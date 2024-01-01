@@ -45,9 +45,8 @@ function MainShopComp() {
       {/* fetch all the product and usimg foreach , render this component */}
       {
         prod.map((product)=>{
-          return <div style={{display:"flex" , justifyContent:"space-between"}}>
-            <ProductCard ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} Price={product.Price} />
-          </div>
+          return <ProductCard key={product._id.toString()} ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} Price={product.Price} />
+          
 
       }) 
         
