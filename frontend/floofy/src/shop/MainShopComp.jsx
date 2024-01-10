@@ -5,8 +5,10 @@ import ShowBestOffersProduct from './ShowBestOffersProduct'
 import ProductCard from './ProductCard'
 
 import Button from '@mui/material/Button';
+import ProductInCart from './ProductInCart'
 function MainShopComp() {
   const [prod ,setProd] = useState([]);
+  const [isCartOpen , setIsCartOpen] = useState(true)
   useEffect(()=>{
       
       
@@ -22,8 +24,6 @@ function MainShopComp() {
         } 
       })
       
-
-
       if (!response.ok) {
         console.log("network error")
       }
@@ -31,20 +31,27 @@ function MainShopComp() {
       console.log("Data from database", data)
       setProd(data)
   }
+  const searchProdCard = `${ <SearchAndAppbar/>}
+      ${<SearchByCategory/>}
+      ${<ShowBestOffersProduct/>}
+      `
   return (
     <div>
+
+    {/* {
+        isCartOpen ? <ProductInCart /> : searchProdCard
+    } */}
+
+
       <SearchAndAppbar/>
       <SearchByCategory/>
       <ShowBestOffersProduct/>
-      {/* <Button onClick={fetchProducts} >show</Button> */}
-      {/* fetch all the product and usimg foreach , render this component */}
       {
         prod.map((product)=>{
-          return <ProductCard key={product._id.toString()} ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} Price={product.Price} />
+          return <ProductCard key={product._id.toString()} ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} category={product.Category} DiscountTag={product.
+            DiscountTag} Price={product.Price} />
       }) 
       }
-      
-
     </div>
   )
 }

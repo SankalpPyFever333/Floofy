@@ -20,7 +20,10 @@ function HomePageContent() {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth= {false}>
-          <Box sx={{ bgcolor: '#e0e0e0', height: '78vh' }}>
+          <Box style={{
+            overflow:"auto",
+            
+          }} sx={{ bgcolor: '#e0e0e0', height: '78vh' }}>
             {clickedBtn === "Home" && <div>This is home</div>}
             {clickedBtn === "Vet" && <div>This is Vet component</div>}
             {clickedBtn === "Shop" && <MainShopComp/>}

@@ -6,6 +6,9 @@ import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
+import { IconButton } from '@mui/material';
+import ShoppingCartButton from './ShoppingCartButton';
+
 const Search = styled('div')(({ theme }) => ({
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
@@ -50,9 +53,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAndAppbar() {
       return (
-            <Box sx={{ flexGrow: 1 }}>
-                  <AppBar position="static">
-                        <Toolbar>
+            <Box sx={{ flexGrow: 1 , margin:"12px"}}>
+                  <AppBar position="static" >
+                        <Toolbar style={
+                              {
+                                    backgroundColor: "blue",
+                                    display: "flex",
+                                    justifyContent: "space-between"
+                              }
+                        } >
                               <Search>
                                     <SearchIconWrapper>
                                           <SearchIcon />
@@ -62,7 +71,11 @@ export default function SearchAndAppbar() {
                                           inputProps={{ 'aria-label': 'search' }}
                                     />
                               </Search>
+                              <ShoppingCartButton/>
+                              {/* upon clicking on this icon open the productCart Component. */}
+
                         </Toolbar>
+
                   </AppBar>
             </Box>
       );

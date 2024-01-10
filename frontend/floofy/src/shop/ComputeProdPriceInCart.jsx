@@ -11,6 +11,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import Divider from '@mui/material/Divider';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 
+// in this cart component , show all the products added by the user.
 
 export default function ComputeProdPriceInCart() {
       return (

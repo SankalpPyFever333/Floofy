@@ -9,26 +9,31 @@ import TextField from '@mui/material/TextField';
 export default function DecrementIncrementBtn({productCount , AddBtn , handleAddBtn}) {
       let [count, setCount] = React.useState(productCount);
       const [openDrawer , setOpenDrawer] = React.useState(false)
+      let getItemCount = 0
       const handleRemoveProduct = ()=>{
             if(productCount > 0) {
                   --count
                   setCount(count)
+                  
             }
             
             if(count===0){
                   setCount(0)
                   productCount = count
+                  
             }
       }
       const handleAddProduct = ()=>{
             ++count;
             setCount(count)
+            
       }
       const openBottomDrawer = () => {
             setOpenDrawer(!openDrawer);
+            // get the text from the textfields and set it localstorage and update the shop cart badge.
             return <BottomDrawer/>
       }
-     
+      
       
       
       return (

@@ -5,14 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import DecrementIncrementBtn from './DecrementIncrementBtn';
 
-export default function ProductCard({imgSrc , ProdDescription , Price , ProdName}) {
+export default function ProductCard({imgSrc , category , DiscountTag,  ProdDescription , Price , ProdName}) {
       let [productCount , setProductCount] = React.useState(0);
       const handleAddToCart = ()=>{
             productCount =  ++productCount;
             console.log(productCount)
             setProductCount(productCount)
+            
       }
       const Addbtn = <Button onClick={handleAddToCart} size="small" variant="contained">Add to cart</Button>;
 // When productCount is 0 , render the ADD To cart button else render the - + button with count value.
@@ -22,18 +24,26 @@ export default function ProductCard({imgSrc , ProdDescription , Price , ProdName
 
 
       return (
-            <Card sx={{ maxWidth: 240 }} style={{margin:12}}>
+
+            // <Grid container spacing={2}>
+
+            <Card sx={{ maxWidth: "14rem" }} style={{margin:5}}>
                   <CardMedia
                         component="img"
-                        alt="Dog Food"
-                        height="170"
+                        alt= {category}
+                        height="100"
                         image={imgSrc}
                   />
                   <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h6" style={{
+                              fontFamily:"serif",
+                              fontSize:"15px",
+                              fontWeight:"bolder",
+                              color:"ActiveCaption"
+                        }} component="div">
                               {ProdName}
                         </Typography>
-                        <Typography variant="body2" color="text.primary">
+                        <Typography variant="body2"  color="text.secondary">
                               {ProdDescription}
                         </Typography>
                   </CardContent>
@@ -48,5 +58,6 @@ export default function ProductCard({imgSrc , ProdDescription , Price , ProdName
                         
                   </CardActions>
             </Card>
+            // </Grid>
       );
 }

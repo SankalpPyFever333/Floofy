@@ -32,8 +32,8 @@ export default function BottomDrawer() {
                                     autoFocus
                                     margin="dense"
                                     id="name"
-                                    label="Email Address"
-                                    type="email"
+                                    label=""
+                                    type="String"
                                     fullWidth
                                     variant="standard"
                               />

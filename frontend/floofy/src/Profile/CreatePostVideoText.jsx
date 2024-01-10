@@ -38,8 +38,6 @@ export default function CreatePostVideoText() {
                   onClick={toggleDrawer(anchor, false)}
                   onKeyDown={toggleDrawer(anchor, false)}
             >
-                  
-                  
                   <List>
                         {['Post', 'Video', 'Text'].map((text, index) => (
                               <ListItem key={text} disablePadding>
