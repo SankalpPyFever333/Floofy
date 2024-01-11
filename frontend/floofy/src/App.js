@@ -11,24 +11,22 @@ import BottomNavBar from './components/BottomNavBar';
 import HomePageContent from './components/HomePageContent';
 import LeftDrawer from './components/LeftDrawer';
 import {BrowserRouter , Routes , Route} from 'react-router-dom';
+import MainApp from './components/MainApp';
 
 
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
-        <Routes> */}
+      <BrowserRouter>
+        <Routes>
 
-          {/* <Route path='/' element= {<SignupComponent/>} /> */}
+          <Route path='/' element= {<SignupComponent/>} />
+          <Route path='/MainApp' element={<MainApp/>} />
 
-          {/* <Route path='/' element= {<ShowCommonForm/>} />
         </Routes>
-      </BrowserRouter> */}
-      <App_Bar />
-      {/* <LeftDrawer/> */}
-      <div className="content">
-        <HomePageContent/>
-      </div>
+      </BrowserRouter>
+      
+      
       
     </div>
   );

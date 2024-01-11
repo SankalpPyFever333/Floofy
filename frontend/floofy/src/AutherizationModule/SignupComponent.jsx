@@ -12,14 +12,15 @@ function SignupComponent() {
       <div className="stepComplete">
             <h3>Complete Your Account setup</h3>
       </div>
-      <div className="stepperContaiiner">
+      {/* <div className="stepperContaiiner">
             <span>steps to complete</span>
             <SignupStepper/>
-      </div>
+      </div> */}
       <div className="logincinfo">
         <SignLogComp/>
-        {/* <PickAvatarComp/> */}
-        {/* <WhatDefineYou/> */}
+        {/* below two cmponents will render when user click on the next button in the Stepper */}
+        {/* <PickAvatarComp/>
+        <WhatDefineYou/> */}
       </div>
     </div>
   )
