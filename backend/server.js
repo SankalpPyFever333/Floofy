@@ -2,23 +2,34 @@ const express = require("express")
 const bodyparser = require("body-parser")
 const mongoose = require("mongoose")
 const multer = require("multer")
+const dotenv = require("dotenv")
 const path = require("path")
 const cors = require("cors")
-const port = 3000
+
+dotenv.config();
+
+const port = process.env.PORT || 3000;
+const MONGO_CONN_STRING = process.env.MONGO_CONN_STRING;
 
 const app = express();
-const upload = multer({dest:"AvatarUpload/"})
 
-app.use(express.json())
+app.use(cors());
 app.use(bodyparser.urlencoded({
       extended: true
 }))
+app.use(express.json())
 
-app.use(cors());
 
-mongoose.connect("mongodb://localhost:27017/AnimalWelfareApp")
+app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginSign.Routes"))
+
+const upload = multer({dest:"AvatarUpload/"})
+
+
+
+
+mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{
-      console.log("Connected successfully")
+      console.log(`database connected successfully`)
 })
 .catch((err)=>{
       console.log(`Error in connecting ${err}`);
@@ -47,6 +58,15 @@ app.post("/CommonUserDetails" , upload.single("image") , (req, res)=>{
             console.log(err)
       })
 })
+
+
+// Add login credentials if user:
+app.post("/addLoginCredentialsOfuser" , (req, res)=>{
+      const {username ,password} = req.body;
+
+});
+
+
 
 // ////////////////////////////////////////////////////////////////////////////////////
 
@@ -166,7 +186,7 @@ app.get("/getRecuePerson" , (req, res)=>{
 
 const ShopModel = mongoose.model("ShopDatabase" , {
       ProductName : String,
-      Price : Number,
+      Price : String,
       Category : String,
       Description : String,
       ImagePath : String,
@@ -177,15 +197,23 @@ const ShopModel = mongoose.model("ShopDatabase" , {
 // User who registered thmeselves as a Seller can add product in the shop database.
 
 app.post("/AddProdInShop" , (req,res)=>{
-      const { ProductName, price,  DiscountTag , Category , Description , ImagePath , Quantity } = req.body;
+      const {
+            ProductName,
+            Price,
+            DiscountTag,
+            Category,
+            Description,
+            ImagePath,
+            Quantity,
+      } = req.body;
       const AddProd = new ShopModel({
-        ProductName,
-        price,
-        DiscountTag,
-        Category,
-        Description,
-        ImagePath,
-        Quantity,
+            ProductName,
+            Price,
+            DiscountTag,
+            Category,
+            Description,
+            ImagePath,
+            Quantity,
       });
       AddProd.save().then(()=>{
             res.send("Product saved")
@@ -196,7 +224,7 @@ app.post("/AddProdInShop" , (req,res)=>{
 })
 
 
-app.get("/getProductFromShop" , async (req, res)=>{
+app.get("/api/getProductFromShop" , async (req, res)=>{
       // get all the product and display in shop.
       // Give category as a select option and display product according to teh category.
       try {
@@ -212,13 +240,6 @@ app.get("/getProductFromShop" , async (req, res)=>{
 
 
 })
-
-
-
-
-
-
-
 
 
 app.listen(port , ()=>{
