@@ -3,12 +3,12 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import BottomDrawer from './BottomDrawer';
+import EnterPriceDialogue from './EnterPriceDialogue';
 import TextField from '@mui/material/TextField';
 
 export default function DecrementIncrementBtn({productCount , AddBtn , handleAddBtn}) {
       let [count, setCount] = React.useState(productCount);
-      const [openDrawer , setOpenDrawer] = React.useState(false)
+      const [openPriceDialog, setOpenPriceDialog] = React.useState(false)
       let getItemCount = 0
       const handleRemoveProduct = ()=>{
             if(productCount > 0) {
@@ -25,13 +25,14 @@ export default function DecrementIncrementBtn({productCount , AddBtn , handleAdd
       }
       const handleAddProduct = ()=>{
             ++count;
+            //code for adding the product in the cart.
             setCount(count)
             
       }
-      const openBottomDrawer = () => {
-            setOpenDrawer(!openDrawer);
+      const handleOpenPriceDialog = () => {
+            setOpenPriceDialog(!openPriceDialog);
             // get the text from the textfields and set it localstorage and update the shop cart badge.
-            return <BottomDrawer/>
+            return <EnterPriceDialogue/>
       }
       
       
@@ -40,9 +41,9 @@ export default function DecrementIncrementBtn({productCount , AddBtn , handleAdd
             
             count ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={handleRemoveProduct} >{<RemoveIcon />}</Button>
-                  <Button onClick={openBottomDrawer} sx={{ fontSize: '10px', padding: '5px 5px' }}>{count}</Button>
+                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{count}</Button>
                   {
-                        openDrawer ? <BottomDrawer /> : null
+                        openPriceDialog ? <EnterPriceDialogue /> : null
                   }
                   
                   

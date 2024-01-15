@@ -12,6 +12,8 @@ import HomePageContent from './components/HomePageContent';
 import LeftDrawer from './components/LeftDrawer';
 import {BrowserRouter , Routes , Route} from 'react-router-dom';
 import MainApp from './components/MainApp';
+import WhatDefineYou from './AutherizationModule/WhatDefineYou';
+import Cart from './CartComponent/Cart';
 
 
 function App() {
@@ -19,15 +21,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-
-          <Route path='/' element= {<SignupComponent/>} />
-          <Route path='/MainApp' element={<MainApp/>} />
-
+          <Route path="/" element={<SignupComponent />} />
+          <Route path="/MainApp" element={<MainApp />} />
+          <Route path="/GoToCart" element={<Cart/>} />
         </Routes>
       </BrowserRouter>
-      
-      
-      
     </div>
   );
 }

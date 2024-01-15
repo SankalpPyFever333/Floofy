@@ -3,7 +3,10 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ProductInCart from './ProductInCart';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
       '& .MuiBadge-badge': {
@@ -14,19 +17,26 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
       },
 }));
 
+
+
+
+
 export default function ShoppingCartButton() {
-      const handleProdCart = ()=>{
-            // alert("cart icon")
-            return <ProductInCart/>
+      const navigate = useNavigate();
+
+      const openCartComponent = () => {
+            navigate("/GoToCart")
       }
-      
-      
+
       return (
-            <IconButton aria-label="cart" onClick={handleProdCart}>
-                  <StyledBadge badgeContent={4} color="secondary">
-                        <ShoppingCartIcon />
-                  </StyledBadge>
+                  <IconButton onClick={openCartComponent} aria-label="cart">
+                        <StyledBadge badgeContent={4} color="secondary">
+                              <ShoppingCartIcon />
+                        </StyledBadge>
+                  </IconButton>
                   
-            </IconButton>
+            
+            
+            
       );
 }

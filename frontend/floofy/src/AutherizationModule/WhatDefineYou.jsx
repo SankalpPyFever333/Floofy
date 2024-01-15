@@ -4,8 +4,8 @@ import Radio from '@mui/material/Radio';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-export default function ColorRadioButtons() {
-      const [selectedValue, setSelectedValue] = React.useState('a');
+export default function WhatDefineYou({setUserType}) {
+      const [selectedValue, setSelectedValue] = React.useState('');
 
       const handleChange = (event) => {
             setSelectedValue(event.target.value);
@@ -19,21 +19,23 @@ export default function ColorRadioButtons() {
             inputProps: { 'aria-label': item },
       });
 
+      localStorage.setItem("userType" , selectedValue)
+      setUserType(localStorage.getItem("userType"))
       return (
             <div>
-                  <span>Place a lottie animation </span>
+                  
 
                   <Box display="flex" justifyContent= "space-evenly">
                         <Box mr={2}>
-                              <Radio {...controlProps('b')} color="secondary" />
+                              <Radio {...controlProps('Doctor')} color="secondary" />
                               <Typography>Doctor</Typography>
                         </Box>
                         <Box mr={2}>
-                              <Radio {...controlProps('c')} color="success" />
+                              <Radio {...controlProps('Rescuer')} color="success" />
                               <Typography>Rescuer</Typography>
                         </Box>
                         <Box mr={2}>
-                              <Radio {...controlProps('d')} color="default" />
+                              <Radio {...controlProps('User')} color="default" />
                               <Typography>User</Typography>
                         </Box>
                   </Box>

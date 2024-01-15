@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Signup.css";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
@@ -16,10 +16,12 @@ import TextField from '@mui/material/TextField';
 
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import WhatDefineYou from './WhatDefineYou';
 
 function SignLogComp() {
       const [username , setUsername] = useState('');
       const[password , setPassword] = useState('');
+      const[userType , setUserType] = useState('');
       const [showPassword, setShowPassword] = React.useState(false);
       const navigate = useNavigate();
       const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -28,15 +30,20 @@ function SignLogComp() {
             event.preventDefault();
       };
 
+      
+
+      
       const addUserSignupDetails =  async (e)=>{
             e.preventDefault()
+            console.log(userType)
+            // For now I am getting a empty string as user type. After studying redux , do it again.
             try {
                   const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser" , {
                   method:'POST',      
                   headers:{
                               'Content-Type':'application/json'
                         },
-                  body: JSON.stringify({username:username , password:password})
+                        body: JSON.stringify({ username: username, password: password, userType: userType })
                   })
 
                   if(response.ok){
@@ -57,15 +64,11 @@ function SignLogComp() {
                   const data = await response.json();
                   console.log(data)
 
-                  
-                  
             } catch (error) {
                   console.log(error)
             }
             
       }
-
-      
 
       return (
             <div>
@@ -79,44 +82,11 @@ function SignLogComp() {
                               <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' type='password' label="Password" variant="standard" onChange={(password) =>{
                                     setPassword(password.target.value)
                               }} />
+                              <WhatDefineYou setUserType={setUserType}/>
                               <Button variant="contained" onClick={addUserSignupDetails} style={{ margin: "20px" }} >Signup</Button>
                         </Box>
 
-                        {/* <FormControl sx={{ m: 2, width: '25ch' }} variant="standard">
-                              <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
-                              <FilledInput
-                                    id="filled-adornment-password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    name='password'
-                                    onChange={(password) =>{
-                                          setPassword(password)
-                                    }}
-                                    // sx prop for hiding the default visibility toggle.
-                                    sx={{
-                                          '& input[type="password"]::-ms-reveal': {
-                                                display: 'none', // Hide IE default password visibility toggle
-                                          },
-                                          '& input[type="password"]::-ms-clear': {
-                                                display: 'none', // Hide IE default clear button
-                                          },
-                                    }}
-                                    endAdornment={
-                                          <InputAdornment position="end">
-                                                <IconButton
-                                                      aria-label="toggle password visibility"
-                                                      onClick={handleClickShowPassword}
-                                                      onMouseDown={handleMouseDownPassword}
-                                                      edge="end"
-
-                                                >
-                                                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                          </InputAdornment>
-                                    }
-                              /> */}
                         
-                              
-                        {/* </FormControl> */}
                   </div>
             </div>
       )

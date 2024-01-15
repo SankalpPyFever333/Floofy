@@ -3,8 +3,8 @@ import Lottie from "react-lottie";
 
 import SignupStepper from './SignupStepper';
 import SignLogComp from './SignLogComp';
-import PickAvatarComp from './PickAvatarComp';
-import WhatDefineYou from './WhatDefineYou';
+
+
 function SignupComponent() {
   
   return (

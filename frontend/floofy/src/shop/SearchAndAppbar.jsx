@@ -5,8 +5,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from 'react-router-dom';
 
-import { IconButton } from '@mui/material';
+import OpenShoppingCart from './OpenShoppingCart';
 import ShoppingCartButton from './ShoppingCartButton';
 
 const Search = styled('div')(({ theme }) => ({
@@ -52,6 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAndAppbar() {
+      const navigate = useNavigate();
       return (
             <Box sx={{ flexGrow: 1 , margin:"12px"}}>
                   <AppBar position="static" >
@@ -71,8 +73,12 @@ export default function SearchAndAppbar() {
                                           inputProps={{ 'aria-label': 'search' }}
                                     />
                               </Search>
+                              {/* Instead of this , render the cart component build by me. */}
+                              {/* <OpenShoppingCart/> */}
                               <ShoppingCartButton/>
-                              {/* upon clicking on this icon open the productCart Component. */}
+                              
+
+                              
 
                         </Toolbar>
 

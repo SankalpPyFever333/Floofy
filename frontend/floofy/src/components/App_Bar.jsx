@@ -100,7 +100,7 @@ export default function App_Bar() {
 
       const handleToggleDrawerOpen = () => {
             
-            setIsOpenDrawer(!isOpenDrawer)
+            // setIsOpenDrawer(!isOpenDrawer)
       }
 
       
