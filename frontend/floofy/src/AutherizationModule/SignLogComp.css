@@ -1,0 +1,20 @@
+/* LoopingVideo.css */
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.responsive-video {
+  width: 100%;
+  height: auto;
+}
+
+/* Add a media query to hide the video on smaller screens */
+@media (max-width: 768px) {
+  .responsive-video {
+    display: none;
+  }
+}
+

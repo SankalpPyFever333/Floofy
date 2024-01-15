@@ -71,24 +71,22 @@ function SignLogComp() {
       }
 
       return (
-            <div>
-                  <span>Let's setup your login credentials</span>
-                  <div className="inputFields">
-                        <Box sx={{ display: 'flex', flexDirection:"column",  alignItems:'center' }}>
-                              {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
-                              <TextField  style={{margin:"20px"}} id="input-with-sx" name='username' label="Username" variant="standard" onChange={(username) =>{
-                                    setUsername(username.target.value)
-                              }} />
-                              <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' type='password' label="Password" variant="standard" onChange={(password) =>{
-                                    setPassword(password.target.value)
-                              }} />
-                              <WhatDefineYou setUserType={setUserType}/>
-                              <Button variant="contained" onClick={addUserSignupDetails} style={{ margin: "20px" }} >Signup</Button>
-                        </Box>
-
-                        
+                  <div>
+                        <span>Let's setup your login credentials</span>
+                        <div className="inputFields">
+                              <Box sx={{ display: 'flex', flexDirection: "column", alignItems: 'center' }}>
+                                    {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
+                                    <TextField style={{ margin: "20px" }} id="input-with-sx" name='username' label="Username" variant="standard" onChange={(username) => {
+                                          setUsername(username.target.value)
+                                    }} />
+                                    <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' type='password' label="Password" variant="standard" onChange={(password) => {
+                                          setPassword(password.target.value)
+                                    }} />
+                                    <WhatDefineYou setUserType={setUserType} />
+                                    <Button variant="contained" onClick={addUserSignupDetails} style={{ margin: "20px" }} >Signup</Button>
+                              </Box>
+                        </div>
                   </div>
-            </div>
       )
 }
 
