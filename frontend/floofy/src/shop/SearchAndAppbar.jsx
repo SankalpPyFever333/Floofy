@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
+
 
 import OpenShoppingCart from './OpenShoppingCart';
 import ShoppingCartButton from './ShoppingCartButton';
@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAndAppbar() {
-      const navigate = useNavigate();
+      
       return (
             <Box sx={{ flexGrow: 1 , margin:"12px"}}>
                   <AppBar position="static" >
