@@ -1,10 +1,10 @@
-const express = require("express");
+// const express = require("express");
 const userSchema = require("../Modals/LoginCredentials")
 
 const AddUserLoginCred = async (req, res)=>{
-      const {username , password} = req.body;
+      const {username , password , userType} = req.body;
       try {
-            const newUser = new userSchema({ username, password });
+            const newUser = new userSchema({ username, password, userType });
             await newUser.save();
             res.status(200).json({message:"User saved"})
             

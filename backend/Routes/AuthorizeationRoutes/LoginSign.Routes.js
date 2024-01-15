@@ -8,3 +8,5 @@ const router = express.Router()
 // signup API
 router.post("/addLoginCredentialsOfuser", AddUserLoginCred);
 module.exports = router;
+
+
