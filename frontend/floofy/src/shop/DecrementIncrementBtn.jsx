@@ -11,12 +11,13 @@ import { Add_Prod_to_Cart , Remove_Prod_From_Cart } from '../State/action-creato
 
 
 export default function DecrementIncrementBtn({productCount , AddBtn , handleAddBtn}) {
-      let [count, setCount] = React.useState(productCount);
+      let [Pcount, setCount] = React.useState(productCount);
       const [openPriceDialog, setOpenPriceDialog] = React.useState(false)
-      // const Add_Rem_Prod_Count = useSelector(state => state.count)
+      const Prod_Count = useSelector(state => state.count)
       const dispatch = useDispatch();
       let getItemCount = 0
       const handleRemoveProduct = ()=>{
+            
             // if(productCount > 0) {
             //       --count
             //       setCount(count)
@@ -50,9 +51,9 @@ export default function DecrementIncrementBtn({productCount , AddBtn , handleAdd
       
       return (
             
-            count ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
+            Pcount ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={()=>{dispatch(Remove_Prod_From_Cart)}} >{<RemoveIcon />}</Button>
-                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{count}</Button>
+                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px'}}>{Prod_Count}</Button>
                   {
                         openPriceDialog ? <EnterPriceDialogue /> : null
                   }

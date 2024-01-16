@@ -18,9 +18,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 
-
-
-
 export default function ShoppingCartButton() {
       const navigate = useNavigate();
       const count = useSelector(state => state.count)

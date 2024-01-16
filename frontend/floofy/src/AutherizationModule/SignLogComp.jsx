@@ -57,7 +57,12 @@ function SignLogComp() {
                         navigate("/MainApp")
                   }
                   else{
-                        throw new Error("Something went wrong!")
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "Something went wrong!",
+                              // footer: '<a href="#">Why do I have this issue?</a>'
+                        });
 
                   }
 

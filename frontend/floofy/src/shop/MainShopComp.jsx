@@ -22,7 +22,8 @@ function MainShopComp() {
         method:'GET',
         headers:{
           'Content-Type':"application/json"
-        } 
+        } , 
+        
       })
       
       if (!response.ok) {
