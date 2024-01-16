@@ -1,4 +1,4 @@
-const shop =  require("../Modals/Shop.model");
+const shop =  require("../../Modals/Shop.model");
 
 
 const AddProdinDb = async (req , res)=>{

@@ -1,4 +1,4 @@
-const shop = require("../Modals/Shop.model");
+const shop = require("../../Modals/Shop.model");
 const multer = require("multer");
 const upload = multer({ dest: "" });
 

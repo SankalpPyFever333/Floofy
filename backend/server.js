@@ -20,7 +20,7 @@ app.use(express.json())
 app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginSign.Routes"))
 app.use("/api" , require("./Routes/ShopDatabseRoutes/AddProdInShop.Routes"))
 app.use("/api" , require("./Routes/ShopDatabseRoutes/getProdFromDb.router"))
-
+app.use("/api" , require("./Routes/ProfileRoutes/EditProfileDoctor.Router"))
 
 mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{

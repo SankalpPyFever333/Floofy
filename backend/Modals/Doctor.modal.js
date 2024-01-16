@@ -20,7 +20,7 @@ const DoctorSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  Experience: Number,
+  Experience: String,
   Education: String,
   Specialization: String,
   SocialMediaLink: String,

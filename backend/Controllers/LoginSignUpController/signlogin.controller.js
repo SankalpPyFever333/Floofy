@@ -1,6 +1,6 @@
-const Doctor = require("../Modals/Doctor.modal");
+const Doctor = require("../../Modals/Doctor.modal");
 const express = require("express");
-const RescuePerson = require("../Modals/RescuerModal")
+const RescuePerson = require("../../Modals/RescuerModal")
 
 // const app = express();
 

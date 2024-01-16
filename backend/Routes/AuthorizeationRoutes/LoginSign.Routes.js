@@ -1,6 +1,6 @@
 // put the routes for the login and signup.
 const express = require("express");
-const AddUserLoginCred = require("../../Controllers/AddLoginCredetials.controller");
+const AddUserLoginCred = require("../../Controllers/LoginSignUpController/AddLoginCredetials.controller");
 const router = express.Router()
 
 // import the Login and sign api here.

@@ -1,5 +1,5 @@
 // const express = require("express");
-const userSchema = require("../Modals/LoginCredentials")
+const userSchema = require("../../Modals/LoginCredentials")
 
 const AddUserLoginCred = async (req, res)=>{
       const {username , password , userType} = req.body;
