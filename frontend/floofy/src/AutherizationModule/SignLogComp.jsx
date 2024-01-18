@@ -39,10 +39,10 @@ function SignLogComp() {
             // For now I am getting a empty string as user type. After studying redux , do it again.
             try {
                   const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser" , {
-                  method:'POST',      
-                  headers:{
-                              'Content-Type':'application/json'
-                        },
+                        method:'POST',      
+                        headers:{
+                                    'Content-Type':'application/json'
+                              },
                         body: JSON.stringify({ username: username, password: password, userType: userType })
                   })
 

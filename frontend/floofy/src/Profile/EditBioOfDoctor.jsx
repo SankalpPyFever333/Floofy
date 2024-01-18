@@ -30,6 +30,8 @@ export default function EditBioOfDoctor() {
       const handleUpdateDoctor = async (e)=>{
             e.preventDefault()
             // getting error of circular reference.
+
+            // Also check for unique username before updating the database.
             try {
                   const Doctor_Response = await fetch("http://localhost:3000/api/EditDoctorProfileBio" , {
                         method:"POST",

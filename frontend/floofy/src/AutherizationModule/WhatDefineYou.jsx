@@ -4,7 +4,7 @@ import Radio from '@mui/material/Radio';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-export default function WhatDefineYou({setUserType}) {
+export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
       const [selectedValue, setSelectedValue] = React.useState('');
 
       const handleChange = (event) => {
@@ -38,6 +38,13 @@ export default function WhatDefineYou({setUserType}) {
                               <Radio {...controlProps('User')} color="default" />
                               <Typography>User</Typography>
                         </Box>
+                        {
+                              showAdminRadio && (<Box mr={2}>
+                                    <Radio {...controlProps('Admin')} color="default" />
+                                    <Typography>Admin</Typography>
+                              </Box>) 
+                        }
+                       
                   </Box>
             </div>
       );

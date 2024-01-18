@@ -14,6 +14,7 @@ import {BrowserRouter , Routes , Route} from 'react-router-dom';
 import MainApp from './components/MainApp';
 import WhatDefineYou from './AutherizationModule/WhatDefineYou';
 import Cart from './CartComponent/Cart';
+import LoginComponent from './AutherizationModule/LoginComponent';
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignupComponent />} />
+          {/* <Route path="/" element={<SignupComponent />} /> */}
+          <Route path="/" element={<LoginComponent/>} />
           <Route path="/MainApp" element={<MainApp />} />
           <Route path="/GoToCart" element={<Cart/>} />
         </Routes>
