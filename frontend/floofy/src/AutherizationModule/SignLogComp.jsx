@@ -35,7 +35,7 @@ function SignLogComp() {
       
       const addUserSignupDetails =  async (e)=>{
             e.preventDefault()
-            console.log(userType)
+            // console.log(userType)
             // For now I am getting a empty string as user type. After studying redux , do it again.
             try {
                   const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser" , {

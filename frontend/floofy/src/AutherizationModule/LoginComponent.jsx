@@ -22,7 +22,7 @@ function LoginComponent() {
       const handleLoginClick = async ()=>{
             // using fetch hit the api and get data from database and match it with values enterd by the user.
             const loginResponse = await fetch("http://localhost:3000/api/getLoginData" , {
-                  method:"GET",
+                  method:"POST",
                   headers:{
                         'Content-Type':'application/json',
                   }
@@ -37,6 +37,7 @@ function LoginComponent() {
                         console.log(element.username)
                         if((element.username===UserName && element.password === password )){
                               userFound = true
+                              
                         }
                         
                   });
