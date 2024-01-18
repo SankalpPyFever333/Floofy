@@ -3,7 +3,7 @@ const router  = express.Router();
 const fetchloginData = require("../../Controllers/LoginSignUpController/LoginOfUsers.controller"); 
 
 
-router.get("/getLoginData" , fetchloginData);
+router.post("/getLoginData" , fetchloginData);
 
 module.exports = router
 
