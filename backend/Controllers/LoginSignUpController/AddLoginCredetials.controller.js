@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt")
 const saltRounds = 10;
 
 const AddUserLoginCred = async (req, res)=>{
-      let {username , password , userType} = req.body;
+      let {username , password , contactNumber,  userType} = req.body;
       try {
             bcrypt.hash(password , saltRounds, (err, hash)=>{
                   if(err){
@@ -13,7 +13,7 @@ const AddUserLoginCred = async (req, res)=>{
                   else{
                         console.log(`hashed pswrd is ${hash}`)
                         password = hash
-                        const newUser = new userSchema({ username, password, userType });
+                        const newUser = new userSchema({ username, password, contactNumber,  userType });
                         newUser.save();
                         res.status(200).json({message:"User saved"})
                         

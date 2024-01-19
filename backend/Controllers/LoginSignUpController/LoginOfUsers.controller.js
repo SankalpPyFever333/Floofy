@@ -26,7 +26,7 @@ const fetchloginData = async (req, res)=>{
 
             // if(loginData.password !== password){
             //       return res.status(401).json('Invalid Password')
-            // }
+            // }  
 
             console.log(loginData.username);
             
