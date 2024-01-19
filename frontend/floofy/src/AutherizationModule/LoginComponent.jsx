@@ -1,8 +1,9 @@
-import React, { useState, useSyncExternalStore } from 'react'
+import React, { useState } from 'react'
 import videoSource from "../Assets/Login.mp4"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import WhatDefineYou from './WhatDefineYou';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -25,8 +26,10 @@ function LoginComponent() {
                   method:"POST",
                   headers:{
                         'Content-Type':'application/json',
-                  }
+                  }, 
+                  body: JSON.stringify({ username: UserName, password: password})
             })
+            
             if(loginResponse.ok){
                   // write code for matching the details enterd by user in the form.
                   const loginDataFromDb = await loginResponse.json();
@@ -70,6 +73,13 @@ function LoginComponent() {
             }
       }
 
+
+      const handleForgotPsswrdClick = ()=>{
+            // navigate to the component of forgot password.
+            navigate("/GotoForgotPassword")
+      }
+
+
       return (
             <div>
                   {
@@ -103,10 +113,23 @@ function LoginComponent() {
                                                 <TextField id="standard-basic" label="password" variant="standard" onChange={(password)=>{
                                                       setPassword(password.target.value)
                                                 }} />
+                                                
+                                                <Link
+                                                      component="button"
+                                                      variant="body2"
+                                                      onClick={handleForgotPsswrdClick}
+                                                      
+                                                >
+                                                      Forgot password?
+                                                </Link>
+
+
                                                 <WhatDefineYou setUserType={setUserType} showAdminRadio = {true} />
                                                 <Button onClick={handleLoginClick} variant="contained">Login</Button>
                                                 <br />
-                              <span onClick={handleSpanClick} > <i>Don't have an account?</i>  </span>
+                                                
+                                                <br />
+                                                <span onClick={handleSpanClick} > <i>Don't have an account?</i>  </span>
                                           </Box>
                                     </div>
                               </div>

@@ -21,6 +21,7 @@ import WhatDefineYou from './WhatDefineYou';
 function SignLogComp() {
       const [username , setUsername] = useState('');
       const[password , setPassword] = useState('');
+      const [phNumber, setPhNumber] = useState('');
       const[userType , setUserType] = useState('');
       const [showPassword, setShowPassword] = React.useState(false);
       const navigate = useNavigate();
@@ -43,7 +44,7 @@ function SignLogComp() {
                         headers:{
                                     'Content-Type':'application/json'
                               },
-                        body: JSON.stringify({ username: username, password: password, userType: userType })
+                        body: JSON.stringify({ username: username, password: password, contactNumber:phNumber ,  userType: userType })
                   })
 
                   if(response.ok){
@@ -86,6 +87,9 @@ function SignLogComp() {
                                     }} />
                                     <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' type='password' label="Password" variant="standard" onChange={(password) => {
                                           setPassword(password.target.value)
+                                    }} />
+                                    <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' label="Phone Number" variant="standard" onChange={(phNumber) => {
+                                          setPhNumber(phNumber.target.value)
                                     }} />
                                     <WhatDefineYou setUserType={setUserType} />
                                     <Button variant="contained" onClick={addUserSignupDetails} style={{ margin: "20px" }} >Signup</Button>
