@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import BottomNavBar from './BottomNavBar';
 import MainProfileComponent from '../Profile/MainProfileComponent';
 import MainShopComp from '../shop/MainShopComp';
+import MainHomeComp from '../HomeComponent/MainHomeComp';
 
 function HomePageContent() {
 
@@ -24,7 +25,7 @@ function HomePageContent() {
             overflow:"auto",
             
           }} sx={{ bgcolor: '#e0e0e0', height: '78vh' }}>
-            {clickedBtn === "Home" && <div>This is home</div>}
+            {clickedBtn === "Home" && <MainHomeComp/>}
             {clickedBtn === "Vet" && <div>This is Vet component</div>}
             {clickedBtn === "Shop" && <MainShopComp/>}
             {clickedBtn === "Profile" && <MainProfileComponent/>}

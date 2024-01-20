@@ -15,6 +15,7 @@ import ProfileIconWithBadge from './ProfileIconWithBadge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import CableIcon from '@mui/icons-material/Cable';
+import LogoutIcon from '@mui/icons-material/Logout';
 export default function LeftDrawer() {
       const [state, setState] = React.useState({
             
@@ -26,7 +27,8 @@ export default function LeftDrawer() {
             {text:"Shop" , icon: <ShoppingCartIcon/>},
             { text: "Vet", icon: <CableIcon />},
             { text: "Customer Support", icon: <SupportAgentIcon />}, 
-            { text: "Cart", icon: <ShoppingCartIcon />}
+            { text: "Cart", icon: <ShoppingCartIcon />},
+            { text: "Log out", icon: <LogoutIcon />}
       ]
       const toggleDrawer = (anchor, open) => (event) => {
             if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {

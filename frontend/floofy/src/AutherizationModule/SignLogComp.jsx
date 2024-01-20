@@ -22,7 +22,7 @@ function SignLogComp() {
       const [username , setUsername] = useState('');
       const[password , setPassword] = useState('');
       const [phNumber, setPhNumber] = useState('');
-      const[userType , setUserType] = useState('');
+      const[userType , setUserType] = useState(localStorage.getItem('userType'));
       const [showPassword, setShowPassword] = React.useState(false);
       const navigate = useNavigate();
       const handleClickShowPassword = () => setShowPassword((show) => !show);

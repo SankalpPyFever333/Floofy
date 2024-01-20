@@ -8,8 +8,20 @@ export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
       const [selectedValue, setSelectedValue] = React.useState('');
 
       const handleChange = (event) => {
-            setSelectedValue(event.target.value);
+            const newValue = event.target.value;
+            setSelectedValue(newValue);
+            localStorage.setItem("userType", newValue)
+            setUserType(newValue)
       };
+
+      React.useEffect(() => {
+            const storedUserType = localStorage.getItem("userType");
+            if (storedUserType) {
+                  setUserType(storedUserType);
+                  setSelectedValue(storedUserType);
+            }
+      }, [setUserType]);
+      // Solve the error of userType caused in the localStorage.
 
       const controlProps = (item) => ({
             checked: selectedValue === item,
@@ -19,8 +31,7 @@ export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
             inputProps: { 'aria-label': item },
       });
 
-      localStorage.setItem("userType" , selectedValue)
-      setUserType(localStorage.getItem("userType"))
+      
       return (
             <div>
                   

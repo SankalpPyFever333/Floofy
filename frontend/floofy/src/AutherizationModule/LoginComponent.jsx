@@ -33,18 +33,27 @@ function LoginComponent() {
             if(loginResponse.ok){
                   // write code for matching the details enterd by user in the form.
                   const loginDataFromDb = await loginResponse.json();
-                  console.log(loginDataFromDb[0].userType,"login data")
+                  console.log(loginDataFromDb)
 
                   // console.log(`entered username is ${UserName} and password is ${password}`)
-                  loginDataFromDb.forEach(element => {
-                        console.log(element.username)
-                        if((element.username===UserName && element.password === password )){
-                              userFound = true
-                              
-                        }
+                  
+                        // console.log(loginDataFromDb.Response.username)
+                        // console.log(loginDataFromDb.Response.password)
                         
-                  });
-
+                  if ((loginDataFromDb.username === UserName)){
+                              userFound = true
+                        setUserType(loginDataFromDb.userType)
+                  }
+                  else{
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "username not matched",
+                              showConfirmButton: false,
+                              timer: 1500
+                        });
+                  }
+                        
                   if(userFound){
                         Swal.fire({
                               position: "center",
@@ -122,8 +131,6 @@ function LoginComponent() {
                                                 >
                                                       Forgot password?
                                                 </Link>
-
-
                                                 <WhatDefineYou setUserType={setUserType} showAdminRadio = {true} />
                                                 <Button onClick={handleLoginClick} variant="contained">Login</Button>
                                                 <br />
