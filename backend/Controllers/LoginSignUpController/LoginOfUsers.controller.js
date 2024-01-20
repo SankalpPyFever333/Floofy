@@ -17,7 +17,7 @@ const fetchloginData = async (req, res)=>{
                   }
                   else if(result){
                         const token = generateToken(loginData)
-                        res.status(200).json({message:"Login Successfull" , loginData , token})
+                        res.status(200).json({message:"Login Successfull" , username:loginData.username , Token:token})
                   }
                   else{
                         return res.status(401).json({message:"passowrd is incorrect"})
