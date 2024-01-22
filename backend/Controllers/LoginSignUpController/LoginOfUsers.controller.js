@@ -9,7 +9,7 @@ const fetchloginData = async (req, res)=>{
       try {
             const loginData = await userLoginModel.findOne({username})
             console.log(loginData.password)
-            // first decrypt the password and then compare.
+            
 
             bcrypt.compare(password , loginData.password , (err, result)=>{
                   if(err){
@@ -23,10 +23,6 @@ const fetchloginData = async (req, res)=>{
                         return res.status(401).json({message:"passowrd is incorrect"})
                   }
             })
-
-            // if(loginData.password !== password){
-            //       return res.status(401).json('Invalid Password')
-            // }  
 
             console.log(loginData.username);
             
