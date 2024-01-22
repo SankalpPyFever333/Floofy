@@ -1,6 +1,6 @@
 # .gitignore
 /floofy_Service_Account.json
-/.env
+.env
 
 # dependencies
 /node_modules
