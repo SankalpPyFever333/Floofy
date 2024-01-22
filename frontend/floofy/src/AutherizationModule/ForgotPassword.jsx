@@ -5,6 +5,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import authentication from './firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import VerifyOtpComp from './VerifyOtpComp';
 
 function ForgotPassword() {
 
@@ -37,6 +40,35 @@ function ForgotPassword() {
             }
       }
 
+      const generateRecaptchaVerifier = () => {
+            // creating a global instance of RecaptchaVerifier class.
+            window.recaptchaVerifier = new RecaptchaVerifier(
+                  authentication,
+                  "recaptchaContainer",
+                  {
+                        "size": "visible",
+
+                  }
+            );
+      }
+
+
+      const handleSendotp = async () => {
+            // console.log("handling the sendOtpClick")
+            if (phNumber.length === 13) {
+                  generateRecaptchaVerifier();
+                  let appVeifier = window.recaptchaVerifier;
+                  signInWithPhoneNumber(authentication, phNumber, appVeifier)
+                        .then((confirmationResult) => {
+                              window.confirmationResult = confirmationResult;
+                              console.log("recaptcha verified!! and navigating to verifyOTP" , confirmationResult);
+                        })
+                        .catch((error) => {
+                              console.log(error);
+                        })
+            }
+      }
+
       return (
             <div>
                   <div className="container-fluid">
@@ -59,9 +91,6 @@ function ForgotPassword() {
                                                 noValidate
                                                 autoComplete="off"
                                           >
-                                                <TextField id="standard-basic" label="Phone Number" variant="standard" onChange={(phNumber) => {
-                                                      setPhNumber(phNumber.target.value)
-                                                }} />
                                                 <TextField id="standard-basic" label="Enter password" variant="standard" onChange={(newPsswrd) => {
                                                       setNewPassword(newPsswrd.target.value)
                                                 }} />
@@ -69,7 +98,8 @@ function ForgotPassword() {
                                                       setNewConfirmPassword(cnfrmNewPsswrd.target.value)
                                                 }} />
                                           </Box>
-                                          <Button onClick={updateNewPasswordInDb} variant="contained">Login</Button>
+                                          <Button onClick={updateNewPasswordInDb} variant="contained">Update</Button>
+                                          
                                     </div>
 
                               </div>

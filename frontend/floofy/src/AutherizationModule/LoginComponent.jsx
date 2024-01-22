@@ -85,7 +85,7 @@ function LoginComponent() {
 
       const handleForgotPsswrdClick = ()=>{
             // navigate to the component of forgot password.
-            navigate("/GotoForgotPassword")
+            navigate("/GotoVerifyOtp")
       }
 
 
