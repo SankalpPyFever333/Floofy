@@ -5,12 +5,14 @@ import authentication from './firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Button from '@mui/material/Button';
 import verifyOtp from "../Assets/OtpVerify1.jpg"
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const VerifyOtpComp = () => {
       const [otp, setOtp] = useState(['', '', '', '', '', '']);
       const [phNumber, setPhNumber] = useState('');
       const inputRefs = useRef(new Array(6).fill(null).map(() => React.createRef()));
-      
+      const navigate = useNavigate();
       const handleChange = (index, value) => {
             if (!isNaN(value) && value.length <= 1) {
                   const newOtp = [...otp];
@@ -45,23 +47,75 @@ const VerifyOtpComp = () => {
 
 
       const handleSendotp = async () => {
-            // console.log("handling the sendOtpClick")
+            
             if (phNumber.length === 13) {
                   generateRecaptchaVerifier();
                   let appVeifier = window.recaptchaVerifier;
                   signInWithPhoneNumber(authentication, phNumber, appVeifier)
                         .then((confirmationResult) => {
                               window.confirmationResult = confirmationResult;
-                              console.log("recaptcha verified!! and navigating to verifyOTP", confirmationResult);
+                              // console.log("recaptcha verified!! and navigating to verifyOTP", confirmationResult);
+                              Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: `otp sent to ${phNumber}`,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                              });
+                              
+
                         })
                         .catch((error) => {
                               console.log(error);
+                              Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Error in sending otp",
+                              });
                         })
             }
       }
 
       const handleVerifyOtp = ()=>{
+            // verify otp and then redirect the user to forgot password page.
+            // server - side OTP verification can be done using Firebase Admin SDK in a Node.js 
+            // send otp from here to the server for verification.
+            const enteredOtp = otp.map((num)=>num.toString()).join("");
+            try {
+                  const response = fetch("http://localhost:3000/api/FirebaseOtpVerify" , {
+                        method:"POST",
+                        headers:{
+                              'Content-Type':"application/json"
+                        },
+                        body: JSON.stringify({ userMobileNumber:phNumber, EnteredOtp:enteredOtp })
+                  });
+                  // console.log(response)
+                  if(response.ok){
+                        Swal.fire({
+                              position: "center",
+                              icon: "success",
+                              title: "Verification successfull",
+                              showConfirmButton: false,
+                              timer: 1500
+                        });
+                        navigate("/GotoForgotPassword")
+                  }
+                  else{
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "OTP not matched!",
+                        });
+                  }
+            } catch (error) {
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                  });
+            }
             
+
       }
 
 
