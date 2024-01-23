@@ -1,16 +1,24 @@
 
 const admin = require("firebase-admin");
+const {getAuth , checkActionCode , applyActionCode} = require("firebase-admin/auth")
 const serviceAccount  = require("../../floofy_Service_Account.json")
 // Initialize Firebase Admin SDK (you need to have a service account JSON file)
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
+const auth = getAuth();
+
 // Verify OTP on the server
 async function verifyOtp(phoneNumber, enteredOtp) {
   try {
-    const user = await admin.auth().getUserByPhoneNumber(phoneNumber);
-    const verificationResult = await admin.auth().checkActionCode(enteredOtp);
+    const user = await admin.auth().getUserByPhoneNumber(phoneNumber).catch((error)=>{
+      if(error.code === 'auth/user-not-found'){
+        return admin.auth().createUser({phoneNumber: phoneNumber})
+      }
+      throw error;
+    });
+    const verificationResult = await checkActionCode(auth , enteredOtp , user.uid);
 
     // If there's no error, the OTP is valid
     console.log("OTP is valid:", verificationResult);

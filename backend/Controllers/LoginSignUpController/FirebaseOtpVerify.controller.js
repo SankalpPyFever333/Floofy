@@ -4,10 +4,21 @@ const verifyOtp = require("./AdminFirebase")
 const FirebaseOtpVerification = async(req,res)=>{
       const {userMobileNumber , EnteredOtp} = req.body;
       try {
-            const response = verifyOtp(userMobileNumber , EnteredOtp);
-            res.status(400).json({message:"We get the response: "+response})
+            const isOtpVerified = await verifyOtp(userMobileNumber , EnteredOtp);
+            if(isOtpVerified){
+                  console.log("OTP verification successfull")
+                  res.status(200).json({message:"OTP Successfull"})
+                  
+            }
+            else{
+                  console.log("OTP unsuccessfull")
+                  res.status(400).json({message:"error"})
+                  
+            }
+
       } catch (error) {
-            res.status(200).json({message:"Error in matching the otp"})
+            console.log(`error is  `,error)
+            res.status(500).json({message:"Internal server error"})
       }
 
 }
