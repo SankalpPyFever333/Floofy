@@ -50,6 +50,14 @@ const VerifyOtpComp = () => {
 
       const handleSendotp = async () => {
             
+            if(phNumber.length<13 || phNumber.length>13){
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Enter a valid number",
+                  });
+            }
+
             const response = await fetch("http://localhost:3000/api/fetchLoginCredentials" , {
                   method: "POST",
                   headers: {

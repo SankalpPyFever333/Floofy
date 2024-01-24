@@ -62,7 +62,13 @@ function LoginComponent() {
                               showConfirmButton: false,
                               timer: 1500
                         });
-                        navigate("/MainApp")
+                        if(userType === "Admin"){
+                              navigate("/MainAdminComponent")
+                        }
+                        else{
+                              navigate("/MainApp")
+                        }
+
                   } else {
                         Swal.fire({
                               icon: "error",

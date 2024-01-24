@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import frgtImage from "../Assets/ForgotpsswrdImage.webp"
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -15,24 +15,35 @@ function ForgotPassword() {
       const [newConfirmPassword , setNewConfirmPassword] = useState('');
       const [phNumber, setPhNumber] = useState('');
       const navigate = useNavigate();
-      setPhNumber(localStorage.getItem("UserPhoneNumber"))
-      const updateNewPasswordInDb = ()=>{
 
-            if(newPassword === newConfirmPassword){
+      useEffect(()=>{
+            setPhNumber(localStorage.getItem("UserPhoneNumber"))
+            // console.log(phNumber)
+      }, []);
+
+      const updateNewPasswordInDb = async ()=>{
+
+            if(newPassword.length < 8){
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Password should be at least 8 characters",
+                  });
+            }
+            else if(newPassword === newConfirmPassword){
 
                   // phone verification done using otp.
 
                   // In this , you need to encrypt the password and then save it to databse.
                   // From here , send the phone, and new password in the request body.
 
-                  const response = fetch("http://localhost:3000/api/updateNewPassword/:id", {
-                        method: 'PUT',
+                  const response = await fetch("http://localhost:3000/api/updatePassword", {
+                        method: 'POST',
                         headers:{
                               'Content-Type':"application/json"
                         },
-                        body: JSON.stringify({ contactNumber: phNumber , password : newPassword})
+                        body: JSON.stringify({ contactNumber: phNumber, password : newPassword})
                   })
-
                   if(response.ok){
                         Swal.fire({
                               position: "center",

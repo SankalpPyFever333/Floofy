@@ -12,6 +12,7 @@ import EditBioOfDoctor from './EditBioOfDoctor';
 import CreatePostVideoText from './CreatePostVideoText';
 import EditRescuerBioDetails from './EditRescuerBioDetails';
 import EditNOrmalUserBioDetails from './EditNormalUserBioDetails';
+import MainAdminComp from '../AdminModule/MainAdminComp';
 
 const Item = styled(Paper)(({ theme }) => ({
       backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -34,6 +35,7 @@ export default function ProfileWithBUtton() {
             else if(openEditPro === "User"){
                   return <EditNOrmalUserBioDetails/>
             }
+            
 
       }
 

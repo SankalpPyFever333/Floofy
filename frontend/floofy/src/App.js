@@ -6,6 +6,7 @@ import Cart from './CartComponent/Cart';
 import LoginComponent from './AutherizationModule/LoginComponent';
 import ForgotPassword from './AutherizationModule/ForgotPassword';
 import VerifyOtpComp from './AutherizationModule/VerifyOtpComp';
+import MainAdminComp from './AdminModule/MainAdminComp';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/GotoForgotPassword" element={<ForgotPassword />} />
           <Route path="/GotoVerifyOtp" element={<VerifyOtpComp />} />
           <Route path="/LoginPage" element={<LoginComponent />} />
+          <Route path="/MainAdminComponent" element={<MainAdminComp />} />
         </Routes>
       </BrowserRouter>
     </div>
