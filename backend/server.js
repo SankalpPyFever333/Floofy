@@ -23,6 +23,8 @@ app.use("/api" , require("./Routes/ShopDatabseRoutes/getProdFromDb.router"))
 app.use("/api" , require("./Routes/ProfileRoutes/EditProfileDoctor.Router"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginOfUsers.Routers"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/FirebaseOtpVerify.router"))
+app.use("/api" , require("./Routes/AuthorizeationRoutes/FetchLoginCredentials.route"))
+app.use("/api" , require("./Routes/AuthorizeationRoutes/UpdatePassword.route"))
 
 mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{

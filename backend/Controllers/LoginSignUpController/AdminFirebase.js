@@ -1,6 +1,6 @@
 
 const admin = require("firebase-admin");
-const { getAuth, signInWithPhoneNumber } = require("firebase-admin/auth");
+const { getAuth, SignInWithPhoneNumber} = require("firebase-admin/auth");
 const serviceAccount  = require("../../floofy_Service_Account.json")
 // Initialize Firebase Admin SDK (you need to have a service account JSON file)
 admin.initializeApp({
@@ -18,10 +18,11 @@ async function verifyOtp(phoneNumber, enteredOtp) {
       }
       throw error;
     });
-    const verificationResult = await signInWithPhoneNumber(
+
+    const verificationResult = await SignInWithPhoneNumber(
       auth,
+      phoneNumber,
       enteredOtp,
-      user.uid
     );
 
     // If there's no error, the OTP is valid
