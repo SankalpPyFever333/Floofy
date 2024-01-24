@@ -11,8 +11,10 @@ import Swal from 'sweetalert2';
 const VerifyOtpComp = () => {
       const [otp, setOtp] = useState(['', '', '', '', '', '']);
       const [phNumber, setPhNumber] = useState('');
+      const [CResult , setCResult] = useState('');
       const inputRefs = useRef(new Array(6).fill(null).map(() => React.createRef()));
       const navigate = useNavigate();
+      const enteredOtp = otp.map((num) => num.toString()).join("");
       const handleChange = (index, value) => {
             if (!isNaN(value) && value.length <= 1) {
                   const newOtp = [...otp];
@@ -48,73 +50,68 @@ const VerifyOtpComp = () => {
 
       const handleSendotp = async () => {
             
-            if (phNumber.length === 13) {
-                  generateRecaptchaVerifier();
-                  let appVeifier = window.recaptchaVerifier;
-                  signInWithPhoneNumber(authentication, phNumber, appVeifier)
-                        .then((confirmationResult) => {
-                              window.confirmationResult = confirmationResult;
-                              // console.log("recaptcha verified!! and navigating to verifyOTP", confirmationResult);
-                              Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: `otp sent to ${phNumber}`,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                              });
-                              
+            const response = await fetch("http://localhost:3000/api/fetchLoginCredentials" , {
+                  method: "POST",
+                  headers: {
+                        'Content-Type':"application/json"
+                  },
+                  body: JSON.stringify({ contactNumber: phNumber})
+            });
+            let data = await response.json();
+            if(response.ok){
+                  
+                  console.log("Contact no: " , data.userLoginData.contactNumber);
+                  if (phNumber.length === 13) {
+      
+                        localStorage.setItem("UserPhoneNumber", data.userLoginData.contactNumber)
+                        generateRecaptchaVerifier();
+                        let appVeifier = window.recaptchaVerifier;
+                        signInWithPhoneNumber(authentication, phNumber, appVeifier)
+                              .then((confirmationResult) => {
+                                    window.confirmationResult = confirmationResult;
+                                    console.log("recaptcha verified!! and navigating to verifyOTP", confirmationResult);
+                                    setCResult(confirmationResult);
+                                    Swal.fire({
+                                          position: "center",
+                                          icon: "success",
+                                          title: `otp sent to ${phNumber}`,
+                                          showConfirmButton: false,
+                                          timer: 1500
+                                    });
+                              })
+                              .catch((error) => {
+                                    console.log(error);
+                                    Swal.fire({
+                                          icon: "error",
+                                          title: "Oops...",
+                                          text: "Error in sending otp",
+                                    });
+                              })
+                  }
+                  
 
-                        })
-                        .catch((error) => {
-                              console.log(error);
-                              Swal.fire({
-                                    icon: "error",
-                                    title: "Oops...",
-                                    text: "Error in sending otp",
-                              });
-                        })
+            } else {
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "User not found!!",
+                  });
             }
+
       }
 
       const handleVerifyOtp = ()=>{
             // verify otp and then redirect the user to forgot password page.
             // server - side OTP verification can be done using Firebase Admin SDK in a Node.js 
             // send otp from here to the server for verification.
-            const enteredOtp = otp.map((num)=>num.toString()).join("");
-            try {
-                  const response = fetch("http://localhost:3000/api/FirebaseOtpVerify" , {
-                        method:"POST",
-                        headers:{
-                              'Content-Type':"application/json"
-                        },
-                        body: JSON.stringify({ userMobileNumber:phNumber, EnteredOtp:enteredOtp })
-                  });
-                  // console.log(response)
-                  if(response.ok){
-                        Swal.fire({
-                              position: "center",
-                              icon: "success",
-                              title: "Verification successfull",
-                              showConfirmButton: false,
-                              timer: 1500
-                        });
-                        navigate("/GotoForgotPassword")
-                  }
-                  else{
-                        Swal.fire({
-                              icon: "error",
-                              title: "Oops...",
-                              text: "OTP not matched!",
-                        });
-                  }
-            } catch (error) {
-                  Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Something went wrong!",
-                  });
-            }
             
+            if ( CResult && CResult.confirm(enteredOtp)) {
+                  console.log("verified");
+                  navigate("/GotoForgotPassword")
+            }
+            else {
+                  console.log("not verifies")
+            }
 
       }
 

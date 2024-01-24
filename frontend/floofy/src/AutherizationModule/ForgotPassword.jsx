@@ -15,21 +15,41 @@ function ForgotPassword() {
       const [newConfirmPassword , setNewConfirmPassword] = useState('');
       const [phNumber, setPhNumber] = useState('');
       const navigate = useNavigate();
+      setPhNumber(localStorage.getItem("UserPhoneNumber"))
       const updateNewPasswordInDb = ()=>{
+
             if(newPassword === newConfirmPassword){
-                  // In this , you need to encrypt the password adn then save it to databse.
+
+                  // phone verification done using otp.
+
+                  // In this , you need to encrypt the password and then save it to databse.
                   // From here , send the phone, and new password in the request body.
 
-                  // Also first verify the phone number by sending otp.
+                  const response = fetch("http://localhost:3000/api/updateNewPassword/:id", {
+                        method: 'PUT',
+                        headers:{
+                              'Content-Type':"application/json"
+                        },
+                        body: JSON.stringify({ contactNumber: phNumber , password : newPassword})
+                  })
 
-                  Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Password updated successfully",
-                        showConfirmButton: false,
-                        timer: 1500
-                  });
-                  navigate("/LoginPage")
+                  if(response.ok){
+                        Swal.fire({
+                              position: "center",
+                              icon: "success",
+                              title: "Password updated successfully",
+                              showConfirmButton: false,
+                              timer: 1500
+                        });
+                        navigate("/LoginPage")
+                  }
+                  else{
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "internal server error , TRY AGAIN LATER",
+                        });
+                  }
             }
             else{
                   Swal.fire({
@@ -40,34 +60,7 @@ function ForgotPassword() {
             }
       }
 
-      const generateRecaptchaVerifier = () => {
-            // creating a global instance of RecaptchaVerifier class.
-            window.recaptchaVerifier = new RecaptchaVerifier(
-                  authentication,
-                  "recaptchaContainer",
-                  {
-                        "size": "visible",
-
-                  }
-            );
-      }
-
-
-      const handleSendotp = async () => {
-            // console.log("handling the sendOtpClick")
-            if (phNumber.length === 13) {
-                  generateRecaptchaVerifier();
-                  let appVeifier = window.recaptchaVerifier;
-                  signInWithPhoneNumber(authentication, phNumber, appVeifier)
-                        .then((confirmationResult) => {
-                              window.confirmationResult = confirmationResult;
-                              console.log("recaptcha verified!! and navigating to verifyOTP" , confirmationResult);
-                        })
-                        .catch((error) => {
-                              console.log(error);
-                        })
-            }
-      }
+      
 
       return (
             <div>
