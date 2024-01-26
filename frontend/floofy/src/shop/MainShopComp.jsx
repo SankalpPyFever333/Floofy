@@ -3,7 +3,7 @@ import SearchAndAppbar from './SearchAndAppbar'
 import SearchByCategory from './SearchByCategory'
 import ShowBestOffersProduct from './ShowBestOffersProduct'
 import ProductCard from './ProductCard'
-
+import { fetchProducts } from './fetchProductfromDb'
 
 
 function MainShopComp() {
@@ -11,30 +11,13 @@ function MainShopComp() {
   const [isCartOpen , setIsCartOpen] = useState(true)
   useEffect(()=>{
       
-      
-      fetchProducts();
-      
-      
+    const response = async ()=>{
+      const jsonProd = await response.json();
+      console.log("Data from database", jsonProd);
+      setProd(jsonProd.All_prod_response);
+    }
   }, [])  
-  const fetchProducts = async (req,res) => {
-   
-    const response = await fetch("http://localhost:3000/api/getProductFromShop" , {
-        method:'GET',
-        headers:{
-          'Content-Type':"application/json"
-        } , 
-        
-      })
-      
-      if (!response.ok) {
-        console.log("network error")
-      }
-      const jsonProd = await response.json()
-    console.log("Data from database", jsonProd)
-
-      setProd(jsonProd.All_prod_response)
-    
-  }
+  
   return (
     <div>
 
