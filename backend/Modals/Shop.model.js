@@ -6,8 +6,8 @@ const ShopModel = new mongoose.Schema({
   Category: String,
   Description: String,
   ImagePath: String,
-  Quantity: Number,
-  DiscountTag: Boolean,
+  Quantity: String,
+  DiscountTag: String,
 });
 
 const shop = mongoose.model( "Shop" , ShopModel)

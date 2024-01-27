@@ -7,14 +7,8 @@ const updatePasswordController = async(req, res)=>{
       const { contactNumber , password} = req.body;
       // let { password } = req.body;
       try {
-
-            
             // hash your password:
-
             const hashedPassword = await bcrypt.hash(password, saltRounds)
-            
-
-
             const userDoc = await userLoginModel.findOneAndUpdate({contactNumber} , {
                   $set :{ "password" : hashedPassword }},
                   {

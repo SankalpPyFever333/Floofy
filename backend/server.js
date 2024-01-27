@@ -17,6 +17,7 @@ app.use(bodyparser.urlencoded({
       extended: true
 }))
 app.use(express.json())
+// user end routes
 app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginSign.Routes"))
 app.use("/api" , require("./Routes/ShopDatabseRoutes/AddProdInShop.Routes"))
 app.use("/api" , require("./Routes/ShopDatabseRoutes/getProdFromDb.router"))
@@ -25,6 +26,12 @@ app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginOfUsers.Routers"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/FirebaseOtpVerify.router"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/FetchLoginCredentials.route"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/UpdatePassword.route"))
+
+
+// Admin end routes
+
+app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/getProductinDbAdmin.route"))
+app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/updateProductInDbAdmin.route"))
 
 mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{
