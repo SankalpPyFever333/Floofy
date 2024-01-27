@@ -66,10 +66,6 @@ function getComparator(order, orderBy) {
             : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
       const stabilizedThis = array.map((el, index) => [el, index]);
       stabilizedThis.sort((a, b) => {
@@ -147,7 +143,7 @@ function EnhancedTableHead(props) {
                                     }}
                               />
                         </TableCell>
-                        {/* In below code , change it when you have dstore the dicounttag as a string in the dtabase. */}
+                        {/* In below code , change it when you have store the dicounttag as a string in the dtabase. */}
                         {
                               headCells.map((headCell) => {
                                     headCell.id === "DiscountTag" ? (
@@ -199,8 +195,8 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-      const { numSelected , selected } = props;
-      console.log(selected[0])
+      const { numSelected , selected} = props;
+      const [localSelected , setLocalSelected] = useState([]);
       const [isEditModalOpen, setIsEditModalOpen] = useState(false);
       const handleEditItem = ()=>{
             setIsEditModalOpen(!isEditModalOpen)
@@ -210,6 +206,9 @@ function EnhancedTableToolbar(props) {
             // code for deleting items from the db.
       }
 
+      React.useEffect(()=>{
+            setLocalSelected(selected);
+      }, [selected])
 
       return (
             <Toolbar
@@ -253,7 +252,7 @@ function EnhancedTableToolbar(props) {
                         {
                               numSelected === 1 && (
                                           <Tooltip title="Edit">
-                                                <EditProductModal selectedRow={selected[0]} />
+                                                <EditProductModal numSelected={numSelected} selectedRowId={selected[0]} />
                                           </Tooltip>
                               )
                         }
@@ -273,8 +272,12 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
       numSelected: PropTypes.number.isRequired,
-      selected: PropTypes.number,
+      selected: PropTypes.array.isRequired,
+
 };
+// EnhancedTableToolbar.defaultProps = {
+//       selected: ["65a0efe743064ab8aca9057d"]
+// }
 
 export default function ShowTabularProducts() {
       const [order, setOrder] = React.useState('asc');
@@ -300,7 +303,7 @@ export default function ShowTabularProducts() {
             setSelected([]);
       };
 
-      
+      // to resolve the problem, we have to make a system that when selected gets changed , then it should change in the above component.
 
       const handleClick = (event, id) => {
             const selectedIndex = selected.indexOf(id);
@@ -319,6 +322,7 @@ export default function ShowTabularProducts() {
                   );
             }
             setSelected(newSelected);
+            // localStorage.setItem("selectedCheckboxArray" , newSelected);
       };
 
       const handleChangePage = (event, newPage) => {
