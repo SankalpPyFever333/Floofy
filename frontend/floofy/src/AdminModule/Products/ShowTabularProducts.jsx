@@ -22,7 +22,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { fetchProducts } from '../../shop/fetchProductfromDb';
 import EditProductModal from './EditProductModal';
-
+import AddProductModal from './AddProductModal';
+import Swal from 'sweetalert2';
 
 
 async function createData() {
@@ -198,12 +199,59 @@ function EnhancedTableToolbar(props) {
       const { numSelected , selected} = props;
       const [localSelected , setLocalSelected] = useState([]);
       const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+      const [onProduxtUpdate , setOnProductUpdate] = useState({});
+
       const handleEditItem = ()=>{
             setIsEditModalOpen(!isEditModalOpen)
       }
 
-      const handleDeleteItemFromDb = ()=>{
+      const handleUpdatedData = (updatedData)=>{
+            console.log('handleUpdatedData -> ', updatedData)
+            setOnProductUpdate(updatedData);
+      }
+
+      const handleAddItemInDb = ()=>{
+            // open the modal for adding the product:
+
+            
+      }
+
+      const handleDeleteItemFromDb = async ()=>{
             // code for deleting items from the db.
+            try {
+                  const response = await fetch("http://localhost:3000/api/deleteProductByAdmin",{
+                        method:"DELETE",
+                        headers:{
+                              'Content-Type':"application/json"
+                        },
+                        body: JSON.stringify({_id: selected})
+                  })
+                  if(!response.ok){
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "Error in deleting",
+                        });
+                  }
+                  else{
+                        Swal.fire({
+                              position: "center",
+                              icon: "success",
+                              title: "Deleted successfully",
+                              showConfirmButton: false,
+                              timer: 1500
+                        });
+                  }
+            } catch (error) {
+                  console.log("exception takes place " , error)
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Internal server error",
+                  });
+            }
+
+            // There is a problem that after successful deletion , that element still selected and I have to handle that error bcoz after deletion it is not in the db , so clicking again on the delete button, i got error.
       }
 
       React.useEffect(()=>{
@@ -243,6 +291,7 @@ function EnhancedTableToolbar(props) {
 
                   {numSelected > 0 ? (
                         <>
+                        
                         <Tooltip title="Delete Selected Item">
                                     <IconButton onClick={handleDeleteItemFromDb}>
                                     <DeleteIcon />
@@ -252,19 +301,22 @@ function EnhancedTableToolbar(props) {
                         {
                               numSelected === 1 && (
                                           <Tooltip title="Edit">
-                                                <EditProductModal numSelected={numSelected} selectedRowId={selected[0]} />
+                                                <EditProductModal onUpdateProduct={handleUpdatedData} numSelected={numSelected} selectedRowId={selected[0]} />
                                           </Tooltip>
                               )
                         }
 
-                        
-                        
                         </>
                   ) : (
-                              <IconButton>
-                                    <FilterListIcon />
-                              </IconButton>
-                        
+                        <>
+                              <AddProductModal/>
+                              <Tooltip title = "filter">
+                                    <IconButton>
+                                          <FilterListIcon />
+                                    </IconButton>
+                              </Tooltip>
+
+                        </>
                   )}
             </Toolbar>
       );

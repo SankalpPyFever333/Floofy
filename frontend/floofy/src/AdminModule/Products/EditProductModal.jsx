@@ -7,16 +7,16 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
 
-function EditProductModal({numSelected , selectedRowId}) {
+function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
       const [show, setShow] = useState(false);
       const [prodFromDb , setProdFromDb] = useState({})
 
       const [prodName, setProdName] = useState('');
-      const [category , setCategory] = useState('')
+      const [category , setCategory] = useState('');
       const [price , setPrice] = useState('');
       const [description, setDescription] = useState('');
       const [quantity, setQuantity] = useState('');
-      const [imagePath , setImagePath] = useState('')
+      const [imagePath , setImagePath] = useState('');
       const [discountTag , setDiscountTag] = useState('');
 
 
@@ -29,25 +29,45 @@ function EditProductModal({numSelected , selectedRowId}) {
                               'Content-type':"application/json"
                         }
                   })
-      
                   if(!response.ok){
-
-                        throw new Error("HTTP error " + response.status);
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "something went wrong!!",
+                        });
                   }
                   const jsonProd = await response.json();
                   const productFromDb = await jsonProd.product;
                   return productFromDb;
             } catch (error) {
                   console.log(error)
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Internal server error",
+                  });
             }
       }
       const fetchProductData = async () => {
             try {
                   const fetchProdFromDb = await fetchedProduct();
-                  console.log(fetchProdFromDb)
+                  // console.log("fetched product from db is: " , fetchProdFromDb)
+                  // console.log("Updated product category is", fetchProdFromDb.Category)
                   setProdFromDb(fetchProdFromDb)
+                  setProdName(fetchProdFromDb.ProductName)
+                  setCategory(fetchProdFromDb.Category)
+                  setDescription(fetchProdFromDb.Description)
+                  setDiscountTag(fetchProdFromDb.DiscountTag)
+                  setPrice(fetchProdFromDb.Price)
+                  setImagePath(fetchProdFromDb.ImagePath)
+                  setQuantity(fetchProdFromDb.Quantity)
             } catch (error) {
                   console.log(error)
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Internal server error",
+                  });
             }
       }
 
@@ -81,8 +101,10 @@ function EditProductModal({numSelected , selectedRowId}) {
                         })
                   })
 
-                  const data = await response.json();
-                  console.log("Updated product is" , data)
+                  const updatedProductData = await response.json();
+                  console.log("Updated product is", updatedProductData)
+                  onUpdateProduct(updatedProductData);
+                  
                   if(!response.ok){
                         Swal.fire({
                               icon: "error",
@@ -98,33 +120,26 @@ function EditProductModal({numSelected , selectedRowId}) {
                               showConfirmButton: false,
                               timer: 1500
                         });
-                        console.log(data.meessage)
+                        console.log(updatedProductData.meessage)
                   }
-
-
             } catch (error) {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Internal server error takes place",
+                        text: "Internal server error",
                   });
                   console.log("Error in updation: " , error)
             }
-
             
             handleClose();
-
       }
-
       return (
             <>
                   <Tooltip title="Edit" >
-                  <IconButton onClick={handleShow} >
-                        <EditIcon />
-                  </IconButton>
-                        
+                        <IconButton onClick={handleShow} >
+                              <EditIcon />
+                        </IconButton>
                   </Tooltip>
-
                   <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
                               <Modal.Title>Edit Product</Modal.Title>
@@ -139,7 +154,6 @@ function EditProductModal({numSelected , selectedRowId}) {
                                                 value={prodFromDb.ProductName || ''}
                                                 onChange={(e)=>{
                                                       setProdName(prodFromDb.ProductName = e.target.value)
-
                                                 }}
                                           />
                                     </Form.Group>
@@ -203,7 +217,6 @@ function EditProductModal({numSelected , selectedRowId}) {
                                                 }}
                                           />
                                     </Form.Group>
-                                    
                               </Form>
                         </Modal.Body>
                         <Modal.Footer>
@@ -222,5 +235,4 @@ function EditProductModal({numSelected , selectedRowId}) {
 export default EditProductModal;
 
 
-// I have to do is that I am getting the updated product in the rsponse but not getting that updated in the table , so set it in the table.
-// Also , while updating the modal , if I keep some fields as it is then it is updating the collection with empty string. So, set it in the way that if user not modifying the fields the it should take its old value not the empty value.
+// I have to do is that I am getting the updated product in the response but not getting that updated in the table , so set it in the table.
