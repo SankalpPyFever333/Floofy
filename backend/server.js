@@ -32,6 +32,9 @@ app.use("/api" , require("./Routes/AuthorizeationRoutes/UpdatePassword.route"))
 
 app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/getProductinDbAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/updateProductInDbAdmin.route"))
+app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/deleteProductByAdmin.route"))
+app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/addProductInDbAdmin.route"))
+
 
 mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{
