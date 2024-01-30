@@ -17,7 +17,9 @@ app.use(bodyparser.urlencoded({
       extended: true
 }))
 app.use(express.json())
+
 // user end routes
+
 app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginSign.Routes"))
 app.use("/api" , require("./Routes/ShopDatabseRoutes/AddProdInShop.Routes"))
 app.use("/api" , require("./Routes/ShopDatabseRoutes/getProdFromDb.router"))
@@ -34,6 +36,20 @@ app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/getProductinDbAdm
 app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/updateProductInDbAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/deleteProductByAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/AdminShopRoute/addProductInDbAdmin.route"))
+
+
+
+// product reviews
+app.use("/api" , require("./Routes/ProductReviewRoutes/postProductReview.route"))
+app.use("/api" , require("./Routes/ProductReviewRoutes/getProductReview.route"))
+app.use("/api", require("./Routes/ProductReviewRoutes/deleteProductReviewe.route"))
+app.use("/api" , require("./Routes/ProductReviewRoutes/getProductReviewWithUsers.routes"))
+app.use("/api" , require("./Routes/AdminRouters/ProductOrderRoutes/fetchProductOrder.route"))
+
+
+// Product Order Routes for admin and user both
+app.use("/api" , require("./Routes/PlaceOrderRoutes/placeOrderUser.route"))
+
 
 
 mongoose.connect(MONGO_CONN_STRING)
