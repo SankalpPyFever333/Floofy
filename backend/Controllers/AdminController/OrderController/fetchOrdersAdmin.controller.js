@@ -5,7 +5,7 @@ const fetchProductOrderDetails = async (req, res)=>{
 
       try {
             const productOrderResponse = await ProductOrder.find({}).populate(
-              "User , Products"
+              "User Products"
             ).exec();
             productOrderResponse.map((productOrder)=>{
                   return {

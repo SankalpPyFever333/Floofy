@@ -52,6 +52,10 @@ app.use("/api" , require("./Routes/PlaceOrderRoutes/placeOrderUser.route"))
 
 
 
+// route for the invoice generation:
+app.use("/api", require("./Routes/InvoiceGenerationRoutes/invoiceGeneration.route"));
+
+
 mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{
       console.log(`database connected successfully`)
