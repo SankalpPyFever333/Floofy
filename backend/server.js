@@ -53,7 +53,15 @@ app.use("/api" , require("./Routes/PlaceOrderRoutes/placeOrderUser.route"))
 
 
 // route for the invoice generation:
-app.use("/api", require("./Routes/InvoiceGenerationRoutes/invoiceGeneration.route"));
+app.use("/api", require("./Routes/InvoiceGenerationRoutes/TotalBillGeneration.route"));
+
+
+
+// show overview
+
+app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/countNewUserLastMonth.route"));
+app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/countProductPurchase.route"))
+
 
 
 mongoose.connect(MONGO_CONN_STRING)

@@ -1,6 +1,6 @@
-const InvoiceModal = require("../../Modals/InvoiceModal/Invoice.modal");
+const TotalBillModal = require("../../Modals/BillModal/TotalBillForCart.modal");
 
-const generateInvoice = async(req, res)=>{
+const generateBillForCart = async(req, res)=>{
       const {
         InvoiceNumber,
         OrderDate,
@@ -15,7 +15,7 @@ const generateInvoice = async(req, res)=>{
         OrderStatus
       } = req.body;
       try {
-            const generatedInvoice = new InvoiceModal({
+            const generatedBillForCartProduct = new TotalBillModal({
               InvoiceNumber,
               OrderDate,
               DeliveryDate,
@@ -26,14 +26,19 @@ const generateInvoice = async(req, res)=>{
               PaymentMode,
               PaymentStatus,
               DiscountedAmount,
-              OrderStatus
+              OrderStatus,
             });
-            await generatedInvoice.save();
-            res.status(200).json({message:"Invoice generated successfully" , InvoiceResponse: generatedInvoice});
+            await generatedBillForCartProduct.save();
+            res
+              .status(200)
+              .json({
+                message: "Total bill generated successfully",
+                InvoiceResponse: generatedBillForCartProduct,
+              });
       } catch (error) {
             console.log(error)
             res.status(500).json({message:"Internal server error"})
       }
 }
 
-module.exports = generateInvoice;
+module.exports = generateBillForCart;

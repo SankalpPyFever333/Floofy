@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
-const InvoiceSchema = new mongoose.Schema({
+const TotalBillSchema = new mongoose.Schema({
   InvoiceNumber: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    default: ()=> Math.random().toString(36).substr(2,10)
   },
   OrderDate: {
     type: Date,
@@ -13,7 +14,8 @@ const InvoiceSchema = new mongoose.Schema({
   },
   DeliveryDate:{
       type: String,
-      require: true
+      require: true,
+      default: Date.now
   },
   Customer: {
     type: mongoose.Types.ObjectId,
@@ -69,9 +71,7 @@ const InvoiceSchema = new mongoose.Schema({
       enum: ['Processing' ,'dispatching', 'shipping' , 'delivered' , 'cancellled'],
       default:'Processing'
   }
-
-
 });
 
-const InvoiceModal = mongoose.model("InvoiceGeneration", InvoiceSchema);
-module.exports = InvoiceModal;
+const TotalBillModal = mongoose.model("TotalBillGeneration", TotalBillSchema);
+module.exports = TotalBillModal;
