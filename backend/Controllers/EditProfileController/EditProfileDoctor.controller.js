@@ -1,4 +1,4 @@
-const Doctor = require("../../Modals/Doctor.modal")
+const Doctor = require("../../Modals/DoctorModals/Doctor.modal")
 
 const AddDoctorProfileEdit = async (req, res)=>{
       const {Name,

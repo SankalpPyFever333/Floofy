@@ -26,5 +26,5 @@ const DoctorSchema = new mongoose.Schema({
   SocialMediaLink: String,
 });
 
-const Doctor = mongoose.model("Doctor" , DoctorSchema)
-module.exports= Doctor;
+const DoctorModel = mongoose.model("Doctor" , DoctorSchema)
+module.exports= DoctorModel;
