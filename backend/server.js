@@ -93,8 +93,7 @@ app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/totalRevenueCalcu
 // Manage doctors by admin
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/showDoctorsListAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchAppointmentHistory.route"))
-
-
+app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
 
 
 
@@ -103,6 +102,7 @@ app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchAppoint
 // Doctors Module Handling:
 
 app.use("/api" , require("./Routes/DoctorsRoutes/DoctorAppointmentRoutes/fixAppointment.route"))
+app.use("/api" , require("./Routes/DoctorsRoutes/DoctorsReviews/postReviewToDoctor.route"))
 
 
 
