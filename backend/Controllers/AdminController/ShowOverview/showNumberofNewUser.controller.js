@@ -13,8 +13,8 @@ const countNewUsers = async (req, res) => {
         const { startDateWeek, endDateWeek } = getLastWeekDates();
         const countUsersLastWeek = await userLoginModel.countDocuments({
           createdAt: {
-            $gte: startDateWeek,
-            $lte: endDateWeek,
+            $gte: new Date(startDateWeek),
+            $lte: new Date(endDateWeek),
           },
         });
         if (countUsersLastWeek) {
@@ -33,7 +33,7 @@ const countNewUsers = async (req, res) => {
         const countUsers = await userLoginModel.aggregate([
           {
             $match: {
-              createdAt: { $gte: lastMonthStartDate },
+              createdAt: { $gte: new Date(lastMonthStartDate) },
             },
           },
           {
@@ -45,7 +45,7 @@ const countNewUsers = async (req, res) => {
             },
           },
         ]);
-        if (countUsers.length > 0) {
+        if ( Array.isArray(countUsers) && countUsers.length > 0) {
           const newUsersCount = countUsers[0].count;
           console.log(
             `Numbers of users from the last month is ${newUsersCount}`
@@ -61,7 +61,6 @@ const countNewUsers = async (req, res) => {
         break;
 
       case "Last Year":
-        //logic for last year count:
         const { startDateYear, endDateYear } = getLastYear();
         const countUsersLastYear = await userLoginModel.countDocuments({
           createdAt: {

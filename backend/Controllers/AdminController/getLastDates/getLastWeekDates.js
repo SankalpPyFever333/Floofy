@@ -7,6 +7,6 @@ const getLastWeekDates = () => {
   console.log(startDateWeek)
   console.log(endDateWeek)
   // return { startDateWeek, endDateWeek };
-  return {startDate ,endDate}
+  return {startDateWeek ,endDateWeek}
 };
 module.exports = getLastWeekDates;

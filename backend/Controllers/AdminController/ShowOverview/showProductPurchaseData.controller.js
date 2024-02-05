@@ -10,29 +10,23 @@ const countProductTimeframe = async (
     switch (getLastStartDate) {
       case "Last Week":
         const { startDateWeek, endDateWeek } = getLastWeekDates();
-      //   const countProductLastWeek = await ProductOrder.aggregate([
-      //     {
-      //       $match: {
-      //         createdAt: {
-      //           $gte: startDateWeek,
-      //           $lte: endDateWeek,
-      //         },
-      //         status: OrderStatus,
-      //       },
-      //     },
-      //     {
-      //       $group: {
-      //         _id: null,
-      //         count: { $sum: 1 },
-      //       },
-      //     },
-      //   ]);
-      const countProductLastWeek = await ProductOrder.countDocuments({
-        createdAt: {
-          $gte: startDateWeek,
-          $lte: endDateWeek,
-        },
-      });
+        const countProductLastWeek = await ProductOrder.aggregate([
+          {
+            $match: {
+              createdAt: {
+                $gte: new Date(startDateWeek),
+                $lte: new Date(endDateWeek),
+              },
+              status: OrderStatus,
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              count: { $sum: 1 },
+            },
+          },
+        ]);
         return countProductLastWeek;
         
       case "Last Month":
@@ -41,8 +35,8 @@ const countProductTimeframe = async (
               {
                 $match: {
                   createdAt: {
-                    $gte: startDateMonth,
-                    $lte: endDateMonth,
+                    $gte:  new Date(startDateMonth),
+                    $lte: new Date(endDateMonth),
                   },
                   status: OrderStatus,
                 },
@@ -91,11 +85,12 @@ const countProductSales = async (req, res) => {
   console.log(getLastStartDate , OrderStatus)
   try {
       const productCount = await countProductTimeframe(getLastStartDate , OrderStatus);
-      if(productCount){
+      if( Array.isArray(productCount) && productCount.length>0){
+        
             res.status(200).json({message:"Product counted" , productCount: productCount.length})
       }
       else{
-            res.status(400).json({message:"No product found" , length:productCount.length})
+            res.status(400).json({message:"No product found" , length: 0})
       }
   } catch (error) {
     console.log(error);

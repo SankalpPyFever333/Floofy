@@ -61,7 +61,7 @@ app.use("/api", require("./Routes/InvoiceGenerationRoutes/TotalBillGeneration.ro
 
 app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/countNewUserLastMonth.route"));
 app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/countProductPurchase.route"))
-
+app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/totalRevenueCalculate.route"))
 
 
 mongoose.connect(MONGO_CONN_STRING)
