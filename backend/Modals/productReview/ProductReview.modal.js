@@ -18,6 +18,7 @@ const prodReviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // add rating  field here
   },
   { timestamps: true }
 );

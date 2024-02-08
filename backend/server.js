@@ -94,8 +94,8 @@ app.use("/api" , require("./Routes/AdminRouters/OverviewRoutes/totalRevenueCalcu
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/showDoctorsListAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchAppointmentHistory.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/removeDoctor.route"))
-app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
 app.use("/api", require("./Routes/AdminRouters/ManageDoctortsRoute/deleteDoctorReview.route"))
+app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
 
 // ////////////////////////////////////////////////////////////////////////////////
 
@@ -103,6 +103,14 @@ app.use("/api", require("./Routes/AdminRouters/ManageDoctortsRoute/deleteDoctorR
 
 app.use("/api" , require("./Routes/DoctorsRoutes/DoctorAppointmentRoutes/fixAppointment.route"))
 app.use("/api" , require("./Routes/DoctorsRoutes/DoctorsReviews/postReviewToDoctor.route"))
+
+
+
+
+// ////////////////////////////////////////////////////////////////
+
+// Rescuer module handling:
+app.use("/api" , require("./Routes/RescuerRoutes/FixedAppointmentRescuer/fixAppointment.rescuer.route"))
 
 
 

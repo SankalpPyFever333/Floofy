@@ -4,7 +4,7 @@ const getLastWeekDates = require("../getLastDates/getLastWeekDates");
 const getLastYear = require("../getLastDates/getLastYearDates");
 
 const countProductTimeframe = async (
-  getLastStartDate , OrderStatus
+  getLastStartDate
 ) => {
   try {
     switch (getLastStartDate) {
@@ -17,7 +17,7 @@ const countProductTimeframe = async (
                 $gte: new Date(startDateWeek),
                 $lte: new Date(endDateWeek),
               },
-              status: OrderStatus,
+              status: "delivered",
             },
           },
           {
@@ -38,7 +38,7 @@ const countProductTimeframe = async (
                     $gte:  new Date(startDateMonth),
                     $lte: new Date(endDateMonth),
                   },
-                  status: OrderStatus,
+                  status: "delivered",
                 },
               },
               {
@@ -60,7 +60,7 @@ const countProductTimeframe = async (
                     $gte: startDateYear,
                     $lte: endDateYear,
                   },
-                  status: OrderStatus,
+                  status: "delivered",
                 },
               },
               {
@@ -81,16 +81,18 @@ const countProductTimeframe = async (
 };
 
 const countProductSales = async (req, res) => {
-  const { getLastStartDate  , OrderStatus} = req.body;
-  console.log(getLastStartDate , OrderStatus)
+  const { getLastStartDate} = req.body;
+  console.log(getLastStartDate)
   try {
-      const productCount = await countProductTimeframe(getLastStartDate , OrderStatus);
+      const productCount = await countProductTimeframe(getLastStartDate);
       if( Array.isArray(productCount) && productCount.length>0){
         
             res.status(200).json({message:"Product counted" , productCount: productCount.length})
       }
       else{
-            res.status(400).json({message:"No product found" , length: 0})
+            res
+              .status(200)
+              .json({ message: "No product found", productCount: 0 });
       }
   } catch (error) {
     console.log(error);

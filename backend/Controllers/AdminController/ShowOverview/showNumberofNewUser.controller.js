@@ -18,12 +18,10 @@ const countNewUsers = async (req, res) => {
           },
         });
         if (countUsersLastWeek) {
-          res
-            .status(200)
-            .json({
-              message: "user founds",
-              countLastWeekUser: countUsersLastWeek,
-            });
+          res.status(200).json({
+            message: "user founds",
+            userCount: countUsersLastWeek,
+          });
         } else {
           res.status(400).json({ messgae: "NO user found" });
         }
@@ -69,12 +67,10 @@ const countNewUsers = async (req, res) => {
           },
         });
         if (countUsersLastYear) {
-          res
-            .status(200)
-            .json({
-              message: "user founds",
-              countLastWeekUser: countUsersLastYear,
-            });
+          res.status(200).json({
+            message: "user founds",
+            userCount: countUsersLastYear,
+          });
         } else {
           res.status(400).json({ messgae: "NO user found" });
         }

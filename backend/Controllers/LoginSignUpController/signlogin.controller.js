@@ -1,8 +1,6 @@
 const Doctor = require("../../Modals/Doctor.modal");
-const express = require("express");
-const RescuePerson = require("../../Modals/RescuerModal")
-
-// const app = express();
+// const express = require("express");
+const Rescuer = require("../../Modals/RescuerModal/Rescuer.modal");
 
 // Doctor Sign up
 // This will be used when user select himself as a doctor.
@@ -38,29 +36,11 @@ const AddDoctor = async (req, res) => {
 // Rescuer Signup:
 const AddRescuer = async (req, res) => {
   const {
-    Name,
-    Username,
-    Phone,
-    Email,
-    Experience,
-    Education,
-    Specialization,
-    SocialMediaLink,
-    Transporting,
-    Equipments,
+    
   } = req.body;
   try {
-    const newResuerPerson = new RescuePerson({
-      Name,
-      Username,
-      Phone,
-      Email,
-      Experience,
-      Education,
-      Specialization,
-      SocialMediaLink,
-      Transporting,
-      Equipments,
+    const newResuerPerson = new Rescuer({
+      
     });
     await newResuerPerson.save();
     res.status(200).json({ message: "Rescuer data saved successfully" });

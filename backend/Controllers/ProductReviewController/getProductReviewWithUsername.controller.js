@@ -6,6 +6,8 @@ const getProductreviewWithUsername = async (req, res) => {
       .find()
       .populate("User Product")
       .exec();
+
+      console.log(reviewsByUser)
     reviewsByUser.map((reviewWithUser) => {
       return {
         UserName: reviewWithUser.User.username,
@@ -13,12 +15,13 @@ const getProductreviewWithUsername = async (req, res) => {
       };
     });
 
+    
     if (reviewsByUser) {
       return res
         .status(200)
         .json({ message: "Get review with product", review: reviewsByUser });
     } else {
-      return res.status(404).json({ message: "review not found" });
+      return res.status(200).json({ message: "review not found" , review: []});
     }
   } catch (error) {
     console.log(error);

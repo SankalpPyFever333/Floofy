@@ -1,15 +1,15 @@
 const mongoose = require("mongoose")
 
-const AppointmentSchema = new mongoose.Schema(
+const RescuerAppointmentSchema = new mongoose.Schema(
   {
     User: {
       type: mongoose.Types.ObjectId,
       ref: "UserLoginCredentials",
       required: true,
     },
-    Doctor: {
+    Rescuer: {
       type: mongoose.Types.ObjectId,
-      ref: "Doctor",
+      ref: "Rescuer",
       required: true,
     },
     AppointmentDate: {
@@ -33,16 +33,17 @@ const AppointmentSchema = new mongoose.Schema(
         required: true,
       },
     },
-    ReasonForAppointment:{
+    ReasonForAppointment: {
       type: String,
       required: true,
-    }
+    },
   },
   {
     timestamps: true,
   }
 );
 
+const  RescuerAppointmentModal = mongoose.model('RescuerAppointment', RescuerAppointmentSchema);
+module.exports = RescuerAppointmentModal;
 
-const AppointmentModel = new mongoose.model("DoctorAppointment" , AppointmentSchema);
-module.exports= AppointmentModel;
+// error in this is that it is not getting the path to Rescue and also I had commented the fetch review middleware in server.js file bcoz will be executed when I hit this api. So solve these.
