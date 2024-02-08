@@ -10,13 +10,16 @@ function MainShopComp() {
   const [prod ,setProd] = useState([]);
   const [isCartOpen , setIsCartOpen] = useState(true)
   useEffect(()=>{
-      
-    const response = async ()=>{
+    async function fetchDataFromDb(){
+      const response = await fetchProducts();
       const jsonProd = await response.json();
-      console.log("Data from database", jsonProd);
-      setProd(jsonProd.All_prod_response);
+      const AllProdFromDb = jsonProd.All_prod_response;
+      console.log(AllProdFromDb)
+        setProd(jsonProd.All_prod_response);
+
     }
-  }, [])  
+    fetchDataFromDb();
+    }, [])  
   
   return (
     <div>

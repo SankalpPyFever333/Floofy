@@ -7,6 +7,7 @@ import LoginComponent from './AutherizationModule/LoginComponent';
 import ForgotPassword from './AutherizationModule/ForgotPassword';
 import VerifyOtpComp from './AutherizationModule/VerifyOtpComp';
 import MainAdminComp from './AdminModule/MainAdminComp';
+// import Razorpayment from './RazorpayPayment/Razorpayment';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/MainAdminComponent" element={<MainAdminComp />} />
         </Routes>
       </BrowserRouter>
+      {/* <Razorpayment/> */}
     </div>
   );
 }

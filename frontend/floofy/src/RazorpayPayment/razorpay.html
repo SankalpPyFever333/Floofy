@@ -1,0 +1,74 @@
+<!-- payment -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paymentpage</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h2>Payment Page</h2>
+    <form id="paymentform">
+        Enter Your Name:
+        <input type="text" id="name" required/>
+        <br/><br/>
+        Enter Your Email:
+        <input type="email" id="email" required/>
+        <br/><br/>
+
+        Enter Your Mobile:
+        <input type="number" id="mobile" required/>
+        <br/><br/>
+
+        <button>Pay Now</button>
+    </form>
+
+    <script>
+       $(document).ready(function(){
+        $("#paymentform").submit(function(event){
+
+        
+        event.preventDefault()
+
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var mobile = $("#mobile").val();
+        
+        var options = {
+    "key": "rzp_live_HGCsLV5PjSYo8F", // Enter the Key ID generated from the Dashboard
+    "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "DigiCoders Technologies", //your business name
+    "description": "Fees Payment",
+    "image": "",
+    "order_id": "order_NUMNZQOdWeNvvM", //This is a sample Order ID. Pass the id obtained in the response of Step 1
+    "callback_url": "",
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        "name": name, //your customer's name
+        "email": email,
+        "contact": mobile //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "22-23, IT Chauraha, Lucknow"
+    },
+    "theme": {
+        "color": "#3399cc"
+    },
+    "handler": function(response)
+    {
+        console.log("Payment ID = " + response.razorpay_payment_id);
+        console.log("Order ID = " + response.razorpay_order_id);
+        console.log("payment Success");
+    }
+};
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+
+})
+       })
+    </script>
+</body>
+</html>
+<!-- code .. -->

@@ -1,9 +1,12 @@
+
 import React from 'react'
+import CardData from './CardData'
 
 function MainOverviewComp() {
   return (
     <div>
-      <h3>Overiview</h3>
+      <h2>Overview</h2>
+      <CardData/>
     </div>
   )
 }

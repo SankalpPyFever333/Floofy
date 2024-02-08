@@ -8,6 +8,7 @@ import MainDoctorsComp from './Doctors/MainDoctorsComp';
 import MainRescuersComp from './Rescuers/MainRescuersComp';
 import AppBarAdmin from './AppBarAdmin';
 import MainOverviewComp from './OverviewOfData/MainOverviewComp';
+import MainProductReviewComp from './ProductReviews/MainProductReviewComp';
 
 
 function MainAdminComp() {
@@ -25,6 +26,7 @@ function MainAdminComp() {
             <div style={{ flex: 1, padding: '20px' }}>
               {currentItem === 'Users' && <MainUsersComp />}
               {currentItem === 'Products' && < MainProductComp />}
+              {currentItem === 'ProductsReviews' && < MainProductReviewComp />}
               {currentItem === 'Orders' && < MainOrdersComp />}
               {currentItem === 'Requests' && < MainRequestComp />}
               {currentItem === 'Doctors' && < MainDoctorsComp />}

@@ -36,6 +36,14 @@ const AdminSidebar = ({ setCurrentItem }) => {
                               <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Products</span> }/>
                         </ListItem>
                   </IconButton>
+                  <IconButton onClick={() => setCurrentItem('ProductsReviews')}>
+                        <ListItem>
+                                    <ListItemIcon>
+                                          <DraftsIcon />
+                                    </ListItemIcon>
+                              <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Reviews</span> }/>
+                        </ListItem>
+                  </IconButton>
 
                   <IconButton onClick={() => setCurrentItem('Orders')}>
                         <ListItem>

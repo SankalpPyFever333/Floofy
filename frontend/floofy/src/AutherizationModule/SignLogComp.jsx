@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./Signup.css";
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Box from '@mui/material/Box';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import InputAdornment from '@mui/material/InputAdornment';
-import Button from '@mui/material/Button';
-import FilledInput from '@mui/material/FilledInput';
-import IconButton from '@mui/material/IconButton';
 
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
+import Box from '@mui/material/Box';
+
+import Button from '@mui/material/Button';
+
 import "./Signup.css"
 import TextField from '@mui/material/TextField';
 
@@ -36,8 +30,6 @@ function SignLogComp() {
       
       const addUserSignupDetails =  async (e)=>{
             e.preventDefault()
-            // console.log(userType)
-            // For now I am getting a empty string as user type. After studying redux , do it again.
             try {
                   const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser" , {
                         method:'POST',      

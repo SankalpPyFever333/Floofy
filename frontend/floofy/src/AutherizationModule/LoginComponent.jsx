@@ -55,6 +55,8 @@ function LoginComponent() {
                   }
                         
                   if(userFound){
+                        console.log("user id is ", loginDataFromDb.userId)
+                        localStorage.setItem("userId" , loginDataFromDb.userId)
                         Swal.fire({
                               position: "center",
                               icon: "success",
@@ -64,6 +66,7 @@ function LoginComponent() {
                         });
                         if(userType === "Admin"){
                               navigate("/MainAdminComponent")
+                              console.log("Admin id is: ", loginDataFromDb.userId)
                         }
                         else{
                               navigate("/MainApp")
