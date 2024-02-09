@@ -5,7 +5,7 @@ const fetchProductOrderDetails = async (req, res)=>{
 
       try {
             const productOrderResponse = await ProductOrder.find({}).populate(
-              "User Products"
+              "User Products.product"
             ).exec();
             productOrderResponse.map((productOrder)=>{
                   return {
@@ -13,10 +13,9 @@ const fetchProductOrderDetails = async (req, res)=>{
                     ProductName: productOrder.Products.ProductName,
                     Quantity: productOrder.Products.quantity,
                     TotalAmount: productOrder.totalAmount,
-                    OrderDate: productOrder.createdAt,
+                    OrderDate: productOrder.createdAt.toLocaleDateString(),
                     DeliverAddress: productOrder.deliveryAddress,
-                    Status : productOrder.Status,
-                    
+                    Status: productOrder.Status,
                   };  
             })
       

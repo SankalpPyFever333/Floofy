@@ -18,7 +18,12 @@ const prodReviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // add rating  field here
+    
+    Rating:{
+      type: String,
+      required:true
+    }
+
   },
   { timestamps: true }
 );

@@ -8,20 +8,28 @@ const getProductreviewWithUsername = async (req, res) => {
       .exec();
 
       console.log(reviewsByUser)
-    reviewsByUser.map((reviewWithUser) => {
+    const usernameAndProdName = reviewsByUser.map((reviewWithUser) => {
       return {
         UserName: reviewWithUser.User.username,
         ProductName: reviewWithUser.Product.ProductName,
+        Comment: reviewWithUser.Comment,
+        createdAt: reviewWithUser.createdAt.toLocaleDateString(),
+        _id: reviewWithUser._id,
+        Rating: reviewWithUser.Rating
       };
     });
 
     
-    if (reviewsByUser) {
+    if (usernameAndProdName) {
       return res
         .status(200)
-        .json({ message: "Get review with product", review: reviewsByUser });
+        .json({
+          message: "Get review with product",
+          review: usernameAndProdName,
+          
+        });
     } else {
-      return res.status(200).json({ message: "review not found" , review: []});
+      return res.status(200).json({ message: "review not found", review: [] });
     }
   } catch (error) {
     console.log(error);

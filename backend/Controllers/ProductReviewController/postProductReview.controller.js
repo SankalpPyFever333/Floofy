@@ -1,12 +1,13 @@
 const productReviwModal = require("../../Modals/productReview/ProductReview.modal");
 
 const postProductReview = async (req, res)=>{
-      const {User , Product , Comment} = req.body;
+      const { User, Product, Comment, Rating } = req.body;
       try {
             const newProductReview = new productReviwModal({
               User,
               Product,
               Comment,
+              Rating,
             });
 
             await newProductReview.save();
