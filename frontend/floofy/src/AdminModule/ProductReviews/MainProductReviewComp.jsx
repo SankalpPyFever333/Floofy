@@ -1,9 +1,11 @@
 import React from 'react'
+import ShowProductReviews from './ShowProductReviews'
 
 function MainProductReviewComp() {
   return (
     <div>
-      <h2>Review Component</h2>
+      <h3>Review Component</h3>
+      <ShowProductReviews/>
     </div>
   )
 }
