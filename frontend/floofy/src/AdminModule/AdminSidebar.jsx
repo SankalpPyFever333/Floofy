@@ -41,7 +41,7 @@ const AdminSidebar = ({ setCurrentItem }) => {
                                     <ListItemIcon>
                                           <DraftsIcon />
                                     </ListItemIcon>
-                              <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Reviews</span> }/>
+                              <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Products Reviews</span> }/>
                         </ListItem>
                   </IconButton>
 
@@ -78,6 +78,14 @@ const AdminSidebar = ({ setCurrentItem }) => {
                                     <DraftsIcon />
                               </ListItemIcon>
                               <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Rescuers</span> } />
+                        </ListItem>
+                  </IconButton>
+                  <IconButton onClick={() => setCurrentItem('Rescuers')}>
+                        <ListItem>
+                              <ListItemIcon>
+                                    <DraftsIcon />
+                              </ListItemIcon>
+                              <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Log out</span> } />
                         </ListItem>
                   </IconButton>
 

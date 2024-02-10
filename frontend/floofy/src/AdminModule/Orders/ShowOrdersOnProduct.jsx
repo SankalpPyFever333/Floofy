@@ -28,7 +28,7 @@ async function createData() {
 
       return jsonFetchOrderResponse.map((order)=>({
             UserName: order.User.username,
-            OrderDate: order.createdAt,
+            createdAt: order.createdAt,
             DeliveryAddress: order.deliveryAddress,
             Status: order.status,
 
@@ -62,7 +62,7 @@ function Row(props) {
                         </TableCell>
                         <TableCell align="left">{row.Status}</TableCell>
                         <TableCell align="left">{row.DeliveryAddress}</TableCell>
-                        <TableCell align="left">{row.OrderDate}</TableCell>
+                        <TableCell align="left">{row.createdAt}</TableCell>
                         
                   </TableRow>
                   <TableRow>
@@ -91,7 +91,7 @@ function Row(props) {
                                                                   <TableCell>{historyRow.Quantity}</TableCell>
                                                                   <TableCell align="left">{historyRow.ProductPrice}</TableCell>
                                                                   <TableCell align="left">
-                                                                        {historyRow.ProductPrice * historyRow.Quantity}
+                                                                              {parseInt(historyRow.ProductPrice) * parseInt(historyRow.Quantity)}
                                                                   </TableCell>
                                                             </TableRow>
                                                             <Divider/>
@@ -100,7 +100,7 @@ function Row(props) {
                                                                         Total Amount
                                                                   </TableCell>
                                                                         <TableCell style={{ fontWeight: "bolder" }} align='right' component="th" scope="row">
-                                                                        45
+                                                                              {historyRow.TotalAmount}
                                                                   </TableCell>
                                                             </TableRow>
                                                             </>
