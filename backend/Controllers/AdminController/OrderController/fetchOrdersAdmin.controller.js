@@ -13,7 +13,7 @@ const fetchProductOrderDetails = async (req, res)=>{
                     ProductName: productOrder.Products.ProductName,
                     Quantity: productOrder.Products.quantity,
                     TotalAmount: productOrder.totalAmount,
-                    OrderDate: productOrder.createdAt.toLocaleDateString(),
+                    createdAt: productOrder.createdAt.toLocaleDateString(),
                     DeliverAddress: productOrder.deliveryAddress,
                     Status: productOrder.Status,
                   };  
