@@ -95,7 +95,7 @@ app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/showDoctorsL
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchAppointmentHistory.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/removeDoctor.route"))
 app.use("/api", require("./Routes/AdminRouters/ManageDoctortsRoute/deleteDoctorReview.route"))
-app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
+// app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/getTotalRevenueDoctor.route"))
 
 

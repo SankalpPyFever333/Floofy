@@ -2,7 +2,7 @@ const express = require("express");
 const fetchDoctorAppointmenthistory = require("../../../Controllers/AdminController/ManageDoctors/ViewAppointmentHistory/fetchAppointmentHistory.controller");
 const router = express.Router();
 
-router.get("/fetchAppointmentHistory" , fetchDoctorAppointmenthistory);
+router.post("/fetchAppointmentHistory" , fetchDoctorAppointmenthistory);
 
 module.exports = router;
 

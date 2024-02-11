@@ -32,6 +32,11 @@ const AppointmentSchema = new mongoose.Schema(
         enum: ["credit_card", "debit_card", "upi"],
         required: true,
       },
+      paymentStatus:{
+        type: String,
+        enum:["paid","unpaid"],
+        default: "unpaid"
+      }
     },
     ReasonForAppointment:{
       type: String,
