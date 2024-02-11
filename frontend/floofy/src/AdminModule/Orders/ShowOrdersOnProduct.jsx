@@ -28,7 +28,7 @@ async function createData() {
 
       return jsonFetchOrderResponse.map((order)=>({
             UserName: order.User.username,
-            createdAt: order.createdAt,
+            createdAt: new Date(order.createdAt).toLocaleDateString(),
             DeliveryAddress: order.deliveryAddress,
             Status: order.status,
 
@@ -62,7 +62,7 @@ function Row(props) {
                         </TableCell>
                         <TableCell align="left">{row.Status}</TableCell>
                         <TableCell align="left">{row.DeliveryAddress}</TableCell>
-                        <TableCell align="left">{row.createdAt}</TableCell>
+                        <TableCell align="left">{row.createdAt.toString()}</TableCell>
                         
                   </TableRow>
                   <TableRow>

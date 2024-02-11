@@ -16,31 +16,33 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { fetchAllDoctorsFromDb } from './fetchDoctorsFromDb';
-import {useNavigate} from "react-router-dom"
-
-async function createData() {
-
-      const fetchedDoctorResponse = await fetchAllDoctorsFromDb();
-      const jsonFetchedDoctorResponse = await fetchedDoctorResponse.json();
-      console.log("doctor list response: ", jsonFetchedDoctorResponse.doctors);
-      return jsonFetchedDoctorResponse.doctors.map((jsonDoctor)=>({
-            Username: jsonDoctor.Username,
-            // Name: jsonDoctor.Name,
-            id: jsonDoctor._id.toString(),
-            Email: jsonDoctor.Email,
-            Phone: jsonDoctor.Phone,
-            Experience: jsonDoctor.Experience
-      }))
+import { fetchDoctorsReview } from './fetchDoctorReviews';
 
 
-}
 
-const rows = await createData();
-console.log("doctors list response: ",rows)
+// async function createData(doctorId) {
+
+//       const DoctorReviewResponse = await fetchDoctorsReview(doctorId);
+//       const jsonDoctorReviewResponse = await DoctorReviewResponse.json();
+//       console.log("doctor review jsonResponse: " , jsonDoctorReviewResponse);
+
+
+
+//       return {
+//             doctorId
+            
+//       };
+// }
+
+// const rows = [
+//       createData(1, 'Cupcake', 305, 3.7),
+
+// ];
 
 function descendingComparator(a, b, orderBy) {
       if (b[orderBy] < a[orderBy]) {
@@ -78,22 +80,22 @@ const headCells = [
             label: 'Username',
       },
       {
-            id: 'Phone',
-            numeric: true,
+            id: 'Date',
+            numeric: false,
             disablePadding: false,
-            label: 'Phone',
+            label: 'Date',
       },
       {
-            id: 'Email',
-            numeric: true,
+            id: 'Rating',
+            numeric: false,
             disablePadding: false,
-            label: 'Email',
+            label: 'Rating',
       },
       {
-            id: 'Experience',
-            numeric: true,
+            id: 'RatingResult',
+            numeric: false,
             disablePadding: false,
-            label: 'Experience',
+            label: 'positive/negative',
       },
 ];
 
@@ -183,7 +185,7 @@ function EnhancedTableToolbar(props) {
                               id="tableTitle"
                               component="div"
                         >
-                              Doctor list
+                              Reviews
                         </Typography>
                   )}
 
@@ -208,7 +210,7 @@ EnhancedTableToolbar.propTypes = {
       numSelected: PropTypes.number.isRequired,
 };
 
-export default function ShowDoctorsList() {
+export default function ShowDoctorReviews({doctorId}) {
       const [order, setOrder] = React.useState('asc');
       const [orderBy, setOrderBy] = React.useState('calories');
       const [selected, setSelected] = React.useState([]);
@@ -216,7 +218,45 @@ export default function ShowDoctorsList() {
       const [dense, setDense] = React.useState(false);
       const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-      const navigate  = useNavigate();
+      const [rows , setReviewRows] = React.useState([]);
+      
+
+      React.useEffect(()=>{
+
+            const fetchReviewData = async ()=>{
+                  try {
+                        const DoctorReviewResponse = await fetchDoctorsReview(doctorId);
+                        const jsonDoctorReviewResponse = await DoctorReviewResponse.json();
+                        console.log("doctor review jsonResponse: ", jsonDoctorReviewResponse);
+                        
+                        const newReviewRows = jsonDoctorReviewResponse.Reviews.map((review)=>({
+                              Username: review.User.username,
+                              ReviewDate: new  Date(review.createdAt).toLocaleDateString(),
+                              Rating: review.rating,
+                              PosiNega: review.rating>=4 ? "Positive" : "Negative",
+                        }));
+
+                        setReviewRows(newReviewRows)
+                        
+
+                  } catch (error) {
+                        console.error(error)
+                  }
+            }
+
+            // In this rows are not rendering when the component renders due to asynchronous nature. See this later.
+            
+            fetchReviewData()
+      },[doctorId , setReviewRows])
+
+      console.log("Review rows outer useefetc " , rows)
+      
+      React.useEffect(()=>{
+            
+            console.log("Review rows in another useefect: " , rows)
+
+      },[rows])
+
 
       const handleRequestSort = (event, property) => {
             const isAsc = orderBy === property && order === 'asc';
@@ -234,7 +274,6 @@ export default function ShowDoctorsList() {
       };
 
       const handleClick = (event, id) => {
-            console.log("Id in event: " , id)
             const selectedIndex = selected.indexOf(id);
             let newSelected = [];
 
@@ -251,7 +290,6 @@ export default function ShowDoctorsList() {
                   );
             }
             setSelected(newSelected);
-            navigate(`/DoctorsDashboard/${id}`)
       };
 
       const handleChangePage = (event, newPage) => {
@@ -333,10 +371,10 @@ export default function ShowDoctorsList() {
                                                             >
                                                                   {row.Username}
                                                             </TableCell>
-                                                            <TableCell align="right">{row.Phone}</TableCell>
-                                                            <TableCell align="right">{row.Email}</TableCell>
-                                                            <TableCell align="right">{row.Experience}</TableCell>
-
+                                                            <TableCell align="left">{row.ReviewDate.toString()}</TableCell>
+                                                            <TableCell align="left">{row.Rating}</TableCell>
+                                                            <TableCell align="left">{row.PosiNega}</TableCell>
+                                                            
                                                       </TableRow>
                                                 );
                                           })}
@@ -365,4 +403,3 @@ export default function ShowDoctorsList() {
             </Box>
       );
 }
-
