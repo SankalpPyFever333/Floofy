@@ -46,5 +46,4 @@ const getTotalRevenueByDoctor = async (req, res)=>{
 
 module.exports = getTotalRevenueByDoctor;
 
-// tommorrow complete the doctor module.
 

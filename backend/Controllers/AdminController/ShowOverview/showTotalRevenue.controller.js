@@ -51,7 +51,7 @@ const totalRevenueCalculation = async (req, res) => {
                 $gte: new Date(LastMonthStartDate),
                 $lte: new Date(LastMonthEndDate),
               },
-              status: "delivered",
+              status: "pending",
             },
           },
           {
@@ -61,6 +61,7 @@ const totalRevenueCalculation = async (req, res) => {
             },
           },
         ]);
+        console.log("Monthly sales ", calculateRevenueLastMonth)
         if( Array.isArray(calculateRevenueLastMonth) && calculateRevenueLastMonth.length>0){
             res.status(200).json({message:"Product Found" , revenue: calculateRevenueLastMonth})
         }
@@ -89,6 +90,7 @@ const totalRevenueCalculation = async (req, res) => {
                   }
             }
             ]);
+            console.log("yearly sales is :" , yearlySales)
             if( Array.isArray(yearlySales)&& yearlySales.length>0){
                   res.status(200).json({message:"revenue calculated" , revenue: yearlySales})
             }

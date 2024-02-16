@@ -4,6 +4,7 @@ const deleteDoctorReview = async (req, res)=>{
       const {reviewObjectId} =  req.body;
       try {
             const findDoctorReviewAndDelete =  await DoctorReviewModel.findByIdAndDelete(reviewObjectId);
+            console.log(findDoctorReviewAndDelete)
             if(findDoctorReviewAndDelete){
                   res.status(200).json({message:"Review deleted successfully"})
             }
