@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
-function ShowTotalRevenueGeneratedCard() {
+function ShowTotalRevenueGeneratedCard({timeFrame}) {
   return (
     <div>
               {['Dark'].map((variant) => (

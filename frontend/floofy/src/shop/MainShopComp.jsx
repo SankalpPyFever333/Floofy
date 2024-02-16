@@ -4,6 +4,7 @@ import SearchByCategory from './SearchByCategory'
 import ShowBestOffersProduct from './ShowBestOffersProduct'
 import ProductCard from './ProductCard'
 import { fetchProducts } from './fetchProductfromDb'
+// import DisplayReviewOfProductMainComp from './DisplayReviewOfProductMainComp'
 
 
 function MainShopComp() {
@@ -32,6 +33,7 @@ function MainShopComp() {
       <SearchAndAppbar/>
       <SearchByCategory/>
       <ShowBestOffersProduct/>
+      {/* <DisplayReviewOfProductMainComp/> */}
       {
 
         prod.map((product)=>{

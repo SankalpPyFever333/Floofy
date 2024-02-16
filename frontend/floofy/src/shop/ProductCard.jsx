@@ -24,10 +24,7 @@ export default function ProductCard({imgSrc , category , DiscountTag,  ProdDescr
 
 
       return (
-
-            // <Grid container spacing={2}>
-            
-
+      
             <Card sx={{ maxWidth: "14rem" }} style={{margin:5}}>
                   <CardMedia
                         component="img"
@@ -54,11 +51,10 @@ export default function ProductCard({imgSrc , category , DiscountTag,  ProdDescr
                         </Typography>
                         {
                               
-                              productCount ? <DecrementIncrementBtn productCount={productCount} AddBtn={Addbtn} handleAddBtn={handleAddToCart} /> : Addbtn
+                              productCount ? <DecrementIncrementBtn productCount={productCount} setProductCount={setProductCount} AddBtn={Addbtn} handleAddBtn={handleAddToCart} /> : Addbtn
                         }
                         
                   </CardActions>
             </Card>
-            // </Grid>
       );
 }

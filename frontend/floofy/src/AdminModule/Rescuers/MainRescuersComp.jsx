@@ -1,11 +1,13 @@
 import React from 'react'
+import ShowRescuersList from './ShowRescuersList'
 
 function MainRescuersComp() {
   return (
     <div>
-      <h4>Main Rescuers Comp</h4>
+      <h4>Rescuers</h4>
+      <ShowRescuersList/>
     </div>
   )
 }
 
-export default MainRescuersComp
+export default MainRescuersComp;

@@ -15,16 +15,18 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Divider from '@mui/material/Divider';
 import { fetchAllProductOrder } from './fetchProductsOrder';
-
+import Tooltip from '@mui/material/Tooltip';
 
 async function createData() {
+      
 
       const OrdersResponse = await fetchAllProductOrder();
       const jsonOrderResponse = await OrdersResponse.json();
       
       const jsonFetchOrderResponse = await jsonOrderResponse.fetchedOrder;
-      console.log(jsonFetchOrderResponse)
-      console.log(jsonFetchOrderResponse.Products)
+      // console.log(jsonFetchOrderResponse)
+      // console.log(jsonFetchOrderResponse.Products)
+      // console.log(data);
 
       return jsonFetchOrderResponse.map((order)=>({
             UserName: order.User.username,
@@ -49,13 +51,16 @@ function Row(props) {
             <React.Fragment>
                   <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                         <TableCell>
-                              <IconButton
-                                    aria-label="expand row"
-                                    size="small"
-                                    onClick={() => setOpen(!open)}
-                              >
-                                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                              </IconButton>
+                              <Tooltip title="See order history" placement="top" >
+                                    <IconButton
+                                          aria-label="expand row"
+                                          size="small"
+                                          onClick={() => setOpen(!open)}
+                                    >
+                                          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                    </IconButton>
+
+                              </Tooltip>
                         </TableCell>
                         <TableCell component="th" scope="row">
                               {row.UserName}

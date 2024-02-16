@@ -4,62 +4,79 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import EnterPriceDialogue from './EnterPriceDialogue';
-import TextField from '@mui/material/TextField';
-import { useDispatch  , useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RemoveItemFromCart , AddItemToCart } from '../AllStateOfApplication/actions/AddRemoveItemFromCart.action';
 
-import { Add_Prod_to_Cart , Remove_Prod_From_Cart } from '../State/action-creator/Add_To_Cart_Action';
-
-
-export default function DecrementIncrementBtn({productCount , AddBtn , handleAddBtn}) {
+export default function DecrementIncrementBtn({ productCount, setProductCount,  AddBtn , handleAddBtn}) {
       let [Pcount, setCount] = React.useState(productCount);
       const [openPriceDialog, setOpenPriceDialog] = React.useState(false)
-      const Prod_Count = useSelector(state => state.count)
+      const countProduct = useSelector(state => state.ProdCount)
       const dispatch = useDispatch();
-      let getItemCount = 0
-      const handleRemoveProduct = ()=>{
-            
-            // if(productCount > 0) {
-            //       --count
-            //       setCount(count)
-                  
-            // }
-            
-            // if(count===0){
-            //       setCount(0)
-            //       productCount = count
-                  
-            // }
 
+      const handleAddProductToCart = ()=>{
+            dispatch(AddItemToCart());
+      }
 
+      const handleRemoveProductFromCart = ()=>{
+            dispatch(RemoveItemFromCart())
 
+            console.log("prodcount: ", countProduct)
 
+            // check this condition later on.
+
+            if(countProduct===1){
+                  setProductCount(0)
+            }
 
       }
-      const handleAddProduct = ()=>{
-            // ++count;
-            // //code for adding the product in the cart.
-            // setCount(count)
+
+
+
+
+
+
+
+      // const handleRemoveProduct = ()=>{
             
-      }
+      //       // if(productCount > 0) {
+      //       //       --Pcount
+      //       //       setCount(Pcount)
+                  
+      //       // }
+            
+      //       // if (Pcount ===0){
+      //       //       setCount(0)
+      //       //       // Pcount = productCount
+      //       //       setProductCount(Pcount)
+      //       // }
+
+
+
+      // }
+
+
+      // const handleAddProduct = ()=>{
+      //       // ++Pcount;
+      //       // //code for adding the product in the cart.
+      //       // setCount(Pcount)
+            
+
+
+      // }
       const handleOpenPriceDialog = () => {
             setOpenPriceDialog(!openPriceDialog);
             // get the text from the textfields and set it localstorage and update the shop cart badge.
             return <EnterPriceDialogue/>
       }
-      
-      
-      
       return (
             
-            Pcount ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                  <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={()=>{dispatch(Remove_Prod_From_Cart)}} >{<RemoveIcon />}</Button>
-                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px'}}>{Prod_Count}</Button>
+            productCount ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                  <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={handleRemoveProductFromCart} >{<RemoveIcon />}</Button>
+                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{countProduct}</Button>
                   {
                         openPriceDialog ? <EnterPriceDialogue /> : null
                   }
-                  
-                  
-                  <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={()=>{dispatch(Add_Prod_to_Cart)}} >{<AddIcon />}</Button>
+                  <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={handleAddProductToCart} >{<AddIcon />}</Button>
             </ButtonGroup> : AddBtn
             
             

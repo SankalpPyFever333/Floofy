@@ -30,7 +30,7 @@ function MainAdminComp() {
               {currentItem === 'Orders' && < MainOrdersComp />}
               {currentItem === 'Requests' && < MainRequestComp />}
               {currentItem === 'Doctors' && < MainDoctorsComp />}
-              {currentItem === 'Rescuers' && < MainRescuersComp />}
+              {/* {currentItem === 'Rescuers' && < MainRescuersComp />} */}
               {currentItem === 'Overview' && < MainOverviewComp />}
             </div>
           </div>

@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
-import {useSelector , useDispatch} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -20,10 +20,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function ShoppingCartButton() {
       const navigate = useNavigate();
-      const count = useSelector(state => state.count)
-      console.log(count)
+
+      const countPrdouct = useSelector(state => state.ProdCount)
       const dispatch = useDispatch();
-      
 
       const openCartComponent = () => {
             navigate("/GoToCart")
@@ -31,7 +30,7 @@ export default function ShoppingCartButton() {
 
       return (
                   <IconButton onClick={openCartComponent} aria-label="cart">
-                        <StyledBadge badgeContent={count} color="secondary">
+                        <StyledBadge badgeContent= {countPrdouct} color="secondary">
                               <ShoppingCartIcon />
                         </StyledBadge>
                   </IconButton>

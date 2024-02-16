@@ -19,27 +19,29 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { fetchProductReviews } from './fetchProductReviewFromDb';
-import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom"
+import { fetchRescuerList } from './fetchResuersFromDb';
+
 
 async function createData() {
-      const prodReviewsResponse = await fetchProductReviews();
-      const jsonProdReviews = await prodReviewsResponse.json();
-      const AllprodReviews = jsonProdReviews.review;
-      console.log(AllprodReviews)
-      return AllprodReviews.map((review)=> ({
-            Comment: review.Comment,
-            _id: review._id,
-            ProductName: review.ProductName,
-            Rating: review.Rating,
-            UserName: review.UserName,
-            createdAt: review.createdAt
-      }))
+
+      // const fetchedRescuerResponse = await fetchRescuerList();
+      // const jsonFetchedRescuerResponse = await fetchedRescuerResponse.json();
+      // console.log("doctor list response: ", jsonFetchedRescuerResponse.doctors);
+      // return jsonFetchedRescuerResponse.doctors.map((jsonRescuer) => ({
+      //       Name: jsonRescuer.Username,
+            
+      //       id: jsonRescuer._id.toString(),
+      //       Email: jsonRescuer.Email,
+      //       Phone: jsonRescuer.Phone,
+      //       Experience: jsonRescuer.Experience
+      // }))
+
+
 }
 
 const rows = await createData();
-console.log(rows)
-
+console.log("rescuers list response: ", rows)
 
 function descendingComparator(a, b, orderBy) {
       if (b[orderBy] < a[orderBy]) {
@@ -74,33 +76,26 @@ const headCells = [
             id: 'username',
             numeric: false,
             disablePadding: true,
-            label: 'User Name',
+            label: 'Username',
       },
       {
-            id: 'productName',
-            numeric: false,
+            id: 'Phone',
+            numeric: true,
             disablePadding: false,
-            label: 'Product Name',
+            label: 'Phone',
       },
       {
-            id: 'Comment',
-            numeric: false,
+            id: 'Email',
+            numeric: true,
             disablePadding: false,
-            label: 'Comment',
+            label: 'Email',
       },
       {
-            id: 'Rating',
-            numeric: false,
+            id: 'Experience',
+            numeric: true,
             disablePadding: false,
-            label: 'Rating',
+            label: 'Experience',
       },
-      {
-            id: 'Date',
-            numeric: false,
-            disablePadding: false,
-            label: 'Date',
-      },
-      
 ];
 
 function EnhancedTableHead(props) {
@@ -160,33 +155,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-      const { numSelected , selected} = props;
-      console.log("selected", selected);
-      const handleDeleteReviews = async ()=>{
-            const deleteProdReviews = await fetch("http://localhost:3000/api/deleteProductReview", {
-                  method:"DELETE",
-                  headers:{
-                        'Content-Type':"application/json"
-                  },
-                  body: JSON.stringify({ reviewIds:selected })
-            });
-            if(!deleteProdReviews.ok){
-                  Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Error in deleting",
-                  });
-            }
-            else{
-                  Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Deleted successfully",
-                        showConfirmButton: false,
-                        timer: 1500
-                  });
-            }
-      }
+      const { numSelected } = props;
 
       return (
             <Toolbar
@@ -215,13 +184,13 @@ function EnhancedTableToolbar(props) {
                               id="tableTitle"
                               component="div"
                         >
-                              Reviews
+                              Doctor list
                         </Typography>
                   )}
 
                   {numSelected > 0 ? (
-                        <Tooltip title="Delete selected item">
-                              <IconButton onClick={handleDeleteReviews} >
+                        <Tooltip title="Delete">
+                              <IconButton>
                                     <DeleteIcon />
                               </IconButton>
                         </Tooltip>
@@ -240,13 +209,15 @@ EnhancedTableToolbar.propTypes = {
       numSelected: PropTypes.number.isRequired,
 };
 
-export default function ShowProductReviews() {
+export default function ShowRescuersList() {
       const [order, setOrder] = React.useState('asc');
       const [orderBy, setOrderBy] = React.useState('calories');
       const [selected, setSelected] = React.useState([]);
       const [page, setPage] = React.useState(0);
       const [dense, setDense] = React.useState(false);
       const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+      const navigate = useNavigate();
 
       const handleRequestSort = (event, property) => {
             const isAsc = orderBy === property && order === 'asc';
@@ -256,17 +227,16 @@ export default function ShowProductReviews() {
 
       const handleSelectAllClick = (event) => {
             if (event.target.checked) {
-                  const newSelected = rows.map((n) => n._id);
+                  const newSelected = rows.map((n) => n.id);
                   setSelected(newSelected);
-                  console.log("All seleted id" , newSelected)
                   return;
             }
             setSelected([]);
       };
 
       const handleClick = (event, id) => {
+            console.log("Id in event: ", id)
             const selectedIndex = selected.indexOf(id);
-            
             let newSelected = [];
 
             if (selectedIndex === -1) {
@@ -282,7 +252,7 @@ export default function ShowProductReviews() {
                   );
             }
             setSelected(newSelected);
-            console.log(id)
+            navigate(`/RescuersDashboard/${id}`)
       };
 
       const handleChangePage = (event, newPage) => {
@@ -294,7 +264,9 @@ export default function ShowProductReviews() {
             setPage(0);
       };
 
-
+      const handleChangeDense = (event) => {
+            setDense(event.target.checked);
+      };
 
       const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -311,15 +283,10 @@ export default function ShowProductReviews() {
             [order, orderBy, page, rowsPerPage],
       );
 
-      React.useEffect(()=>{
-
-      },[visibleRows])
-
-
       return (
             <Box sx={{ width: '100%' }}>
                   <Paper sx={{ width: '100%', mb: 2 }}>
-                        <EnhancedTableToolbar numSelected={selected.length} selected = {selected} />
+                        <EnhancedTableToolbar numSelected={selected.length} />
                         <TableContainer>
                               <Table
                                     sx={{ minWidth: 750 }}
@@ -336,17 +303,17 @@ export default function ShowProductReviews() {
                                     />
                                     <TableBody>
                                           {visibleRows.map((row, index) => {
-                                                const isItemSelected = isSelected(row._id);
+                                                const isItemSelected = isSelected(row.id);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
 
                                                 return (
                                                       <TableRow
                                                             hover
-                                                            onClick={(event) => handleClick(event, row._id)}
+                                                            onClick={(event) => handleClick(event, row.id)}
                                                             role="checkbox"
                                                             aria-checked={isItemSelected}
                                                             tabIndex={-1}
-                                                            key={row._id}
+                                                            key={row.id}
                                                             selected={isItemSelected}
                                                             sx={{ cursor: 'pointer' }}
                                                       >
@@ -365,12 +332,12 @@ export default function ShowProductReviews() {
                                                                   scope="row"
                                                                   padding="none"
                                                             >
-                                                                  {row.UserName}
+                                                                  {row.Name}
                                                             </TableCell>
-                                                            <TableCell align="left">{row.ProductName}</TableCell>
-                                                            <TableCell align="left">{row.Comment}</TableCell>
-                                                            <TableCell align="left">{row.Rating}</TableCell>
-                                                            <TableCell align="left">{row.createdAt}</TableCell>
+                                                            <TableCell align="right">{row.Phone}</TableCell>
+                                                            <TableCell align="right">{row.Email}</TableCell>
+                                                            <TableCell align="right">{row.Experience}</TableCell>
+
                                                       </TableRow>
                                                 );
                                           })}
@@ -399,4 +366,7 @@ export default function ShowProductReviews() {
             </Box>
       );
 }
+
+
+
 
