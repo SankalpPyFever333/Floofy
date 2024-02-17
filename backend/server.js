@@ -95,7 +95,7 @@ app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/showDoctorsL
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchAppointmentHistory.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/removeDoctor.route"))
 app.use("/api", require("./Routes/AdminRouters/ManageDoctortsRoute/deleteDoctorReview.route"))
-app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
+// app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/getTotalRevenueDoctor.route"))
 
 
@@ -113,6 +113,14 @@ app.use("/api" , require("./Routes/DoctorsRoutes/DoctorsReviews/postReviewToDoct
 
 // Rescuer module handling:
 app.use("/api" , require("./Routes/RescuerRoutes/FixedAppointmentRescuer/fixAppointment.rescuer.route"))
+
+
+
+
+// ///////////////////////////////////////////////////////////////////////////
+app.use("/api" , require("./Routes/AdminRouters/ManageAllusers/getAllUsers.route"))
+
+
 
 
 
