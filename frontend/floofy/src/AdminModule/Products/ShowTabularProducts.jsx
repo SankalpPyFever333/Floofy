@@ -43,7 +43,9 @@ async function createData() {
                   description: product.Description,
                   ImagePath: product.ImagePath,
                   Quantity: product.Quantity,
-                  DiscountTag: product.DiscountTag
+                  DiscountTag: product.DiscountTag,
+                  AddedDate: new Date(product.createdAt).toLocaleDateString(),
+                  EditedDate: new Date(product.updatedAt).toLocaleDateString()
             })
       )
 }
@@ -116,13 +118,25 @@ const headCells = [
             id: 'DiscountTag',
             numeric: false,
             disablePadding: false,
-            label: 'DiscountTag',
+            label: 'Discount(%)',
       },
       {
             id: 'Quantity',
             numeric: true,
             disablePadding: false,
             label: 'Quantity',
+      },
+      {
+            id: 'Added_Date',
+            numeric: true,
+            disablePadding: false,
+            label: 'Added Date',
+      },
+      {
+            id: 'Updated_Date',
+            numeric: true,
+            disablePadding: false,
+            label: 'Last updated',
       }
 ];
 
@@ -465,6 +479,8 @@ export default function ShowTabularProducts() {
                                                             <TableCell align="right">{row.ImagePath}</TableCell>
                                                             <TableCell align="right">{row.DiscountTag}</TableCell>
                                                             <TableCell align="right">{row.Quantity}</TableCell>
+                                                            <TableCell align="right">{row.AddedDate}</TableCell>
+                                                            <TableCell align="right">{row.EditedDate}</TableCell>
             
                                                       </TableRow>
                                                 );

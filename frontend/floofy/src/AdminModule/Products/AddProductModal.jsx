@@ -21,6 +21,37 @@ function AddProductModal() {
 
       const handleAddItemInDb = async ()=>{
             // code for adding product in db:
+
+            if(parseInt(quantity) < 1){
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Quantity must at least 1.",
+                  });
+                  return
+            }
+
+            if(parseFloat(discountTag)<0){
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Discount must be a positive value.",
+                  });
+                  return
+            }
+
+            if(parseFloat(price)< 1){
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "price can't be negative.",
+                  });
+                  return
+            }
+
+
+
+
             try {
                   const response = await fetch("http://localhost:3000/api/addProductInDbAdmin" , {
                         method : "POST",
@@ -67,6 +98,20 @@ function AddProductModal() {
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
 
+      const handleFileSelect = (e) => {
+            const selectedFile = e.target.files[0];
+            if (selectedFile) {
+                  // Get the path of the selected file
+                  const imagePath = URL.createObjectURL(selectedFile);
+                  // Set the path in the state
+                  setImagePath(imagePath);
+            }
+      };
+
+
+
+
+
       return (
             <>
                   <Tooltip title="Add Item">
@@ -95,6 +140,7 @@ function AddProductModal() {
                                           <Form.Label>Price</Form.Label>
                                           <Form.Control
                                                 type="text"
+                                                min= "1"
                                                 onChange={(e) => {
                                                       setPrice(e.target.value)
                                                 }}
@@ -118,7 +164,7 @@ function AddProductModal() {
                                                 }}
                                           />
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="Product_ImagePath">
+                                    {/* <Form.Group className="mb-3" controlId="Product_ImagePath">
                                           <Form.Label>Image Url</Form.Label>
                                           <Form.Control
                                                 type="text"
@@ -126,18 +172,32 @@ function AddProductModal() {
                                                       setImagePath(e.target.value)
                                                 }}
                                           />
+                                    </Form.Group> */}
+
+                                    <Form.Group className="mb-3" controlId="Product_ImagePath">
+                                          <Form.Label>Image Url</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                value={imagePath} // Display the selected file path
+                                                onChange={(e) => {
+                                                      setImagePath(e.target.value);
+                                                }}
+                                          />
+                                          <Form.Control type="file" onChange={handleFileSelect} /> {/* File input */}
                                     </Form.Group>
+
                                     <Form.Group className="mb-3" controlId="Product_Quantity">
                                           <Form.Label>Quantity</Form.Label>
                                           <Form.Control
                                                 type="text"
+                                                
                                                 onChange={(e) => {
                                                       setQuantity(e.target.value)
                                                 }}
                                           />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="Product_DiscountTag">
-                                          <Form.Label>Discount</Form.Label>
+                                          <Form.Label>Discount (%) </Form.Label>
                                           <Form.Control
                                                 type="text"
                                                 onChange={(e) => {

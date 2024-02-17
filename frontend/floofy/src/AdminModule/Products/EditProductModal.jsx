@@ -22,6 +22,36 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
 
       const fetchedProduct = async ()=>{
             // console.log("Id in the fetched: ", selectedRowId)
+
+            if (parseInt(quantity) < 1) {
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Quantity must at least 1.",
+                  });
+                  return
+            }
+
+            if (parseFloat(discountTag) < 0) {
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Discount must be a positive value.",
+                  });
+                  return
+            }
+
+            if (parseFloat(price) < 1) {
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "price can't be negative.",
+                  });
+                  return
+            }
+
+
+
             try {
                   const response = await fetch(`http://localhost:3000/api/fetchProductShowModal/${selectedRowId}`, {
                         method:"GET",

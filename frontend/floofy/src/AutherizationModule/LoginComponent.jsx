@@ -43,6 +43,7 @@ function LoginComponent() {
                   if ((loginDataFromDb.username === UserName)){
                               userFound = true
                         setUserType(loginDataFromDb.userType)
+                        localStorage.setItem("Username" , loginDataFromDb.username )
                   }
                   else{
                         Swal.fire({
