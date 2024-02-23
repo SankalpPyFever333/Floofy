@@ -7,30 +7,32 @@ import EnterPriceDialogue from './EnterPriceDialogue';
 import { useDispatch, useSelector } from 'react-redux';
 import { RemoveItemFromCart , AddItemToCart } from '../AllStateOfApplication/actions/AddRemoveItemFromCart.action';
 
-export default function DecrementIncrementBtn({ productCount, setProductCount,  AddBtn , handleAddBtn}) {
+export default function DecrementIncrementBtn({ productId, product ,   productCount, setProductCount,  AddBtn , handleAddBtn}) {
       let [Pcount, setCount] = React.useState(productCount);
       const [openPriceDialog, setOpenPriceDialog] = React.useState(false)
-      const countProduct = useSelector(state => state.ProdCount)
+      const ProductFromReducer = useSelector(state => state.cartItems)
+      console.log(ProductFromReducer)
       const dispatch = useDispatch();
 
       const handleAddProductToCart = ()=>{
-            dispatch(AddItemToCart());
+            dispatch({ type: "Add_Item_To_Cart", payload: product});
       }
 
       const handleRemoveProductFromCart = ()=>{
-            dispatch(RemoveItemFromCart())
+            dispatch({ type:"Decrement_Quantity" , payload:productId})
 
-            console.log("prodcount: ", countProduct)
+            // console.log("prodcount: ", countProduct)
 
             // check this condition later on.
 
-            if(countProduct===1){
-                  setProductCount(0)
-            }
+            // if(countProduct===1){
+            //       setProductCount(0)
+            // }
 
       }
 
 
+      // Complete this redux part for the cart management
 
 
 
@@ -72,14 +74,12 @@ export default function DecrementIncrementBtn({ productCount, setProductCount,  
             
             productCount ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={handleRemoveProductFromCart} >{<RemoveIcon />}</Button>
-                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{countProduct}</Button>
+                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{ProductFromReducer[0].quantity}</Button>
                   {
                         openPriceDialog ? <EnterPriceDialogue /> : null
                   }
                   <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={handleAddProductToCart} >{<AddIcon />}</Button>
-            </ButtonGroup> : AddBtn
-            
-            
-            
+            </ButtonGroup>
+            : AddBtn
       );
 }

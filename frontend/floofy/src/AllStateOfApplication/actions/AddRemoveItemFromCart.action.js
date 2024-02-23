@@ -1,11 +1,11 @@
-export const AddItemToCart = (AddProdCount) => ({
+export const AddItemToCart = (product) => ({
   type: "Add_Item_To_Cart",
-  payload: AddProdCount,
+  payload: product,
 });
 
-export const RemoveItemFromCart = (RemoveProdCount) => ({
-      type: "Remove_Item_From_Cart",
-      payload: RemoveProdCount
-})
+export const RemoveItemFromCart = (productId) => ({
+  type: "Decrement_Quantity",
+  payload: productId,
+});
 
 

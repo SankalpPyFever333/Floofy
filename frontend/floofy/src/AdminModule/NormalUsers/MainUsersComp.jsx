@@ -110,8 +110,9 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Added on',
-  }
-  
+  },
+
+
 ];
 
 function EnhancedTableHead(props) {
@@ -208,8 +209,9 @@ function EnhancedTableToolbar(props) {
 
   const handleDeleteItemFromDb = async () => {
     // make the api for deleting users
+    console.log("selectedid in delete method:" , selected);
     try {
-      const response = await fetch("", {
+      const response = await fetch("http://localhost:3000/api/deleteSelectedUser", {
         method: "DELETE",
         headers: {
           'Content-Type': "application/json"
@@ -240,8 +242,6 @@ function EnhancedTableToolbar(props) {
         text: "Internal server error",
       });
     }
-
-    // There is a problem that after successful deletion , that element still selected and I have to handle that error bcoz after deletion it is not in the db , so clicking again on the delete button, i got error.
   }
 
   React.useEffect(() => {
@@ -327,8 +327,11 @@ export default function ShowTabularProducts() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-
+  const [loading , setLoading] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -395,6 +398,10 @@ export default function ShowTabularProducts() {
     [order, orderBy, page, rowsPerPage],
   );
 
+  React.useEffect(() => {
+    createData();
+  }, [visibleRows])
+
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -445,15 +452,13 @@ export default function ShowTabularProducts() {
                       scope="row"
                       padding="none"
                     >
-                      {row.name}
+                      {row.username}
                     </TableCell>
-                    <TableCell align="right">{row.username}</TableCell>
-                    <TableCell align="right">{row.password}</TableCell>
-                    <TableCell align="right">{row.userType}</TableCell>
-                    <TableCell align="right">{row.contactNumber}</TableCell>
-                    <TableCell align="right">{row.AddedDate}</TableCell>
                     
-
+                    <TableCell align="left">{row.password}</TableCell>
+                    <TableCell align="left">{row.userType}</TableCell>
+                    <TableCell align="left">{row.contactNumber}</TableCell>
+                    <TableCell align="left">{row.AddedDate}</TableCell>
                   </TableRow>
                 );
               })}

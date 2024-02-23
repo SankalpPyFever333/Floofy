@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import DecrementIncrementBtn from './DecrementIncrementBtn';
 
-export default function ProductCard({imgSrc , category , DiscountTag,  ProdDescription , Price , ProdName}) {
+export default function ProductCard({ProductId , imgSrc , category , DiscountPercentage,  ProdDescription , Price , ProdName}) {
       let [productCount , setProductCount] = React.useState(0);
       const handleAddToCart = ()=>{
             productCount =  ++productCount;
@@ -51,7 +51,9 @@ export default function ProductCard({imgSrc , category , DiscountTag,  ProdDescr
                         </Typography>
                         {
                               
-                              productCount ? <DecrementIncrementBtn productCount={productCount} setProductCount={setProductCount} AddBtn={Addbtn} handleAddBtn={handleAddToCart} /> : Addbtn
+                              productCount ? <DecrementIncrementBtn productId={ProductId} product={{ productId: ProductId ,  productName: ProdName , Description: ProdDescription , Price: Price , category: category}}  productCount={productCount} setProductCount={setProductCount} AddBtn={Addbtn} handleAddBtn={handleAddToCart} /> : Addbtn
+
+                              // instead of increment decrement button , place just a animation button of item added to cart.
                         }
                         
                   </CardActions>

@@ -37,8 +37,8 @@ function MainShopComp() {
       {
 
         prod.map((product)=>{
-          return <ProductCard key={product._id.toString()} ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} category={product.Category} DiscountTag={product.
-          DiscountTag} Price={product.Price} />
+          return <ProductCard key={product._id.toString()} ProductId={product._id.toString()} ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} category={product.Category} DiscountTag={product.
+          DiscountTag} Price={product.Price} /> 
         })
       
       }

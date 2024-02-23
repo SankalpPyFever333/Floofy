@@ -1,6 +1,5 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import "./cart.css";
-// chnage this css sheet bcoz it is affecting my app.
 import { products } from "./products";
 import ContextCart from "./ContextCart";
 import { reducer } from "./reducer";
