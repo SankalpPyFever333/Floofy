@@ -1,8 +1,11 @@
-const DoctorModel = require("../../../../Modals/DoctorModals/Doctor.modal");
+// const DoctorModel = require("../../../../Modals/DoctorModals/Doctor.modal");
+const userLoginModel = require("../../../../Modals/LoginCredentials.modal");
+
 
 const fetchDoctorsFromDb = async (req, res)=>{
       try {
-            const doctorsList = await DoctorModel.find();
+            const doctorsList = await userLoginModel.find({userType: "Doctor"})
+            console.log("Doctor list is " , doctorsList)
             res.status(200).json({doctors: doctorsList})
       } catch (error) {
             console.log(error);
@@ -11,4 +14,3 @@ const fetchDoctorsFromDb = async (req, res)=>{
 }
 
 module.exports = fetchDoctorsFromDb;
-

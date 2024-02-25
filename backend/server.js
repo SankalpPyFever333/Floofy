@@ -95,9 +95,14 @@ app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/showDoctorsL
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchAppointmentHistory.route"))
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/removeDoctor.route"))
 app.use("/api", require("./Routes/AdminRouters/ManageDoctortsRoute/deleteDoctorReview.route"))
-// app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
+
+app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/fetchDoctorReviewsAdmin.route"))
+
 app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/getTotalRevenueDoctor.route"))
 
+app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/showCompleteDetailsDoctor.router"))
+
+app.use("/api" , require("./Routes/AdminRouters/ManageDoctortsRoute/saveCompleteDoctorDetails.route"))
 
 // ////////////////////////////////////////////////////////////////////////////////
 
@@ -118,8 +123,10 @@ app.use("/api" , require("./Routes/RescuerRoutes/FixedAppointmentRescuer/fixAppo
 
 
 // ///////////////////////////////////////////////////////////////////////////
-app.use("/api" , require("./Routes/AdminRouters/ManageAllusers/getAllUsers.route"))
 
+// manage all users 
+app.use("/api" , require("./Routes/AdminRouters/ManageAllusers/getAllUsers.route"))
+app.use("/api", require("./Routes/AdminRouters/ManageAllusers/deleteUser.route"))
 
 
 
@@ -137,3 +144,5 @@ mongoose.connect(MONGO_CONN_STRING)
 app.listen(port , ()=>{
       console.log(`app running at port ${port}`)
 })
+
+

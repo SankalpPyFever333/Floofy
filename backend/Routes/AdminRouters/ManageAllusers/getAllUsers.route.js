@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.get("/fetchAllTypeUsers" , fetchAllUsers);
 
-module.exports = fetchAllUsers;
+module.exports = router;

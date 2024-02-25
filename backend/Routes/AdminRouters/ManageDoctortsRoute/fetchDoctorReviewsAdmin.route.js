@@ -4,4 +4,4 @@ const router =  express.Router();
 
 router.post("/fetch_Doctors_Review" , fetchReviewOfDoctors);
 
-module.exports = fetchReviewOfDoctors;
+module.exports = router;
