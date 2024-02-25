@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DropdownToSelectTime from '../../OverviewOfData/DropdownToSelectTime';
 import { deleteDoctorByIDFromDb } from './removeDoctorFromDashboard';
 import Swal from 'sweetalert2';
+import MainDoctorPersonalShow from './ShowPersonalinfo/MainDoctorPersonalShow';
 
 function MainDoctorDashBoradComp() {
       const [selectedTimeFrame, setSelectedTimeFrame] = useState("Last Week")
@@ -42,23 +43,30 @@ function MainDoctorDashBoradComp() {
             <div className="row">
                   <div className="col-sm-2" style={{ margin:"1rem"}} >
                         <DropdownToSelectTime selectedTimeFrame={selectedTimeFrame} setSelectedTimeFrame={setSelectedTimeFrame} />
+                        <Tooltip title="Remove Doctor" placement="top">
+                              <IconButton aria-label="delete" onClick={handleDeleteDoctor} >
+                                    <DeleteIcon style={{color:"red"}} />
+                              </IconButton>
+                        </Tooltip>
                   </div>
             </div>
             <div className="row">
-                  <div className="col-sm-6">
-                        <ShowTotalAppointmentsCard timeFrame={selectedTimeFrame} />
-                  </div>
-                  <div className="col-sm-5">
-                        <ShowTotalRevenueGeneratedCard timeFrame={selectedTimeFrame} />
-                  </div>
-                  <div className="col-sm-1">
-                        <Tooltip  title="Remove Doctor" placement="top">
-                              <IconButton aria-label="delete" onClick={handleDeleteDoctor} >
-                                    <DeleteIcon />
-                              </IconButton>
-                        </Tooltip>
+                  <div className="col-sm-8">
+                        <div className="row">
+                              <div className="col-sm-4">
+                                    <ShowTotalAppointmentsCard timeFrame={selectedTimeFrame} />
+                              </div>
 
+                              <div className="col-sm-4">
+                                    <ShowTotalRevenueGeneratedCard timeFrame={selectedTimeFrame} />
+                              </div>
+                        </div>
+                        
                   </div>
+                  <div className="col-sm-4">
+                        <MainDoctorPersonalShow doctorid={id} />
+                  </div>
+                  
             </div>
 
             <div className="row" style={{ margin:"20px" , maxHeight: '300px', overflowY: 'auto' }}>

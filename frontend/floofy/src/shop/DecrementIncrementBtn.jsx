@@ -74,7 +74,7 @@ export default function DecrementIncrementBtn({ productId, product ,   productCo
             
             productCount ? <ButtonGroup variant="contained" aria-label="outlined primary button group">
                   <Button sx={{ fontSize: '10px', padding: '5px 5px' }} onClick={handleRemoveProductFromCart} >{<RemoveIcon />}</Button>
-                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{ProductFromReducer[0].quantity}</Button>
+                  <Button onClick={handleOpenPriceDialog} sx={{ fontSize: '10px', padding: '5px 5px' }}>{ ProductFromReducer.length>0 ?  ProductFromReducer[0].quantity :0 }</Button>
                   {
                         openPriceDialog ? <EnterPriceDialogue /> : null
                   }

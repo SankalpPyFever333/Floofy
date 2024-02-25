@@ -28,12 +28,11 @@ async function createData() {
       const jsonFetchedDoctorResponse = await fetchedDoctorResponse.json();
       console.log("doctor list response: ", jsonFetchedDoctorResponse.doctors);
       return jsonFetchedDoctorResponse.doctors.map((jsonDoctor)=>({
-            Username: jsonDoctor.Username,
+            Username: jsonDoctor.username,
             // Name: jsonDoctor.Name,
             id: jsonDoctor._id.toString(),
-            Email: jsonDoctor.Email,
-            Phone: jsonDoctor.Phone,
-            Experience: jsonDoctor.Experience
+            Phone: jsonDoctor.contactNumber,
+            createdAt: new Date(jsonDoctor.createdAt).toLocaleDateString()
       }))
 
 
@@ -84,17 +83,12 @@ const headCells = [
             label: 'Phone',
       },
       {
-            id: 'Email',
+            id: 'Added on',
             numeric: true,
             disablePadding: false,
-            label: 'Email',
-      },
-      {
-            id: 'Experience',
-            numeric: true,
-            disablePadding: false,
-            label: 'Experience',
-      },
+            label: 'Added on',
+      }
+      
 ];
 
 function EnhancedTableHead(props) {
@@ -334,8 +328,8 @@ export default function ShowDoctorsList() {
                                                                   {row.Username}
                                                             </TableCell>
                                                             <TableCell align="right">{row.Phone}</TableCell>
-                                                            <TableCell align="right">{row.Email}</TableCell>
-                                                            <TableCell align="right">{row.Experience}</TableCell>
+                                                            <TableCell align="right">{row.createdAt}</TableCell>
+                                                            
 
                                                       </TableRow>
                                                 );
