@@ -10,7 +10,8 @@ const fetchAllDoctorDetails = async (req, res)=>{
               return res.status(200).json({ message: "Invalid object id" });
             }
             const DoctorResponse = await DoctorModel.findOne({
-              Username: Username,});
+              Username: Username,
+            }).populate("Username").exec();
             res.status(200).json({message:"Doctor info fetched" , DoctorDetails:DoctorResponse})
       } catch (error) {
             console.log(error)
