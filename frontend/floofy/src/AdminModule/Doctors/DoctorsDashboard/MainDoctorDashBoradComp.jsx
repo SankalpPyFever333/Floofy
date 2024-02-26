@@ -12,18 +12,23 @@ import { deleteDoctorByIDFromDb } from './removeDoctorFromDashboard';
 import Swal from 'sweetalert2';
 import MainDoctorPersonalShow from './ShowPersonalinfo/MainDoctorPersonalShow';
 
-function MainDoctorDashBoradComp() {
+function MainDoctorDashBoradComp({doctoridFromFrontend}) {
       const [selectedTimeFrame, setSelectedTimeFrame] = useState("Last Week")
+
       const { id } = useParams();
+      
+
+      const isDoctorView = !!doctoridFromFrontend;
+      const doctorId = isDoctorView ? doctoridFromFrontend : id;
 
       const handleDeleteDoctor = async ()=>{
             // Write the delete function here.
-            const deletedDoctor = await deleteDoctorByIDFromDb(id);
+            const deletedDoctor = await deleteDoctorByIDFromDb(doctorId);
             if (!deletedDoctor) {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Error in adding product",
+                        text: "Error in deleting",
                   });
             }
             else{
@@ -43,11 +48,14 @@ function MainDoctorDashBoradComp() {
             <div className="row">
                   <div className="col-sm-2" style={{ margin:"1rem"}} >
                         <DropdownToSelectTime selectedTimeFrame={selectedTimeFrame} setSelectedTimeFrame={setSelectedTimeFrame} />
-                        <Tooltip title="Remove Doctor" placement="top">
-                              <IconButton aria-label="delete" onClick={handleDeleteDoctor} >
-                                    <DeleteIcon style={{color:"red"}} />
-                              </IconButton>
-                        </Tooltip>
+                        {
+                                    (!isDoctorView && (<Tooltip title="Remove Doctor" placement="top">
+                                          <IconButton aria-label="delete" onClick={handleDeleteDoctor} >
+                                                <DeleteIcon style={{ color: "red" }} />
+                                          </IconButton>
+                                    </Tooltip>)  )
+                        }
+                        
                   </div>
             </div>
             <div className="row">
@@ -64,17 +72,17 @@ function MainDoctorDashBoradComp() {
                         
                   </div>
                   <div className="col-sm-4">
-                        <MainDoctorPersonalShow doctorid={id} />
+                              <MainDoctorPersonalShow doctorid={doctorId} />
                   </div>
                   
             </div>
 
             <div className="row" style={{ margin:"20px" , maxHeight: '300px', overflowY: 'auto' }}>
-                  <ShowDoctorReviews doctorId={id} />
+                        <ShowDoctorReviews doctorId={doctorId} />
             </div>
 
             <div className="row" style={{ margin: "20px", maxHeight: '300px', overflowY: 'auto' }}>
-                  <ShowAppointmentHistory doctorId={id} />
+                        <ShowAppointmentHistory doctorId={doctorId} />
             </div>
 
       </div>
@@ -82,3 +90,4 @@ function MainDoctorDashBoradComp() {
 }
 
 export default MainDoctorDashBoradComp
+

@@ -79,7 +79,7 @@ export default function EditBioOfDoctor() {
 
       return (
             <React.Fragment>
-                  <Button variant="outlined" onClick={handleClickOpen}>
+                  <Button variant="filled" onClick={handleClickOpen}>
                         Edit Profile
                   </Button>
                   <Dialog open={open} onClose={handleClose}>

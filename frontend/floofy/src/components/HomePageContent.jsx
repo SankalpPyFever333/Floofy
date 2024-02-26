@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import BottomNavBar from './BottomNavBar';
-import MainProfileComponent from '../Profile/MainProfileComponent';
+import MainProfileComponent from '../Profile/DoctorProfile/MainProfileComponent';
 import MainShopComp from '../shop/MainShopComp';
 import MainHomeComp from '../HomeComponent/MainHomeComp';
 

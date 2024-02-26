@@ -257,6 +257,8 @@ export default function ShowDoctorReviews({doctorId}) {
 
       },[rows])
 
+      
+
 
       const handleRequestSort = (event, property) => {
             const isAsc = orderBy === property && order === 'asc';
@@ -320,6 +322,11 @@ export default function ShowDoctorReviews({doctorId}) {
             [order, orderBy, page, rowsPerPage],
       );
 
+
+      // if(rows.length === 0){
+      //       return  <div>No reviews available</div>;
+      // }
+
       return (
             <Box sx={{ width: '100%' }}>
                   <Paper sx={{ width: '100%', mb: 2 }}>
@@ -339,7 +346,8 @@ export default function ShowDoctorReviews({doctorId}) {
                                           rowCount={rows.length}
                                     />
                                     <TableBody>
-                                          {visibleRows.map((row, index) => {
+
+                                          {/* {visibleRows.map((row, index) => {
                                                 const isItemSelected = isSelected(row.id);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -386,7 +394,64 @@ export default function ShowDoctorReviews({doctorId}) {
                                                 >
                                                       <TableCell colSpan={6} />
                                                 </TableRow>
-                                          )}
+                                          )} */}
+                                          <TableBody>
+                                                {visibleRows.length === 0 ? (
+                                                      <TableRow>
+                                                            
+                                                            <p>No data to display</p>
+                                                      </TableRow>
+                                                ) : (
+                                                      visibleRows.map((row, index) => {
+                                                            const isItemSelected = isSelected(row.id);
+                                                            const labelId = `enhanced-table-checkbox-${index}`;
+
+                                                            return (
+                                                                  <TableRow
+                                                                        hover
+                                                                        onClick={(event) => handleClick(event, row.id)}
+                                                                        role="checkbox"
+                                                                        aria-checked={isItemSelected}
+                                                                        tabIndex={-1}
+                                                                        key={row.id}
+                                                                        selected={isItemSelected}
+                                                                        sx={{ cursor: 'pointer' }}
+                                                                  >
+                                                                        <TableCell padding="checkbox">
+                                                                              <Checkbox
+                                                                                    color="primary"
+                                                                                    checked={isItemSelected}
+                                                                                    inputProps={{
+                                                                                          'aria-labelledby': labelId,
+                                                                                    }}
+                                                                              />
+                                                                        </TableCell>
+                                                                        <TableCell
+                                                                              component="th"
+                                                                              id={labelId}
+                                                                              scope="row"
+                                                                              padding="none"
+                                                                        >
+                                                                              {row.Username}
+                                                                        </TableCell>
+                                                                        <TableCell align="left">{row.ReviewDate.toString()}</TableCell>
+                                                                        <TableCell align="left">{row.Rating}</TableCell>
+                                                                        <TableCell align="left">{row.PosiNega}</TableCell>
+                                                                  </TableRow>
+                                                            );
+                                                      })
+                                                )}
+                                                {emptyRows > 0 && (
+                                                      <TableRow
+                                                            style={{
+                                                                  height: (dense ? 33 : 53) * emptyRows,
+                                                            }}
+                                                      >
+                                                            <TableCell colSpan={6} />
+                                                      </TableRow>
+                                                )}
+                                          </TableBody>
+
                                     </TableBody>
                               </Table>
                         </TableContainer>
