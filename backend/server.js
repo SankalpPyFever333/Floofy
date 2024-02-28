@@ -132,6 +132,15 @@ app.use("/api", require("./Routes/AdminRouters/ManageAllusers/deleteUser.route")
 
 
 
+// ///////////////////////////////////////////////////////////
+
+// content management api:
+
+app.use("/api" , require("./Routes/ContentRoutes/postContentRoutes/createPost.route"))
+app.use("/api" , require("./Routes/ContentRoutes/getPostRoutes/fetchPosts.route"))
+
+
+
 mongoose.connect(MONGO_CONN_STRING)
 .then(()=>{
       console.log(`database connected successfully`)
