@@ -51,7 +51,7 @@ export default function EditBioOfDoctor() {
                   });
       
                   if(Doctor_Response.ok){
-                        await Swal.fire({
+                         Swal.fire({
                               position: "center",
                               icon: "success",
                               title: "Profile saved successfully",
@@ -61,7 +61,7 @@ export default function EditBioOfDoctor() {
                         handleClose()
                   }
                   else{
-                        await Swal.fire({
+                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
                               text: "Something went wrong!",

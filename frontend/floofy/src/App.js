@@ -9,6 +9,9 @@ import VerifyOtpComp from './AutherizationModule/VerifyOtpComp';
 import MainAdminComp from './AdminModule/MainAdminComp';
 import MainDoctorDashBoradComp from './AdminModule/Doctors/DoctorsDashboard/MainDoctorDashBoradComp';
 import MainRescuerDashboard from './AdminModule/Rescuers/RescuerDashboard/MainRescuerDashboard';
+import DoctorProfileUpdate from './Profile/DoctorProfile/DoctorProfileUpdate';
+import CreatePost from './Profile/CreatePost';
+
 // import Razorpayment from './RazorpayPayment/Razorpayment';
 
 
@@ -18,6 +21,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<SignupComponent />} /> */}
+
           <Route path="/" element={<LoginComponent />} />
           <Route path="/MainApp" element={<MainApp />} />
           <Route path="/GoToCart" element={<Cart />} />
@@ -33,7 +37,10 @@ function App() {
             path="/RescuersDashboard/:id"
             element={<MainRescuerDashboard />}
           />
+
           <Route path="/LoginAfterLogOut" element={<LoginComponent />} />
+          <Route path="/doctorprofileedit" element={<DoctorProfileUpdate />} />
+          <Route path="/createpost" element= {<CreatePost/>} />
         </Routes>
       </BrowserRouter>
       {/* <Razorpayment/> */}

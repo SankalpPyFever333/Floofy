@@ -51,7 +51,7 @@ async function createData() {
 }
 
 const rows = await createData();
-console.log(rows)
+// console.log(rows)
 
 
 
@@ -229,6 +229,7 @@ function EnhancedTableToolbar(props) {
       const handleAddItemInDb = ()=>{
             // open the modal for adding the product:
 
+
             
       }
 
@@ -249,6 +250,7 @@ function EnhancedTableToolbar(props) {
                               text: "Error in deleting",
                         });
                   }
+                  
                   else{
                         Swal.fire({
                               position: "center",
@@ -257,6 +259,7 @@ function EnhancedTableToolbar(props) {
                               showConfirmButton: false,
                               timer: 1500
                         });
+                        createData();
                   }
             } catch (error) {
                   console.log("exception takes place " , error)

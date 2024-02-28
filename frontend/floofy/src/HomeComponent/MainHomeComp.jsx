@@ -1,5 +1,6 @@
 import React from 'react'
 import SidebarChatonHome from './ChatComponent/SidebarChatonHome'
+import MainFeedComp from './FeedComponent/MainFeedComp'
 
 function MainHomeComp() {
   return (
@@ -13,7 +14,7 @@ function MainHomeComp() {
             </div>
 
             <div className="col-sm-4">
-                  <h3>feed</h3>
+                  <MainFeedComp/>
             </div>
 
             <div className="col-sm-3">
