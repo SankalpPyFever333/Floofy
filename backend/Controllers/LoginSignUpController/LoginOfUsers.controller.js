@@ -4,16 +4,25 @@ const userLoginModel = require("../../Modals/LoginCredentials.modal");
 const bcrypt = require("bcrypt");
 
 const fetchloginData = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, userType } = req.body;
 
   try {
     const loginData = await userLoginModel.findOne({ username });
+     if (!loginData) {
+       return res.status(401).json({ message: "Invalid Username" });
+     }
     console.log(loginData.password);
 
     bcrypt.compare(password, loginData.password, (err, result) => {
       if (err) {
         return res.status(401).json({ message: `error occured ${err}` });
       } else if (result) {
+
+          if (loginData.userType !== userType) {
+            return res.status(401).json("invalid user type");
+          }
+
+
         const token = generateToken(loginData);
         console.log("userid is: ", loginData._id);
         res.status(200).json({
@@ -27,11 +36,8 @@ const fetchloginData = async (req, res) => {
       }
     });
 
-    console.log(loginData.username);
+    
 
-    if (loginData.username !== username) {
-      return res.status(401).json("Invalid Username");
-    }
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: `Error in fetching data ${error}` });
