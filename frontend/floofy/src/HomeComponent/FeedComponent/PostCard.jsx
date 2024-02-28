@@ -2,6 +2,15 @@ import { useEffect , useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { fetchAllPost } from './getPost';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import CommentIcon from '@mui/icons-material/Comment';
+import { IconButton } from '@mui/material';
+import ShowCommentOnPost from './ShowCommentOnPost';
+
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function PostCard() {
 
@@ -19,30 +28,40 @@ function PostCard() {
       },[])
 
       console.log(posts);
+
+      
+
+
       return (
             
                   posts.map((post , index)=>{
-                        return <Card style={{ width: '18rem' }} key={index} >
+                        return <Card style={{ width: '70%' ,  margin:"1.4rem" }} key={index} >
                               <Card.Img variant="top" src="holder.js/100px180" />
                               <Card.Body>
                                     <Card.Title>{post.title}</Card.Title>
                                     <Card.Text>
                                           {post.caption}
                                     </Card.Text>
+                                    <Card.Text>
+                                          hashtags
+                                    </Card.Text>
+                                    {post.hashTag.map((ele, index)=>{
+                                          return  <div className="row">
+                                                            <Card.Text key={index}>
+                                                                  {ele}
+                                                            </Card.Text>
+                                                      </div>
+                                    })}
                                     
-                                          {post.hashTag.map((e, index)=>{
-                                               return  <Card.Text key={index} >
-                                                      {e}
-                                                </Card.Text>
-                                          })}
                                     
-                                    {/* <Button variant="primary">Go somewhere</Button> */}
+                                    <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                                    <ShowCommentOnPost/>
+                                    
+                                    
                               </Card.Body>
                         </Card>
                   }
             
-
-
             
       ));
 }

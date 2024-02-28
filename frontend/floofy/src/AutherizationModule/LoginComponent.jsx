@@ -27,7 +27,7 @@ function LoginComponent() {
                   headers:{
                         'Content-Type':'application/json',
                   }, 
-                  body: JSON.stringify({ username: UserName, password: password})
+                  body: JSON.stringify({ username: UserName, password: password, userType: localStorage.getItem("userType")})
             })
             
             if(loginResponse.ok){
