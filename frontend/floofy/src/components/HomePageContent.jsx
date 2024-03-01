@@ -6,6 +6,7 @@ import BottomNavBar from './BottomNavBar';
 import MainProfileComponent from '../Profile/DoctorProfile/MainProfileComponent';
 import MainShopComp from '../shop/MainShopComp';
 import MainHomeComp from '../HomeComponent/MainHomeComp';
+import MainDisplayUserContent from '../Profile/DisplaySpecificUserContent/MainDisplayUserContent';
 
 function HomePageContent() {
 
@@ -28,7 +29,7 @@ function HomePageContent() {
             {clickedBtn === "Home" && <MainHomeComp/>}
             {clickedBtn === "Vet" && <div>This is Vet component</div>}
             {clickedBtn === "Shop" && <MainShopComp/>}
-            {clickedBtn === "Profile" && <MainProfileComponent/>}
+            {clickedBtn === "Profile" && <MainDisplayUserContent/> }
           </Box>
           
         </Container>

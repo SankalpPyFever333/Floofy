@@ -5,10 +5,14 @@ import { fetchAllPost } from './getPost';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import CommentIcon from '@mui/icons-material/Comment';
-import { IconButton } from '@mui/material';
 import ShowCommentOnPost from './ShowCommentOnPost';
+import DogImage from "../../Assets/dogCat.webp"
 
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+
+import Typography from '@mui/material/Typography';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -35,30 +39,27 @@ function PostCard() {
       return (
             
                   posts.map((post , index)=>{
-                        return <Card style={{ width: '70%' ,  margin:"1.4rem" }} key={index} >
-                              <Card.Img variant="top" src="holder.js/100px180" />
-                              <Card.Body>
-                                    <Card.Title>{post.title}</Card.Title>
-                                    <Card.Text>
-                                          {post.caption}
-                                    </Card.Text>
-                                    <Card.Text>
-                                          hashtags
-                                    </Card.Text>
-                                    {post.hashTag.map((ele, index)=>{
-                                          return  <div className="row">
-                                                            <Card.Text key={index}>
-                                                                  {ele}
-                                                            </Card.Text>
-                                                      </div>
-                                    })}
-                                    
-                                    
-                                    <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                                    <ShowCommentOnPost/>
-                                    
-                                    
-                              </Card.Body>
+                        
+                        return <Card sx={{ maxWidth: 345 }}>
+                              <CardMedia
+                                    component="img"
+                                    alt="green iguana"
+                                    height="140"
+                                    image= {DogImage}
+                              />
+                              <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                          Lizard
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                          Lizards are a widespread group of squamate reptiles, with over 6,000
+                                          species, ranging across all continents except Antarctica
+                                    </Typography>
+                              </CardContent>
+                              <CardActions>
+                                    <Button size="small">Share</Button>
+                                    <Button size="small">Learn More</Button>
+                              </CardActions>
                         </Card>
                   }
             

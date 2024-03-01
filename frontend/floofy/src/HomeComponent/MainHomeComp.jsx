@@ -1,6 +1,7 @@
 import React from 'react'
 import SidebarChatonHome from './ChatComponent/SidebarChatonHome'
 import MainFeedComp from './FeedComponent/MainFeedComp'
+import MainDisplayUserContent from '../Profile/DisplaySpecificUserContent/MainDisplayUserContent'
 
 function MainHomeComp() {
   return (
@@ -14,7 +15,8 @@ function MainHomeComp() {
             </div>
 
             <div className="col-sm-6">
-                  <MainFeedComp/>
+                  {/* <MainFeedComp/> */}
+                  <MainDisplayUserContent/>
             </div>
 
             <div className="col-sm-3">
