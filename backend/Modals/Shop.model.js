@@ -8,6 +8,7 @@ const ShopModel = new mongoose.Schema({
   ImagePath: String,
   Quantity: String,
   DiscountTag: String,
+  
 } , {
   timestamps:true
 });

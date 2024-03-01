@@ -18,6 +18,7 @@ app.use(bodyparser.urlencoded({
 }))
 app.use(express.json())
 
+app.use(express.static("uploads"))
 
 // /////////////////////////////////////////////////////////////////////
 
@@ -138,7 +139,10 @@ app.use("/api", require("./Routes/AdminRouters/ManageAllusers/deleteUser.route")
 
 app.use("/api" , require("./Routes/ContentRoutes/postContentRoutes/createPost.route"))
 app.use("/api" , require("./Routes/ContentRoutes/getPostRoutes/fetchPosts.route"))
-
+app.use("/api" , require("./Routes/ContentRoutes/getPostRoutes/fetchSpecificUserPost.route"));
+app.use("/api" , require("./Routes/ContentRoutes/handleLikeUnlike/likeUnlikePost.route"))
+app.use("/api" , require("./Routes/ContentRoutes/commentHandlerRoutes/postCommentonPost.route"))
+app.use("/api" , require("./Routes/ContentRoutes/commentHandlerRoutes/fetchAllComment.route"))
 
 
 mongoose.connect(MONGO_CONN_STRING)

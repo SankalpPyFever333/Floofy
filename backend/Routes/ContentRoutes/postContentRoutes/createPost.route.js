@@ -1,9 +1,11 @@
 const express = require("express");
-const postContent = require("../../../Controllers/ContentController/PostSchema/postContent.controller");
+const postContent = require("../../../Controllers/ContentController/PostHandlerModule/postContent.controller");
+const uploads = require("../../../multer-config");
+
 
 const router = express.Router();
 
-router.post("/createPost" , postContent);
+router.post("/createPost" , uploads.single("Image") ,  postContent);
 
 module.exports = router;
 

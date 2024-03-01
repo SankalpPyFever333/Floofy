@@ -1,7 +1,8 @@
 const postModel = require("../../../Modals/ContentModels/postSchema.modal");
 
+
 const postContent = async(req, res)=>{
-      const {title , caption, Image , userId , hashTag} = req.body;
+      const { title, caption, Image, userId, hashTag, likedBy } = req.body;
       try {
             const newpost = new postModel({
               title,
@@ -9,6 +10,7 @@ const postContent = async(req, res)=>{
               Image,
               userId,
               hashTag,
+              likedBy,
             });
 
             await newpost.save();

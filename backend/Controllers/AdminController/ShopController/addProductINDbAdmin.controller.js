@@ -2,7 +2,7 @@
 const shop = require("../../../Modals/Shop.model");
 
 const addProductInDbAdmin = async (req, res)=>{
-      const { ProductName, Price, Category, Description, ImagePath, Quantity, DiscountTag} = req.body;
+      const { ProductName, Price, Category, Description, ImagePath, Quantity, DiscountTag , ExpiryDate} = req.body;
       try {
             const newProduct = new shop({
               ProductName: ProductName,
