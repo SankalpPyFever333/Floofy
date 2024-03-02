@@ -4,7 +4,7 @@ import PostCardSpecificUser from './PostCard'
 function MainDisplayUserContent() {
   return (
     <div>
-      <h3>All post</h3>
+      
       <PostCardSpecificUser/>
     </div>
   )

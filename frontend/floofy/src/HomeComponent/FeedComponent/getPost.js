@@ -8,6 +8,7 @@ export const fetchAllPost = async ()=>{
       });
 
       if(fetchedPost.ok){
+            console.log("post in the fetechJs:" , fetchedPost);
             return fetchedPost;
       }
       else{

@@ -1,0 +1,8 @@
+.BackImageinHome {
+  background-image: url('../Assets/bgImage.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px; /* Set the height as needed */
+}

@@ -9,6 +9,8 @@ import { fetchSpecificUserPost } from './fetchPostDataSpecificUser';
 import ShowCommentOnPost from '../../HomeComponent/FeedComponent/ShowCommentOnPost';
 import DogImage from "../../Assets/dogCat.webp"
 
+import "./postCard.css"
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function PostCardSpecificUser() {
@@ -30,29 +32,45 @@ function PostCardSpecificUser() {
 
 
       return (
+            
 
             posts.map((post, index) => {
-                  return <Card className='border border-info shadow'   style={{  width: '70%', margin: "1.4rem" }} key={index} >
-                        <Card.Img variant="top" src={DogImage} />
-                        <Card.Body>
-                              <Card.Title>{post.title}</Card.Title>
-                              <Card.Text>
+                  return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container'   style={{  width: '70%', height:"40%" , margin: "1.4rem" }} key={index} >
+                              <Card.Body>
+                                    <Card.Title className='' style={{display:"inline"}} >
+                                          Username
+                                    </Card.Title>
+                              <hr className='shadow border-1' />
+                              </Card.Body>
+                              
+                        <img src={DogImage} alt="" className='w-100' style={{height:"200px" , width:"70%"}}  />
+                        <hr className='shadow border-3' />
+                        <Card.Body className='' >
+                              <Card.Title className='text-opacity-80 ' >{post.title}</Card.Title>
+                              <Card.Text className='text-opacity-34' >
                                     {post.caption}
                               </Card.Text>
-                              <Card.Text>
+                              <Card.Text className='text-light-emphasis' >
                                     hashtags
                               </Card.Text>
-                              {post.hashTag.map((ele, index) => {
-                                    return <div className="row">
-                                          <Card.Text key={index}>
+                              
+
+                              <div className="d-flex gap-2">
+                                    {post.hashTag.map((ele, index) => {
+                                          return <small className="">
                                                 {ele}
-                                          </Card.Text>
-                                    </div>
-                              })}
+                                          </small>
+                                    })}
+                                    
+                              </div>
 
+                              
 
-                              <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                              <ShowCommentOnPost/>
+                              <Card.Text>
+                                          <Checkbox className='pt-3 text-danger' {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                                          <ShowCommentOnPost postId={post._id}  className="pt-3" />
+
+                              </Card.Text>
 
 
                         </Card.Body>
