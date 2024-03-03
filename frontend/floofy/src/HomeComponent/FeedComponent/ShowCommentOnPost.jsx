@@ -14,23 +14,32 @@ function ShowCommentOnPost({postId}) {
       const [showComment , setShowComment] = useState([]);
 
       const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
+      const handleShow = () => {
+
+            
+            setShow(true);
+
+      }
+
+      
 
       const handlePostComment = ()=>{
             // after saving the comment to database, call the fetch again to show the newly added code.
       }
 
       useEffect(()=>{
-            const commentResponse = async ()=>{
+            const commentResponse = async () => {
                   const fetchCommentResponse = await getCommentsOnPost(postId);
-                  if(fetchCommentResponse){
-                        setShowComment(fetchCommentResponse);
-                        
+                  console.log("comment reponse:", fetchCommentResponse);
+                  if (fetchCommentResponse) {
+                        setShowComment(fetchCommentResponse.AllComments);
                   }
             }
 
             commentResponse();
-      })
+      },[]);
+
+      console.log("comment is " , showComment);
       return (
             <>
                   <IconButton className='text-info mt-2' onClick={handleShow} >
@@ -42,6 +51,7 @@ function ShowCommentOnPost({postId}) {
                   <Offcanvas show={show} style={{ height: '50vh', backgroundColor:"", scroll:"hidden"  }} placement='bottom' onHide={handleClose}>
                         <Offcanvas.Header closeButton>
                               <Offcanvas.Title className='w-25 p-2 fs-5' >Comments</Offcanvas.Title>
+                              
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                               {/* use map function on the below div to show all the comment */}
@@ -49,17 +59,22 @@ function ShowCommentOnPost({postId}) {
                               <div className="row">
                                     <div className="showUsername font-monospace text-body-secondary fs-6 ">
 
-                                          
-
-                                          <p>
-                                                Username
-                                          </p>
-
-                                           
+                                          {
+                                                showComment.map((singleComment)=>{
+                                                      // console.log(singleComment.user.username)
+                                                      return <div>
+                                                            <p>
+                                                                  {singleComment.user.username}
+                                                            </p>
+                                                            
+                                                            <small>{singleComment.content}</small>
+                                                            
+                                                            <hr className='h-1 shadow' />
+                                                      </div>
+                                                })
+                                          }
                                     </div>
-                                    <div className="showComment fs-6">
-                                          <p>All the comments</p>
-                                    </div>
+                                    
                               </div>
 
 

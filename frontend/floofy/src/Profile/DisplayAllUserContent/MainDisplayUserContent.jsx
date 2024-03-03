@@ -1,11 +1,12 @@
 import React from 'react'
-import PostCardSpecificUser from './PostCard'
+import PostCardAllUser from './PostCard'
+
 
 function MainDisplayUserContent() {
   return (
     <div>
+      <PostCardAllUser/>
       
-      <PostCardSpecificUser/>
     </div>
   )
 }

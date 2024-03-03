@@ -1,8 +1,8 @@
 import React from 'react'
-import SidebarChatonHome from './ChatComponent/SidebarChatonHome'
-import MainFeedComp from './FeedComponent/MainFeedComp'
-import MainDisplayUserContent from '../Profile/DisplaySpecificUserContent/MainDisplayUserContent'
-import bgImage from "../Assets/bgImage.jpg"
+// import SidebarChatonHome from './ChatComponent/SidebarChatonHome'
+// import MainFeedComp from './FeedComponent/MainFeedComp'
+import MainDisplayUserContent from '../Profile/DisplayAllUserContent/MainDisplayUserContent'
+// import bgImage from "../Assets/bgImage.jpg"
 
 function MainHomeComp() {
   return (

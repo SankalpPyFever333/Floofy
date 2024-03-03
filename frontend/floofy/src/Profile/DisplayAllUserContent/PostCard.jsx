@@ -5,25 +5,27 @@ import Card from 'react-bootstrap/Card';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import { fetchSpecificUserPost } from './fetchPostDataSpecificUser';
+// import { fetchSpecificUserPost } from './fetchPostDataSpecificUser';
 import ShowCommentOnPost from '../../HomeComponent/FeedComponent/ShowCommentOnPost';
 import DogImage from "../../Assets/dogCat.webp"
 
 import "./postCard.css"
+import { fetchAllPost } from '../../HomeComponent/FeedComponent/getPost';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-function PostCardSpecificUser() {
+function PostCardAllUser() {
 
       const [posts, setPosts] = useState([]);
       useEffect(() => {
-            const getDataUseeffect = async(userId)=>{
-                  const SpecificData = await fetchSpecificUserPost(userId);
-                  console.log('data', SpecificData)
-                  setPosts(SpecificData.UserPost);
+            const getDataUseeffect = async()=>{
+                  
+                  const AllPostData = await fetchAllPost();
+                  console.log('data', AllPostData)
+                  setPosts(AllPostData.AllPost);
             }
 
-            getDataUseeffect(localStorage.getItem("userId"));
+            getDataUseeffect();
       }, [])
 
       console.log(posts);
@@ -38,7 +40,7 @@ function PostCardSpecificUser() {
                   return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container'   style={{  width: '70%', height:"40%" , margin: "1.4rem" }} key={index} >
                               <Card.Body>
                                     <Card.Title className='' style={{display:"inline"}} >
-                                          Username
+                                          {post.userId.username}
                                     </Card.Title>
                               <hr className='shadow border-1' />
                               </Card.Body>
@@ -53,8 +55,6 @@ function PostCardSpecificUser() {
                               <Card.Text className='text-light-emphasis' >
                                     hashtags
                               </Card.Text>
-                              
-
                               <div className="d-flex gap-2">
                                     {post.hashTag.map((ele, index) => {
                                           return <small className="">
@@ -81,7 +81,7 @@ function PostCardSpecificUser() {
       ));
 }
 
-export default PostCardSpecificUser;
+export default PostCardAllUser;
 
 
 

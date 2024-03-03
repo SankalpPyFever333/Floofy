@@ -9,9 +9,9 @@ export const fetchAllPost = async ()=>{
 
       if(fetchedPost.ok){
             console.log("post in the fetechJs:" , fetchedPost);
-            return fetchedPost;
+            return await fetchedPost.json();
       }
       else{
-            throw new Error('Error Fetching Posts');
+            throw new Error('Error Fetching Posts');  
       }
 }

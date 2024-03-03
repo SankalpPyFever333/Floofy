@@ -6,7 +6,8 @@ import BottomNavBar from './BottomNavBar';
 import MainProfileComponent from '../Profile/DoctorProfile/MainProfileComponent';
 import MainShopComp from '../shop/MainShopComp';
 import MainHomeComp from '../HomeComponent/MainHomeComp';
-import MainDisplayUserContent from '../Profile/DisplaySpecificUserContent/MainDisplayUserContent';
+import MainDisplayUserContent from '../Profile/DisplayAllUserContent/MainDisplayUserContent';
+import MyPostCard from '../Profile/DisplayMyContent/MyPostCard';
 
 function HomePageContent() {
 
@@ -25,11 +26,11 @@ function HomePageContent() {
           <Box style={{
             overflow:"auto",
             
-          }} sx={{ bgcolor: '#e0e0e0', height: '78vh' }}>
+          }} sx={{ bgcolor: 'bg-light-subtle', height: '78vh' }}>
             {clickedBtn === "Home" && <MainHomeComp/>}
             {clickedBtn === "Vet" && <div>This is Vet component</div>}
             {clickedBtn === "Shop" && <MainShopComp/>}
-            {clickedBtn === "Profile" && <MainDisplayUserContent/> }
+            {clickedBtn === "Profile" && <MyPostCard/> }
           </Box>
           
         </Container>
