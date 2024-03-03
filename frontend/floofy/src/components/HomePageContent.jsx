@@ -30,7 +30,8 @@ function HomePageContent() {
             {clickedBtn === "Home" && <MainHomeComp/>}
             {clickedBtn === "Vet" && <div>This is Vet component</div>}
             {clickedBtn === "Shop" && <MainShopComp/>}
-            {clickedBtn === "Profile" && <MyPostCard/> }
+            {/* {clickedBtn === "Profile" && <MyPostCard/> } */}
+            {clickedBtn === "Profile" && <MainProfileComponent/> }
           </Box>
           
         </Container>
