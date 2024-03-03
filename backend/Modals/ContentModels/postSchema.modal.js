@@ -20,10 +20,11 @@ const postSchema = new mongoose.Schema({
   likedBy: {
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
+    ref: "UserLoginCredentials",
   },
   commentedBy: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: "Comment",  
+    ref: "Comment",
   },
 
   hashTag: {
