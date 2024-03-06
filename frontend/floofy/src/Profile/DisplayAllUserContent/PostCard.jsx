@@ -7,7 +7,6 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 // import { fetchSpecificUserPost } from './fetchPostDataSpecificUser';
 import ShowCommentOnPost from '../../HomeComponent/FeedComponent/ShowCommentOnPost';
-import DogImage from "../../Assets/dogCat.webp"
 
 import "./postCard.css"
 import { fetchAllPost } from '../../HomeComponent/FeedComponent/getPost';
@@ -45,7 +44,7 @@ function PostCardAllUser() {
                               <hr className='shadow border-1' />
                               </Card.Body>
                               
-                        <img src={DogImage} alt="" className='w-100' style={{height:"200px" , width:"70%"}}  />
+                        <img src={post.Image} alt="" className='w-100' style={{height:"200px" , width:"70%"}}  />
                         <hr className='shadow border-3' />
                         <Card.Body className='' >
                               <Card.Title className='text-opacity-80 ' >{post.title}</Card.Title>
