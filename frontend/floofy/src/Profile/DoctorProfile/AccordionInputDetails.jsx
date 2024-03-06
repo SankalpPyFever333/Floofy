@@ -14,14 +14,26 @@ function AccordionInputDetails({SetExpereince , SetLocation , SertSpecialization
       const [startDate, setStartDate] = useState();
       const [endDate, setEndDate] = useState();
 
+      const [experienceDetails, setExperienceDetails] = useState({
+            startDate: '', // Initial value for startDate
+            endDate: '', // Initial value for endDate
+            institutionName: '', // Initial value for institutionName
+            description: '', // Initial value for description
+            // Add more properties as needed
+      });
+
       const handleSaveExperienceOnExit = ()=>{
             const experienceData = {
-                  startDate: startDate,
-                  endDate: endDate,
-                  institutionName: institutionName,
-                  description: description,
+                  ...experienceDetails , 
+                  startDate: startDate || experienceDetails.startDate ,
+                  endDate: endDate || experienceDetails.endDate ,
+                  institutionName: institutionName|| experienceDetails.institutionName,
+                  description: description|| experienceDetails.description,
                   
             };
+            // console.log("Start Date:" , experienceData.startDate);
+            // console.log("descriptioL :" , experienceData.description);
+            // console.log("EndDate: " , endDate);
             SetExpereince(experienceData);
       }
 
@@ -31,6 +43,8 @@ function AccordionInputDetails({SetExpereince , SetLocation , SertSpecialization
                   areaOFSpecialization : areaOFSpecialization
                   
             }
+            // console.log("Asre: " , areaOFSpecialization)
+            // console.log("training : " , additionalTraining)
             SertSpecialization(specializationData)
       }
 

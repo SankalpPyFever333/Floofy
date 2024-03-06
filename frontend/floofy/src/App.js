@@ -39,7 +39,7 @@ function App() {
           />
 
           <Route path="/LoginAfterLogOut" element={<LoginComponent />} />
-          <Route path="/doctorprofileedit" element={<DoctorProfileUpdate />} />
+          <Route path="/doctorprofileedit/:id" element={<DoctorProfileUpdate />} />
           <Route path="/createpost" element= {<CreatePost/>} />
         </Routes>
       </BrowserRouter>

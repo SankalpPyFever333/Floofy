@@ -46,8 +46,8 @@ function MainDoctorDashBoradComp({doctoridFromFrontend}) {
       return (
       <div>
             <div className="row">
-                  <div className="col-sm-2" style={{ margin:"1rem"}} >
-                        <DropdownToSelectTime selectedTimeFrame={selectedTimeFrame} setSelectedTimeFrame={setSelectedTimeFrame} />
+                  <div className="col-sm-2 " style={{ margin:"1rem"}} >
+                        <DropdownToSelectTime  selectedTimeFrame={selectedTimeFrame} setSelectedTimeFrame={setSelectedTimeFrame} />
                         {
                                     (!isDoctorView && (<Tooltip title="Remove Doctor" placement="top">
                                           <IconButton aria-label="delete" onClick={handleDeleteDoctor} >
@@ -59,8 +59,8 @@ function MainDoctorDashBoradComp({doctoridFromFrontend}) {
                   </div>
             </div>
             <div className="row">
-                  <div className="col-sm-8">
-                        <div className="row">
+                  <div className="col-sm-5">
+                        <div className="row" >
                               <div className="col-sm-4">
                                     <ShowTotalAppointmentsCard timeFrame={selectedTimeFrame} />
                               </div>

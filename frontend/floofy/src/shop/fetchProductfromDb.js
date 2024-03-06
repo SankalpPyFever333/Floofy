@@ -11,7 +11,7 @@ export const fetchProducts = async () => {
     console.log("network error");
     throw new Error("HTTP error" , response.status)
   }   
-  console.log(response)
+  console.log( "Product response: " ,  response)
   return response;
 };
 

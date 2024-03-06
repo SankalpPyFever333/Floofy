@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import AccordionInputDetails from './AccordionInputDetails';
 import prflUpdate from "../../Assets/UpdateProfile.jpg"
+import { saveUpdatedDataDoctor } from './saveUpdatedDataDoctor';
+import Swal from 'sweetalert2';
 
 function DoctorProfileUpdate() {
 
@@ -14,10 +16,36 @@ function DoctorProfileUpdate() {
   const [location , setLocation] = useState('');
   const [specialization , setSpecialization] = useState({});
   
-  const handleSaveUserData = ()=>{
-    console.log("Expereince is :" , expereince)
-    console.log("Locatio is: " , location);
-    console.log("specialzation is:" , specialization);
+  const handleSaveUserData = async()=>{
+    
+    try {
+      const updateDoctor = await saveUpdatedDataDoctor(localStorage.getItem("userId") , name , username , phone , email , expereince , location , specialization );
+      console.log(updateDoctor)
+      if(updateDoctor){
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Updated successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+        else{
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error in updating",
+        });
+        }
+    } catch (error) {
+      console.log("Error in updating", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Internal server ",
+      });
+    }
+  
   }
 
 

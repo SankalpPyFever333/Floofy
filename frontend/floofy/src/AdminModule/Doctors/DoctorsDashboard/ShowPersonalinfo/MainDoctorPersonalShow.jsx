@@ -39,19 +39,32 @@ function MainDoctorPersonalShow({doctorid}) {
   }
 
   return (
-    <div>
-      <h5 style={{display:"inline" , marginRight:"1rem"}}>Username: </h5>
-      <span>{jsonDoctorDetails.DoctorDetails.Username.username} </span>
-      <br />
-      <br />
-      <span>name: {jsonDoctorDetails.DoctorDetails.Name} </span>
-      <br />
-      <br />
-      <span>Email: {jsonDoctorDetails.DoctorDetails.Email} </span>
-      <br />
-      <br />
-      <span>Phone: {jsonDoctorDetails.DoctorDetails.Phone} </span>
-      <br />
+    <div className='shadow p-2 d-flex' style={{flexDirection:"column"}}  >
+      <div  >
+        <h5 style={{display:"inline" , marginRight:"1rem"}}>Username: </h5>
+        <span  >{jsonDoctorDetails.DoctorDetails.Username.username} </span>
+
+      </div>
+      
+      <div>
+        <h5 style={{display:"inline" , marginRight:"1rem"}}>Name: </h5>
+        <span> {jsonDoctorDetails.DoctorDetails.Name} </span>
+
+      </div>
+      
+      <div>
+        <h5 style={{display:"inline" , marginRight:"1rem"}}>Email: </h5>
+        <span> {jsonDoctorDetails.DoctorDetails.Email} </span>
+
+      </div>
+
+      <div>
+        <h5 style={{display:"inline" , marginRight:"1rem"}}>Phone: </h5>
+        
+        <span> {jsonDoctorDetails.DoctorDetails.Phone} </span>
+
+      </div>
+      
       <br />
       
       {/* Rest details show in that offcanvas */}

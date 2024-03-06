@@ -8,7 +8,7 @@ function ShowTotalRevenueGeneratedCard({timeFrame}) {
                           bg={variant.toLowerCase()}
                           key={variant}
                           text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
-                          style={{ width: '100%', height: "9rem", margin: ".3rem", left: "4rem", boxShadow: '0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22)' }}
+                          style={{ width: '100%', height: "9rem", left: "1rem", boxShadow: '0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22)' }}
                           className="mb-2"
                     >
                           <Card.Header>Total Revenue</Card.Header>

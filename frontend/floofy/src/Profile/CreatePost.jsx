@@ -9,7 +9,7 @@ function CreatePost() {
       const [title, setTitle] = useState(null);
       const [caption, setCaption] = useState("");
 
-      const [imagePath ,   setImage] = useState("");
+      const [imagePath ,   setImage] = useState("");  
       const [hashtags , sethashTags] = useState("");
 
       const handleFileSelect = (e) => {
@@ -54,32 +54,36 @@ function CreatePost() {
 
   return (
     <div>
-              <TextField style={{ margin: "12px" }} id="filled-basic" label="Title" variant="filled" onChange= {(e)=>{
-                  setTitle(e.target.value)
-              }}  />
-              <br />
-              <TextField style={{ margin: "12px" }} id="filled-basic" label="Caption" variant="filled" onChange={(e) => {
-                    setCaption(e.target.value)
-              }} />
-              <br />
+
+            <div className="row">
+                  <div className="col-sm-5">
+
+                  </div>
+
+                  <div className="col-sm-7">
+                          <TextField style={{ margin: "12px" }} id="filled-basic" label="Title" variant="filled" onChange={(e) => {
+                                setTitle(e.target.value)
+                          }} />
+                          <br />
+                          <TextField style={{ margin: "12px" }} id="filled-basic" label="Caption" variant="filled" onChange={(e) => {
+                                setCaption(e.target.value)
+                          }} />
+                          <br />
+
+                          <Form.Group className="mb-3" controlId="Product_ImagePath">
+                              
+                                <Form.Control type="file" onChange={handleFileSelect} /> {/* File input */}
+                          </Form.Group>
+                          <br />
+                          <TextField style={{ margin: "12px" }} id="filled-basic" label="hashtags " variant="filled" onChange={(e) => {
+                                sethashTags(e.target.value)
+                          }} />
+                          <br />
+                          <Button variant="info" onClick={handleSavePost} >Post</Button>{' '}
+                  </div>
+            </div>
+
               
-              <Form.Group className="mb-3" controlId="Product_ImagePath">
-                    {/* <Form.Label>Image Url</Form.Label>
-                    <Form.Control
-                          type="text"
-                          value={imagePath} // Display the selected file path
-                          onChange={(e) => {
-                                setImage(e.target.value);
-                          }}
-                    /> */}
-                    <Form.Control type="file" onChange={handleFileSelect} /> {/* File input */}
-              </Form.Group>
-              <br />
-              <TextField style={{ margin: "12px" }} id="filled-basic" label="hashtags " variant="filled" onChange={(e) => {
-                    sethashTags(e.target.value)
-              }} />
-              <br />
-              <Button variant="info" onClick={handleSavePost} >Post</Button>{' '}
     </div>
   )
 }

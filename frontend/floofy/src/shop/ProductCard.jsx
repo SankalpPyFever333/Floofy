@@ -19,6 +19,7 @@ export default function ProductCard({ProductId , imgSrc , category , DiscountPer
       const Addbtn = <Button onClick={handleAddToCart} size="small" variant="contained">Add to cart</Button>;
 // When productCount is 0 , render the ADD To cart button else render the - + button with count value.
 
+console.log("image url:" , imgSrc)
 
 // Problem is that after rendering add button again, then it is not re rendering the buttongroup bcoz after that it is coming to this component for rendering the AddBtn.
 
@@ -32,6 +33,7 @@ export default function ProductCard({ProductId , imgSrc , category , DiscountPer
                         height="100"
                         image={imgSrc}
                   />
+
                   <CardContent>
                         <Typography gutterBottom variant="h6" style={{
                               fontFamily:"serif",
