@@ -1,7 +1,8 @@
-const express = require("express")
-const AddDoctorProfileEdit = require("../../Controllers/EditProfileController/EditProfileDoctor.controller")
+const express = require("express");
+const handleDoctorProfileUpdate = require("../../Controllers/EditProfileController/EditProfileDoctor.controller");
+
 const router = express.Router()
 
-router.post("/EditDoctorProfileBio" , AddDoctorProfileEdit )
+router.put("/EditDoctorProfileBio/:doctorId" , handleDoctorProfileUpdate )
 
 module.exports = router;

@@ -3,6 +3,8 @@ const bodyparser = require("body-parser")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cors = require("cors")
+const path = require('path')
+const uploads = require("./upload")
 
 dotenv.config();
 
@@ -18,7 +20,9 @@ app.use(bodyparser.urlencoded({
 }))
 app.use(express.json())
 
-app.use(express.static("uploads"))
+// app.use(express.static("uploads"))
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 // /////////////////////////////////////////////////////////////////////
 
@@ -143,6 +147,26 @@ app.use("/api" , require("./Routes/ContentRoutes/getPostRoutes/fetchSpecificUser
 app.use("/api" , require("./Routes/ContentRoutes/handleLikeUnlike/likeUnlikePost.route"))
 app.use("/api" , require("./Routes/ContentRoutes/commentHandlerRoutes/postCommentonPost.route"))
 app.use("/api" , require("./Routes/ContentRoutes/commentHandlerRoutes/fetchAllComment.route"))
+
+
+
+
+
+// profile controller:
+
+app.use("/api" , require("./Routes/ProfileRoutes/EditProfileDoctor.Router"))
+
+
+
+
+ // Update this with your server's base URL
+
+// Serve the uploaded file
+
+
+// Construct the URL for the uploaded file
+
+
 
 
 mongoose.connect(MONGO_CONN_STRING)

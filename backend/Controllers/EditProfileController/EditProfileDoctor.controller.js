@@ -1,31 +1,19 @@
 const Doctor = require("../../Modals/DoctorModals/Doctor.modal")
 
-const AddDoctorProfileEdit = async (req, res)=>{
-      const {Name,
-            Username,
-            Phone,
-            Email,
-            Experience,
-            Education,
-            Specialization,
-            SocialMediaLink} =  req.body;
-
+const handleDoctorProfileUpdate = async (req, res)=>{
+      const doctorId = req.params.doctorId;
+      console.log(doctorId);
             try {
-                  const newDoctorInfo = new Doctor({
-                    Name,
-                    Username,
-                    Phone,
-                    Email,
-                    Experience,
-                    Education,
-                    Specialization,
-                    SocialMediaLink,
-                  });
-                  await newDoctorInfo.save();
-                  res.status(200).json({message:"Profile updated"})
+                  const updateDoctorDetails = await Doctor.findByIdAndUpdate(doctorId , req.body , {
+                        new: true
+                  }) 
+                  if(!updateDoctorDetails){
+                        return res.status(401).json({message:"Error in updating"});
+                  }
+                  return res.status(200).json({message:"Updated successfully" , updatedProduct:updateDoctorDetails})
             } catch (error) {
-                  res.status(400).json({message:"Error in updating details."})
+                  res.status(400).json({message:"Error in updating details." , error:error , updatedProduct:[]})
             }
 }
 
-module.exports = AddDoctorProfileEdit;
+module.exports = handleDoctorProfileUpdate;

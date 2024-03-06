@@ -1,14 +1,12 @@
-
 const express = require("express");
-
-const addProductInDbAdmin = require("../../../Controllers/AdminController/ShopController/addProductINDbAdmin.controller");
+const addProductInDbAdminController = require("../../../Controllers/AdminController/ShopController/addProductINDbAdmin.controller");
 const uploads = require("../../../upload");
 const router = express.Router();
 
 router.post(
   "/addProductInDbAdmin",
   uploads.single("file"),
-  addProductInDbAdmin
+  addProductInDbAdminController
 );
 
 module.exports = router;
