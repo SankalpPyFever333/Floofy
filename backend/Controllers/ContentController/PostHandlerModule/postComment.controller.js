@@ -2,18 +2,17 @@ const  Comment = require("../../../Modals/ContentModels/PostComment.model");
 const postModel = require("../../../Modals/ContentModels/postSchema.modal");
 
 const addCommentToPost = async(req, res)=>{
-      const {postId} = req.body;
-      const {content , user} = req.body;
+      const { post, content, user } = req.body;
       try {
-            const post = await postModel.findOne({_id : postId})
-            if(!post){
-                  return res.status(401).json({message:"No post found"})
+            const Findpost = await postModel.findOne({_id : post})
+            if (!Findpost) {
+              return res.status(401).json({ message: "No post found" });
             }
 
-            const comment = new Comment({content:content , post:postId , user: user});
+            const comment = new Comment({content:content , post:post , user: user});
             await comment.save();
 
-            await postModel.findByIdAndUpdate(postId, {
+            await postModel.findByIdAndUpdate(post, {
               $push: { commentedBy: comment._id },
             });
 

@@ -2,15 +2,20 @@ const postModel = require("../../../Modals/ContentModels/postSchema.modal");
 
 
 const postContent = async(req, res)=>{
-      const { title, caption, Image, userId, hashTag, likedBy } = req.body;
+      const { title, caption,  userId, hashTag, likedBy } = req.body;
+      const file = req.file;
+
+      console.log("reqbody:" , req.body);
+      console.log("fileobject: " , req.file)
+
       try {
             const newpost = new postModel({
-              title,
-              caption,
-              Image,
-              userId,
-              hashTag,
-              likedBy,
+              title: title,
+              caption: caption,
+              Image: `http://localhost:3000/uploads/${file.originalname}`,
+              userId: userId,
+              hashTag: hashTag,
+              likedBy: likedBy,
             });
 
             await newpost.save();

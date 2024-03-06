@@ -5,7 +5,7 @@ const uploads = require("../../../upload");
 
 const router = express.Router();
 
-router.post("/createPost" , uploads.single("Image") ,  postContent);
+router.post("/createPost" , uploads.single("file") ,  postContent);
 
 module.exports = router;
 
