@@ -90,14 +90,14 @@ const AdminSidebar = ({ setCurrentItem }) => {
                         </ListItem>
                   </IconButton>
 
-                  {/* <IconButton onClick={() => setCurrentItem('Rescuers')}>
+                  <IconButton onClick={() => setCurrentItem('ProductInventory')}>
                         <ListItem>
                               <ListItemIcon>
                                     <DraftsIcon />
                               </ListItemIcon>
-                              <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Rescuers</span> } />
+                              <ListItemText primary = {<span style={{ fontWeight: 'bolder' }}>Inventory</span> } />
                         </ListItem>
-                  </IconButton> */}
+                  </IconButton>
                   <IconButton onClick={handleLogout}>
                         <ListItem>
                               <ListItemIcon>

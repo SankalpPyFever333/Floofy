@@ -7,9 +7,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import DecrementIncrementBtn from './DecrementIncrementBtn';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({ProductId , imgSrc , category , DiscountPercentage,  ProdDescription , Price , ProdName}) {
       let [productCount , setProductCount] = React.useState(0);
+      const navigate = useNavigate();
       const handleAddToCart = ()=>{
             productCount =  ++productCount;
             console.log(productCount)
@@ -23,10 +25,14 @@ console.log("image url:" , imgSrc)
 
 // Problem is that after rendering add button again, then it is not re rendering the buttongroup bcoz after that it is coming to this component for rendering the AddBtn.
 
+      const handleCardClick = ()=>{
+            navigate(`/productDetailsPage/${ProductId}`)
+      }
+
 
       return (
       
-            <Card sx={{ maxWidth: "14rem" }} style={{margin:5}}>
+            <Card sx={{ maxWidth: "14rem" }} onClick = {handleCardClick} style={{margin:5}}>
                   <CardMedia
                         component="img"
                         alt= {category}
@@ -51,13 +57,6 @@ console.log("image url:" , imgSrc)
                         <Typography variant="body2" color="text.primary">
                               {Price}
                         </Typography>
-                        {
-                              
-                              productCount ? <DecrementIncrementBtn productId={ProductId} product={{ productId: ProductId ,  productName: ProdName , Description: ProdDescription , Price: Price , category: category}}  productCount={productCount} setProductCount={setProductCount} AddBtn={Addbtn} handleAddBtn={handleAddToCart} /> : Addbtn
-
-                              // instead of increment decrement button , place just a animation button of item added to cart.
-                        }
-                        
                   </CardActions>
             </Card>
       );

@@ -79,7 +79,7 @@ function AddProductModal() {
             <>
                   <Tooltip title="Add Item">
                         <IconButton onClick={handleShow}>
-                              <AddIcon fontSize='large' />
+                              <AddIcon fontSize='small' />
                         </IconButton>
                   </Tooltip>
 
@@ -134,7 +134,7 @@ function AddProductModal() {
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="Product_Quantity">
-                                          <Form.Label>Quantity</Form.Label>
+                                          <Form.Label>Quantity(in stock)</Form.Label>
                                           <Form.Control
                                                 type="text"
                                                 onChange={handleInputChange}

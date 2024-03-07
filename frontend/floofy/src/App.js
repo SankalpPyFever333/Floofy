@@ -11,6 +11,8 @@ import MainDoctorDashBoradComp from './AdminModule/Doctors/DoctorsDashboard/Main
 import MainRescuerDashboard from './AdminModule/Rescuers/RescuerDashboard/MainRescuerDashboard';
 import DoctorProfileUpdate from './Profile/DoctorProfile/DoctorProfileUpdate';
 import CreatePost from './Profile/CreatePost';
+import MainInventoryManager from './InventoryManagement/MainInventoryManager';
+import ProductPageDetails from './shop/ProductPageDetails';
 
 // import Razorpayment from './RazorpayPayment/Razorpayment';
 
@@ -39,8 +41,20 @@ function App() {
           />
 
           <Route path="/LoginAfterLogOut" element={<LoginComponent />} />
-          <Route path="/doctorprofileedit/:id" element={<DoctorProfileUpdate />} />
-          <Route path="/createpost" element= {<CreatePost/>} />
+          <Route
+            path="/doctorprofileedit/:id"
+            element={<DoctorProfileUpdate />}
+          />
+          <Route path="/createpost" element={<CreatePost />} />
+          <Route
+            path="/InventoryManagment"
+            element={<MainInventoryManager />}
+          />
+          <Route path="/MoveToAdminPanel" element={<MainAdminComp />} />
+          <Route
+            path="/productDetailsPage/:ProductId"
+            element={<ProductPageDetails />}
+          />
         </Routes>
       </BrowserRouter>
       {/* <Razorpayment/> */}

@@ -9,16 +9,18 @@ import MainRescuersComp from './Rescuers/MainRescuersComp';
 import AppBarAdmin from './AppBarAdmin';
 import MainOverviewComp from './OverviewOfData/MainOverviewComp';
 import MainProductReviewComp from './ProductReviews/MainProductReviewComp';
-
+import MainInventoryManager from '../InventoryManagement/MainInventoryManager';
+import { useNavigate } from 'react-router-dom';
 
 function MainAdminComp() {
   const [currentItem, setCurrentItem] = useState('Users');
+  const navigate = useNavigate();
   return (
     <div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-2">
-            <p>render the floofy image</p>
+          <div className="col-sm-2 border-end ">
+            
             <AdminSidebar setCurrentItem={setCurrentItem}/>
           </div>
           <div className="col-sm-10">
@@ -31,6 +33,7 @@ function MainAdminComp() {
               {currentItem === 'Requests' && < MainRequestComp />}
               {currentItem === 'Doctors' && < MainDoctorsComp />}
               {/* {currentItem === 'Rescuers' && < MainRescuersComp />} */}
+              {currentItem === "ProductInventory" && navigate("/InventoryManagment")}
               {currentItem === 'Overview' && < MainOverviewComp />}
             </div>
           </div>

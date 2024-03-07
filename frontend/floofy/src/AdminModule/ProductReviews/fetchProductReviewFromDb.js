@@ -1,11 +1,12 @@
 
 export const fetchProductReviews = async ()=>{
       const prodReviews = await fetch(
-        "http://localhost:3000/api/getReviewsWithUserName" , {
-            method:"GET",
-            headers:{
-                  'Content-Type':"appplication/json"
-            }
+        "http://localhost:3000/api/getproductReview",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "appplication/json",
+          },
         }
       );
 
