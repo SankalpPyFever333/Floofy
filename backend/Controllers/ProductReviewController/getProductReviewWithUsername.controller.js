@@ -1,9 +1,12 @@
 const productReviwModal = require("../../Modals/productReview/ProductReview.modal");
 
 const getProductreviewWithUsername = async (req, res) => {
+  const {ProductId} = req.body;
   try {
     const reviewsByUser = await productReviwModal
-      .find()
+      .find({
+        Product:ProductId
+      })
       .populate("User Product")
       .exec();
 
@@ -29,7 +32,7 @@ const getProductreviewWithUsername = async (req, res) => {
           
         });
     } else {
-      return res.status(200).json({ message: "review not found", review: [] });
+      return res.status(400).json({ message: "review not found", review: [] });
     }
   } catch (error) {
     console.log(error);

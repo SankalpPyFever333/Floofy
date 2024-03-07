@@ -37,7 +37,7 @@ app.use("/api" , require("./Routes/AuthorizeationRoutes/LoginOfUsers.Routers"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/FirebaseOtpVerify.router"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/FetchLoginCredentials.route"))
 app.use("/api" , require("./Routes/AuthorizeationRoutes/UpdatePassword.route"))
-
+app.use("/api" , require("./Routes/ShopDatabseRoutes/getSingleProduct.route"))
 
 
 // /////////////////////////////////////////////////////////////////////////////////////////////
