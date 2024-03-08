@@ -41,21 +41,10 @@ function Razorpayment() {
 
       return (
             <div>
-                  <h1>RazorPay Payment Gateway</h1>
+                  
                   <form id='paymentform' onSubmit={handleSubmit}>
-                        <input style={{ margin: "20px" }} type="text" placeholder='Name' onChange={(e) => {
-                              setName(e.target.value)
-                        }} />
-                        <br />
-                        <input style={{ margin: "20px" }} type="text" placeholder='Email' onChange={(e) => {
-                              setEmail(e.target.value)
-                        }} />
-                        <br />
-                        <input style={{ margin: "20px" }} type="text" placeholder='Phone' onChange={(e) => {
-                              setMobile(e.target.value)
-                        }} />
-                        <br />
-                        <button type='submit' style={{ margin: "20px" }}>Pay now</button>
+                        
+                        <button className='btn btn-success rounded m-2 p-2 ' >Pay Now</button>
                   </form>
             </div>
       )

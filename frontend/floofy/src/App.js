@@ -13,8 +13,9 @@ import DoctorProfileUpdate from './Profile/DoctorProfile/DoctorProfileUpdate';
 import CreatePost from './Profile/CreatePost';
 import MainInventoryManager from './InventoryManagement/MainInventoryManager';
 import ProductPageDetails from './shop/ProductPageDetails';
+import TakeDeliveryAddress from './shop/TakeDeliveryAddress';
 
-// import Razorpayment from './RazorpayPayment/Razorpayment';
+import Razorpayment from './RazorpayPayment/Razorpayment';
 
 
 function App() {
@@ -54,6 +55,10 @@ function App() {
           <Route
             path="/productDetailsPage/:ProductId"
             element={<ProductPageDetails />}
+          />
+          <Route
+            path="/GotoDeliveryPage/:ProductId/:ProductPrice"
+            element={<TakeDeliveryAddress />}
           />
         </Routes>
       </BrowserRouter>

@@ -11,7 +11,7 @@ export const fetchReviewOfProduct = async (productId)=>{
       );
 
       if(ReviewReponse.ok){
-          return await ReviewReponse.json()
+          return ReviewReponse;
       }else{
         throw new Error('Could not find product reviews')
       }
