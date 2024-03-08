@@ -1,38 +1,57 @@
 const mongoose = require("mongoose")
 
-const orderSchema = mongoose.Schema({
-  User: {
-    type: mongoose.Types.ObjectId,
-    ref: "UserLoginCredentials",
-    required: true,
-  },
-  Products: [
-    {
-      product: {
-        type: mongoose.Types.ObjectId,
-        ref: "Shop",
-        required: true,
-      },
-      quantity: {
-            type: String,
-            required: true
-      }
+const orderSchema = mongoose.Schema(
+  {
+    User: {
+      type: mongoose.Types.ObjectId,
+      ref: "UserLoginCredentials",
+      required: true,
     },
-  ],
-  totalAmount:{
+    Products: [
+      {
+        product: {
+          type: mongoose.Types.ObjectId,
+          ref: "Shop",
+          required: true,
+        },
+        quantity: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    totalAmount: {
       type: String,
-      required:true
+      required: true,
+    },
+    deliveryAddress: {
+      type: String,
+      Adress: {
+        StreetAddress:{
+          type: String,
+          required: true
+        },
+        PIN: {
+          type: String,
+          required: true,
+        },
+        District: {
+          type: String,
+          required: true,
+        },
+        
+      },
+
+      require: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "processing", "delivered"],
+      default: "pending",
+    },
   },
-  deliveryAddress:{
-      type:String,
-      require: true
-  },
-  status:{
-      type:String,
-      enum:["pending","processing","delivered"],
-      default:"pending"
-  }
-} , { timestamps: true } );
+  { timestamps: true }
+);
 
 const  ProductOrder = mongoose.model("OrderDetails",orderSchema);
 

@@ -16,6 +16,7 @@ const getProductreviewWithUsername = async (req, res) => {
         UserName: reviewWithUser.User.username,
         ProductName: reviewWithUser.Product.ProductName,
         Comment: reviewWithUser.Comment,
+        Rating: reviewWithUser.Rating,
         createdAt: reviewWithUser.createdAt.toLocaleDateString(),
         _id: reviewWithUser._id,
         Rating: reviewWithUser.Rating
