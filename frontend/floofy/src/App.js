@@ -16,6 +16,7 @@ import ProductPageDetails from './shop/ProductPageDetails';
 import TakeDeliveryAddress from './shop/TakeDeliveryAddress';
 
 import Razorpayment from './RazorpayPayment/Razorpayment';
+import BookAppointmentWithDoctor from './Profile/DoctorProfile/BookAppointmentWithDoctor';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
             path="/GotoDeliveryPage/:ProductId/:ProductPrice"
             element={<TakeDeliveryAddress />}
           />
+          {/* <Route path="/bookappointment/:UserID" element={<BookAppointmentWithDoctor />} /> */}
         </Routes>
       </BrowserRouter>
       {/* <Razorpayment/> */}

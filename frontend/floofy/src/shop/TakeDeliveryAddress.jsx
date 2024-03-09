@@ -10,6 +10,15 @@ function TakeDeliveryAddress() {
       
       let [DeliveryCharge , setDeleveryCharge] = useState(70)
       let [prodCount, setProdCount] = React.useState(1);
+      const [district , setDistrict] = useState('');
+      const [homeAddress , setHomeAdress] = useState('');
+      const [pinCode , setPINcode] = useState('');
+      
+      localStorage.setItem("district" , district);
+      localStorage.setItem("HomeAddress" , homeAddress);
+      localStorage.setItem("PINCOde" , pinCode);
+      localStorage.setItem("productCount" , prodCount)
+
 
 
       const handleAddProduct = () => {
@@ -56,7 +65,7 @@ function TakeDeliveryAddress() {
                               <div className="col-6">
                                     <div className="container mt-3">
                                           <small>Home Address</small>
-                                          <Form.Control size="lg" type="text" placeholder="Home Address" />
+                                          <Form.Control size="lg" type="text" onChange={(e)=>{setHomeAdress(e.target.value)}} placeholder="Home Address" />
                                     </div>
                               </div>
                               <div className="col-6 ">
@@ -70,7 +79,7 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
                                     <div className="container mt-3">
                                           <small>District</small>
-                                          <Form.Control size="lg" type="text" placeholder="District" />
+                                          <Form.Control size="lg" type="text" placeholder="District" onChange={(e)=>{setDistrict(e.target.value)}} />
                                     </div>
                               </div>
                               <div className="col-6 ">
@@ -85,7 +94,7 @@ function TakeDeliveryAddress() {
                               <div className="col-6">
                                     <div className="container mt-3">
                                           <small>PIN Code</small>
-                                          <Form.Control size="lg" type="text" placeholder="PIN Code" />
+                                          <Form.Control size="lg" type="text" placeholder="PIN Code" onChange={(e)=>{setPINcode(e.target.value)}} />
                                     </div>
                               </div>
                               <div className="col-6 ">

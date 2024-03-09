@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import TakeDeliveryAddress from './TakeDeliveryAddress';
 import TextField from '@mui/material/TextField';
 import Button from 'react-bootstrap/Button';
+import { SaveProdReviews } from './saveProductReview';
+import Swal from 'sweetalert2';
+import ProductRating from './ProductRating';
 
 
 function ProductPageDetails() {
@@ -13,12 +16,15 @@ function ProductPageDetails() {
       const [prodReviews, setProdReviews] = useState([]);
       const [prod, setProd] = useState([]);
       const [comment, setComment] = useState();
+      
       const navigate = useNavigate();
 
       let avgRating = prodReviews.map((SingleReview)=>{
             let sumRating = 0;
-            sumRating+= SingleReview.Rating;
-            return sumRating/prodReviews.length;
+            sumRating = sumRating +  Number(SingleReview.Rating);
+            // console.log("Rating:" , sumRating);
+            // console.log("review length:", prodReviews.length);
+            return (sumRating/prodReviews.length).toFixed(2);
       })
 
 
@@ -53,9 +59,31 @@ function ProductPageDetails() {
       }
 
 
-      const handlePostProductReview = ()=>{
+      const handlePostProductReview = async()=>{
             // save the product review in the review model
-      }
+            const newReview = await SaveProdReviews(localStorage.getItem("rating") , comment , localStorage.getItem("userId") , ProductId )
+            if(newReview){
+                  Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Review Posted",
+                        showConfirmButton: false,
+                        timer: 800
+                  });
+                  fetchProductreviews();
+                  setComment('')
+            }
+            else{
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Error!! Try Later",
+
+                  });
+            }
+
+
+      }     
 
 
   return (
@@ -88,7 +116,7 @@ function ProductPageDetails() {
                           <br />
                           <span className='m-2 p-2 fs-6 text-success' >You save Rs. {prod.Price - discountedPrice} on this order</span>
                           <br />
-                          <span className='m-2 p-2 fs-6 text-danger ' >Only  4 are in stocks </span>
+                          <span className={prod.Quantity - localStorage.getItem("productCount") <= 10 ? ' m-2 p-2 fs-6 text-danger' : ' m-2 p-2 fs-6' }  >Only  {prod.Quantity - localStorage.getItem("productCount") } are in stocks </span>
                         <br />
                           <span className={avgRating > 3.5 ? 'm-2 p-2 fs-6 text-success' : 'm-2 p-2 fs-6 text-danger'  } >Rating: {avgRating} </span>
                           
@@ -98,7 +126,7 @@ function ProductPageDetails() {
 
       <div className='container-fluid' >
             <span className='fs-6 m-3' >Product Reviews</span>
-                    <div className="showUsername font-monospace text-body-secondary fs-6 m-3 ">
+                    <div className="showUsername font-monospace overflow-auto text-body-secondary fs-6 m-3 " style={{height:"110px"}} >
 
                           {
                                 prodReviews.map((singleReviews) => {
@@ -119,14 +147,18 @@ function ProductPageDetails() {
                           }
 
                     </div>
-                    <div className="row position-absolute  bottom-0 start-2 w-100"  >
-                          <div className="col-sm-8">
-                                <TextField fullWidth label="Post Your Review" value={comment} id="fullWidth" onChange={(e) => {
+                    <div className="row position-fixed bottom-0 start-2 w-100" style={{ height: "60px" }}  >
+                          <div className="col-sm-7">
+                                <TextField fullWidth label="Post Your Review"  value={comment} id="fullWidth" onChange={(e) => {
                                       setComment(e.target.value)
 
                                 }} color='secondary' />
                           </div>
                           <div className="col-sm-2">
+                                <ProductRating  />
+                          </div>
+                          <div className="col-sm-1">
+
                                 <Button variant="info" onClick={handlePostProductReview} style={{ height: "3.5rem", width: "4rem" }} >Post</Button>{' '}
                           </div>
                     </div>

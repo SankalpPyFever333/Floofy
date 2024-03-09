@@ -8,6 +8,7 @@ import PostCardAllUser from '../DisplayAllUserContent/PostCard'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import BookAppointmentWithDoctor from './BookAppointmentWithDoctor'
 
 function ProfileWithBUtton() {
 
@@ -20,6 +21,10 @@ function ProfileWithBUtton() {
     navigate("/createpost")
   }
 
+  // const handleNavigateBookAppointment = ()=>{
+  //   navigate(`/bookappointment/${localStorage.getItem("userId")}`)
+  // }
+
   return (
     <div>
         
@@ -29,7 +34,7 @@ function ProfileWithBUtton() {
           <div className="d-flex gap-3">
             <Button variant="info" onClick={handleEditClick} >Edit Profile</Button>{' '}
             <Button variant="info" onClick={handleNavigatePostContent} >create post</Button>{' '}
-            <Button variant="info" onClick={handleNavigatePostContent} >Book Appointment</Button>{' '}
+            <BookAppointmentWithDoctor/>
 
           </div>
         </div>
