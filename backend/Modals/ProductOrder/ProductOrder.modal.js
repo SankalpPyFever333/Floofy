@@ -27,7 +27,7 @@ const orderSchema = mongoose.Schema(
     deliveryAddress: {
       type: String,
       Adress: {
-        StreetAddress:{
+        HomeAddress:{
           type: String,
           required: true
         },

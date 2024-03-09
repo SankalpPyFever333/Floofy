@@ -16,6 +16,8 @@ const fixAppointment = async (req, res) => {
               User: User,
               Doctor: Doctor,
               Payment: Payment,
+              AppointmentDate:AppointmentDate,
+              Status: Status,
               ReasonForAppointment: ReasonForAppointment
             });
             await newAppoinment.save();

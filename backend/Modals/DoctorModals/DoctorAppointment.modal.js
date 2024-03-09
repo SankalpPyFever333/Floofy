@@ -12,6 +12,7 @@ const AppointmentSchema = new mongoose.Schema(
       ref: "Doctor",
       required: true,
     },
+    
     AppointmentDate: {
       type: Date,
       required: true,
@@ -21,6 +22,10 @@ const AppointmentSchema = new mongoose.Schema(
       type: String,
       enum: ["pending", "confirmed", "cancelled", "completed"],
       default: "pending",
+    },
+    PetImage:{
+      type: String,
+      
     },
     Payment: {
       paymentAmount: {
