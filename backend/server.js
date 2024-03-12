@@ -158,13 +158,11 @@ app.use("/api" , require("./Routes/ProfileRoutes/EditProfileDoctor.Router"))
 
 
 
+// //////////////////////////////
 
- // Update this with your server's base URL
-
-// Serve the uploaded file
-
-
-// Construct the URL for the uploaded file
+// Payment Controller:
+app.use("/api" , require("./Routes/PaymentRoutes/ProductPaymentroute/productPayment.route"))
+app.use(require("./Routes/PaymentRoutes/ProductPaymentroute/getProductOrderId.route"))
 
 
 

@@ -9,10 +9,10 @@ const AppointmentSchema = new mongoose.Schema(
     },
     Doctor: {
       type: mongoose.Types.ObjectId,
-      ref: "Doctor",
+      ref: "UserLoginCredentials",
       required: true,
     },
-    
+
     AppointmentDate: {
       type: Date,
       required: true,
@@ -23,9 +23,8 @@ const AppointmentSchema = new mongoose.Schema(
       enum: ["pending", "confirmed", "cancelled", "completed"],
       default: "pending",
     },
-    PetImage:{
+    PetImage: {
       type: String,
-      
     },
     Payment: {
       paymentAmount: {
@@ -37,16 +36,16 @@ const AppointmentSchema = new mongoose.Schema(
         enum: ["credit_card", "debit_card", "upi"],
         required: true,
       },
-      paymentStatus:{
+      paymentStatus: {
         type: String,
-        enum:["paid","unpaid"],
-        default: "unpaid"
-      }
+        enum: ["paid", "unpaid"],
+        default: "unpaid",
+      },
     },
-    ReasonForAppointment:{
+    ReasonForAppointment: {
       type: String,
       required: true,
-    }
+    },
   },
   {
     timestamps: true,

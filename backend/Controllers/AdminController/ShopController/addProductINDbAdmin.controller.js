@@ -1,8 +1,15 @@
 const Shop = require("../../../Modals/Shop.model");
 
 const addProductInDbAdmin = async (req, res) => {
-  const { ProductName, Price, Category, Description, Quantity, DiscountTag } =
-    req.body;
+  const {
+    ProductName,
+    Price,
+    Category,
+    Description,
+    Quantity,
+    DiscountTag,
+    ExpiryDate,
+  } = req.body;
   const file = req.file;
   console.log(file);
 
@@ -17,6 +24,7 @@ const addProductInDbAdmin = async (req, res) => {
       ImagePath: `http://localhost:3000/uploads/${file.originalname}`, // Store the path where the file is saved
       Quantity: Quantity,
       DiscountTag: DiscountTag,
+      ExpiryDate: ExpiryDate
     });
 
     const savedProduct = await newProduct.save();

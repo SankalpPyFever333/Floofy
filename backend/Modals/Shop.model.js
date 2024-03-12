@@ -9,7 +9,7 @@ const ShopSchema = new mongoose.Schema(
     ImagePath: String,
     Quantity: String,
     DiscountTag: String,
-    // ExpiryDate: String,
+    ExpiryDate: String,
   },
   {
     timestamps: true,
