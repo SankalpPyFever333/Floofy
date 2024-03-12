@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { payProductAmount } from './RazorpayProdPay'
 
-function Razorpayment() {
+function Razorpayment({disabledState}) {
       const [name, setName] = useState('')
       const [email, setEmail] = useState('')
       const [mobile, setMobile] = useState('')
       const [paymentResponse , setPaymentResponse] = useState({})
       const [paymentConfirmed , setPaymnetConfirmed] = useState(false);
 
-      const handleSubmit = (event) => {
+      const handleSubmit = async (event) => {
             event.preventDefault();
+
+            
+
+            
 
             const options = {
                   key: 'rzp_test_2Q30fucOuJvMqJ',
@@ -19,7 +23,7 @@ function Razorpayment() {
                   name: 'DigiCoders Technologies',
                   description: 'Fees Payment',
                   image: '',
-                  order_id: 'order_NkypXu1sCUc4qc',
+                  order_id: paymentConfirmed.OrderResponse.id,
                   // order_id: 'order_NUOPJGtB4Omtqz',
                   callback_url: '',
                   prefill: {
@@ -46,34 +50,42 @@ function Razorpayment() {
 
             };
 
+            
+            
             const rzp1 = new window.Razorpay(options);
             rzp1.open();
 
-
+// In this, after making a successful payment , regenerate the orderid again and then make payment. 
 
 
       };
 
-      useEffect(()=>{
-            payProductAmount();
-      })
+      const getOrderId = async ()=>{
+            const paymentResponseProduct = await payProductAmount(localStorage.getItem("TotalPayableAmount"));
+            // console.log("Payment confirmed state response: ", paymentResponseProduct)
+            setPaymnetConfirmed(paymentResponseProduct)
+      }
 
+      useEffect(()=>{
+            getOrderId();
+      })
 
       return (
             <div>
                   
                   <form id='paymentform' onSubmit={handleSubmit}>
                         
-                        <button className='btn btn-success rounded m-2 p-2 ' >Pay Now</button>
+                        <button disabled = {disabledState} className='btn btn-success rounded m-2 p-2 ' >Pay Now</button>
                   </form>
 
-                  {paymentConfirmed &&  <p>Payment confirmed</p> }
+                  {paymentResponse &&  <p>Payment confirmed</p> }
 
             </div>
       )
 }
 
 export default Razorpayment
+
 
 
 

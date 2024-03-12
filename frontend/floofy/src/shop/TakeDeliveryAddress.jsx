@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'; 
@@ -13,13 +13,18 @@ function TakeDeliveryAddress() {
       const [district , setDistrict] = useState('');
       const [homeAddress , setHomeAdress] = useState('');
       const [pinCode , setPINcode] = useState('');
+      const [isDisabled, setIsDisabled] = useState(true);
+      const [payableAmount , setPayableAmount] = useState('');
       
       localStorage.setItem("district" , district);
       localStorage.setItem("HomeAddress" , homeAddress);
       localStorage.setItem("PINCOde" , pinCode);
       localStorage.setItem("productCount" , prodCount)
+      localStorage.setItem("TotalPayableAmount", prodCount * ProductPrice + DeliveryCharge)
 
-
+      useEffect(()=>{
+            checkFieldValue();
+      }, [district , pinCode , homeAddress])
 
       const handleAddProduct = () => {
             prodCount += 1;
@@ -33,7 +38,18 @@ function TakeDeliveryAddress() {
             setProdCount(prodCount);
       }
       
+      const checkFieldValue = ()=>{
+            if(pinCode.length ===6   && homeAddress.length>0 && district.length>0){
+                  setIsDisabled(false)
+            }
+            else{
+                  setIsDisabled(true)
+            }
+      }
+
       
+      
+
 
       return (
             <div>
@@ -94,13 +110,17 @@ function TakeDeliveryAddress() {
                               <div className="col-6">
                                     <div className="container mt-3">
                                           <small>PIN Code</small>
-                                          <Form.Control size="lg" type="text" placeholder="PIN Code" onChange={(e)=>{setPINcode(e.target.value)}} />
+                                          <Form.Control size="lg" type="text" 
+                                          pattern='[0-9]{6}'
+                                          maxLength={6}
+                                          placeholder="PIN Code" onChange={(e)=>{setPINcode(e.target.value)}} />
+                                          
                                     </div>
                               </div>
                               <div className="col-6 ">
 
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
-                                          <Razorpayment/>
+                                          <Razorpayment disabledState={isDisabled}  />
                                     </div>
                               </div>
                         </div>
