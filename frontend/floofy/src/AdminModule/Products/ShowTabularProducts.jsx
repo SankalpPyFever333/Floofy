@@ -45,7 +45,8 @@ async function createData() {
                   Quantity: product.Quantity,
                   DiscountTag: product.DiscountTag,
                   AddedDate: new Date(product.createdAt).toLocaleDateString(),
-                  EditedDate: new Date(product.updatedAt).toLocaleDateString()
+                  EditedDate: new Date(product.updatedAt).toLocaleDateString(),
+                  ExpiryDate: new Date(product.ExpiryDate).toLocaleDateString()
             })
       )
 }
@@ -137,6 +138,12 @@ const headCells = [
             numeric: true,
             disablePadding: false,
             label: 'Last updated',
+      }, 
+      {
+            id: 'Expiry_Date',
+            numeric: true,
+            disablePadding: false,
+            label: 'Expiry Date',
       }
 ];
 
@@ -484,6 +491,7 @@ export default function ShowTabularProducts() {
                                                             <TableCell align="right">{row.Quantity}</TableCell>
                                                             <TableCell align="right">{row.AddedDate}</TableCell>
                                                             <TableCell align="right">{row.EditedDate}</TableCell>
+                                                            <TableCell align="right">{row.ExpiryDate}</TableCell>
             
                                                       </TableRow>
                                                 );

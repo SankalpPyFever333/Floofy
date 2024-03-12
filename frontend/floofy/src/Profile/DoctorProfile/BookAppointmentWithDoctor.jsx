@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
+import Razorpayment from '../../RazorpayPayment/Razorpayment';
 
 function BookAppointmentWithDoctor() {
       const [show, setShow] = useState(false);
@@ -145,9 +146,13 @@ function BookAppointmentWithDoctor() {
                               <Button variant="secondary" onClick={handleClose}>
                                     Close
                               </Button>
-                              <Button type='submit' variant="primary" onClick={handleBookAppointment}>
+                              {/* <Button type='submit' variant="primary" onClick={handleBookAppointment}>
                                     Book
-                              </Button>
+                              </Button> */}
+
+                              <Razorpayment/>
+                              {/* on successful payment , create the appointment in the db. */}
+
                         </Modal.Footer>
                   </Modal>
             </>

@@ -16,6 +16,7 @@ function AddProductModal() {
             Description: '',
             Quantity: '',
             DiscountTag: '',
+            ExpiryDate: '',
             file: null
       });
 
@@ -147,6 +148,14 @@ function AddProductModal() {
                                                 type="text"
                                                 onChange={handleInputChange}
                                                 name="DiscountTag"
+                                          />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_DiscountTag">
+                                          <Form.Label>Expiry Date</Form.Label>
+                                          <Form.Control
+                                                type="date"
+                                                onChange={handleInputChange}
+                                                name="ExpiryDate"
                                           />
                                     </Form.Group>
 

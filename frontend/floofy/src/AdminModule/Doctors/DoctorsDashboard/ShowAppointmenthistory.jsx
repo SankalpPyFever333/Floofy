@@ -13,30 +13,25 @@ export default function ShowAppointmentHistory({doctorId}) {
 
       const [rows,setRows] = React.useState([]);
 
+      async function fetchAppointments(){
+            const fetchedAppointmentResponse = await fetchAppointmentHistory(doctorId);
+            const jsonAppointmentResponse = await fetchedAppointmentResponse.json();
+            console.log("Appointment is : ", jsonAppointmentResponse);
+            setRows(jsonAppointmentResponse.appointmentHistory.map((appointment) => ({
+                  UserName: appointment.User.username,
+                  Status: appointment.Status,
+                  AppointmentDate: new Date(appointment.AppointmentDate).toLocaleDateString(),
+                  PaymentStatus: appointment.Payment.paymentStatus,
+                  ReasonForAppointment: appointment.ReasonForAppointment
+            })));
+
+
+            console.log("Rows Appointment is" , rows)
+
+      }
       React.useEffect(()=>{
-
-            async function fetchAppointments(){
-                  const fetchedAppointmentResponse = await fetchAppointmentHistory(doctorId);
-                  const jsonAppointmentResponse = await fetchedAppointmentResponse.json();
-                  console.log("Appointment is : ", jsonAppointmentResponse);
-                  setRows(jsonAppointmentResponse.appointmentHistory.map((appointment) => ({
-                        UserName: appointment.User.username,
-                        Status: appointment.Status,
-                        AppointmentDate: new Date(appointment.AppointmentDate).toLocaleDateString(),
-                        PaymentStatus: appointment.Payment.paymentStatus,
-                        ReasonForAppointment: appointment.ReasonForAppointment
-                  })));
-
-
-                  console.log("Rows is" , rows)
-
-            }
-
             fetchAppointments();
-
-      },[doctorId])
-
-
+      },[])
 
 
       return (
