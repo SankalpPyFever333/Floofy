@@ -8,8 +8,11 @@ const ShopSchema = new mongoose.Schema(
     Description: String,
     ImagePath: String,
     Quantity: String,
+    SuitableFor: String, // for whom this product is suitable (e.g., "adults", "children")
     DiscountTag: String,
     ExpiryDate: String,
+    Allergens: [String],
+    KeyIngredients: String
   },
   {
     timestamps: true,
