@@ -17,6 +17,7 @@ import TakeDeliveryAddress from './shop/TakeDeliveryAddress';
 
 import Razorpayment from './RazorpayPayment/Razorpayment';
 import BookAppointmentWithDoctor from './Profile/DoctorProfile/BookAppointmentWithDoctor';
+import MainShopComp from './shop/MainShopComp';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<LoginComponent />} />
           <Route path="/MainApp" element={<MainApp />} />
           <Route path="/GoToCart" element={<Cart />} />
+          <Route path="/MoveToshopByCarousel" element={<MainShopComp />} />
           <Route path="/GotoForgotPassword" element={<ForgotPassword />} />
           <Route path="/GotoVerifyOtp" element={<VerifyOtpComp />} />
           <Route path="/LoginPage" element={<LoginComponent />} />
