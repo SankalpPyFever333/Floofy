@@ -8,6 +8,7 @@ import MainShopComp from '../shop/MainShopComp';
 import MainHomeComp from '../HomeComponent/MainHomeComp';
 import MainDisplayUserContent from '../Profile/DisplayAllUserContent/MainDisplayUserContent';
 import MyPostCard from '../Profile/DisplayMyContent/MyPostCard';
+import MainShowDoctorsList from '../ShowDoctorComponent/MainShowDoctorsList';
 
 function HomePageContent() {
 
@@ -28,7 +29,7 @@ function HomePageContent() {
             
           }} sx={{ bgcolor: 'bg-light-subtle', height: '78vh' }}>
             {clickedBtn === "Home" && <MainHomeComp/>}
-            {clickedBtn === "Vet" && <div>This is Vet component</div>}
+            {clickedBtn === "Vet" &&  <MainShowDoctorsList/> }
             {clickedBtn === "Shop" && <MainShopComp/>}
             {/* {clickedBtn === "Profile" && <MyPostCard/> } */}
             {clickedBtn === "Profile" && <MainProfileComponent/> }

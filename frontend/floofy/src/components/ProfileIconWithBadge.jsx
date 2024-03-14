@@ -48,6 +48,7 @@ export default function ProfileIconWithBadge() {
                         variant="dot"
                   >
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                        {/* display the image of user as a avatar */}
                   </StyledBadge>
                   
             </Stack>

@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
 import Razorpayment from '../../RazorpayPayment/Razorpayment';
+import RazorpaymentDoctorAppointment from './RazorpayDoctorAppointment';
 
 function BookAppointmentWithDoctor() {
       const [show, setShow] = useState(false);
@@ -52,13 +53,13 @@ function BookAppointmentWithDoctor() {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
-                              text: "Error in adding product",
+                              text: "Try again later!!",
                         });
                   } else {
                         Swal.fire({
                               position: "center",
                               icon: "success",
-                              title: "Added successfully",
+                              title: "Appointment fixed",
                               showConfirmButton: false,
                               timer: 1500
                         });
@@ -69,7 +70,7 @@ function BookAppointmentWithDoctor() {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Internal server error",
+                        text: "Server Error occurred!! Try later",
                   });
             }
       };
@@ -78,7 +79,7 @@ function BookAppointmentWithDoctor() {
             <>
                   
                         <IconButton onClick={handleShow}>
-                              <Button type='submit' variant="primary" onClick={handleShow}>
+                              <Button type='submit' variant="info" onClick={handleShow}>
                                     Book Appointment
                               </Button>
                         </IconButton>
@@ -150,7 +151,8 @@ function BookAppointmentWithDoctor() {
                                     Book
                               </Button> */}
 
-                              <Razorpayment/>
+                              <RazorpaymentDoctorAppointment/>
+
                               {/* on successful payment , create the appointment in the db. */}
 
                         </Modal.Footer>

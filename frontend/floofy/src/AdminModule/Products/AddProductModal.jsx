@@ -17,6 +17,9 @@ function AddProductModal() {
             Quantity: '',
             DiscountTag: '',
             ExpiryDate: '',
+            SuitableFor:'',
+            KeyIngredients:'',
+            Allergens: [],
             file: null
       });
 
@@ -36,6 +39,11 @@ function AddProductModal() {
       const handleInputChange = (e) => {
             const { name, value } = e.target;
             setFormData({ ...formData, [name]: value });
+      };
+
+      const handleAllergensChange = (e) => {
+            const selectedAllergens = Array.from(e.target.selectedOptions, (option) => option.value);
+            setFormData({ ...formData, Allergens: selectedAllergens });
       };
 
       const handleAddItemInDb = async () => {
@@ -109,12 +117,15 @@ function AddProductModal() {
                                           />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="Product_Category">
-                                          <Form.Label>Category</Form.Label>
-                                          <Form.Control
-                                                type="text"
-                                                onChange={handleInputChange}
-                                                name="Category"
-                                          />
+                                          
+                                          <Form.Select name='Category' onChange={handleInputChange} aria-label="Default select example">
+                                                <option>Category</option>
+                                                <option value="Dog Food">Dog Food</option>
+                                                <option value="Cat Food">Cat Food</option>
+                                                <option value="Pet Grooming">Pet Grooming</option>
+                                                <option value="Clothing">Clothing</option>
+                                                <option value="Bowls & Feeders">Clothing</option>
+                                          </Form.Select>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="Product_Description">
                                           <Form.Label>Description</Form.Label>
@@ -124,6 +135,37 @@ function AddProductModal() {
                                                 name="Description"
                                           />
                                     </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_SuitableFor">
+                                          <Form.Label>Suitable for(Age group of pet)</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                onChange={handleInputChange}
+                                                name="SuitableFor"
+                                          />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_SuitableFor">
+                                          <Form.Label>Key Ingredients</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                onChange={handleInputChange}
+                                                name="KeyIngredients"
+                                          />
+                                    </Form.Group>
+
+                                    
+
+                                    <Form.Group className="mb-3" controlId="Product_Category">
+
+                                          <Form.Select name='Category'  onChange={handleAllergensChange} aria-label="Default select example">
+                                                <option>Allergens</option>
+                                                <option value="Gluttem">Gluten</option>
+                                                <option value="Diary">Diary</option>
+                                                <option value="Soy">Soy</option>
+                                                <option value="Nuts">Nuts</option>
+                                                
+                                          </Form.Select>
+                                    </Form.Group>
+
 
                                     <Form.Group className="mb-3" controlId="Product_ImagePath">
                                           <Form.Label>Image</Form.Label>

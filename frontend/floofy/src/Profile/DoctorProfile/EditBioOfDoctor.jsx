@@ -19,6 +19,19 @@ export default function EditBioOfDoctor() {
       const [Specialization , setSpecialization] = React.useState('')
       const [SocialMediaLink, setSocialMediaLink] = React.useState('')
 
+      // const [formData, setFormData] = useState({
+      //       ProductName: '',
+      //       Price: '',
+      //       Category: '',
+      //       Description: '',
+      //       Quantity: '',
+      //       DiscountTag: '',
+      //       ExpiryDate: '',
+      //       file: null
+      // });
+
+
+
       const handleClickOpen = () => {
             setOpen(true);
       };
@@ -204,5 +217,5 @@ export default function EditBioOfDoctor() {
       );
 }
 
-
+// take image of the doctor
 

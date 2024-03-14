@@ -46,7 +46,9 @@ async function createData() {
                   DiscountTag: product.DiscountTag,
                   AddedDate: new Date(product.createdAt).toLocaleDateString(),
                   EditedDate: new Date(product.updatedAt).toLocaleDateString(),
-                  ExpiryDate: new Date(product.ExpiryDate).toLocaleDateString()
+                  ExpiryDate: new Date(product.ExpiryDate).toLocaleDateString(),
+                  SuitableFor: product.SuitableFor,
+                  Allergens: product.Allergens
             })
       )
 }
@@ -144,7 +146,19 @@ const headCells = [
             numeric: true,
             disablePadding: false,
             label: 'Expiry Date',
-      }
+      },
+      {
+            id: 'SuitableFor',
+            numeric: true,
+            disablePadding: false,
+            label: 'Suitable for',
+      },
+      {
+            id: 'Allergens',
+            numeric: true,
+            disablePadding: false,
+            label: 'Common Allergens',
+      },
 ];
 
 function EnhancedTableHead(props) {
@@ -492,7 +506,12 @@ export default function ShowTabularProducts() {
                                                             <TableCell align="right">{row.AddedDate}</TableCell>
                                                             <TableCell align="right">{row.EditedDate}</TableCell>
                                                             <TableCell align="right">{row.ExpiryDate}</TableCell>
-            
+                                                            <TableCell align="right">{row.SuitableFor}</TableCell>
+                                                            {
+                                                                  row.Allergens.map((ele)=>{
+                                                                        return  <TableCell align="center">{ele}</TableCell>
+                                                                  })
+                                                            }
                                                       </TableRow>
                                                 );
                                           })}

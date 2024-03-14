@@ -105,23 +105,49 @@ function ProductPageDetails() {
             </div>
                   <div className="col-sm-8 border-start shadow ">
                   <h4 className='m-3 p-2' >Product details</h4>
-                          <span className='m-2 p-2 fs-4 ' >Name: {prod.ProductName} </span>
-                          <div className="container m-2 p-2">
-                                <span className='fs-5' >Rs. {discountedPrice} </span>
-                                <span className='text-decoration-line-through' >{prod.Price} </span>
-                              <span className='text-success ms-2' >{prod.DiscountTag}% off </span>
-                          </div>
+                  <div className="row">
+                        <div className="col-sm-4 border-end ">
+                                      <span className='m-2 p-2 fs-4 ' >Name: {prod.ProductName} </span>
+                                      <div className="container m-2 p-2">
+                                            <span className='fs-5' >Rs. {discountedPrice} </span>
+                                            <span className='text-decoration-line-through' >{prod.Price} </span>
+                                            <span className='text-success ms-2' >{prod.DiscountTag}% off </span>
+                                      </div>
 
-                          <span className='m-2 p-2 fs-6 ' >{prod.Description} </span>
-                          <br />
-                          <br />
-                          <span className='m-2 p-2 fs-6 text-success' >You save Rs. {prod.Price - discountedPrice} on this order</span>
-                          <br />
-                          <span className={prod.Quantity - localStorage.getItem("productCount") <= 10 ? ' m-2 p-2 fs-6 text-danger' : ' m-2 p-2 fs-6' }  >Only  {prod.Quantity - localStorage.getItem("productCount") } are in stocks </span>
-                        <br />
-                          <span className={avgRating > 3.5 ? 'm-2 p-2 fs-6 text-success' : 'm-2 p-2 fs-6 text-danger'  } >Rating: {avgRating} </span>
+                                      <span className='m-2 p-2 fs-6 ' >{prod.Description} </span>
+                                      <br />
+                                      <br />
+                                      <span className='m-2 p-2 fs-6 text-success' >You save Rs. {prod.Price - discountedPrice} on this order</span>
+                                      <br />
+                                      <span className={prod.Quantity - localStorage.getItem("productCount") <= 10 ? ' m-2 p-2 fs-6 text-danger' : ' m-2 p-2 fs-6'}  >Only  {prod.Quantity - localStorage.getItem("productCount")} are in stocks </span>
+                                      <br />
+                                      <span className={avgRating > 3.5 ? 'm-2 p-2 fs-6 text-success' : 'm-2 p-2 fs-6 text-danger'} >Rating: {avgRating} </span>
+                                      <br />
+
+                                      <span className='m-2 p-2 fs-6 text-body-emphasis' >Suitable For: {prod.SuitableFor} </span>
+                                      <br />
+                                      <span className='m-2 p-2 fs-6 text-body-emphasis'  >Shelf Life: 18 months</span>
+
+                        </div>
+                        <div className="col-sm-4">
+                              <p className='text-body-emphasis' >Nutritional & Ingredients details</p>
+                                      <p className='text-warning-emphasis' >Key Ingredients: {prod.KeyIngredients}  </p>
+
+                              <div className="d-flex gap-2 ">
+                                            <p className='text-danger' >Common Allergens: {prod.Allergens} </p>
+                                    
+                                    
+                                    
+
+                              </div>
+
+
+
+                              <p className='text-info-emphasis' > NOTE:  Use as directed by vetnerians</p>
+
+                        </div>
+                  </div>
                           
-                        
             </div>
       </div>
 

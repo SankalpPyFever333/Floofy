@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { payProductAmount } from './RazorpayProdPay'
+// import { payProductAmount } from './RazorpayProdPay'
 
-function Razorpayment({disabledState}) {
+function RazorpaymentDoctorAppointment() {
       const [name, setName] = useState('')
       const [email, setEmail] = useState('')
       const [mobile, setMobile] = useState('')
-      const [paymentResponse , setPaymentResponse] = useState({})
-      const [paymentConfirmed , setPaymnetConfirmed] = useState(false);
+      const [paymentResponse, setPaymentResponse] = useState({})
+      const [paymentConfirmed, setPaymnetConfirmed] = useState(false);
 
       const handleSubmit = async (event) => {
             event.preventDefault();
@@ -19,8 +19,9 @@ function Razorpayment({disabledState}) {
                   name: 'DigiCoders Technologies',
                   description: 'Fees Payment',
                   image: '',
-                  order_id: paymentConfirmed.OrderResponse.id,
-                  // order_id: 'order_NUOPJGtB4Omtqz',
+                  // order_id: paymentConfirmed.OrderResponse.id,
+                  // keep this order as the charge set by doctor.
+                  order_id: 'order_NUOPJGtB4Omtqz',
                   callback_url: '',
                   prefill: {
                         name: name,
@@ -39,36 +40,36 @@ function Razorpayment({disabledState}) {
                         console.log('payment Success');
                         setPaymentResponse(response);
                   },
-                  
+
 
             };
 
-            
-            
+
+
             const rzp1 = new window.Razorpay(options);
             rzp1.open();
 
-// In this, after making a successful payment , regenerate the orderid again and then make payment. 
+            // In this, after making a successful payment , regenerate the orderid again and then make payment. 
 
 
       };
 
-      const getOrderId = async ()=>{
-            const paymentResponseProduct = await payProductAmount(localStorage.getItem("TotalPayableAmount"));
-            // console.log("Payment confirmed state response: ", paymentResponseProduct)
-            setPaymnetConfirmed(paymentResponseProduct)
-      }
+      // const getOrderId = async () => {
+      //       const paymentResponseProduct = await payProductAmount(localStorage.getItem("TotalPayableAmount"));
+      //       // console.log("Payment confirmed state response: ", paymentResponseProduct)
+      //       setPaymnetConfirmed(paymentResponseProduct)
+      // }
 
-      useEffect(()=>{
-            getOrderId();
-      }, [localStorage.getItem("TotalPayableAmount")])
+      // useEffect(() => {
+      //       getOrderId();
+      // }, [localStorage.getItem("TotalPayableAmount")])
 
       return (
             <div>
-                  
+
                   <form id='paymentform' onSubmit={handleSubmit}>
-                        
-                        <button disabled = {disabledState} className='btn btn-success rounded m-2 p-2 ' >Pay Now</button>
+
+                        <button className='btn btn-success rounded m-2 p-2 ' >Pay Now</button>
                   </form>
 
                   {/* {paymentResponse &&  <p>Payment confirmed</p> } */}
@@ -77,7 +78,11 @@ function Razorpayment({disabledState}) {
       )
 }
 
-export default Razorpayment
+export default RazorpaymentDoctorAppointment
+
+
+
+
 
 
 
