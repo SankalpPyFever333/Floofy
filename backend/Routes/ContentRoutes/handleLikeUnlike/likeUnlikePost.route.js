@@ -2,6 +2,6 @@ const express = require("express");
 const LikeUnlikecontoller = require("../../../Controllers/ContentController/PostHandlerModule/UnlikeLikeOnPost.controller");
 const router = express.Router();
 
-router.post("/likeiunlikepost" , LikeUnlikecontoller);
+router.put("/likeiunlikepost/:postId" , LikeUnlikecontoller);
 
 module.exports = router;

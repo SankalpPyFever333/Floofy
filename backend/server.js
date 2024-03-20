@@ -145,7 +145,7 @@ app.use("/api" , require("./Routes/ContentRoutes/getPostRoutes/fetchSpecificUser
 app.use("/api" , require("./Routes/ContentRoutes/handleLikeUnlike/likeUnlikePost.route"))
 app.use("/api" , require("./Routes/ContentRoutes/commentHandlerRoutes/postCommentonPost.route"))
 app.use("/api" , require("./Routes/ContentRoutes/commentHandlerRoutes/fetchAllComment.route"))
-
+app.use("/api" , require("./Routes/ContentRoutes/handleLikeUnlike/getLikesOnPost.route"))
 
 
 
