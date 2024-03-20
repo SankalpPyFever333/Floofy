@@ -33,7 +33,7 @@ function MyPostCard() {
 
       return (
                                     posts.map((post, index) => {
-                                          return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container' style={{ width: '40%', height: "50%", margin: "1.4rem" }} key={index} >
+                                          return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container' style={{ width: '40%', margin: "1.4rem" }} key={index} >
                                                 <Card.Body>
                                                       <Card.Title className='' style={{ display: "inline" }} >
                                                             {post.userId.username}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import videoSource from "../Assets/Login.mp4"
+import floofyLogo from "../Assets/FloofyLogo.png"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -107,17 +108,20 @@ function LoginComponent() {
                   <div className="container-fluid">
                         <div className="row">
                               <div className="col-sm-5">
-                                    <video autoPlay loop muted className="responsive-video">
+                                    {/* <video autoPlay loop muted className="responsive-video">
                                           <source src={videoSource} type="video/mp4" />
-                                    </video>
+                                    </video> */}
+                                                <img src={floofyLogo} alt="" style={{
+                                                      height: "40rem", position: "relative",
+                                                      left: "-157px"}} />
                               </div>
-                              <div className="col-sm-6">
+                              <div className="col-sm-6 " style={{position:"relative" ,  top:"50px"}} >
                                     <div style={{ margin: "20px" }} className="stepComplete">
-                                          <h4>Welcome to floofy</h4>
+                                          {/* <h4>Welcome to floofy</h4> */}
                                     </div>
                               
                         
-                                    <div className="logincinfo">
+                                    <div className="logincinfo text-center">
                                           <Box
                                                 component="form"
                                                 sx={{
@@ -141,7 +145,10 @@ function LoginComponent() {
                                                 >
                                                       Forgot password?
                                                 </Link>
-                                                <WhatDefineYou setUserType={setUserType} showAdminRadio = {true} />
+                                                <div className="text-center postion-relative ">
+                                                      <WhatDefineYou  setUserType={setUserType} showAdminRadio = {true} />
+
+                                                </div>
                                                 <Button onClick={handleLoginClick} variant="contained">Login</Button>
                                                 <br />
                                                 

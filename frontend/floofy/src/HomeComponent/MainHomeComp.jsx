@@ -10,12 +10,9 @@ function MainHomeComp() {
   return (
         <div className='container-fluid bg-light-subtle '>
       <div className="row">
-            <div className="col-sm-3 border-end">
+            <div className="col-sm-3 position-static border-end">
                   
                   <MainShopOffer/>
-
-                  
-                  
             </div>
 
             <div className="col-sm-6 border-end">
@@ -24,7 +21,7 @@ function MainHomeComp() {
                   <MainDisplayUserContent/>
             </div>
 
-            <div className="col-sm-3">
+            <div className="col-sm-3 position-static ">
                   <MainVetOffer/>
             </div>
       </div>

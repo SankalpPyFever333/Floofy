@@ -10,6 +10,7 @@ import ShowCommentOnPost from '../../HomeComponent/FeedComponent/ShowCommentOnPo
 
 import "./postCard.css"
 import { fetchAllPost } from '../../HomeComponent/FeedComponent/getPost';
+import { handleLikeOnPost } from './postlikehandler';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -30,13 +31,16 @@ function PostCardAllUser() {
       console.log(posts);
 
 
+      const handleLikeUnlike = async (postId)=>{
+            const countLIke = await handleLikeOnPost(postId);
+      }
 
 
       return (
             
 
             posts.map((post, index) => {
-                  return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container'   style={{  width: '70%', height:"40%" , margin: "1.4rem" }} key={index} >
+                  return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container'   style={{  width: '70%', margin: "1.4rem" }} key={index} >
                               <Card.Body>
                                     <Card.Title className='' style={{display:"inline"}} >
                                           {post.userId.username}
@@ -66,7 +70,7 @@ function PostCardAllUser() {
                               
 
                               <Card.Text>
-                                          <Checkbox className='pt-3 text-danger' {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                                          <Checkbox className='pt-3 text-danger' onClick={handleLikeUnlike(post._id)  } {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                                           <ShowCommentOnPost postId={post._id}  className="pt-3" />
 
                               </Card.Text>

@@ -33,10 +33,10 @@ export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
 
       
       return (
-            <div>
+            <div style={{position:"relative", marginLeft:"12rem" }} >
                   
 
-                  <Box display="flex" justifyContent= "space-evenly">
+                  <Box display="flex"  justifyContent= "space-evenly">
                         <Box mr={2}>
                               <Radio {...controlProps('Doctor')} color="secondary" />
                               <Typography>Doctor</Typography>
