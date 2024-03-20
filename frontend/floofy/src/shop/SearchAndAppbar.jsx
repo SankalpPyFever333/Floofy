@@ -55,31 +55,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAndAppbar() {
       
       return (
-            <Box sx={{ flexGrow: 1 , margin:"12px"}}>
+            <Box sx={{ flexGrow: 1 , marginBottom:"12px"}}>
                   <AppBar position="static" >
                         <Toolbar style={
                               {
-                                    backgroundColor: "blue",
+                                    backgroundColor: "#F9E8C9",
                                     display: "flex",
                                     justifyContent: "space-between"
                               }
                         } >
-                              <Search>
+                              <Search className='bg-light text-success' >
                                     <SearchIconWrapper>
                                           <SearchIcon />
                                     </SearchIconWrapper>
                                     <StyledInputBase
-                                          placeholder="Pet products"
+                                          placeholder="Search products"
                                           inputProps={{ 'aria-label': 'search' }}
                                     />
                               </Search>
                               {/* Instead of this , render the cart component build by me. */}
                               {/* <OpenShoppingCart/> */}
                               <ShoppingCartButton/>
-                              
-
-                              
-
                         </Toolbar>
 
                   </AppBar>

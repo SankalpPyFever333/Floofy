@@ -1,3 +1,4 @@
+
 export const handleLikeOnPost = async (postId)=>{
       const likeResponse = await fetch(
         `http://localhost:3000/api/likeiunlikepost/${postId}`,
@@ -11,7 +12,11 @@ export const handleLikeOnPost = async (postId)=>{
       );
 
       if(likeResponse.ok){
-            
+        
+            return await likeResponse.json();
+      }
+      else{
+        return false;
       }
 
 }

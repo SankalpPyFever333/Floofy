@@ -32,7 +32,7 @@ function MainShopComp() {
 
       <SearchAndAppbar/>
       <SearchByCategory/>
-      <ShowBestOffersProduct/>
+      {/* <ShowBestOffersProduct/> */}
       {/* <DisplayReviewOfProductMainComp/> */}
       {
 

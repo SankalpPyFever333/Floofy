@@ -32,7 +32,7 @@ console.log("image url:" , imgSrc)
 
       return (
       
-            <Card sx={{ maxWidth: "14rem" }} onClick = {handleCardClick} style={{margin:5}}>
+            <Card sx={{ maxWidth: "14rem" }} onClick = {handleCardClick} style={{margin:"12px"}}>
                   <CardMedia
                         component="img"
                         alt= {category}
@@ -55,7 +55,7 @@ console.log("image url:" , imgSrc)
                   </CardContent>
                   <CardActions style={{display:"flex" , justifyContent:"space-between" , backgroundColor:"lightgoldenrodyellow"}}>
                         <Typography variant="body2" color="text.primary">
-                              {Price}
+                              Rs.{Price}
                         </Typography>
                   </CardActions>
             </Card>

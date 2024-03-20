@@ -14,6 +14,7 @@ const categoryOptions = [
 export default function SearchByCategory() {
       return (
             <Select
+                  
                   closeMenuOnSelect={false}
                   components={animatedComponents}
                   // defaultValue={[colourOptions[4], colourOptions[5]]}
