@@ -8,14 +8,15 @@ import { getCommentsOnPost } from './getCommentsOnPost';
 import { postComment } from './postComment';
 import Swal from 'sweetalert2';
 import Tooltip from '@mui/material/Tooltip';
+import { CountNumberOfLikes } from './countLikesONPost';
 
 
-function ShowCommentOnPost({postId}) {
+function ShowCommentOnPost({postId , likeCount}) {
       const [show, setShow] = useState(false);
       const [comment , setComment] = useState();
 
       const [showComment , setShowComment] = useState([]);
-
+      
       const handleClose = () => setShow(false);
       const handleShow = () => {
 
@@ -76,6 +77,7 @@ function ShowCommentOnPost({postId}) {
       useEffect(()=>{
             
             commentResponse();
+            // countNumberOfLikesOnPost();
       },[]);
 
       console.log("comment is " , showComment);
@@ -89,7 +91,7 @@ function ShowCommentOnPost({postId}) {
                   </Tooltip>
 
                   <div className="d-flex gap-2">
-                        <small>Likes:</small>
+                        <small>Likes: {likeCount} </small>
                         <small>comments {showComment.length} </small>
                   </div>
                   

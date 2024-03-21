@@ -499,7 +499,7 @@ export default function ShowTabularProducts() {
                                                             </TableCell>
                                                             <TableCell align="right">{row.category}</TableCell>
                                                             <TableCell align="right">{row.price}</TableCell>
-                                                            <TableCell align="right">{row.description}</TableCell>
+                                                            <TableCell align="left">{row.description}</TableCell>
                                                             <TableCell align="right">{row.ImagePath}</TableCell>
                                                             <TableCell align="right">{row.DiscountTag}</TableCell>
                                                             <TableCell align="right">{row.Quantity}</TableCell>

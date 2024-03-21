@@ -1,5 +1,5 @@
 
-export const postComment = async(comment , userId , ProductId)=>{
+export const postComment = async(comment , userId , postId)=>{
       const postCommentReponse = await fetch(
         "http://localhost:3000/api/addCommentToPost",
         {
@@ -8,9 +8,9 @@ export const postComment = async(comment , userId , ProductId)=>{
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            Comment: comment,
-            User: userId,
-            Product: ProductId,
+            content: comment,
+            user: userId,
+            post: postId,
             
           }),
         }

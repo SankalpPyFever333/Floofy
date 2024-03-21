@@ -11,7 +11,9 @@ import ShowCommentOnPost from '../../HomeComponent/FeedComponent/ShowCommentOnPo
 import "./postCard.css"
 import { fetchAllPost } from '../../HomeComponent/FeedComponent/getPost';
 import { handleLikeOnPost } from './postlikehandler';
+import { CountNumberOfLikes } from '../../HomeComponent/FeedComponent/countLikesONPost';
 // import { post } from '../../../../../backend/Routes/ContentRoutes/handleLikeUnlike/likeUnlikePost.route';
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -23,6 +25,8 @@ function PostCardAllUser() {
       const [isChecked , setIsChecked] = useState('');
       const [likedPosts, setLikedPosts] = useState({}); // Map post IDs to like states
       const [isLikedByServer, setIsLikedByServer] = useState('');
+      const [countLikes, setCountLikes] = useState(0);
+      
       useEffect(() => {
             const getDataUseeffect = async()=>{
                   
@@ -50,14 +54,18 @@ function PostCardAllUser() {
             }
             getDataUseeffect();
 
-            likedArray.map((singlePost)=>{
-                  if(singlePost._id.toString() === localStorage.getItem("userId")){
-                        setIsLikedByServer(true)
-                  }
-                  else{
-                        setIsLikedByServer(false)
-                  }
-            })
+            // likedArray.map((singlePost)=>{
+            //       if(singlePost._id.toString() === localStorage.getItem("userId")){
+            //             setIsLikedByServer(true)
+            //       }
+            //       else{
+            //             setIsLikedByServer(false)
+            //       }
+            // })
+
+            // posts.map((singlePost)=>{
+            //       countNumberOfLikesOnPost(singlePost._id);
+            // })
 
             return ()=>{}
 
@@ -65,6 +73,24 @@ function PostCardAllUser() {
 
       console.log(posts);
       console.log("setLIkedPost", isLikedByServer)
+
+      const countNumberOfLikesOnPost = async (postId) => {
+            // call method for getting all post and count numberOflikes.
+            const FetchedLikeReponse = await CountNumberOfLikes(postId);
+            const jsonFetchedResponse = await FetchedLikeReponse.json();
+            console.log("josnLikeReposne", jsonFetchedResponse);
+            if (jsonFetchedResponse) {
+                  const postLikes = {}
+                  jsonFetchedResponse.AllPost.forEach((singlePost)=>{
+                        const countLikesOnPost = singlePost.likedBy.length;
+                        postLikes[singlePost._id] = countLikesOnPost;
+                  })
+
+                  setLikedPosts(postLikes);
+            }
+
+
+      }
 
       const handleLikeUnlike = async (postId)=>{
             const LikeResponse = await handleLikeOnPost(postId);
@@ -76,6 +102,7 @@ function PostCardAllUser() {
             else{
                   console.log("Error on liking the post")
             }
+            countNumberOfLikesOnPost(postId);
       }
 
 
@@ -83,6 +110,7 @@ function PostCardAllUser() {
             
 
             posts.map((post, index) => {
+                  const postLike = likedPosts[post._id] || 0;
                   return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container'   style={{  width: '70%', margin: "1.4rem" }} key={index} >
                               <Card.Body>
                                     <Card.Title className='' style={{display:"inline"}} >
@@ -115,7 +143,7 @@ function PostCardAllUser() {
                               <Card.Text>
                                     {/* Add this propperty later on: checked={likedPosts[post._id] ?? isLikedByServer} */}
                                     <Checkbox  key={post._id} className='pt-3 text-danger' onClick={() => { handleLikeUnlike(post._id) }  } {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                                          <ShowCommentOnPost postId={post._id}  className="pt-3" />
+                                    <ShowCommentOnPost postId={post._id} likeCount={postLike} className="pt-3" />
 
                               </Card.Text>
 
@@ -130,6 +158,6 @@ function PostCardAllUser() {
 
 export default PostCardAllUser;
 
-
+// In this, Now I have a single problem that When I unchecked the like button, then it is counting the like 1 and upon checking the button its count become 0. I want opposite of it. So correct it may be by check state of a like button.
 
 

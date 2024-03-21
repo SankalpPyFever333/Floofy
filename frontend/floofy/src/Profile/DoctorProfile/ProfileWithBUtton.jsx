@@ -9,6 +9,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import BookAppointmentWithDoctor from './BookAppointmentWithDoctor'
+import MyPostCard from '../DisplayMyContent/MyPostCard'
 
 function ProfileWithBUtton() {
 
@@ -38,16 +39,15 @@ function ProfileWithBUtton() {
 
           </div>
         </div>
-        <div className="col-sm-4">
-
-        </div>
-        <div className="col-sm-4">
+        
+        <div className="col">
           <Container maxWidth={false}>
             <Box style={{
               overflow: "auto",
               
             }} sx={{ bgcolor: 'bg-light-subtle', height: '78vh' }}>
-                <PostCardAllUser/>
+                {/* <PostCardAllUser/> */}
+                <MyPostCard/>
             </Box>
 
           </Container>
