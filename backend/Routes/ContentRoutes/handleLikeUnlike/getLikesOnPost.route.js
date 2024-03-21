@@ -3,7 +3,7 @@ const fetchFetchNumberOfLikes = require("../../../Controllers/ContentController/
 
 const router = express.Router();
 
-router.get("/getAllPostWithLikes" , fetchFetchNumberOfLikes);
+router.post("/getAllPostWithLikes" , fetchFetchNumberOfLikes);
 
 module.exports = router;
 
