@@ -12,3 +12,8 @@ const ProductPaymentController = async(req, res)=>{
 }
 
 module.exports = ProductPaymentController;
+
+// check whether the payment is failed or success and if success, create that order in the database.
+// After this, generate invoice and billing also and send it to customer.
+// And then implements a system for order tracking having all the facilities.
+
