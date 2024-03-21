@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { payProductAmount } from './RazorpayProdPay'
+import { createProductOrder } from './createOrderOnSuccessPayment'
 
 function Razorpayment({disabledState}) {
       const [name, setName] = useState('')
@@ -38,20 +39,27 @@ function Razorpayment({disabledState}) {
                         console.log('Order ID = ' + response.razorpay_order_id);
                         console.log('payment Success');
                         setPaymentResponse(response);
+                        const IsOrderCreated = createProductOrder();
+                        if(IsOrderCreated){
+                              console.log("Order created successfully in db")
+                        }else{
+                              console.log("Error in crating order")
+                        }
                   },
                   
-
             };
 
-            
-            
             const rzp1 = new window.Razorpay(options);
             rzp1.open();
 
-// In this, after making a successful payment , regenerate the orderid again and then make payment. 
-
-
+            rzp1.on("payment.error", function (error){
+                alert( "Payment failed" );
+                console.log(error);
+            });
       };
+
+
+
 
       const getOrderId = async ()=>{
             const paymentResponseProduct = await payProductAmount(localStorage.getItem("TotalPayableAmount"));

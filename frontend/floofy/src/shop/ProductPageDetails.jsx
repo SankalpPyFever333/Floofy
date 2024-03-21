@@ -18,7 +18,7 @@ function ProductPageDetails() {
       const [comment, setComment] = useState();
       
       const navigate = useNavigate();
-
+      localStorage.setItem("ProductID" , ProductId);
       let avgRating = prodReviews.map((SingleReview)=>{
             let sumRating = 0;
             sumRating = sumRating +  Number(SingleReview.Rating);
