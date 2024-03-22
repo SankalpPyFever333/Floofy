@@ -2,9 +2,20 @@ const ProductOrder = require("../../Modals/ProductOrder/ProductOrder.modal");
 
 const placeOrderByUser = async(req, res) => {
       // Write code for creating order.
-      const {User , Products , totalAmount ,deliveryAddress , status} = req.body;
+      const { User, Products, totalAmount, deliveryAddress, status } = req.body;
+      console.log("DeliverAdress home: ", deliveryAddress.HomeAddress);
       try {
-            const newProductOrder = new ProductOrder({User , Products, totalAmount , deliveryAddress , status});
+            const newProductOrder = new ProductOrder({
+              User,
+              Products,
+              totalAmount,
+              deliveryAddress: {
+                HomeAddress: deliveryAddress.HomeAddress,
+                PIN: deliveryAddress.PIN,
+                District: deliveryAddress.District,
+              },
+              status,
+            });
             await newProductOrder.save();
             res.status(200).json({message:"order placed successfully!!" , newProductReview: newProductOrder})
       } catch (error) {
