@@ -11,13 +11,13 @@ export const createProductOrder = async ()=>{
             body: JSON.stringify({
               totalAmount: localStorage.getItem("TotalPayableAmount"),
               User: localStorage.getItem("userId"),
-              deliveryAddress:JSON.stringify({
-                Adress: {
+              deliveryAddress: {
+                
                   HomeAddress: localStorage.getItem("HomeAddress"),
                   PIN: localStorage.getItem("PINCOde"),
                   District: localStorage.getItem("district"),
-                },
-              },) ,
+                
+              },
               Products: {
                 product: localStorage.getItem("ProductID"),
                 quantity: localStorage.getItem("productCount"),

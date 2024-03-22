@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { fetchMyOrders } from './fetchMyOrders';
 // import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -19,6 +19,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Divider from '@mui/material/Divider';
 // import { fetchAllProductOrder } from './fetchProductsOrder';
 import Tooltip from '@mui/material/Tooltip';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -38,7 +40,7 @@ async function createData() {
     createdAt: new Date(order.createdAt).toLocaleDateString(),
     DeliveryAddress: order.deliveryAddress,
     Status: order.status,
-
+    RowId: order._id,
     history: order.Products.map((product) => ({
       ProductName: product.product.ProductName, // Access ProductName
       Quantity: product.quantity,
@@ -50,7 +52,13 @@ async function createData() {
 
 function Row(props) {
   const { row } = props;
+  // console.log("SingleRow is: " , row);
+  // console.log("Row Id is:", row.RowId)
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const HandleOrderEdit = ()=>{
+    navigate(`/GotoEditOrder/${row.RowId}?district=${row}`)
+  }
 
   return (
     <React.Fragment>
@@ -71,8 +79,24 @@ function Row(props) {
           {row.UserName}
         </TableCell>
         <TableCell align="left">{row.Status}</TableCell>
-        <TableCell align="left">{row.DeliveryAddress}</TableCell>
+        <TableCell align="left">{row.DeliveryAddress.HomeAddress},{row.DeliveryAddress.PIN}</TableCell>
         <TableCell align="left">{row.createdAt.toString()}</TableCell>
+        <TableCell align="left">
+          <Tooltip title="Edit Order">
+            <IconButton onClick={HandleOrderEdit}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          {" / "}
+          <Tooltip title="Cancel Order">
+            <IconButton>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
+
+{/* upon clicking on the edit order button , navigate to page where he can update his address and quantity of product. So, for updating the order, write the put api. */}
+
 
       </TableRow>
       <TableRow>
@@ -89,6 +113,7 @@ function Row(props) {
                     <TableCell>Quantity</TableCell>
                     <TableCell align="left">Product price</TableCell>
                     <TableCell align="left">Total price</TableCell>
+                    <TableCell align="left">Discount</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -103,14 +128,17 @@ function Row(props) {
                         <TableCell align="left">
                           {parseInt(historyRow.ProductPrice) * parseInt(historyRow.Quantity)}
                         </TableCell>
+                        <TableCell align="left">
+                          {parseInt(historyRow.ProductPrice) * parseInt(historyRow.Quantity) - parseInt(historyRow.TotalAmount) }
+                        </TableCell>
                       </TableRow>
                       <Divider />
                       <TableRow key={index}>
                         <TableCell style={{ fontWeight: "bolder" }} component="th" scope="row">
-                          Total Amount
+                          Total Payable Amount
                         </TableCell>
                         <TableCell style={{ fontWeight: "bolder" }} align='right' component="th" scope="row">
-                          {historyRow.TotalAmount}
+                          { Math.floor(historyRow.TotalAmount)}
                         </TableCell>
                       </TableRow>
                     </>
@@ -174,6 +202,7 @@ function MainViewYourOrder() {
             <TableCell align="left">Status</TableCell>
             <TableCell align="left">Delivery Address</TableCell>
             <TableCell align="left">Order Date</TableCell>
+            <TableCell align="left">Edit/Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

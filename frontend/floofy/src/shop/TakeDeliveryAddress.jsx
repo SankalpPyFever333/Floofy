@@ -7,7 +7,10 @@ import SlideQuanityDialog from './SlideQuanityDialog';
 import Razorpayment from '../RazorpayPayment/Razorpayment';
 function TakeDeliveryAddress() {
       const { ProductId, ProductPrice } = useParams();
-      
+      const {rowId} = useParams();
+
+      // Write the method foe fetching info for the rowId, and display conditionally those values.
+
       let [DeliveryCharge , setDeleveryCharge] = useState(70)
       let [prodCount, setProdCount] = React.useState(1);
       const [district , setDistrict] = useState('');
