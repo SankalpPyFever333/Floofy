@@ -18,6 +18,8 @@ import TakeDeliveryAddress from './shop/TakeDeliveryAddress';
 import Razorpayment from './RazorpayPayment/Razorpayment';
 import BookAppointmentWithDoctor from './Profile/DoctorProfile/BookAppointmentWithDoctor';
 import MainShopComp from './shop/MainShopComp';
+import MainViewYourOrder from './shop/ViewYourOrders/MainViewYourOrder';
+import MyMainOrderAllComp from './shop/ViewYourOrders/MyMainOrderAllComp';
 
 
 function App() {
@@ -63,6 +65,10 @@ function App() {
             path="/GotoDeliveryPage/:ProductId/:ProductPrice"
             element={<TakeDeliveryAddress />}
           />
+
+          <Route path='/viewYourOrders/:userId'
+          element = {<MyMainOrderAllComp/>}/>
+
           {/* <Route path="/bookappointment/:UserID" element={<BookAppointmentWithDoctor />} /> */}
         </Routes>
       </BrowserRouter>

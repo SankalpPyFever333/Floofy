@@ -9,6 +9,9 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import OpenShoppingCart from './OpenShoppingCart';
 import ShoppingCartButton from './ShoppingCartButton';
+import MainViewYourOrder from './ViewYourOrders/MainViewYourOrder';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
       position: 'relative',
@@ -53,7 +56,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAndAppbar() {
-      
+      const navigate = useNavigate();
+
+      const handleViewOrders = ()=>{
+            navigate(`/viewYourOrders/${localStorage.getItem("userId")}`)
+      }
+
       return (
             <Box sx={{ flexGrow: 1 , marginBottom:"12px"}}>
                   <AppBar position="static" >
@@ -75,6 +83,7 @@ export default function SearchAndAppbar() {
                               </Search>
                               {/* Instead of this , render the cart component build by me. */}
                               {/* <OpenShoppingCart/> */}
+                              <Button onClick={handleViewOrders} >View Order</Button>
                               <ShoppingCartButton/>
                         </Toolbar>
 
