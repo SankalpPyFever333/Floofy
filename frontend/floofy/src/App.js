@@ -66,7 +66,7 @@ function App() {
             element={<TakeDeliveryAddress />}
           />
           <Route
-            path="/GotoEditOrder/:rowId"
+            path="/GotoEditOrder"
             element={<TakeDeliveryAddress />}
           />
           <Route

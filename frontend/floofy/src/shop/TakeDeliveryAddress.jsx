@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'; 
 import EnterPriceDialogue from './EnterPriceDialogue';
 import SlideQuanityDialog from './SlideQuanityDialog';
 import Razorpayment from '../RazorpayPayment/Razorpayment';
+import { fetchOrderForEdit } from './fetchOrderForEditing';
 function TakeDeliveryAddress() {
+      const location = useLocation();
+      const searchParams = new URLSearchParams(location.search);
       const { ProductId, ProductPrice } = useParams();
-      const {rowId} = useParams();
-
+      const districtParam = searchParams.get("districtParam")
+      const homeAddressParam = searchParams.get("homeAddressParam")
+      const PINcodeparam = searchParams.get("pinCodeParam")
+      const rowIdParam = searchParams.get("rowid");
+      const [pincodeParamState , setPincodeParamState] = useState(PINcodeparam || '' )
+      const [homeAddressParamState , setHomeArrParam] = useState(homeAddressParam || '' )
+      const [districtParamState , setDistrictParamState] = useState(districtParam || '')
+      
+      // console.log("All parameters are: " , districtParam)
       // Write the method foe fetching info for the rowId, and display conditionally those values.
 
       let [DeliveryCharge , setDeleveryCharge] = useState(70)
@@ -18,15 +29,29 @@ function TakeDeliveryAddress() {
       const [pinCode , setPINcode] = useState('');
       const [isDisabled, setIsDisabled] = useState(true);
       const [payableAmount , setPayableAmount] = useState('');
-      
+      const [productOrderIdResponse ,setProductOrderIdResponse] = useState('');
+
       localStorage.setItem("district" , district);
       localStorage.setItem("HomeAddress" , homeAddress);
       localStorage.setItem("PINCOde" , pinCode);
       localStorage.setItem("productCount" , prodCount)
       localStorage.setItem("TotalPayableAmount", prodCount * ProductPrice + DeliveryCharge)
 
+
+      // write a js method for fetching order and take quantity and productprice from it and show that calculation.
+
+
+      const fetchOrderWithId = async(orderId)=>{
+            const orderResponse = await fetchOrderForEdit(orderId)
+            const jsonResponseOrder = await orderResponse.json();
+            setProductOrderIdResponse(jsonResponseOrder);
+            console.log( "Order for editing", productOrderIdResponse);
+      }
+
+
       useEffect(()=>{
             checkFieldValue();
+            fetchOrderWithId(rowIdParam);
       }, [district , pinCode , homeAddress])
 
       const handleAddProduct = () => {
@@ -42,7 +67,7 @@ function TakeDeliveryAddress() {
       }
       
       const checkFieldValue = ()=>{
-            if(pinCode.length ===6   && homeAddress.length>0 && district.length>0){
+            if((pinCode.length ===6   && homeAddress.length>0 && district.length>0) || (pincodeParamState.length === 6 && homeAddressParamState.length>0 && districtParamState.length>0 ) ){
                   setIsDisabled(false)
             }
             else{
@@ -76,7 +101,7 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           <h5>Price({prodCount} item)</h5>
-                                          <h5>Rs. {prodCount*ProductPrice}</h5>
+                                          <h5>Rs. { ProductPrice ? prodCount*ProductPrice : 0}</h5>
                                     </div>
                               </div>
                         </div>
@@ -84,7 +109,10 @@ function TakeDeliveryAddress() {
                               <div className="col-6">
                                     <div className="container mt-3">
                                           <small>Home Address</small>
-                                          <Form.Control size="lg" type="text" onChange={(e)=>{setHomeAdress(e.target.value)}} placeholder="Home Address" />
+                                          <Form.Control size="lg" type="text" value={homeAddressParamState || '' } onChange={(e)=>{
+                                                setHomeAdress(e.target.value)
+                                                setHomeArrParam(e.target.value)
+                                                }} placeholder="Home Address" />
                                     </div>
                               </div>
                               <div className="col-6 ">
@@ -98,7 +126,10 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
                                     <div className="container mt-3">
                                           <small>District</small>
-                                          <Form.Control size="lg" type="text" placeholder="District" onChange={(e)=>{setDistrict(e.target.value)}} />
+                                          <Form.Control size="lg" type="text" value={districtParamState || '' } placeholder="District" onChange={(e)=>{
+                                                setDistrict(e.target.value)
+                                                setDistrictParamState(e.target.value)
+                                                }} />
                                     </div>
                               </div>
                               <div className="col-6 ">
@@ -116,7 +147,11 @@ function TakeDeliveryAddress() {
                                           <Form.Control size="lg" type="text" 
                                           pattern='[0-9]{6}'
                                           maxLength={6}
-                                          placeholder="PIN Code" onChange={(e)=>{setPINcode(e.target.value)}} />
+                                                value={pincodeParamState || '' }
+                                          placeholder="PIN Code" onChange={(e)=>{
+                                                setPINcode(e.target.value)
+                                                setPincodeParamState(e.target.value)
+                                                }} />
                                           
                                     </div>
                               </div>

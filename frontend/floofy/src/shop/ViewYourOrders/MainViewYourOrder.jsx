@@ -53,11 +53,12 @@ async function createData() {
 function Row(props) {
   const { row } = props;
   // console.log("SingleRow is: " , row);
-  // console.log("Row Id is:", row.RowId)
+  console.log("Row Id is:", row.RowId)
+  
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const HandleOrderEdit = ()=>{
-    navigate(`/GotoEditOrder/${row.RowId}?district=${row}`)
+    navigate(`/GotoEditOrder?rowid=${row.RowId}&districtParam=${row.DeliveryAddress.District}&homeAddressParam=${row.DeliveryAddress.HomeAddress}&pinCodeParam=${row.DeliveryAddress.PIN}`)
   }
 
   return (
@@ -124,11 +125,11 @@ function Row(props) {
                           {historyRow.ProductName}
                         </TableCell>
                         <TableCell>{historyRow.Quantity}</TableCell>
-                        <TableCell align="left">{historyRow.ProductPrice}</TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left">Rs.{historyRow.ProductPrice}</TableCell>
+                        <TableCell align="left">Rs.
                           {parseInt(historyRow.ProductPrice) * parseInt(historyRow.Quantity)}
                         </TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left">Rs.
                           {parseInt(historyRow.ProductPrice) * parseInt(historyRow.Quantity) - parseInt(historyRow.TotalAmount) }
                         </TableCell>
                       </TableRow>
@@ -178,9 +179,9 @@ console.log("Rows is:", rows);
 function MainViewYourOrder() {
   const[myOrders , setMyOrders] = useState({});
   const {userId} = useParams();
-  console.log("userIdIN the params" , userId)
+  // console.log("userIdIN the params" , userId)
 
-  const fetchOrder= async(userId)=>{
+  const fetchOrder= async(userId)=>{  
     const OrderResponse = await fetchMyOrders(userId);
     const jsonOrderResponse  = await OrderResponse.json();
     console.log("My orders: " , jsonOrderResponse);
