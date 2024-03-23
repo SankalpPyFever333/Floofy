@@ -31,6 +31,8 @@ function TakeDeliveryAddress() {
       const [payableAmount , setPayableAmount] = useState('');
       const [productOrderIdResponse ,setProductOrderIdResponse] = useState('');
 
+      const [showPayButton , setShowPayButton] = useState(false);
+
       localStorage.setItem("district" , district);
       localStorage.setItem("HomeAddress" , homeAddress);
       localStorage.setItem("PINCOde" , pinCode);
@@ -43,9 +45,12 @@ function TakeDeliveryAddress() {
 
       const fetchOrderWithId = async(orderId)=>{
             const orderResponse = await fetchOrderForEdit(orderId)
-            const jsonResponseOrder = await orderResponse.json();
-            setProductOrderIdResponse(jsonResponseOrder);
-            console.log( "Order for editing", productOrderIdResponse);
+            if(orderResponse){
+                  const jsonResponseOrder = await orderResponse.json();
+                  setProductOrderIdResponse(jsonResponseOrder.OrderDetails);
+                  console.log( "Order for editing", jsonResponseOrder);
+            }
+            return
       }
 
 
@@ -54,9 +59,22 @@ function TakeDeliveryAddress() {
             fetchOrderWithId(rowIdParam);
       }, [district , pinCode , homeAddress])
 
+
+      // console.log("Products order is : ", productOrderIdResponse.deliveryAddress)
+      // console.log("Products : ", productOrderIdResponse.Products[0].product.Price)
+
+      const getQuantityAndProdPrice = ()=>{
+            return {
+                  ProdQuantityEdit: productOrderIdResponse.Products[0].quantity,
+                  ProdPriceWdit: productOrderIdResponse.Products[0].product.Price
+            }
+      }
+
+
       const handleAddProduct = () => {
             prodCount += 1;
             setProdCount(prodCount);
+            setShowPayButton(true);
       }
       const handleDecrementProduct = () => {
             if(prodCount===0){
@@ -64,6 +82,7 @@ function TakeDeliveryAddress() {
             }
             prodCount -= 1;
             setProdCount(prodCount);
+            setShowPayButton(true)
       }
       
       const checkFieldValue = ()=>{
@@ -75,9 +94,18 @@ function TakeDeliveryAddress() {
             }
       }
 
-      
-      
+      let QuantProdPrice = {};
+      if (productOrderIdResponse){
+            QuantProdPrice = getQuantityAndProdPrice();     
+            console.log("Quantity and prod Price: " , QuantProdPrice);
+      }
+      else{
+            console.log("Product order not fetched yet.")
+      }
 
+      const handleUpdateProductOrder = ()=>{
+            // call method for updating the order.
+      }
 
       return (
             <div>
@@ -101,7 +129,7 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           <h5>Price({prodCount} item)</h5>
-                                          <h5>Rs. { ProductPrice ? prodCount*ProductPrice : 0}</h5>
+                                          <h5>Rs. {(prodCount * ProductPrice) || (prodCount * QuantProdPrice.ProdPriceWdit) }</h5>
                                     </div>
                               </div>
                         </div>
@@ -136,7 +164,7 @@ function TakeDeliveryAddress() {
                                     
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           <h5>Payable Amount</h5>
-                                          <h5>{prodCount * ProductPrice + DeliveryCharge }</h5>
+                                          <h5>{Math.floor(productOrderIdResponse.totalAmount) || Math.floor((prodCount * ProductPrice + DeliveryCharge))}</h5>
                                     </div>
                               </div>
                         </div>
@@ -158,7 +186,13 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
 
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
-                                          <Razorpayment disabledState={isDisabled}  />
+                                          {
+                                                showPayButton ? <Razorpayment disabledState={isDisabled} /> : null
+                                          }
+                                          <Button variant="primary" onClick={()=>{
+                                                handleUpdateProductOrder()
+                                          }} >Update</Button>
+                                          
                                     </div>
                               </div>
                         </div>
@@ -182,5 +216,8 @@ function TakeDeliveryAddress() {
             </div>
       )
 }
+
+// So, now you have to give the button to update order and make payment(when he update quanity).
+
 
 export default TakeDeliveryAddress
