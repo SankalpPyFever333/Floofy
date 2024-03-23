@@ -3,7 +3,9 @@ const ProductOrder = require("../../Modals/ProductOrder/ProductOrder.modal");
 const fetchProductOrderToShowEdit = async(req, res)=>{
       const {OrderId} = req.body;
       try {
-            const OrderDetails = await  ProductOrder.findById(OrderId);
+            const OrderDetails = await ProductOrder.findById(OrderId).populate(
+              "Products.product"
+            );
             if(!OrderDetails) return res.status(401).json({message:'No Data Found'});
             return res
               .status(200)
