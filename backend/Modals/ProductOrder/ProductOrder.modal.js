@@ -24,28 +24,21 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    deliveryAddress:
-      {
-      
-        HomeAddress:{
-          type: String,
-          
-        },
-        PIN: {
-          type: String,
-          
-        },
-        District: {
-          type: String,
-          
-        },
-      
-    }
-  ,
+    deliveryAddress: {
+      HomeAddress: {
+        type: String,
+      },
+      PIN: {
+        type: String,
+      },
+      District: {
+        type: String,
+      },
+    },
     status: {
       type: String,
-      enum: ["pending", "processing", "delivered"],
-      default: "pending",
+      enum: ["processing", "out for delivery", "delivered"],
+      default: "processing",
     },
   },
   { timestamps: true }
