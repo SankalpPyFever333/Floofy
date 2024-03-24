@@ -12,9 +12,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function SlideQuanityDialog({prodCount , prodQuantityEdit}) {
+export default function SlideQuanityDialog({prodCount}) {
       const [open, setOpen] = React.useState(false);
-      console.log("quant in dialog," , prodQuantityEdit);
+
 
 
       const handleClickOpen = () => {
@@ -28,7 +28,7 @@ export default function SlideQuanityDialog({prodCount , prodQuantityEdit}) {
       return (
             <React.Fragment>
                   <Button variant="Light"  onClick={handleClickOpen} size="sm" className='fs-4' active>
-                        { prodQuantityEdit ? prodQuantityEdit : prodCount}
+                        { prodCount}
                   </Button>{' '}
                   <Dialog
                         open={open}

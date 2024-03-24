@@ -65,10 +65,10 @@ function App() {
             path="/GotoDeliveryPage/:ProductId/:ProductPrice"
             element={<TakeDeliveryAddress />}
           />
-          <Route
+          {/* <Route
             path="/GotoEditOrder"
             element={<TakeDeliveryAddress />}
-          />
+          /> */}
           <Route
             path="/viewYourOrders/:userId"
             element={<MyMainOrderAllComp />}

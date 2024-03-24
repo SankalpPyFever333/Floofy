@@ -7,18 +7,22 @@ import EnterPriceDialogue from './EnterPriceDialogue';
 import SlideQuanityDialog from './SlideQuanityDialog';
 import Razorpayment from '../RazorpayPayment/Razorpayment';
 import { fetchOrderForEdit } from './fetchOrderForEditing';
+import SplashScreenForShop from './SplashScreenForShop';
 function TakeDeliveryAddress() {
       const location = useLocation();
       const searchParams = new URLSearchParams(location.search);
       const { ProductId, ProductPrice } = useParams();
-      const districtParam = searchParams.get("districtParam")
-      const homeAddressParam = searchParams.get("homeAddressParam")
-      const PINcodeparam = searchParams.get("pinCodeParam")
-      const rowIdParam = searchParams.get("rowid");
-      const [pincodeParamState , setPincodeParamState] = useState(PINcodeparam || '' )
-      const [homeAddressParamState , setHomeArrParam] = useState(homeAddressParam || '' )
-      const [districtParamState , setDistrictParamState] = useState(districtParam || '')
+
+      // const districtParam = searchParams.get("districtParam")
+      // const homeAddressParam = searchParams.get("homeAddressParam")
+      // const PINcodeparam = searchParams.get("pinCodeParam")
+      // const rowIdParam = searchParams.get("rowid");
+      // const [pincodeParamState , setPincodeParamState] = useState(PINcodeparam || '' )
+      // const [homeAddressParamState , setHomeArrParam] = useState(homeAddressParam || '' )
+      // const [districtParamState , setDistrictParamState] = useState(districtParam || '')
       
+      const [loading, setLoading] = useState(true)
+
       // console.log("All parameters are: " , districtParam)
       // Write the method foe fetching info for the rowId, and display conditionally those values.
 
@@ -34,6 +38,7 @@ function TakeDeliveryAddress() {
       const [showPayButton , setShowPayButton] = useState(false);
       const [qProdEditValue , setQProdEditValue] = useState('');
 
+      const [QuantProdPrice , setQuantProdPrice] = useState({})
 
       localStorage.setItem("district" , district);
       localStorage.setItem("HomeAddress" , homeAddress);
@@ -45,79 +50,99 @@ function TakeDeliveryAddress() {
       // write a js method for fetching order and take quantity and productprice from it and show that calculation.
 
 
-      const fetchOrderWithId = async(orderId)=>{
-            const orderResponse = await fetchOrderForEdit(orderId)
-            if(orderResponse){
-                  const jsonResponseOrder = await orderResponse.json();
-                  setProductOrderIdResponse(jsonResponseOrder.OrderDetails);
-                  console.log( "Order for editing", jsonResponseOrder);
-            }
-            return
-      }
+      // const fetchOrderWithId = async(orderId)=>{
+      //       const orderResponse = await fetchOrderForEdit(orderId)
+      //       if(orderResponse){
+      //             const jsonResponseOrder = await orderResponse.json();
+      //             setProductOrderIdResponse(jsonResponseOrder.OrderDetails);
+      //             console.log( "Order for editing", jsonResponseOrder);
+      //             return jsonResponseOrder.OrderDetails;
+      //       }
+      //       else{
+      //             console.log("Some error occured in fetchOrderiD method");
+      //             return null;
 
+      //       }
+      // }
+
+      // const getQuantityAndProdPrice = () => {
+      //       console.log("productOrderIdResponse in the get : ", productOrderIdResponse.Products[0].quantity)
+      //       return {
+      //             ProdQuantityEdit: productOrderIdResponse.Products[0].quantity,
+      //             ProdPriceWdit: productOrderIdResponse.Products[0].product.Price
+      //       }
+      // }
 
       useEffect(()=>{
             checkFieldValue();
-            fetchOrderWithId(rowIdParam);
+
+            // const orderDetails = async ()=>{
+            //       const orderDetailRowId = await fetchOrderWithId(rowIdParam);
+            //       console.log("orderDetails in the useeffect: " , orderDetailRowId);
+            //       setProductOrderIdResponse(orderDetailRowId)
+            //       // console.log("Product order ID response useeffect: " , productOrderIdResponse.Products);
+            //       if(orderDetailRowId){
+            //             const quantityAndPrice = getQuantityAndProdPrice();
+            //             setQProdEditValue(quantityAndPrice.ProdQuantityEdit);
+            //             setQuantProdPrice(quantityAndPrice);
+            //       }
+            // }
+            // orderDetails();
+
+            const timer = setTimeout(() => {
+                  setLoading(false)
+            }, 4000);
+
+            return ()=>{
+                  clearTimeout(timer);
+            }
+
       }, [district , pinCode , homeAddress])
 
 
       // console.log("Products order is : ", productOrderIdResponse.deliveryAddress)
       // console.log("Products : ", productOrderIdResponse.Products[0].product.Price)
-
-      const getQuantityAndProdPrice = ()=>{
-            return {
-                  ProdQuantityEdit: productOrderIdResponse.Products[0].quantity,
-                  ProdPriceWdit: productOrderIdResponse.Products[0].product.Price
-            }
-      }
-
-      let QuantProdPrice = {};
-      if (productOrderIdResponse) {
-            QuantProdPrice = getQuantityAndProdPrice();
-            console.log("Quantity and prod Price: ", QuantProdPrice);
-      }
-      else {
-            console.log("Product order not fetched yet.")
-      }
+      
+      
 
 
       const handleAddProduct = () => {
-            if (QuantProdPrice.ProdQuantityEdit){
-                  QuantProdPrice.ProdQuantityEdit = (parseInt(QuantProdPrice.ProdQuantityEdit) + 1).toString();
-                  console.log("quantity is: " , QuantProdPrice);
-                  setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
-                  setShowPayButton(true);
-                  return
-            }
+            // if (QuantProdPrice.ProdQuantityEdit){
+            //       QuantProdPrice.ProdQuantityEdit = (parseInt(QuantProdPrice.ProdQuantityEdit) + 1).toString();
+            //       console.log("quantity is: " , QuantProdPrice);
+            //       setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
+            //       return
+            // }
+            // setShowPayButton(true);
+
             prodCount += 1;
             setProdCount(prodCount);
       }
       // prodCount is not working properly, do it later on.
       
       const handleDecrementProduct = () => {
-            if(QuantProdPrice.ProdQuantityEdit) {
-                  if (QuantProdPrice.ProdQuantityEdit <= 1) {
-                        // console.log("Inside the if")
-                        // setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
-                        return
-                  }
-                  QuantProdPrice.ProdQuantityEdit = (parseInt(QuantProdPrice.ProdQuantityEdit) - 1).toString();
-                  console.log("quantity is: ", QuantProdPrice);
-                  setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
-                  setShowPayButton(true);
-                  return
-            }
+            // if(QuantProdPrice.ProdQuantityEdit) {
+            //       if (QuantProdPrice.ProdQuantityEdit <= 1) {
+            //             // console.log("Inside the if")
+            //             setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
+            //             return
+            //       }
+            //       QuantProdPrice.ProdQuantityEdit = (parseInt(QuantProdPrice.ProdQuantityEdit) - 1).toString();
+            //       console.log("quantity is: ", QuantProdPrice);
+            //       setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
+            //       setShowPayButton(true);
+            //       return
+            // }
             if(prodCount===1){
                   return
             }
             prodCount -= 1;
             setProdCount(prodCount);
-            setShowPayButton(true)
+            // setShowPayButton(true)
       }
       
       const checkFieldValue = ()=>{
-            if((pinCode.length ===6   && homeAddress.length>0 && district.length>0) || (pincodeParamState.length === 6 && homeAddressParamState.length>0 && districtParamState.length>0 ) ){
+            if(pinCode.length ===6   && homeAddress.length>0 && district.length>0){
                   setIsDisabled(false)
             }
             else{
@@ -125,9 +150,9 @@ function TakeDeliveryAddress() {
             }
       }
 
-      const handleUpdateProductOrder = ()=>{
-            // call method for updating the order.
 
+      if(loading){
+            return <SplashScreenForShop/>
       }
 
       return (
@@ -152,7 +177,7 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           <h5>Price({prodCount} item)</h5>
-                                          <h5>Rs. {(prodCount * ProductPrice) || (prodCount * QuantProdPrice.ProdPriceWdit) }</h5>
+                                          <h5>Rs. { Math.floor((prodCount * ProductPrice)) }</h5>
                                     </div>
                               </div>
                         </div>
@@ -160,9 +185,9 @@ function TakeDeliveryAddress() {
                               <div className="col-6">
                                     <div className="container mt-3">
                                           <small>Home Address</small>
-                                          <Form.Control size="lg" type="text" value={homeAddressParamState || '' } onChange={(e)=>{
+                                          <Form.Control size="lg" type="text"  onChange={(e)=>{
                                                 setHomeAdress(e.target.value)
-                                                setHomeArrParam(e.target.value)
+                                                
                                                 }} placeholder="Home Address" />
                                     </div>
                               </div>
@@ -177,9 +202,9 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
                                     <div className="container mt-3">
                                           <small>District</small>
-                                          <Form.Control size="lg" type="text" value={districtParamState || '' } placeholder="District" onChange={(e)=>{
+                                          <Form.Control size="lg" type="text" placeholder="District" onChange={(e)=>{
                                                 setDistrict(e.target.value)
-                                                setDistrictParamState(e.target.value)
+                                                
                                                 }} />
                                     </div>
                               </div>
@@ -187,7 +212,7 @@ function TakeDeliveryAddress() {
                                     
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           <h5>Payable Amount</h5>
-                                          <h5>{Math.floor(productOrderIdResponse.totalAmount) || Math.floor((prodCount * ProductPrice + DeliveryCharge))}</h5>
+                                          <h5>{Math.floor(prodCount * ProductPrice + DeliveryCharge)}</h5>
                                     </div>
                               </div>
                         </div>
@@ -198,10 +223,10 @@ function TakeDeliveryAddress() {
                                           <Form.Control size="lg" type="text" 
                                           pattern='[0-9]{6}'
                                           maxLength={6}
-                                                value={pincodeParamState || '' }
+                                                
                                           placeholder="PIN Code" onChange={(e)=>{
                                                 setPINcode(e.target.value)
-                                                setPincodeParamState(e.target.value)
+                                                
                                                 }} />
                                           
                                     </div>
@@ -209,11 +234,9 @@ function TakeDeliveryAddress() {
                               <div className="col-6 ">
 
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
-                                          {
-                                                showPayButton ? <Razorpayment disabledState={isDisabled} /> : <Button variant="primary" onClick={() => {
-                                                      handleUpdateProductOrder()
-                                                }} >Update</Button>
-                                          }
+                                          
+                                                <Razorpayment disabledState={isDisabled} /> 
+                                          
                                           
                                     
                                     </div>
@@ -228,7 +251,7 @@ function TakeDeliveryAddress() {
                                                 -
                                           </Button>{' '}
                                           
-                                          <SlideQuanityDialog prodCount={prodCount} prodQuantityEdit={qProdEditValue} />
+                                          <SlideQuanityDialog prodCount={prodCount} />
                                           <Button variant="primary" onClick={handleAddProduct} className='fs-4' size="sm" active>
                                                 +
                                           </Button>
@@ -240,7 +263,6 @@ function TakeDeliveryAddress() {
       )
 }
 
-// So, now you have to give the button to update order and make payment(when he update quanity).
 
 
 export default TakeDeliveryAddress
