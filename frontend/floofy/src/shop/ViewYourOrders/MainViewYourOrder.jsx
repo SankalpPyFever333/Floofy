@@ -18,9 +18,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Divider from '@mui/material/Divider';
 // import { fetchAllProductOrder } from './fetchProductsOrder';
+
 import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { CancelOrder } from './CancelOrder';
+import Swal from 'sweetalert2';
 
 
 
@@ -61,6 +64,30 @@ function Row(props) {
     navigate(`/GotoEditOrder?rowid=${row.RowId}&districtParam=${row.DeliveryAddress.District}&homeAddressParam=${row.DeliveryAddress.HomeAddress}&pinCodeParam=${row.DeliveryAddress.PIN}`)
   }
 
+  const handleCancelOrder = async ()=>{
+    // delete order:
+    const deleteOrder = await CancelOrder(row.RowId);
+    if(deleteOrder){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Order Cancel",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+    else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Failed To cancel! Try Later",
+
+      });
+    }
+    
+  }
+
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -90,7 +117,7 @@ function Row(props) {
           </Tooltip>
           {" / "}
           <Tooltip title="Cancel Order">
-            <IconButton>
+            <IconButton onClick={handleCancelOrder} >
               <DeleteIcon />
             </IconButton>
           </Tooltip>
