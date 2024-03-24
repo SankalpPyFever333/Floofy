@@ -20,6 +20,7 @@ import BookAppointmentWithDoctor from './Profile/DoctorProfile/BookAppointmentWi
 import MainShopComp from './shop/MainShopComp';
 import MainViewYourOrder from './shop/ViewYourOrders/MainViewYourOrder';
 import MyMainOrderAllComp from './shop/ViewYourOrders/MyMainOrderAllComp';
+import OrderEditingComp from './shop/OrderEditingComp';
 
 
 function App() {
@@ -65,10 +66,10 @@ function App() {
             path="/GotoDeliveryPage/:ProductId/:ProductPrice"
             element={<TakeDeliveryAddress />}
           />
-          {/* <Route
+          <Route
             path="/GotoEditOrder"
-            element={<TakeDeliveryAddress />}
-          /> */}
+            element={<OrderEditingComp />}
+          />
           <Route
             path="/viewYourOrders/:userId"
             element={<MyMainOrderAllComp />}

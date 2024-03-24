@@ -14,21 +14,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function SlideQuanityDialog({prodCount}) {
       const [open, setOpen] = React.useState(false);
-
-
-
+      const [prodCountInDialog , setProdCountDialog] = React.useState(0)
+      
       const handleClickOpen = () => {
+            localStorage.setItem("prodQuantDialog" , prodCountInDialog)
             setOpen(true);
       };
-
+      
       const handleClose = () => {
+            localStorage.setItem("prodQuantDialog" , prodCountInDialog)
             setOpen(false);
       };
 
       return (
             <React.Fragment>
                   <Button variant="Light"  onClick={handleClickOpen} size="sm" className='fs-4' active>
-                        { prodCount}
+                        {prodCountInDialog === 0 ? prodCount : prodCountInDialog}
                   </Button>{' '}
                   <Dialog
                         open={open}
@@ -42,7 +43,9 @@ export default function SlideQuanityDialog({prodCount}) {
                         
                         <DialogContent >
                               <DialogContentText id="alert-dialog-slide-description">
-                                    <TextField className='mt-3' id="outlined-basic" label="Quanity" variant="outlined" />
+                                    <TextField className='mt-3' id="outlined-basic" autoFocus label="Quantity" onChange={(e)=>{
+                                          setProdCountDialog(e.target.value)
+                                    }} variant="outlined" />
                               </DialogContentText>    
                         </DialogContent>
                         <DialogActions>

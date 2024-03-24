@@ -60,7 +60,6 @@ function OrderEditingComp() {
             else {
                   console.log("Some error occured in fetchOrderiD method");
                   return null;
-
             }
       }
 
