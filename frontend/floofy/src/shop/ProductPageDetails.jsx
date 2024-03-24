@@ -97,8 +97,8 @@ function ProductPageDetails() {
                   
                   <img src={prod.ImagePath} alt="" style={{width:"100%" , margin:"5px"}} />
                   <div className="d-flex gap-2 m-5">
-                                <button className='btn btn-primary rounded m-2 p-2' >Add To Cart</button>
-                                <button onClick={handleBuyNow}  className='btn btn-warning rounded m-2 p-2 ' >Buy now</button>
+                                {/* <button className='btn btn-primary rounded m-2 p-2' >Add To Cart</button> */}
+                                <button onClick={handleBuyNow}  className='btn btn-warning  rounded m-2 p-2 ' >Buy now</button>
                                 
                   </div>
 

@@ -16,6 +16,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Divider from '@mui/material/Divider';
 import { fetchAllProductOrder } from './fetchProductsOrder';
 import Tooltip from '@mui/material/Tooltip';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import { updateOrderStatus } from './updateOrderStatus';
 
 async function createData() {
       
@@ -24,7 +26,7 @@ async function createData() {
       const jsonOrderResponse = await OrdersResponse.json();
       
       const jsonFetchOrderResponse = await jsonOrderResponse.fetchedOrder;
-      // console.log(jsonFetchOrderResponse)
+      console.log("jsonOrder fetched: " , jsonFetchOrderResponse)
       // console.log(jsonFetchOrderResponse.Products)
       // console.log(data);
 
@@ -47,6 +49,16 @@ function Row(props) {
       const { row } = props;
       const [open, setOpen] = React.useState(false);
 
+      const handleUpdateOrder = async()=>{
+            // call method of updating status.
+
+            const OrderStatus = await updateOrderStatus();
+            const jsonUpdateOrderStatus = OrderStatus.json();
+            // make a usestate to store this updated response and set it in the table.
+
+            alert("Order updated")
+      }
+
       return (
             <React.Fragment>
                   <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -66,8 +78,15 @@ function Row(props) {
                               {row.UserName}
                         </TableCell>
                         <TableCell align="left">{row.Status}</TableCell>
-                        <TableCell align="left">{row.DeliveryAddress}</TableCell>
+                        <TableCell align="left">{row.DeliveryAddress.HomeAddress},{row.DeliveryAddress.PIN}</TableCell>
                         <TableCell align="left">{row.createdAt.toString()}</TableCell>
+                        <TableCell align="left">
+                              <Tooltip title="Update Order Status" >
+                                    <IconButton onClick={handleUpdateOrder} >
+                                          <LocalShippingIcon/>
+                                    </IconButton>
+                              </Tooltip>
+                        </TableCell>
                         
                   </TableRow>
                   <TableRow>
@@ -106,7 +125,7 @@ function Row(props) {
                                                                   </TableCell>
                                                                         <TableCell style={{ fontWeight: "bolder" }} align='right' component="th" scope="row">
                                                                               {historyRow.TotalAmount}
-                                                                  </TableCell>
+                                                                        </TableCell>
                                                             </TableRow>
                                                             </>
                                                       ))}
@@ -152,6 +171,7 @@ export default function ShowOrdersOnProducts() {
                                     <TableCell align="left">Status</TableCell>
                                     <TableCell align="left">Delivery Address</TableCell>
                                     <TableCell align="left">Order Date</TableCell>
+                                    <TableCell align="left">Update Status</TableCell>
                               </TableRow>
                         </TableHead>
                         <TableBody>
