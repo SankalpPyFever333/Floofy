@@ -32,6 +32,8 @@ function TakeDeliveryAddress() {
       const [productOrderIdResponse ,setProductOrderIdResponse] = useState('');
 
       const [showPayButton , setShowPayButton] = useState(false);
+      const [qProdEditValue , setQProdEditValue] = useState('');
+
 
       localStorage.setItem("district" , district);
       localStorage.setItem("HomeAddress" , homeAddress);
@@ -70,14 +72,43 @@ function TakeDeliveryAddress() {
             }
       }
 
+      let QuantProdPrice = {};
+      if (productOrderIdResponse) {
+            QuantProdPrice = getQuantityAndProdPrice();
+            console.log("Quantity and prod Price: ", QuantProdPrice);
+      }
+      else {
+            console.log("Product order not fetched yet.")
+      }
+
 
       const handleAddProduct = () => {
+            if (QuantProdPrice.ProdQuantityEdit){
+                  QuantProdPrice.ProdQuantityEdit = (parseInt(QuantProdPrice.ProdQuantityEdit) + 1).toString();
+                  console.log("quantity is: " , QuantProdPrice);
+                  setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
+                  setShowPayButton(true);
+                  return
+            }
             prodCount += 1;
             setProdCount(prodCount);
-            setShowPayButton(true);
       }
+      // prodCount is not working properly, do it later on.
+      
       const handleDecrementProduct = () => {
-            if(prodCount===0){
+            if(QuantProdPrice.ProdQuantityEdit) {
+                  if (QuantProdPrice.ProdQuantityEdit <= 1) {
+                        // console.log("Inside the if")
+                        // setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
+                        return
+                  }
+                  QuantProdPrice.ProdQuantityEdit = (parseInt(QuantProdPrice.ProdQuantityEdit) - 1).toString();
+                  console.log("quantity is: ", QuantProdPrice);
+                  setQProdEditValue(QuantProdPrice.ProdQuantityEdit)
+                  setShowPayButton(true);
+                  return
+            }
+            if(prodCount===1){
                   return
             }
             prodCount -= 1;
@@ -94,17 +125,9 @@ function TakeDeliveryAddress() {
             }
       }
 
-      let QuantProdPrice = {};
-      if (productOrderIdResponse){
-            QuantProdPrice = getQuantityAndProdPrice();     
-            console.log("Quantity and prod Price: " , QuantProdPrice);
-      }
-      else{
-            console.log("Product order not fetched yet.")
-      }
-
       const handleUpdateProductOrder = ()=>{
             // call method for updating the order.
+
       }
 
       return (
@@ -187,12 +210,12 @@ function TakeDeliveryAddress() {
 
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           {
-                                                showPayButton ? <Razorpayment disabledState={isDisabled} /> : null
+                                                showPayButton ? <Razorpayment disabledState={isDisabled} /> : <Button variant="primary" onClick={() => {
+                                                      handleUpdateProductOrder()
+                                                }} >Update</Button>
                                           }
-                                          <Button variant="primary" onClick={()=>{
-                                                handleUpdateProductOrder()
-                                          }} >Update</Button>
                                           
+                                    
                                     </div>
                               </div>
                         </div>
@@ -205,7 +228,7 @@ function TakeDeliveryAddress() {
                                                 -
                                           </Button>{' '}
                                           
-                                          <SlideQuanityDialog prodCount={prodCount} />
+                                          <SlideQuanityDialog prodCount={prodCount} prodQuantityEdit={qProdEditValue} />
                                           <Button variant="primary" onClick={handleAddProduct} className='fs-4' size="sm" active>
                                                 +
                                           </Button>
