@@ -71,7 +71,7 @@ app.use("/api" , require("./Routes/PlaceOrderRoutes/placeOrderUser.route"))
 // Route to fetch order of a user to display him:
 app.use("/api" , require("./Routes/PlaceOrderRoutes/fetchMyOrder.route"))
 app.use("/api" , require("./Routes/PlaceOrderRoutes/fetchOrderToEditShow.route"))
-
+app.use("/api" , require("./Routes/PlaceOrderRoutes/cancelOrder.route"))
 
 // ////////////////////////////////////////////////////////////////////////////
 
