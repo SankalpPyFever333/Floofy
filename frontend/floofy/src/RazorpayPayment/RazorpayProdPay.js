@@ -8,23 +8,17 @@ export const payProductAmount = async(payableAmount)=>{
           Authorization:
             "Basic cnpwX3Rlc3RfMlEzMGZ1Y091SnZNcUo6WldnRXRaWEpHWER3UnZiaWhZRUEwUVdm",
         },
-
         body: JSON.stringify({
           amount: payableAmount,
           currency: "INR",
           receipt: receiptNumber.toString(),
         }),
       });
-
-
-      // console.log(payAmountResponse);
       if (payAmountResponse.ok) {
         return payAmountResponse.json();
       } else {
-        console.log("Error oin payment, returning false")
+        console.log("Error in payment, returning false")
         return false;
       }
-      
-
 }
 

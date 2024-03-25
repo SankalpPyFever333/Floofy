@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { payAppointmentFees } from './payAppointmentFees'
 // import { payProductAmount } from './RazorpayProdPay'
 
-function RazorpaymentDoctorAppointment() {
+function RazorpaymentDoctorAppointment({handleBookAppointment}) {
       const [name, setName] = useState('')
       const [email, setEmail] = useState('')
       const [mobile, setMobile] = useState('')
@@ -21,7 +22,7 @@ function RazorpaymentDoctorAppointment() {
                   image: '',
                   // order_id: paymentConfirmed.OrderResponse.id,
                   // keep this order as the charge set by doctor.
-                  order_id: 'order_NUOPJGtB4Omtqz',
+                  order_id: paymentConfirmed.OrderResponse.id,
                   callback_url: '',
                   prefill: {
                         name: name,
@@ -39,30 +40,23 @@ function RazorpaymentDoctorAppointment() {
                         console.log('Order ID = ' + response.razorpay_order_id);
                         console.log('payment Success');
                         setPaymentResponse(response);
+                        handleBookAppointment();
+                        
                   },
-
-
             };
-
-
-
             const rzp1 = new window.Razorpay(options);
-            rzp1.open();
-
-            // In this, after making a successful payment , regenerate the orderid again and then make payment. 
-
-
+            rzp1.open(); 
       };
 
-      // const getOrderId = async () => {
-      //       const paymentResponseProduct = await payProductAmount(localStorage.getItem("TotalPayableAmount"));
-      //       // console.log("Payment confirmed state response: ", paymentResponseProduct)
-      //       setPaymnetConfirmed(paymentResponseProduct)
-      // }
+      const getOrderId = async () => {
+            const paymentResponseAppointment = await payAppointmentFees("200");
+            console.log("Payment confirmed state response: ", paymentResponseAppointment)
+            setPaymnetConfirmed(paymentResponseAppointment)
+      }
 
-      // useEffect(() => {
-      //       getOrderId();
-      // }, [localStorage.getItem("TotalPayableAmount")])
+      useEffect(() => {
+            getOrderId();
+      }, [])
 
       return (
             <div>

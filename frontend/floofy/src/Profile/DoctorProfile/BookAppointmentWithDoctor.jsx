@@ -106,7 +106,7 @@ function BookAppointmentWithDoctor() {
                                                 type="date"
                                                 
                                                 onChange={handleInputChange}
-                                                name="CustomerName"
+                                                name="DateOfAppointment"
                                           />
                                     </Form.Group>
                                     
@@ -115,7 +115,7 @@ function BookAppointmentWithDoctor() {
                                           <Form.Control
                                                 type="text"
                                                 onChange={handleInputChange}
-                                                name="Category"
+                                                name="ReasonForAppointment"
                                           />
                                     </Form.Group>
                                     
@@ -134,7 +134,7 @@ function BookAppointmentWithDoctor() {
                                           <Form.Control
                                                 type="text"
                                                 onChange={handleInputChange}
-                                                name="Category"
+                                                name="Payment"
                                                 value={200}
                                                 readOnly
                                           />
@@ -151,7 +151,7 @@ function BookAppointmentWithDoctor() {
                                     Book
                               </Button> */}
 
-                              <RazorpaymentDoctorAppointment/>
+                              <RazorpaymentDoctorAppointment handleBookAppointment={handleBookAppointment} />
 
                               {/* on successful payment , create the appointment in the db. */}
 

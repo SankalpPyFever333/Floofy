@@ -41,9 +41,19 @@ function Razorpayment({disabledState}) {
                         setPaymentResponse(response);
                         const IsOrderCreated = createProductOrder();
                         if(IsOrderCreated){
-                              console.log("Order created successfully in db")
+                              Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Order Placed",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                              });
                         }else{
-                              console.log("Error in crating order")
+                              Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Try again later!!",
+                              });
                         }
                   },
                   
@@ -58,12 +68,9 @@ function Razorpayment({disabledState}) {
             });
       };
 
-
-
-
       const getOrderId = async ()=>{
             const paymentResponseProduct = await payProductAmount(localStorage.getItem("TotalPayableAmount"));
-            // console.log("Payment confirmed state response: ", paymentResponseProduct)
+            console.log("Payment confirmed state response: ", paymentResponseProduct)
             setPaymnetConfirmed(paymentResponseProduct)
       }
 

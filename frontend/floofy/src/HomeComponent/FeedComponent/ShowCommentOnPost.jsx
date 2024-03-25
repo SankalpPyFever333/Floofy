@@ -75,7 +75,6 @@ function ShowCommentOnPost({postId , likeCount}) {
       }
 
       useEffect(()=>{
-            
             commentResponse();
             // countNumberOfLikesOnPost();
       },[]);
@@ -94,8 +93,6 @@ function ShowCommentOnPost({postId , likeCount}) {
                         <small>Likes: {likeCount} </small>
                         <small>comments {showComment.length} </small>
                   </div>
-                  
-
                   <Offcanvas show={show} style={{ height: '50vh', backgroundColor:"", scroll:"hidden"  }} placement='bottom' onHide={handleClose}>
                         <Offcanvas.Header closeButton>
                               <Offcanvas.Title className='w-25 p-2 fs-5' >Comments</Offcanvas.Title>
