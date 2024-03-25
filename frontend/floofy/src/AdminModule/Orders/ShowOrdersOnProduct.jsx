@@ -10,6 +10,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -18,6 +20,7 @@ import { fetchAllProductOrder } from './fetchProductsOrder';
 import Tooltip from '@mui/material/Tooltip';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { updateOrderStatus } from './updateOrderStatus';
+import Swal from 'sweetalert2';
 
 async function createData() {
       
@@ -35,7 +38,7 @@ async function createData() {
             createdAt: new Date(order.createdAt).toLocaleDateString(),
             DeliveryAddress: order.deliveryAddress,
             Status: order.status,
-
+            rowId: order._id,
             history: order.Products.map((product) => ({
                   ProductName: product.product.ProductName, // Access ProductName
                   Quantity: product.quantity,
@@ -47,16 +50,79 @@ async function createData() {
 
 function Row(props) {
       const { row } = props;
+      const [anchorEl, setAnchorEl] = React.useState(null);
+      const [selectedMenuItem , setSelectedMenuItem] = React.useState("");
+      const isMenuOpen = Boolean(anchorEl);
+      // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
       const [open, setOpen] = React.useState(false);
 
-      const handleUpdateOrder = async()=>{
+      const handleProfileMenuOpen = (event) => {
+            setAnchorEl(event.currentTarget);
+      };
+      const handleMenuClose = (selectedValue) => {
+            setAnchorEl(null);
+            console.log("Selected value is " , selectedValue);
+            // handleMobileMenuClose();
+            setSelectedMenuItem(selectedValue)
+      };
+
+
+      const menuId = 'primary-search-account-menu';
+      const renderMenu = (
+            <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                  }}
+                  id={menuId}
+                  keepMounted
+                  transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                  }}
+                  open={isMenuOpen}
+                  onClose={()=>{handleMenuClose(null)}}
+            >
+                  <MenuItem onClick={() => { 
+                        handleMenuClose("processing") 
+                        handleUpdateOrder("processing");
+                        }}>processing</MenuItem>
+                  <MenuItem onClick={() => { 
+                        handleMenuClose("out for delivery")
+                        handleUpdateOrder("out for delivery")
+                         }}>out for delivery</MenuItem>
+                  <MenuItem onClick={() => { 
+                        handleMenuClose('delivered')
+                        handleUpdateOrder("delivered")
+                         }}>delivered</MenuItem>
+            </Menu>
+      );
+
+      console.log("sleected value outside update: " , selectedMenuItem);
+      const handleUpdateOrder = async(orderStatus)=>{
             // call method of updating status.
 
-            const OrderStatus = await updateOrderStatus();
-            const jsonUpdateOrderStatus = OrderStatus.json();
+            // console.log("sleected value in update:" , selectedMenuItem);
+            const OrderStatus = await updateOrderStatus(row.rowId, orderStatus);
+            const jsonUpdateOrderStatus = await OrderStatus.json();
             // make a usestate to store this updated response and set it in the table.
-
-            alert("Order updated")
+            console.log("updateStatus: " , jsonUpdateOrderStatus);
+            if(jsonUpdateOrderStatus){
+                  Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Status Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                  });
+            }else{
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Error! Try later",
+                  });
+            }
       }
 
       return (
@@ -82,7 +148,8 @@ function Row(props) {
                         <TableCell align="left">{row.createdAt.toString()}</TableCell>
                         <TableCell align="left">
                               <Tooltip title="Update Order Status" >
-                                    <IconButton onClick={handleUpdateOrder} >
+                                    <IconButton aria-controls={menuId}  onClick={handleProfileMenuOpen} >
+                                          {/* upon clicing, give the option to choose order status */}
                                           <LocalShippingIcon/>
                                     </IconButton>
                               </Tooltip>
@@ -134,6 +201,7 @@ function Row(props) {
                                     </Box>
                               </Collapse>
                         </TableCell>
+                        {renderMenu}
                   </TableRow>
             </React.Fragment>
       );
@@ -161,6 +229,7 @@ const rows =  await createData();
 console.log("Rows is:" , rows);
 
 export default function ShowOrdersOnProducts() {
+      
       return (
             <TableContainer component={Paper}>
                   <Table aria-label="collapsible table">
