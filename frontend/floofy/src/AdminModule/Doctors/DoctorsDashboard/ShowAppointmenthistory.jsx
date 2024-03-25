@@ -18,10 +18,10 @@ export default function ShowAppointmentHistory({doctorId}) {
             const jsonAppointmentResponse = await fetchedAppointmentResponse.json();
             console.log("Appointment is : ", jsonAppointmentResponse);
             setRows(jsonAppointmentResponse.appointmentHistory.map((appointment) => ({
-                  UserName: appointment.User.username,
+                  UserName: appointment.User,
                   Status: appointment.Status,
                   AppointmentDate: new Date(appointment.AppointmentDate).toLocaleDateString(),
-                  PaymentStatus: appointment.Payment.paymentStatus,
+                  PaymentStatus: appointment.paymentAmount,
                   ReasonForAppointment: appointment.ReasonForAppointment
             })));
 
@@ -44,7 +44,7 @@ export default function ShowAppointmentHistory({doctorId}) {
                                     <TableCell>Username</TableCell>
                                     <TableCell align="right">Status</TableCell>
                                     <TableCell align="right">Appointment Date</TableCell>
-                                    <TableCell align="right">Payment Status</TableCell>
+                                    <TableCell align="right">Payment</TableCell>
                                     <TableCell align="right">Reason of Appointment</TableCell>
                               </TableRow>
                         </TableHead>

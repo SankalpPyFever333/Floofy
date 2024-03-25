@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { payProductAmount } from './RazorpayProdPay'
 import { createProductOrder } from './createOrderOnSuccessPayment'
+import Swal from 'sweetalert2'
 
 function Razorpayment({disabledState}) {
       const [name, setName] = useState('')

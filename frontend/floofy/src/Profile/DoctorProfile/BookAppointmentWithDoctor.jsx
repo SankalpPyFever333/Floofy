@@ -12,7 +12,7 @@ import RazorpaymentDoctorAppointment from './RazorpayDoctorAppointment';
 function BookAppointmentWithDoctor() {
       const [show, setShow] = useState(false);
       const [formData, setFormData] = useState({
-            CustomerName: '',
+            User: '',
             ReasonForAppointment: '',
             Payment: '',
             DateOfAppointment: '',
@@ -97,7 +97,7 @@ function BookAppointmentWithDoctor() {
                                                 type="text"
                                                 autoFocus
                                                 onChange={handleInputChange}
-                                                name="CustomerName"
+                                                name="User"
                                           />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="Product_Name">
