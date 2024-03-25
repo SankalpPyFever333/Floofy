@@ -10,7 +10,7 @@ const fetchDoctorAppointmenthistory = async (req, res)=>{
             const appointmentData = await AppointmentModel.find({
               Doctor: doctorId,
             })
-              .populate("User Doctor")
+              .populate("Doctor")
               .exec();
             res.status(200).json({appointmentHistory: appointmentData})
       } catch (error) {

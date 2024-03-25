@@ -3,23 +3,31 @@ const AppointmentModel = require("../../../Modals/DoctorModals/DoctorAppointment
 // in this , a user when click on the button for fixing appoinment then this will be executed.
 const fixAppointment = async (req, res) => {
       const {
-        CustomerName,
+        User,
         Doctor,
         DateOfAppointment,
-        Status,
         Payment,
         ReasonForAppointment,
       } = req.body;
+
+      console.log(
+        User,
+        Doctor,
+        DateOfAppointment,
+        Payment,
+        ReasonForAppointment
+      );
+
       const file = req.file;
+      console.log("File object: " , file);
       // console.log(`userId: ${User} and doctorId is: ${Doctor}`)
       try {
             const newAppoinment = new AppointmentModel({
-              User: CustomerName,
+              User: User,
               Doctor: Doctor,
               paymentAmount: Payment,
               AppointmentDate: DateOfAppointment,
-              PetImage: `http://localhost:3000/uploads/${file.originalname}`,
-              Status: Status,
+              PetImage: `http://localhost:3000/uploads/file.jnp`,
               ReasonForAppointment: ReasonForAppointment,
             });
             await newAppoinment.save();
