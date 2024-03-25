@@ -3,8 +3,9 @@ const mongoose = require("mongoose")
 const AppointmentSchema = new mongoose.Schema(
   {
     User: {
-      type: mongoose.Types.ObjectId,
-      ref: "UserLoginCredentials",
+      // type: mongoose.Types.ObjectId,
+      // ref: "UserLoginCredentials",
+      type: String,
       required: true,
     },
     Doctor: {
@@ -26,22 +27,10 @@ const AppointmentSchema = new mongoose.Schema(
     PetImage: {
       type: String,
     },
-    Payment: {
-      paymentAmount: {
+    paymentAmount: {
         type: String,
         required: true,
       },
-      paymentMethod: {
-        type: String,
-        enum: ["credit_card", "debit_card", "upi"],
-        required: true,
-      },
-      paymentStatus: {
-        type: String,
-        enum: ["paid", "unpaid"],
-        default: "unpaid",
-      },
-    },
     ReasonForAppointment: {
       type: String,
       required: true,

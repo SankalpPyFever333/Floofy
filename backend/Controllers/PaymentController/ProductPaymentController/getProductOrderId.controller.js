@@ -9,7 +9,6 @@ const razorpay = new Razorpay({
 
 const createOrder = async (req, res) => {
   const { amount, currency, receipt } = req.body;
-
   try {
     const order = await razorpay.orders.create({
       amount: amount * 100, // Convert amount to paise (assuming currency is INR)

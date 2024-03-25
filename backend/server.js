@@ -72,7 +72,7 @@ app.use("/api" , require("./Routes/PlaceOrderRoutes/placeOrderUser.route"))
 app.use("/api" , require("./Routes/PlaceOrderRoutes/fetchMyOrder.route"))
 app.use("/api" , require("./Routes/PlaceOrderRoutes/fetchOrderToEditShow.route"))
 app.use("/api" , require("./Routes/PlaceOrderRoutes/cancelOrder.route"))
-
+app.use("/api" , require("./Routes/PlaceOrderRoutes/updateOrderStatus.route"))
 // ////////////////////////////////////////////////////////////////////////////
 
 
@@ -163,6 +163,8 @@ app.use("/api" , require("./Routes/ProfileRoutes/EditProfileDoctor.Router"))
 app.use("/api" , require("./Routes/PaymentRoutes/ProductPaymentroute/productPayment.route"))
 app.use(require("./Routes/PaymentRoutes/ProductPaymentroute/getProductOrderId.route"))
 
+// doctor Appointment pay controller:
+app.use(require("./Routes/PaymentRoutes/DoctorAppointmentPayment/createAppointment.route"))
 
 
 
