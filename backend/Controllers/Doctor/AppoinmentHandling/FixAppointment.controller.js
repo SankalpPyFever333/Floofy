@@ -18,6 +18,10 @@ const fixAppointment = async (req, res) => {
         ReasonForAppointment
       );
 
+      // handle the file handling bcoz not getting the file object.
+      // think how can pass the doctor id and user id from the client to here.
+
+
       const file = req.file;
       console.log("File object: " , file);
       // console.log(`userId: ${User} and doctorId is: ${Doctor}`)
@@ -27,7 +31,7 @@ const fixAppointment = async (req, res) => {
               Doctor: Doctor,
               paymentAmount: Payment,
               AppointmentDate: DateOfAppointment,
-              PetImage: `http://localhost:3000/uploads/file.jnp`,
+              PetImage: `http://localhost:3000/uploads/${file.originalname}`,
               ReasonForAppointment: ReasonForAppointment,
             });
             await newAppoinment.save();
