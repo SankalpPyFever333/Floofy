@@ -14,7 +14,8 @@ function BookAppointmentWithDoctor() {
       const [formData, setFormData] = useState({
             User: '',
             ReasonForAppointment: '',
-            Payment: '',
+            Doctor: localStorage.getItem("userId"),
+            Payment: '200',
             DateOfAppointment: '',
             file: null
       });
@@ -43,6 +44,8 @@ function BookAppointmentWithDoctor() {
                   for (let key in formData) {
                         formDataToSend.append(key, formData[key]);
                   }
+
+                  console.log("form data to send: " , formDataToSend);
 
                   const response = await fetch("http://localhost:3000/api/fixAppointmentWithDoctor", {
                         method: "POST",
@@ -135,7 +138,7 @@ function BookAppointmentWithDoctor() {
                                                 type="text"
                                                 onChange={handleInputChange}
                                                 name="Payment"
-                                                value={200}
+                                                value={formData.Payment}
                                                 readOnly
                                           />
                                     </Form.Group>
