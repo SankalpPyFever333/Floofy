@@ -96,6 +96,10 @@ function Row(props) {
                         handleMenuClose('delivered')
                         handleUpdateOrder("delivered")
                          }}>delivered</MenuItem>
+                  <MenuItem onClick={() => { 
+                        handleMenuClose('cancellled')
+                        handleUpdateOrder("cancellled")
+                  }}>cancellled</MenuItem>
             </Menu>
       );
 

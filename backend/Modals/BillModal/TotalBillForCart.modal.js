@@ -71,8 +71,6 @@ const TotalBillSchema = new mongoose.Schema(
       type: String,
       enum: [
         "Processing",
-        "dispatching",
-        "shipping",
         "delivered",
         "cancellled",
       ],
