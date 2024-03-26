@@ -114,7 +114,7 @@ app.use("/api" , require("./Routes/DoctorsRoutes/fetchAllDoctor.route"))
 
 app.use("/api" , require("./Routes/DoctorsRoutes/DoctorAppointmentRoutes/fixAppointment.route"))
 app.use("/api" , require("./Routes/DoctorsRoutes/DoctorsReviews/postReviewToDoctor.route"))
-
+app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/countAppointments.route"))
 
 
 
