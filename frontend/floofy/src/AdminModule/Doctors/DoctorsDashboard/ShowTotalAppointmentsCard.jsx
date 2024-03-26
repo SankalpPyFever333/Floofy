@@ -1,8 +1,23 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
+import { totalAppointment } from './countTotalAppointment';
 
 function ShowTotalAppointmentsCard({timeFrame}) {
+      const [totalAppointmentState , setTotalAppointmentState] = useState('');
+      const totalReponseApp = async()=>{
+            const countTotalApp = await totalAppointment(timeFrame);
+            if(countTotalApp){
+                  const jsonTotalAppointment = await countTotalApp.json();
+                  console.log("JosnAppoitment: " , jsonTotalAppointment);
+                  setTotalAppointmentState(jsonTotalAppointment);
+            }
+      }
+      console.log("Toatla app in state: " , totalAppointmentState);
+      useEffect(()=>{
+            totalReponseApp();
+      }, [timeFrame]);
+
   return (
     <div>
       
@@ -16,7 +31,7 @@ function ShowTotalAppointmentsCard({timeFrame}) {
                     >
                           <Card.Header>Total Appointment</Card.Header>
                           <Card.Body>
-                                <Card.Title> 3 </Card.Title>
+                                <Card.Title> {totalAppointmentState.countAppointment} </Card.Title>
                                 {/* <Card.Text>
                                           Show %age inc or dcr
                                     </Card.Text> */}
