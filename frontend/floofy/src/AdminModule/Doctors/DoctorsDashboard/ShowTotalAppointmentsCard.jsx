@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import { totalAppointment } from './countTotalAppointment';
+import { totalAdminParamAppointment } from './totalAppointAdminParam';
 
 function ShowTotalAppointmentsCard({timeFrame , doctorId}) {
       const [totalAppointmentState , setTotalAppointmentState] = useState('');
@@ -10,7 +11,7 @@ function ShowTotalAppointmentsCard({timeFrame , doctorId}) {
             const countTotalApp = await totalAppointment(timeFrame);
             if(countTotalApp){
                   const jsonTotalAppointment = await countTotalApp.json();
-                  console.log("JosnAppoitment: " , jsonTotalAppointment);
+                  console.log("JosnAppoitment body: " , jsonTotalAppointment);
                   setTotalAppointmentState(jsonTotalAppointment);
             }
       }
@@ -18,16 +19,22 @@ function ShowTotalAppointmentsCard({timeFrame , doctorId}) {
 
       const totalAppointAdminParam = async()=>{
             // call method in whicvh passing id in the param
-            
+            const responseAdminParamAppoint = await totalAdminParamAppointment(timeFrame , doctorId);
+            const jsonAdminParamAppoint = await responseAdminParamAppoint.json();
+            console.log("JosnAppoitment Admin param ", jsonAdminParamAppoint);
+            setTotalAppointmentState(jsonAdminParamAppoint);
       }
 
 
       console.log("Toatla app in state: " , totalAppointmentState);
       useEffect(()=>{
             if(doctorId){
-
+                  totalAppointAdminParam();
             }
-            totalReponseApp();
+            else{
+                  totalReponseApp();
+            }
+
       }, [timeFrame]);
 
   return (
