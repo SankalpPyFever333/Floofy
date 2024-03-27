@@ -6,7 +6,10 @@ export const totalRevenueDoctor = async(timeFrame)=>{
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ getLastStartDate: timeFrame }),
+          body: JSON.stringify({
+            getLastStartDate: timeFrame,
+            doctorIdBody: localStorage.getItem("userId"),
+          }),
         }
       );
       if(response.ok){

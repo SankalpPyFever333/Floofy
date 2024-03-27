@@ -39,7 +39,7 @@ function App() {
           <Route path="/LoginPage" element={<LoginComponent />} />
           <Route path="/MainAdminComponent" element={<MainAdminComp />} />
           <Route
-            path="/DoctorsDashboard/:id"
+            path="/DoctorsDashboard/:doctorIdParams"
             element={<MainDoctorDashBoradComp />}
           />
           <Route
@@ -66,10 +66,7 @@ function App() {
             path="/GotoDeliveryPage/:ProductId/:ProductPrice"
             element={<TakeDeliveryAddress />}
           />
-          <Route
-            path="/GotoEditOrder"
-            element={<OrderEditingComp />}
-          />
+          <Route path="/GotoEditOrder" element={<OrderEditingComp />} />
           <Route
             path="/viewYourOrders/:userId"
             element={<MyMainOrderAllComp />}
