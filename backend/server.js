@@ -120,6 +120,10 @@ app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/calTota
 // total revenue using params to show admin:
 app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/calTotalRevParams.route"))
 
+// total appoontment to show admin:
+app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/getTotalApointAdminPrama.route"))
+
+
 // ////////////////////////////////////////////////////////////////
 
 // Rescuer module handling:
