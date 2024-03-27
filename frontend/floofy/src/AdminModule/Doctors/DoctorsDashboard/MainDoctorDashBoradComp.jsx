@@ -16,7 +16,7 @@ function MainDoctorDashBoradComp({doctoridFromFrontend}) {
       const [selectedTimeFrame, setSelectedTimeFrame] = useState("Last Week")
 
       const { id } = useParams();
-      
+      console.log("id int the main Doc param Dashbrd" , id)
 
       const isDoctorView = !!doctoridFromFrontend;
       const doctorId = isDoctorView ? doctoridFromFrontend : id;
@@ -62,11 +62,11 @@ function MainDoctorDashBoradComp({doctoridFromFrontend}) {
                   <div className="col-sm-5">
                         <div className="row" >
                               <div className="col-sm-4">
-                                    <ShowTotalAppointmentsCard timeFrame={selectedTimeFrame} />
+                                    <ShowTotalAppointmentsCard timeFrame={selectedTimeFrame} doctorId={id} />
                               </div>
 
                               <div className="col-sm-4">
-                                    <ShowTotalRevenueGeneratedCard timeFrame={selectedTimeFrame} />
+                                    <ShowTotalRevenueGeneratedCard timeFrame={selectedTimeFrame} doctorIdParam={id} />
                               </div>
                         </div>
                         

@@ -39,7 +39,7 @@ function App() {
           <Route path="/LoginPage" element={<LoginComponent />} />
           <Route path="/MainAdminComponent" element={<MainAdminComp />} />
           <Route
-            path="/DoctorsDashboard/:doctorIdParams"
+            path="/DoctorsDashboard/:id"
             element={<MainDoctorDashBoradComp />}
           />
           <Route

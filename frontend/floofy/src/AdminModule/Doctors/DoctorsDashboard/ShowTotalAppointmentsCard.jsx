@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import { totalAppointment } from './countTotalAppointment';
 
-function ShowTotalAppointmentsCard({timeFrame}) {
+function ShowTotalAppointmentsCard({timeFrame , doctorId}) {
       const [totalAppointmentState , setTotalAppointmentState] = useState('');
+      console.log("doctor i freom param i: " , doctorId);
       const totalReponseApp = async()=>{
             const countTotalApp = await totalAppointment(timeFrame);
             if(countTotalApp){
@@ -13,8 +14,19 @@ function ShowTotalAppointmentsCard({timeFrame}) {
                   setTotalAppointmentState(jsonTotalAppointment);
             }
       }
+
+
+      const totalAppointAdminParam = async()=>{
+            // call method in whicvh passing id in the param
+            
+      }
+
+
       console.log("Toatla app in state: " , totalAppointmentState);
       useEffect(()=>{
+            if(doctorId){
+
+            }
             totalReponseApp();
       }, [timeFrame]);
 

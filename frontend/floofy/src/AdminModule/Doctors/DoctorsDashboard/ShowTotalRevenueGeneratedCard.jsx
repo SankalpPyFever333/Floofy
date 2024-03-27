@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import { totalRevenueDoctor } from './calTotalRevenue';
+import { totalRevenueDoctorAdminParam } from './calTotalRevDocAdminParam';
 
-function ShowTotalRevenueGeneratedCard({timeFrame}) {
+function ShowTotalRevenueGeneratedCard({timeFrame , doctorIdParam}) {
       const[totalAmt, setTotalAmt] = useState(0);
+      console.log("doctor id in param: " , doctorIdParam);
       const getTotalRev = async()=>{
             const totalRev = await totalRevenueDoctor(timeFrame);
             const jsonTotalRev = await  totalRev.json();
             setTotalAmt(jsonTotalRev);
       }
 
+      const getTotalRevParamAdmin = async()=>{
+            const totalRevAdminParam = await totalRevenueDoctorAdminParam(timeFrame, doctorIdParam);
+            const jsonTotalRevAdminParam = await  totalRevAdminParam.json();
+            setTotalAmt(jsonTotalRevAdminParam);
+      }
+
       useEffect(()=>{
-            getTotalRev();
+            if(doctorIdParam){
+                  getTotalRevParamAdmin();
+            }
+            else{
+                  getTotalRev();
+            }
+
       }, [timeFrame]);
 
       console.log("Total amt in state: " , totalAmt);

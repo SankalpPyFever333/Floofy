@@ -1,4 +1,4 @@
-export const totalAppointment = async (timeFrame)=>{
+export const totalAppointment = async (timeFrame )=>{
       const response = await fetch(
         "http://localhost:3000/api/countAppintmentOfDoc",
         {
