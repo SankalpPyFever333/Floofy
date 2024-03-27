@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
+import { totalRevenueDoctor } from './calTotalRevenue';
+
 function ShowTotalRevenueGeneratedCard({timeFrame}) {
+      const[totalAmt, setTotalAmt] = useState(0);
+      const getTotalRev = async()=>{
+            const totalRev = await totalRevenueDoctor(timeFrame);
+            const jsonTotalRev = await  totalRev.json();
+            setTotalAmt(jsonTotalRev);
+      }
+
+      useEffect(()=>{
+            getTotalRev();
+      }, [timeFrame]);
+
+      console.log("Total amt in state: " , totalAmt);
+      console.log("messgae is :" , totalAmt.message);
+      // console.log("totla rev is :", totalAmt.totalRev[0].totalPaymentAmount);
+
+      const totalRevenueGenerated = totalAmt && totalAmt.totalRev && totalAmt.totalRev[0] ? totalAmt.totalRev[0].totalPaymentAmount : 0
+
   return (
     <div>
               {['Dark'].map((variant) => (
@@ -13,7 +32,7 @@ function ShowTotalRevenueGeneratedCard({timeFrame}) {
                     >
                           <Card.Header>Total Revenue</Card.Header>
                           <Card.Body>
-                                <Card.Title> 1200 </Card.Title>
+                                <Card.Title> {totalRevenueGenerated} </Card.Title>
                                 {/* <Card.Text>
                                           Show %age inc or dcr
                                     </Card.Text> */}
