@@ -117,11 +117,17 @@ app.use("/api" , require("./Routes/DoctorsRoutes/DoctorsReviews/postReviewToDoct
 app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/countAppointments.route"))
 app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/calTotalRev.route"))
 
+// total revenue using params to show admin:
+app.use("/api" , require("./Routes/DoctorsRoutes/ShowRevAppointmentRoute/calTotalRevParams.route"))
 
 // ////////////////////////////////////////////////////////////////
 
 // Rescuer module handling:
 app.use("/api" , require("./Routes/RescuerRoutes/FixedAppointmentRescuer/fixAppointment.rescuer.route"))
+
+
+// You hAVE TO DO: get the id of doctor from the params and get total revenue and total appointment of that doctor.
+
 
 
 

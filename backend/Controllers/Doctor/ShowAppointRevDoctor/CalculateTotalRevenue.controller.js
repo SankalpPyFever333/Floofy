@@ -82,10 +82,15 @@ const CalTotalRevenue = async (getLastStartDate, doctorId) => {
 };
 
 const calTotalRevenueDoc = async(req, res)=>{
-      const { getLastStartDate , doctorId} = req.body;
-      console.log("docxtor id",doctorId)
+      const { getLastStartDate , doctorIdBody} = req.body;
+      const { doctorIdParams } = req.params;
+      console.log("Doctor id in param", doctorIdParams);
+      console.log("docxtor id",doctorIdBody);
+
+      const doctorId = doctorIdParams ? doctorIdParams : doctorIdBody;
+
       try {
-            const totalRev = await CalTotalRevenue(getLastStartDate, doctorId);
+            const totalRev = await CalTotalRevenue(getLastStartDate, doctorId );
             console.log("total rev",totalRev);
             if(totalRev){
                   res.status(200).json({message:"Total revenue fetched" , totalRev:totalRev})
