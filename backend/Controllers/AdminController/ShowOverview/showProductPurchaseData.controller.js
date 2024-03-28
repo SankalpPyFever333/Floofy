@@ -17,7 +17,7 @@ const countProductTimeframe = async (
                 $gte: new Date(startDateWeek),
                 $lte: new Date(endDateWeek),
               },
-              status: "delivered",
+              // status: "delivered",
             },
           },
           {
@@ -38,7 +38,7 @@ const countProductTimeframe = async (
                     $gte:  new Date(startDateMonth),
                     $lte: new Date(endDateMonth),
                   },
-                  status: "delivered",
+                  // status: "delivered",
                 },
               },
               {
@@ -60,7 +60,7 @@ const countProductTimeframe = async (
                     $gte: startDateYear,
                     $lte: endDateYear,
                   },
-                  status: "delivered",
+                  // status: "delivered",
                 },
               },
               {

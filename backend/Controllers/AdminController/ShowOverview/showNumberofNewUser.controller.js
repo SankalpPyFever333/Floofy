@@ -23,7 +23,9 @@ const countNewUsers = async (req, res) => {
             userCount: countUsersLastWeek,
           });
         } else {
-          res.status(400).json({ messgae: "NO user found" });
+          res
+            .status(200)
+            .json({ messgae: "NO user found", userCount: 0 });
         }
         break;
       case "Last Month":
@@ -53,7 +55,9 @@ const countNewUsers = async (req, res) => {
             .json({ message: "Users counted last month", userCount: newUsersCount });
         } else {
           console.log("No user found");
-          res.status(400).json({ message: "NO users found" });
+          res
+            .status(200)
+            .json({ message: "NO users found", userCount: 0 });
           return 0;
         }
         break;
@@ -72,7 +76,9 @@ const countNewUsers = async (req, res) => {
             userCount: countUsersLastYear,
           });
         } else {
-          res.status(400).json({ messgae: "NO user found" });
+          res
+            .status(200)
+            .json({ messgae: "NO user found", userCount: 0 });
         }
 
       default:

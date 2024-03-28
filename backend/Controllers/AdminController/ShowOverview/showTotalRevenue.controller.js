@@ -16,13 +16,13 @@ const totalRevenueCalculation = async (req, res) => {
                 $gte: new Date(startDateWeek),
                 $lte: new Date(endDateWeek),
               },
-              status: "delivered",
+              // status: "processing",
             },
           },
           {
             $group: {
               _id: null,
-              totalAmount: { $sum: { $toInt: "$totalAmount" } },
+              totalAmount: { $sum: { $toDouble: "$totalAmount" } },
             },
           },
         ]);
@@ -51,13 +51,13 @@ const totalRevenueCalculation = async (req, res) => {
                 $gte: new Date(LastMonthStartDate),
                 $lte: new Date(LastMonthEndDate),
               },
-              status: "pending",
+              // status: "processing",
             },
           },
           {
             $group: {
               _id: null,
-              totalAmount: { $sum: { $toInt: "$totalAmount" } },
+              totalAmount: { $sum: { $toDouble: "$totalAmount" } },
             },
           },
         ]);
@@ -78,17 +78,17 @@ const totalRevenueCalculation = async (req, res) => {
                     $gte: new Date(StartYear),
                     $lte: new Date(EndYear),
                   },
-                  status: "delivered",
+                  // status: "processing",
                 },
               },
               {
-                  $group:{
-                        _id: null,
-                        totalAmount: {
-                              $sum: { $toInt: "$totalAmount" },
-                        }
-                  }
-            }
+                $group: {
+                  _id: null,
+                  totalAmount: {
+                    $sum: { $toDouble: "$totalAmount" },
+                  },
+                },
+              },
             ]);
             console.log("yearly sales is :" , yearlySales)
             if( Array.isArray(yearlySales)&& yearlySales.length>0){
@@ -97,7 +97,10 @@ const totalRevenueCalculation = async (req, res) => {
             else{
               res
                 .status(200)
-                .json({ messagae: "NO sales found for this period", revenue:0});
+                .json({
+                  messagae: "NO sales found for this period",
+                  revenue: [{_id:null, totalAmount: 0 }],
+                });
             }
         break;
 
