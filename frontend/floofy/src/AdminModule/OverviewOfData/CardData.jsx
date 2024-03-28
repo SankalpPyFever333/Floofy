@@ -19,21 +19,20 @@ function CardData() {
       const fetchDataActiveUsersData = async (timeFrame) => {
             try {
                   const datafetchedFromDb = await fetchAllDataFromDb(timeFrame)
+                  console.log("Data from js object: " , datafetchedFromDb);
                   console.log(`Active users data in frontend ${datafetchedFromDb.ActiveUserSData.userCount}`)
                   setActiveUsersData(datafetchedFromDb.ActiveUserSData.userCount)
 
                   console.log(`purchase data in fromtend: ${datafetchedFromDb.purchaseData.productCount}`)
                   setPurchasesData(datafetchedFromDb.purchaseData.productCount)
 
-                  console.log(`Total Revenue is: ${datafetchedFromDb.revenueData.revenue}`)
-                  setRevenueData(datafetchedFromDb.revenueData.revenue)
+                  console.log(`Total Revenue is: ${datafetchedFromDb.revenueData.revenue[0].totalAmount}`)
+                  setRevenueData(datafetchedFromDb.revenueData.revenue[0].totalAmount)
 
             } catch (error) {
                   console.log("error in fetching data  ", error)
             }
       }
-
-
       return (
             <>
                   <div style={{margin:"20px"}} >

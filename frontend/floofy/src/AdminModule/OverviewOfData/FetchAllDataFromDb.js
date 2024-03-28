@@ -22,7 +22,7 @@ const fetchActiveUsersData = async (timeFrame) => {
 
       if(fetchedActiveUsers.ok){
             const jsonActiveUsers = await fetchedActiveUsers.json();
-            console.log( "json data from db is" ,jsonActiveUsers);
+            console.log( "json data from db of Active users" ,jsonActiveUsers);
             return jsonActiveUsers;
       }
       else{
