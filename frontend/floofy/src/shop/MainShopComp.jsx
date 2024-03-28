@@ -9,6 +9,7 @@ import { fetchProducts } from './fetchProductfromDb'
 
 function MainShopComp() {
   const [prod ,setProd] = useState([]);
+  const [lsGetCategory , setLSGetCategory] = useState([]);
   const [isCartOpen , setIsCartOpen] = useState(true)
   useEffect(()=>{
     async function fetchDataFromDb(){
@@ -17,11 +18,11 @@ function MainShopComp() {
       const AllProdFromDb = jsonProd.All_prod_response;
       console.log(AllProdFromDb)
         setProd(jsonProd.All_prod_response);
-
     }
     fetchDataFromDb();
-    }, [])  
-  
+    setLSGetCategory(localStorage.getItem("selectProdCategory"));
+  }, [])  
+
   return (
     <div>
 
@@ -31,16 +32,18 @@ function MainShopComp() {
 
 
       <SearchAndAppbar/>
-      <SearchByCategory/>
+      <SearchByCategory  />
       {/* <ShowBestOffersProduct/> */}
       {/* <DisplayReviewOfProductMainComp/> */}
+
+      {/* work on search  */}
       {
 
+        localStorage.getItem("selectProdCategory") ? prod.filter(filterProd => filterProd.Category in localStorage.getItem("selectProdCategory")) :
         prod.map((product)=>{
           return <ProductCard key={product._id.toString()} ProductId={product._id.toString()} ProdName={product.ProductName} imgSrc={product.ImagePath} ProdDescription={product.Description} category={product.Category} DiscountTag={product.
           DiscountTag} Price={product.Price} /> 
         })
-      
       }
     </div>
   )

@@ -92,6 +92,7 @@ function CardData() {
                                           </Card.Body>
                                     </Card>
                               ))}
+                              
                         </div>
 
                         <div className="col-sm-6">
