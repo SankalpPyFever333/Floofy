@@ -17,7 +17,6 @@ function DoctorProfileUpdate() {
   const [specialization , setSpecialization] = useState({});
   
   const handleSaveUserData = async()=>{
-    
     try {
       const updateDoctor = await saveUpdatedDataDoctor(localStorage.getItem("userId") , name , username , phone , email , expereince , location , specialization );
       console.log(updateDoctor)
@@ -61,7 +60,7 @@ function DoctorProfileUpdate() {
                           </p>
                           <TextField  className='rounded w-50 shadow' onChange={(e)=> setName(e.target.value)}  style={{ margin: "12px" }} id="filled-basic" label="Name" variant="filled" />
                           <br />
-                          <TextField className='rounded w-50 shadow' style={{ margin: "12px" }} id="filled-basic" onChange={(e) => setUsername(e.target.value)} label="Username" variant="filled" />
+                          {/* <TextField className='rounded w-50 shadow' style={{ margin: "12px" }} id="filled-basic" onChange={(e) => setUsername(e.target.value)} label="Username" variant="filled" /> */}
                           <br />
                           <TextField className='rounded w-50 shadow' style={{ margin: "12px" }} id="filled-basic" onChange={(e) => setEmail(e.target.value)} label="Email" variant="filled" />
                           <br />

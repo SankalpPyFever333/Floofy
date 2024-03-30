@@ -41,7 +41,6 @@ function AccordionInputDetails({SetExpereince , SetLocation , SertSpecialization
             const specializationData = {
                   additionalTraining: additionalTraining,
                   areaOFSpecialization : areaOFSpecialization
-                  
             }
             // console.log("Asre: " , areaOFSpecialization)
             // console.log("training : " , additionalTraining)
@@ -53,7 +52,7 @@ function AccordionInputDetails({SetExpereince , SetLocation , SertSpecialization
                   <Accordion.Item eventKey="0" style={{margin:"12px"}}>
                         <Accordion.Header >Experience</Accordion.Header>
                         <Accordion.Body onExit={handleSaveExperienceOnExit} >
-                              <TextField onClick={(e)=> setInstitutionName(e.target.value)} className='rounded w-50 shadow p-2 m-2' id="filled-basic"  label="Institution Name" variant="filled" />
+                              <TextField onChange={(e)=> setInstitutionName(e.target.value)} className='rounded w-50 shadow p-2 m-2' id="filled-basic"  label="Institution Name" variant="filled" />
                               
                               <BasicDateRangePicker SetstartDate={setStartDate} SetendDate={setEndDate} />
                               
