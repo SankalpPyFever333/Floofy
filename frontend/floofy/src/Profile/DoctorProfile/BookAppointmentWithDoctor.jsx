@@ -9,12 +9,13 @@ import Swal from 'sweetalert2';
 import Razorpayment from '../../RazorpayPayment/Razorpayment';
 import RazorpaymentDoctorAppointment from './RazorpayDoctorAppointment';
 
-function BookAppointmentWithDoctor() {
+function BookAppointmentWithDoctor({doctorIdCard}) {
+      console.log("Doctor Id card:v" , doctorIdCard)
       const [show, setShow] = useState(false);
       const [formData, setFormData] = useState({
             User: '',
             ReasonForAppointment: '',
-            Doctor: localStorage.getItem("userId"),
+            Doctor: doctorIdCard,
             Payment: '200',
             DateOfAppointment: '',
             file: null

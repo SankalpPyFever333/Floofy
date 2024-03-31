@@ -1,9 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import BookAppointmentWithDoctor from '../Profile/DoctorProfile/BookAppointmentWithDoctor';
+import DoctorRating from './DoctorRating';
 
-function ShowDoctorsList({joinedFloofy , education , email , username , cardId }) {
-      
+function ShowDoctorsList({joinedFloofy , education , email , username , doctorId }) {
+      console.log("Doctor id in the list is : " , doctorId);
+
       return (
             <Card className='shadow border-top m-2 ' >
                   <Card.Header as="h5">{username}</Card.Header>
@@ -12,17 +14,15 @@ function ShowDoctorsList({joinedFloofy , education , email , username , cardId }
                         <Card.Text>
                               Specialization: {education}
                         </Card.Text>
-                        
                         <Card.Text>
                               joined Floofy: { new Date(joinedFloofy).toLocaleDateString()}
                         </Card.Text>
                         <Card.Text>
                               email: { email}
                         </Card.Text>
-                        
                         <Card.Text>
-                              <BookAppointmentWithDoctor  />
-                              
+                              <BookAppointmentWithDoctor doctorIdCard={doctorId} />
+                              <DoctorRating/>
                         </Card.Text>
                         {/* <Button variant="info">Book Appointment</Button> */}
                   </Card.Body>

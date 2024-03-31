@@ -18,12 +18,14 @@ function MainShowDoctorsList() {
             getAllDoctors();
       }, []);
 
+      console.log("doctor data list is ; " ,  doctorData)
+
   return (
     <div>
       <h3 className='text-center' >{doctorData.length} doctors</h3>
       {
             doctorData.map((singleDoctor)=>{
-                  return <ShowDoctorsList joinedFloofy={singleDoctor.Username.createdAt} education={singleDoctor.Education.degree} email={singleDoctor.Email} username={singleDoctor.Username.username} cardId={singleDoctor._id} />
+                  return <ShowDoctorsList joinedFloofy={singleDoctor.Username.createdAt} education={singleDoctor.Education.degree} email={singleDoctor.Email} username={singleDoctor.Username.username} cardId={singleDoctor._id} doctorId={singleDoctor.Username._id} />
             })
       }
 

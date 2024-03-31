@@ -3,18 +3,15 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
-export default function ProductRating() {
+export default function DoctorRating() {
       const [value, setValue] = React.useState(0);
-      localStorage.setItem("rating", value)
-      return (    
+      localStorage.setItem("DoctorRating", value)
+      return (
             <Box
                   sx={{
                         '& > legend': { mt: 2 },
-                         
+
                   }}
-
-                  
-
             >
                   <Typography component="legend">Rate Product</Typography>
                   <Rating
@@ -24,7 +21,6 @@ export default function ProductRating() {
                               setValue(newValue);
                         }}
                   />
-                  
             </Box>
       );
 }
