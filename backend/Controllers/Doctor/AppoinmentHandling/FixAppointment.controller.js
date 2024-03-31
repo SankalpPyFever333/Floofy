@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const AppointmentModel = require("../../../Modals/DoctorModals/DoctorAppointment.modal");
 
 // in this , a user when click on the button for fixing appoinment then this will be executed.
@@ -28,7 +29,7 @@ const fixAppointment = async (req, res) => {
       try {
             const newAppoinment = new AppointmentModel({
               User: User,
-              Doctor: Doctor,
+              Doctor: new mongoose.Types.ObjectId(Doctor),
               paymentAmount: Payment,
               AppointmentDate: DateOfAppointment,
               PetImage: `http://localhost:3000/uploads/${file.originalname}`,

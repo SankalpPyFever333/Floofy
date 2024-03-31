@@ -93,8 +93,14 @@ const countAppointment = async (req, res)=>{
               getLastStartDate,
               doctorId
             );
+            console.log(countAppointmentOfDoctor);
             if(Array.isArray(countAppointmentOfDoctor) && countAppointmentOfDoctor.length > 0){
-                  res.status(200).json({message:"Appoitnment found" , countAppointment: countAppointmentOfDoctor.length})
+                  res
+                    .status(200)
+                    .json({
+                      message: "Appoitnment found",
+                      countAppointment: countAppointmentOfDoctor[0].count,
+                    });
             }
             else{
                   res
