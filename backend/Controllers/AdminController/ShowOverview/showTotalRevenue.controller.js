@@ -66,7 +66,12 @@ const totalRevenueCalculation = async (req, res) => {
             res.status(200).json({message:"Product Found" , revenue: calculateRevenueLastMonth})
         }
         else{
-            res.status(200).json( {message: "No Data for this period" , revenue:0})
+            res
+              .status(200)
+              .json({
+                message: "No Data for this period",
+                revenue: [{ _id: null, totalAmount: 0 }],
+              });
         }
         break;
       case "Last Year":
