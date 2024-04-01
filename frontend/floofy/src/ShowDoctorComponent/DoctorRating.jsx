@@ -11,7 +11,7 @@ export default function DoctorRating({doctorIdToRate}) {
 
 
       const handleReviewClick = async()=>{
-            const postReview = await postDoctorReview(value , doctorIdToRate);
+            const postReview = await postDoctorReview(doctorIdToRate);
             
             if(postReview.ok){
                   Swal.fire({
@@ -31,23 +31,23 @@ export default function DoctorRating({doctorIdToRate}) {
             }
       }
       React.useEffect(()=>{
-            handleReviewClick();
-      } , [value]);
+            if(value>0){
+                  handleReviewClick();
+            }
 
+      } , [value]);
       return (
             <Box
                   sx={{
                         '& > legend': { mt: 2 },
-
                   }}
             >
-                  <Typography component="legend">Rate Product</Typography>
+                  <Typography component="legend">Rate Doctor</Typography>
                   <Rating
                         name="simple-controlled"
                         value={value}
                         onChange={(event, newValue) => {
                               setValue(newValue);
-                        
                         }}
                   />
             </Box>

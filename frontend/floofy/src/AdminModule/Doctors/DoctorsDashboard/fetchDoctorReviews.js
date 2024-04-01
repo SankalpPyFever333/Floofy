@@ -15,8 +15,10 @@ export const fetchDoctorsReview = async (doctorId) =>{
             );
       
             if(!fetchReview.ok){
-                  console.log("Response status", fetchReview.status);
+
+                 return console.log("Response status", fetchReview.status);
             }
+            console.log("review of doctor: " , fetchReview)
             return fetchReview;
       } catch (error) {
             console.log("Error:",error);

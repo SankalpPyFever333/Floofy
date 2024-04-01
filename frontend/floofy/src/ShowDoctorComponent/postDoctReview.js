@@ -1,4 +1,4 @@
-export const postDoctorReview = async(rating, doctorId) => {
+export const postDoctorReview = async(doctorId) => {
       const responsePOstReview = await fetch(
         "http://localhost:3000/api/postReviewToDoctor",
         {
@@ -6,10 +6,10 @@ export const postDoctorReview = async(rating, doctorId) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON({
+          body: JSON.stringify({
             User: localStorage.getItem("userId"),
             Doctor: doctorId,
-            rating: rating,
+            rating: localStorage.getItem("DoctorRating"),
           }),
         }
       );
@@ -20,6 +20,5 @@ export const postDoctorReview = async(rating, doctorId) => {
       else{
             throw new Error("Error in posting review");
       }
-
 }
 

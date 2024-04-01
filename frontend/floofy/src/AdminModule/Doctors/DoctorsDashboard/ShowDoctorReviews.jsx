@@ -257,9 +257,6 @@ export default function ShowDoctorReviews({doctorId}) {
 
       },[rows])
 
-      
-
-
       const handleRequestSort = (event, property) => {
             const isAsc = orderBy === property && order === 'asc';
             setOrder(isAsc ? 'desc' : 'asc');
@@ -347,7 +344,7 @@ export default function ShowDoctorReviews({doctorId}) {
                                     />
                                     <TableBody>
 
-                                          {/* {visibleRows.map((row, index) => {
+                                          {visibleRows.map((row, index) => {
                                                 const isItemSelected = isSelected(row.id);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -394,8 +391,8 @@ export default function ShowDoctorReviews({doctorId}) {
                                                 >
                                                       <TableCell colSpan={6} />
                                                 </TableRow>
-                                          )} */}
-                                          <TableBody>
+                                          )}
+                                          {/* <TableBody>
                                                 {visibleRows.length === 0 ? (
                                                       <TableRow>
                                                             
@@ -450,7 +447,7 @@ export default function ShowDoctorReviews({doctorId}) {
                                                             <TableCell colSpan={6} />
                                                       </TableRow>
                                                 )}
-                                          </TableBody>
+                                          </TableBody> */}
 
                                     </TableBody>
                               </Table>
