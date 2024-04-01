@@ -3,7 +3,9 @@ const DoctorReviewModel = require("../../../../Modals/DoctorModals/DoctorsReview
 const fetchReviewOfDoctors = async (req, res)=>{
       const {doctorId} = req.body;
       try{
-            const fetchedReview = await DoctorReviewModel.find({Doctor: doctorId}).populate("User Doctor") ; 
+            const fetchedReview = await DoctorReviewModel.find({
+              Doctor: doctorId,
+            }).populate("User Doctor"); ; 
             res.status(200).json({Reviews: fetchedReview})
       }
       catch (error){
