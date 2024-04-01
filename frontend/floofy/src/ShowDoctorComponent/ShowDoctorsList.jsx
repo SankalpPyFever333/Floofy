@@ -22,7 +22,7 @@ function ShowDoctorsList({joinedFloofy , education , email , username , doctorId
                         </Card.Text>
                         <Card.Text>
                               <BookAppointmentWithDoctor doctorIdCard={doctorId} />
-                              <DoctorRating/>
+                              <DoctorRating doctorIdToRate={doctorId} />
                         </Card.Text>
                         {/* <Button variant="info">Book Appointment</Button> */}
                   </Card.Body>

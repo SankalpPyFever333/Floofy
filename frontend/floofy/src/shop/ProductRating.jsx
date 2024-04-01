@@ -13,8 +13,6 @@ export default function ProductRating() {
                          
                   }}
 
-                  
-
             >
                   <Typography component="legend">Rate Product</Typography>
                   <Rating
