@@ -88,15 +88,18 @@ const countProductSales = async (req, res) => {
       if( Array.isArray(productCount) && productCount.length>0){
         
             res.status(200).json({message:"Product counted" , productCount: productCount.length})
+            return productCount.length;
       }
       else{
             res
               .status(200)
               .json({ message: "No product found", productCount: 0 });
+              return 0;
       }
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
+    return 0;
   }
 };
 

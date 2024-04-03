@@ -1,22 +1,40 @@
-const { exec } = require("child_process");
-const path = require("path")
+const {spawn} = require("child_process");
+const path = require("path");
+
+
+const DB_NAME = "AnimalWelfareApp";
+
+const ARCHIVE_PATH = path.join(__dirname, "./WelfareAppDBBackup" , `${DB_NAME}.gzip`);
 // Restore MongoDB database
 const restoreDatabase = () => {
-  const backupDir = path.join(__dirname, "./WelfareAppDBBackup")
+  const child = spawn("mongorestore" , [
+            `--db=${DB_NAME}`,
+            `--archive=${ARCHIVE_PATH}`,
+            "--gzip"
+      ]);
+      child.stdout.on("data" , (data)=>{
+            console.log("stdout: \n" , data);
+      })
 
-  // Use mongorestore command to restore the database
-  exec(`mongorestore --drop ${backupDir}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Restoration failed: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.error(`Restoration failed: ${stderr}`);
-      return;
-    }
-    console.log(`Restoration completed successfully`);
-  });
+      child.stderr.on("data" , (data)=>{
+            console.log("stdout: \n" , data)
+      });
+
+      child.on("error" , (error)=>{
+            console.log("Error: \n" , error);
+      })
+
+      child.on("exit" , (code, signal)=>{
+            if(code){
+                  console.log("Process exit with code: " , code);
+            }
+            else if(signal){
+                  console.log("Process killed with signal: " , signal)
+            }
+            else{
+                  console.log("restore is successfull");
+            }
+      })
 };
 
-// Call the restore function
 restoreDatabase();

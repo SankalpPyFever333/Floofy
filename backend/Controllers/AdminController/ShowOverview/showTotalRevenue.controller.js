@@ -34,13 +34,15 @@ const totalRevenueCalculation = async (req, res) => {
             message: "Revenue calculated",
             revenue: calculateRevenueLastWeek,
           });
+          return calculateRevenueLastWeek[0].totalAmount;
         } else {
           res.status(200).json({
-            message: "NO Data found for this period",
-            revenue: 0,
+            message: "No Data for this period",
+            revenue: [{ _id: null, totalAmount: 0 }],
           });
+          return 0;
         }
-        break;
+        
       case "Last Month":
         const { LastMonthStartDate, LastMonthEndDate } =
           getLastMonthStartDate();
@@ -64,6 +66,7 @@ const totalRevenueCalculation = async (req, res) => {
         console.log("Monthly sales ", calculateRevenueLastMonth)
         if( Array.isArray(calculateRevenueLastMonth) && calculateRevenueLastMonth.length>0){
             res.status(200).json({message:"Product Found" , revenue: calculateRevenueLastMonth})
+            return calculateRevenueLastMonth[0].totalAmount;
         }
         else{
             res
@@ -72,8 +75,9 @@ const totalRevenueCalculation = async (req, res) => {
                 message: "No Data for this period",
                 revenue: [{ _id: null, totalAmount: 0 }],
               });
+              return 0;
         }
-        break;
+        
       case "Last Year":
             const { StartYear, EndYear } = getLastYear();
             const yearlySales = await ProductOrder.aggregate([
@@ -98,6 +102,7 @@ const totalRevenueCalculation = async (req, res) => {
             console.log("yearly sales is :" , yearlySales)
             if( Array.isArray(yearlySales)&& yearlySales.length>0){
                   res.status(200).json({message:"revenue calculated" , revenue: yearlySales})
+                  return yearlySales[0].totalAmount;
             }
             else{
               res
@@ -106,8 +111,8 @@ const totalRevenueCalculation = async (req, res) => {
                   messagae: "NO sales found for this period",
                   revenue: [{_id:null, totalAmount: 0 }],
                 });
+                return 0;
             }
-        break;
 
       default:
         break;
@@ -115,6 +120,7 @@ const totalRevenueCalculation = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
+    return 0;
   }
 };
 

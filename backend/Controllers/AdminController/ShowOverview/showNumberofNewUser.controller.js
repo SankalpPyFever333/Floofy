@@ -22,12 +22,14 @@ const countNewUsers = async (req, res) => {
             message: "user founds",
             userCount: countUsersLastWeek,
           });
+          return countUsersLastWeek
         } else {
           res
             .status(200)
             .json({ messgae: "NO user found", userCount: 0 });
+            return 0
         }
-        break;
+        
       case "Last Month":
         const lastMonthStartDate = getLastMonthStartDate();
         const countUsers = await userLoginModel.aggregate([
@@ -53,6 +55,7 @@ const countNewUsers = async (req, res) => {
           res
             .status(200)
             .json({ message: "Users counted last month", userCount: newUsersCount });
+            return newUsersCount
         } else {
           console.log("No user found");
           res
@@ -60,7 +63,7 @@ const countNewUsers = async (req, res) => {
             .json({ message: "NO users found", userCount: 0 });
           return 0;
         }
-        break;
+        
 
       case "Last Year":
         const { startDateYear, endDateYear } = getLastYear();
@@ -75,10 +78,12 @@ const countNewUsers = async (req, res) => {
             message: "user founds",
             userCount: countUsersLastYear,
           });
+          return  countUsersLastYear;
         } else {
           res
             .status(200)
             .json({ messgae: "NO user found", userCount: 0 });
+            return 0;
         }
 
       default:
