@@ -14,6 +14,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
       const [show, setShow] = useState(false);
       const [formData, setFormData] = useState({
             User: '',
+            UserEmail: '',
             ReasonForAppointment: '',
             Doctor: doctorIdCard,
             Payment: '200',
@@ -105,10 +106,18 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                                           />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="Product_Name">
+                                          <Form.Label>Email</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                autoFocus
+                                                onChange={handleInputChange}
+                                                name="UserEmail"
+                                          />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_Name">
                                           <Form.Label>Appointment Date</Form.Label>
                                           <Form.Control
                                                 type="date"
-                                                
                                                 onChange={handleInputChange}
                                                 name="DateOfAppointment"
                                           />
