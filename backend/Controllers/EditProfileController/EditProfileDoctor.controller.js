@@ -9,7 +9,7 @@ const handleDoctorProfileUpdate = async (req, res)=>{
          return res.status(400).json({ message: "Invalid doctor ID" });
        }
             try {
-                  const updateDoctorDetails = await Doctor.findOneAndUpdate(
+                  let updateDoctorDetails = await Doctor.findOneAndUpdate(
                     {
                       Username: new mongoose.Types.ObjectId(doctorId),
                     },
@@ -18,10 +18,10 @@ const handleDoctorProfileUpdate = async (req, res)=>{
                       new: true,
                     }
                   ); 
-                  console.log("updateDoctorDetails",updateDoctorDetails)
                   if(!updateDoctorDetails){
-                        return res.status(401).json({message:"No, user found"});
+                    updateDoctorDetails = await Doctor.create(req.body);
                   }
+                  console.log("updateDoctorDetails",updateDoctorDetails)
                   return res.status(200).json({message:"Updated successfully" , updatedProduct:updateDoctorDetails})
             } catch (error) {
                   console.log("Error occured: " , error);

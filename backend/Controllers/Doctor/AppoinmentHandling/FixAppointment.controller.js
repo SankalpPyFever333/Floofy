@@ -36,7 +36,7 @@ const fixAppointment = async (req, res) => {
               ReasonForAppointment: ReasonForAppointment,
             });
             await newAppoinment.save();
-            res.status(201).json({message:"Appointment Fixed"})
+            res.status(200).json({message:"Appointment Fixed"})
       } catch (error) {
             console.log(error);
             res.status(500).json({message:"Internal Server Error"})

@@ -40,6 +40,10 @@ const orderSchema = mongoose.Schema(
       enum: ["processing", "out for delivery", "delivered"],
       default: "processing",
     },
+    CustomerEmail:{
+      type: String,
+      required: true
+    }
   },
   { timestamps: true }
 );

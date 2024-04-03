@@ -26,12 +26,12 @@ const DoctorSchema = new mongoose.Schema({
     endDate: String,
     description: String,
   },
-  Education: {
-    degree: String,
-    institution: String,
-    completionYear: String,
-    fieldOfStudy: String,
-  },
+  // Education: {
+  //   degree: String,
+  //   institution: String,
+  //   completionYear: String,
+  //   fieldOfStudy: String,
+  // },
   Specialization: {
     areaOfSpecialization: String,
     additionalTraining: String,
