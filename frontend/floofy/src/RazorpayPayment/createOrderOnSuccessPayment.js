@@ -10,6 +10,7 @@ export const createProductOrder = async ()=>{
             },
             body: JSON.stringify({
               totalAmount: localStorage.getItem("TotalPayableAmount"),
+              CustomerEmail: localStorage.getItem("CustomerEmail") , 
               User: localStorage.getItem("userId"),
               deliveryAddress: {
                 

@@ -1,4 +1,4 @@
-export const saveUpdatedDataDoctor = async(doctorId , name , username , phone , email , expereince , location , specialization )=>{
+export const saveUpdatedDataDoctor = async(doctorId , name , username , phone , email , expereince , location , specialization , licenseId )=>{
       try {
         const saveDoctorData = await fetch(
           `http://localhost:3000/api/EditDoctorProfileBio/${doctorId}`,
@@ -11,8 +11,9 @@ export const saveUpdatedDataDoctor = async(doctorId , name , username , phone , 
               Phone: phone,
               Email: email,
               Experience: expereince,
-              Specialization:specialization,
+              Specialization: specialization,
               LocationOfDoctor: location,
+              LicenseNumber: licenseId,
             }),
           }
         );

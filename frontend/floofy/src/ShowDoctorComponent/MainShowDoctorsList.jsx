@@ -25,7 +25,7 @@ function MainShowDoctorsList() {
       <h3 className='text-center' >{doctorData.length} doctors</h3>
       {
             doctorData.map((singleDoctor)=>{
-                  return <ShowDoctorsList joinedFloofy={singleDoctor.Username.createdAt} education={singleDoctor.Education.degree} email={singleDoctor.Email} username={singleDoctor.Username.username} cardId={singleDoctor._id} doctorId={singleDoctor.Username._id} />
+                  return <ShowDoctorsList joinedFloofy={singleDoctor.Username.createdAt}  email={singleDoctor.Email} username={singleDoctor.Username.username} cardId={singleDoctor._id} doctorId={singleDoctor.Username._id} />
             })
       }
 

@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import BookAppointmentWithDoctor from '../Profile/DoctorProfile/BookAppointmentWithDoctor';
 import DoctorRating from './DoctorRating';
 
-function ShowDoctorsList({joinedFloofy , education , email , username , doctorId }) {
+function ShowDoctorsList({joinedFloofy ,  email , username , doctorId }) {
       console.log("Doctor id in the list is : " , doctorId);
 
       return (
@@ -11,9 +11,9 @@ function ShowDoctorsList({joinedFloofy , education , email , username , doctorId
                   <Card.Header as="h5">{username}</Card.Header>
                   <Card.Body>
                         <Card.Title></Card.Title>
-                        <Card.Text>
+                        {/* <Card.Text>
                               Specialization: {education}
-                        </Card.Text>
+                        </Card.Text> */}
                         <Card.Text>
                               joined Floofy: { new Date(joinedFloofy).toLocaleDateString()}
                         </Card.Text>

@@ -14,11 +14,12 @@ function DoctorProfileUpdate() {
   const [email , setEmail] = useState('');
   const [expereince , setExpereince] = useState({});
   const [location , setLocation] = useState('');
+  const [licenseNumber , setLicenseNumber] = useState('');
   const [specialization , setSpecialization] = useState({});
   
   const handleSaveUserData = async()=>{
     try {
-      const updateDoctor = await saveUpdatedDataDoctor(localStorage.getItem("userId") , name , username , phone , email , expereince , location , specialization );
+      const updateDoctor = await saveUpdatedDataDoctor(localStorage.getItem("userId") , name , username , phone , email , expereince , location , specialization , licenseNumber);
       console.log(updateDoctor)
       if(updateDoctor){
         Swal.fire({
@@ -67,6 +68,8 @@ function DoctorProfileUpdate() {
                           <TextField className='rounded w-50 shadow' style={{ margin: "12px" }} id="filled-basic" onChange={(e) => setPhone(e.target.value)} label="Phone " variant="filled" />
                           <br />
                           <AccordionInputDetails SetExpereince={setExpereince} SetLocation={setLocation} SertSpecialization={setSpecialization}  />
+                          <TextField className='rounded w-50 shadow' style={{ margin: "12px" }} id="filled-basic" onChange={(e) => setLicenseNumber(e.target.value)} label="License Id" variant="filled" />
+                          <br />
                           <button type="button" onClick={handleSaveUserData} className="btn btn-info">Save</button>
             </div>
       </div>

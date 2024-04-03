@@ -11,24 +11,25 @@ function TakeDeliveryAddress() {
       const location = useLocation();
       const searchParams = new URLSearchParams(location.search);
       const { ProductId, ProductPrice } = useParams();
-      
+
       const [loading, setLoading] = useState(true)
-
-      
-
       let [DeliveryCharge , setDeleveryCharge] = useState(70)
       let [prodCount, setProdCount] = React.useState(1);
       const [district , setDistrict] = useState('');
       const [homeAddress , setHomeAdress] = useState('');
       const [pinCode , setPINcode] = useState('');
       const [isDisabled, setIsDisabled] = useState(true);
+      const [customerEmail,  setCustomerEmail] = useState('');
       let [prodQuantDialog, setProdCountDialog] = useState(localStorage.getItem("prodQuantDialog"))
 
       localStorage.setItem("district" , district);
       localStorage.setItem("HomeAddress" , homeAddress);
       localStorage.setItem("PINCOde" , pinCode);
-      localStorage.setItem("productCount", prodQuantDialog === 0 ? prodCount : prodQuantDialog)
-      localStorage.setItem("TotalPayableAmount", prodQuantDialog === 0 ? prodCount * ProductPrice + DeliveryCharge : prodQuantDialog * ProductPrice + DeliveryCharge)
+      // localStorage.setItem("productCount", prodQuantDialog === 0 ? prodCount : prodQuantDialog)
+      localStorage.setItem("productCount", prodCount)
+      localStorage.setItem("TotalPayableAmount", prodCount * ProductPrice + DeliveryCharge)
+      localStorage.setItem("CustomerEmail", customerEmail)
+      // localStorage.setItem("TotalPayableAmount", prodQuantDialog === 0 ? prodCount * ProductPrice + DeliveryCharge : prodQuantDialog * ProductPrice + DeliveryCharge)
 
       useEffect(()=>{
             checkFieldValue();
@@ -43,14 +44,13 @@ function TakeDeliveryAddress() {
             }
 
 
-      }, [district , pinCode , homeAddress , prodQuantDialog])
+      }, [district , pinCode , homeAddress , prodQuantDialog , customerEmail])
 
       const handleAddProduct = () => {
             prodCount += 1;
             setProdCount(prodCount);
       }
-      
-      
+
       const handleDecrementProduct = () => {
             
             if(prodCount===1){
@@ -62,7 +62,7 @@ function TakeDeliveryAddress() {
       }
       
       const checkFieldValue = ()=>{
-            if(pinCode.length ===6   && homeAddress.length>0 && district.length>0){
+            if(pinCode.length ===6   && homeAddress.length>0 && district.length>0 && customerEmail.length>0 ){
                   setIsDisabled(false)
             }
             else{
@@ -70,6 +70,17 @@ function TakeDeliveryAddress() {
             }
       }
 
+      const handleEmailChange = ()=>(e)=>{
+            const email = e.target.value;
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (emailRegex.test(email)) {
+                  // Valid email format
+                  setCustomerEmail(email);
+            } else {
+                  // Invalid email format
+                  setCustomerEmail('');
+            }
+      }
 
       if(loading){
             return <SplashScreenForShop/>
@@ -96,8 +107,10 @@ function TakeDeliveryAddress() {
                               </div>
                               <div className="col-6 ">
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
-                                          <h5>Price({prodQuantDialog === 0 ? prodCount : prodQuantDialog} item)</h5>
-                                          <h5>Rs. {Math.floor(((prodQuantDialog === 0 ? prodCount : prodQuantDialog)  * ProductPrice)) }</h5>
+                                          {/* <h5>Price({prodQuantDialog === 0 ? prodCount : prodQuantDialog} item)</h5> */}
+                                          <h5>Price({prodCount} item)</h5>
+                                          {/* <h5>Rs. {Math.floor(((prodQuantDialog === 0 ? prodCount : prodQuantDialog)  * ProductPrice)) }</h5> */}
+                                          <h5>Rs. {Math.floor(( prodCount  * ProductPrice)) }</h5>
                                     </div>
                               </div>
                         </div>
@@ -132,7 +145,8 @@ function TakeDeliveryAddress() {
                                     
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           <h5>Payable Amount</h5>
-                                          <h5>{Math.floor((prodQuantDialog === 0 ? prodCount : prodQuantDialog) * ProductPrice + DeliveryCharge)}</h5>
+                                          {/* <h5>{Math.floor((prodQuantDialog === 0 ? prodCount : prodQuantDialog) * ProductPrice + DeliveryCharge)}</h5> */}
+                                          <h5>{Math.floor(( prodCount) * ProductPrice + DeliveryCharge)}</h5>
                                     </div>
                               </div>
                         </div>
@@ -146,16 +160,28 @@ function TakeDeliveryAddress() {
                                                 
                                           placeholder="PIN Code" onChange={(e)=>{
                                                 setPINcode(e.target.value)
-                                                
                                                 }} />
-                                          
                                     </div>
                               </div>
                               <div className="col-6 ">
-
                                     <div className="container mt-3 d-flex gap-5 border-bottom">
                                           
                                                 <Razorpayment disabledState={isDisabled} /> 
+                                    </div>
+                              </div>
+                        </div>
+                        <div className="row">
+                              <div className="col-6 border-end ">
+                                    <div className="col-6 border-end ">
+                                          <div className="container mt-3">
+                                                <small>Email</small>
+                                                <Form.Control size="lg" type="text"
+                                                      value={customerEmail}
+                                                      placeholder="Email" onChange={(e) => {
+                                                            setCustomerEmail(e.target.value)
+                                                            handleEmailChange(e);
+                                                      }} />
+                                          </div>
                                     </div>
                               </div>
                         </div>
@@ -175,6 +201,7 @@ function TakeDeliveryAddress() {
                                     </div>
                               </div>
                         </div>
+                        
                   </div>
             </div>
       )

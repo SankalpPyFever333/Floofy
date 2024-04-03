@@ -237,6 +237,10 @@ export default function ShowDoctorReviews({doctorId}) {
                         }));
 
                         setReviewRows(newReviewRows)
+                        // setReviewRows((prevRows) => {
+                        //       console.log("Updated rows: ", newReviewRows);
+                        //       return newReviewRows;
+                        // });
                         
 
                   } catch (error) {
@@ -250,7 +254,6 @@ export default function ShowDoctorReviews({doctorId}) {
       },[doctorId , setReviewRows])
 
       console.log("Review rows outer useefetc " , rows)
-      
       React.useEffect(()=>{
             
             console.log("Review rows in another useefect: " , rows)
