@@ -26,7 +26,7 @@ const restoreDatabase = () => {
 
       child.on("exit" , (code, signal)=>{
             if(code){
-                  console.log("Process exit with code: " , code);
+                  console.log("Process exit with code:" , code);
             }
             else if(signal){
                   console.log("Process killed with signal: " , signal)

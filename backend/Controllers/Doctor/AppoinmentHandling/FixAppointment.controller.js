@@ -5,6 +5,7 @@ const AppointmentModel = require("../../../Modals/DoctorModals/DoctorAppointment
 const fixAppointment = async (req, res) => {
       const {
         User,
+        UserEmail,
         Doctor,
         DateOfAppointment,
         Payment,
@@ -13,6 +14,7 @@ const fixAppointment = async (req, res) => {
 
       console.log(
         User,
+        UserEmail,
         Doctor,
         DateOfAppointment,
         Payment,
@@ -29,6 +31,7 @@ const fixAppointment = async (req, res) => {
       try {
             const newAppoinment = new AppointmentModel({
               User: User,
+              UserEmail: UserEmail,
               Doctor: new mongoose.Types.ObjectId(Doctor),
               paymentAmount: Payment,
               AppointmentDate: DateOfAppointment,
