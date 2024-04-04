@@ -33,7 +33,7 @@ export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
 
       
       return (
-            <div style={{position:"relative", marginLeft:"12rem" }} >
+            <div style={{position:"relative", marginLeft:"1rem" }} >
                   
 
                   <Box display="flex"  justifyContent= "space-evenly">
@@ -43,7 +43,7 @@ export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
                         </Box>
                         <Box mr={2}>
                               <Radio {...controlProps('Rescuer')} color="success" />
-                              <Typography>Rescuer</Typography>
+                              <Typography>Delivery Boy</Typography>
                         </Box>
                         <Box mr={2}>
                               <Radio {...controlProps('User')} color="default" />

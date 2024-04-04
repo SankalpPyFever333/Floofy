@@ -3,9 +3,11 @@ import Card from 'react-bootstrap/Card';
 import BookAppointmentWithDoctor from '../Profile/DoctorProfile/BookAppointmentWithDoctor';
 import DoctorRating from './DoctorRating';
 
-function ShowDoctorsList({joinedFloofy ,  email , username , doctorId }) {
+function ShowDoctorsList({ joinedFloofy, 
+      LicenseNumber,
+      LocationOfDoctor,
+      additionalTraining ,  email , username , doctorId }) {
       console.log("Doctor id in the list is : " , doctorId);
-
       return (
             <Card className='shadow border-top m-2 ' >
                   <Card.Header as="h5">{username}</Card.Header>
@@ -17,6 +19,16 @@ function ShowDoctorsList({joinedFloofy ,  email , username , doctorId }) {
                         <Card.Text>
                               joined Floofy: { new Date(joinedFloofy).toLocaleDateString()}
                         </Card.Text>
+                        <Card.Text>
+                              License Number: { LicenseNumber}
+                        </Card.Text>
+                        <Card.Text>
+                              Location: {LocationOfDoctor}
+                        </Card.Text>
+                        <Card.Text>
+                              Experience: { additionalTraining }
+                        </Card.Text>
+
                         <Card.Text>
                               email: { email}
                         </Card.Text>
