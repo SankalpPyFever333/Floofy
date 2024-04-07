@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { fetchAppointmentHistory } from './fetchDoctorsAppointment';
-
+import WhatsApplOgo  from "../../../Assets/WhatAppLogo.webp";
 
 export default function ShowAppointmentHistory({doctorId}) {
 
@@ -45,6 +45,7 @@ export default function ShowAppointmentHistory({doctorId}) {
                                     <TableCell align="right">Status</TableCell>
                                     <TableCell align="right">Appointment Date</TableCell>
                                     <TableCell align="right">Payment</TableCell>
+                                    <TableCell align="right">Message</TableCell>
                                     <TableCell align="right">Reason of Appointment</TableCell>
                               </TableRow>
                         </TableHead>
@@ -57,6 +58,12 @@ export default function ShowAppointmentHistory({doctorId}) {
                                           <TableCell align="right">{row.Status}</TableCell>
                                           <TableCell align="right">{row.AppointmentDate}</TableCell>
                                           <TableCell align="right">{row.PaymentStatus}</TableCell>
+                                          <TableCell align="right">
+                                                <a href="https://api.whatsapp.com/send?phone=6392361443&text=Join%20our%20Google%20Meet%20meeting:%20https://meet.google.com/hao-mayb-prb" target="_blank" rel="noopener noreferrer">
+                                                      <img src={WhatsApplOgo} alt="WhatsApp Logo" style={{ width: "2rem" }} />
+                                                </a>
+                                          </TableCell>
+
                                           <TableCell align="right">{row.ReasonForAppointment}</TableCell>
                                     </TableRow>
                               ))}
