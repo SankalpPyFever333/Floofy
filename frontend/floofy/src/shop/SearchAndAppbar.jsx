@@ -55,11 +55,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
 }));
 
-export default function SearchAndAppbar() {
+export default function SearchAndAppbar({setSearchQuery}) {
       const navigate = useNavigate();
 
       const handleViewOrders = ()=>{
             navigate(`/viewYourOrders/${localStorage.getItem("userId")}`)
+      }
+
+      const handleSearchValue = (e)=>{
+
       }
 
       return (
@@ -72,7 +76,7 @@ export default function SearchAndAppbar() {
                                     justifyContent: "space-between"
                               }
                         } >
-                              <Search className='bg-light text-success' >
+                              <Search onChange={(e) => { setSearchQuery(e.target.value) }} className='bg-light text-success' >
                                     <SearchIconWrapper>
                                           <SearchIcon />
                                     </SearchIconWrapper>

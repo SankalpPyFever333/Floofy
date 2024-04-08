@@ -62,9 +62,3 @@ function ProfileWithBUtton() {
 }
 
 export default ProfileWithBUtton
-
-// area wise searching
-// inventory management
-// content posting
-// aggregation
-// increase dataset
