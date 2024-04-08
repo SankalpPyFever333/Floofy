@@ -22,7 +22,8 @@ export default function ShowAppointmentHistory({doctorId}) {
                   Status: appointment.Status,
                   AppointmentDate: new Date(appointment.AppointmentDate).toLocaleDateString(),
                   PaymentStatus: appointment.paymentAmount,
-                  ReasonForAppointment: appointment.ReasonForAppointment
+                  ReasonForAppointment: appointment.ReasonForAppointment,
+                  ContactNumber: appointment.ContactNumber
             })));
 
 
@@ -47,10 +48,12 @@ export default function ShowAppointmentHistory({doctorId}) {
                                     <TableCell align="right">Payment</TableCell>
                                     <TableCell align="right">Message</TableCell>
                                     <TableCell align="right">Reason of Appointment</TableCell>
+                                    <TableCell align="right">Contact Number</TableCell>
                               </TableRow>
                         </TableHead>
                         <TableBody>
                               {rows.map((row) => (
+                                    
                                     <TableRow key={row.name}>
                                           <TableCell component="th" scope="row">
                                                 {row.UserName}
@@ -59,12 +62,13 @@ export default function ShowAppointmentHistory({doctorId}) {
                                           <TableCell align="right">{row.AppointmentDate}</TableCell>
                                           <TableCell align="right">{row.PaymentStatus}</TableCell>
                                           <TableCell align="right">
-                                                <a href="https://api.whatsapp.com/send?phone=6392361443&text=Join%20our%20Google%20Meet%20meeting:%20https://meet.google.com/hao-mayb-prb" target="_blank" rel="noopener noreferrer">
+                                                <a href={`https://api.whatsapp.com/send?phone=${row.ContactNumber}&text=Join%20our%20Google%20Meet%20meeting:%20https://meet.google.com/hao-mayb-prb`} target="_blank" rel="noopener noreferrer">
                                                       <img src={WhatsApplOgo} alt="WhatsApp Logo" style={{ width: "2rem" }} />
                                                 </a>
                                           </TableCell>
-
+                                          
                                           <TableCell align="right">{row.ReasonForAppointment}</TableCell>
+                                          <TableCell align="right">{row.ContactNumber}</TableCell>
                                     </TableRow>
                               ))}
                         </TableBody>

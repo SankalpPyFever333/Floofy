@@ -35,7 +35,7 @@ function ProfileWithBUtton() {
           <div className="d-flex gap-3">
             <Button variant="info" onClick={handleEditClick} >Edit Profile</Button>{' '}
             <Button variant="info" onClick={handleNavigatePostContent} >create post</Button>{' '}
-            <BookAppointmentWithDoctor/>
+            {/* <BookAppointmentWithDoctor/> */}
 
           </div>
         </div>

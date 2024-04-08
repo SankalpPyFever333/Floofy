@@ -43,7 +43,7 @@ function MyPostCard() {
                                                       <hr className='shadow border-1' />
                                                 </Card.Body>
 
-                                                <img src={DogImage} alt="" className='w-100' />
+                                                <img src={post.Image} alt="" className='w-100' />
                                                 <hr className='shadow border-3' />
                                                 <Card.Body className='' >
                                                       <Card.Title className='text-opacity-80 ' >{post.title}</Card.Title>
