@@ -55,7 +55,10 @@ function ProfileWithBUtton() {
         </div>
       </div>
 
-      <MainDoctorDashBoradComp doctoridFromFrontend={localStorage.getItem("userId")} />
+      {
+        localStorage.getItem("userType") === "User" ? null : <MainDoctorDashBoradComp doctoridFromFrontend={localStorage.getItem("userId")} />
+      }
+      
 
     </div>
   )

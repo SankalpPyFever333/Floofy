@@ -37,7 +37,7 @@ function LoginComponent() {
                   console.log(loginDataFromDb)
 
                   // console.log(`entered username is ${UserName} and password is ${password}`)
-                  
+
                         // console.log(loginDataFromDb.Response.username)
                         // console.log(loginDataFromDb.Response.password)
                         
@@ -116,12 +116,8 @@ function LoginComponent() {
                                                       left: "-157px"}} />
                               </div>
                               <div className="col-sm-6 " style={{position:"relative" ,  top:"50px"}} >
-                                    <div style={{ margin: "20px" }} className="stepComplete">
-                                          {/* <h4>Welcome to floofy</h4> */}
-                                    </div>
-                              
-                        
-                                    <div className="logincinfo text-center">
+
+                                    <div className="logincinfo text-center shadow-lg" style={{backgroundColor:"#C1FCD3"}} >
                                           <Box
                                                 component="form"
                                                 sx={{
@@ -133,7 +129,7 @@ function LoginComponent() {
                                                 <TextField id="standard-basic" label="Username" variant="standard" onChange={(username)=>{
                                                       setUserName(username.target.value)
                                                 }} />
-                                                <TextField id="standard-basic" label="password" variant="standard" onChange={(password)=>{
+                                                <TextField id="standard-basic" label="Password" type='password' variant="standard" onChange={(password)=>{
                                                       setPassword(password.target.value)
                                                 }} />
                                                 
@@ -153,7 +149,7 @@ function LoginComponent() {
                                                 <br />
                                                 
                                                 <br />
-                                                <span onClick={handleSpanClick} > <i>Don't have an account?</i>  </span>
+                                                <span onClick={handleSpanClick} > <i>Don't have an account? sign up </i>  </span>
                                           </Box>
                                     </div>
                               </div>

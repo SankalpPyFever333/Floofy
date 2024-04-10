@@ -27,8 +27,8 @@ function AccordianForDoctorData({ DoctorInfoData }) {
                                           <div className="docData">
                                                 <h5>additionalTraining:</h5>
                                                 {DoctorInfoData.DoctorDetails.Specialization?.additionalTraining}
-                                                <h5>areaOfSpecialization:</h5>
-                                                {DoctorInfoData.DoctorDetails.Specialization?.areaOfSpecialization}
+                                                {/* <h5>areaOfSpecialization:</h5>
+                                                {DoctorInfoData.DoctorDetails.Specialization?.areaOfSpecialization} */}
                                           </div>
                                     </Accordion.Body>
                               </Accordion.Item>

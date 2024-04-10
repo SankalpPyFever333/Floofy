@@ -16,6 +16,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import CableIcon from '@mui/icons-material/Cable';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import { Sling as Hamburger } from 'hamburger-react'
 export default function LeftDrawer() {
       const [state, setState] = React.useState({
@@ -23,6 +25,8 @@ export default function LeftDrawer() {
             left: false
             
       });
+
+      const navigate = useNavigate();
 
       const myListItems = [
             {text:"Shop" , icon: <ShoppingCartIcon/>},
@@ -38,6 +42,17 @@ export default function LeftDrawer() {
 
             setState({ ...state, [anchor]: open });
       };
+
+      const handleLogout = ()=>{
+            Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Logged out successfully",
+                  showConfirmButton: false,
+                  timer: 1500
+            });
+            navigate("/LoginAfterLogOut")
+      }
 
       const list = (anchor) => (
             <Box
@@ -62,7 +77,7 @@ export default function LeftDrawer() {
                   <List>
                         {myListItems.map((item, index) => (
                               <ListItem key={item.text} disablePadding>
-                                    <ListItemButton>
+                                    <ListItemButton onClick={item.text === "Log out" ? handleLogout : null} >
                                           <ListItemIcon>
                                                 {item.icon}
                                           </ListItemIcon>

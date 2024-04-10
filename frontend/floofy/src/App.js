@@ -25,7 +25,7 @@ import OrderEditingComp from './shop/OrderEditingComp';
 
 function App() {
   return (
-    <div className="App" >
+    <div className="App">
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<SignupComponent />} /> */}
@@ -48,6 +48,7 @@ function App() {
           />
 
           <Route path="/LoginAfterLogOut" element={<LoginComponent />} />
+          {/* <Route path="/logoutFromuserEnd" element={<LoginComponent />} /> */}
           <Route
             path="/doctorprofileedit/:id"
             element={<DoctorProfileUpdate />}
