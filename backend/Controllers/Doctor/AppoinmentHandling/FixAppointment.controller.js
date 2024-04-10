@@ -5,7 +5,7 @@ const AppointmentModel = require("../../../Modals/DoctorModals/DoctorAppointment
 const fixAppointment = async (req, res) => {
       const {
         User,
-        UserEmail,
+        ContactNumber,
         Doctor,
         DateOfAppointment,
         Payment,
@@ -14,7 +14,7 @@ const fixAppointment = async (req, res) => {
 
       console.log(
         User,
-        UserEmail,
+        ContactNumber,
         Doctor,
         DateOfAppointment,
         Payment,
@@ -31,7 +31,7 @@ const fixAppointment = async (req, res) => {
       try {
             const newAppoinment = new AppointmentModel({
               User: User,
-              UserEmail: UserEmail,
+              ContactNumber: ContactNumber,
               Doctor: new mongoose.Types.ObjectId(Doctor),
               paymentAmount: Payment,
               AppointmentDate: DateOfAppointment,
@@ -48,5 +48,3 @@ const fixAppointment = async (req, res) => {
 
 module.exports = fixAppointment;
 
-
-// Do fix appointment

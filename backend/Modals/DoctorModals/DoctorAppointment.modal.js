@@ -14,10 +14,10 @@ const AppointmentSchema = new mongoose.Schema(
       required: true,
     },
 
-    UserEmail:{
+    ContactNumber: {
       type: String,
-      required: true
-    } , 
+      required: true,
+    },
 
     AppointmentDate: {
       type: Date,
@@ -33,9 +33,9 @@ const AppointmentSchema = new mongoose.Schema(
       type: String,
     },
     paymentAmount: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
     ReasonForAppointment: {
       type: String,
       required: true,

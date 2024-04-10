@@ -85,9 +85,10 @@ const countProductSales = async (req, res) => {
   console.log(getLastStartDate)
   try {
       const productCount = await countProductTimeframe(getLastStartDate);
+      console.log("Product count:" , productCount);
       if( Array.isArray(productCount) && productCount.length>0){
         
-            res.status(200).json({message:"Product counted" , productCount: productCount.length})
+            res.status(200).json({message:"Product counted" , productCount: productCount[0].count})
             return productCount.length;
       }
       else{
