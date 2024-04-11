@@ -41,10 +41,10 @@ export default function WhatDefineYou({setUserType , showAdminRadio= false}) {
                               <Radio {...controlProps('Doctor')} color="secondary" />
                               <Typography>Doctor</Typography>
                         </Box>
-                        <Box mr={2}>
+                        {/* <Box mr={2}>
                               <Radio {...controlProps('Rescuer')} color="success" />
                               <Typography>Delivery Boy</Typography>
-                        </Box>
+                        </Box> */}
                         <Box mr={2}>
                               <Radio {...controlProps('User')} color="default" />
                               <Typography>User</Typography>

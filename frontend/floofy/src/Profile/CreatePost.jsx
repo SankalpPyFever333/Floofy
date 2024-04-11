@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
-
+import LogoImage from "../Assets/FloofyLogo.png"
 
 function CreatePost() {
 
@@ -80,13 +79,14 @@ function CreatePost() {
     <div>
 
             <div className="row">
-                  <div className="col-sm-5">
-
+                  <div className="col-sm-7">
+                        <img  src={LogoImage} alt="logo" />
                   </div>
 
-                  <div className="col-sm-7">
+                  <div className="col-sm-4">
 
                           <Form enctype="multipart/form-data">
+                              <h4>Create your post</h4>
                                 <Form.Group className="mb-3" controlId="Product_Name">
                                       <Form.Label>Title</Form.Label>
                                       <Form.Control

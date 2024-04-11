@@ -32,11 +32,6 @@ function ForgotPassword() {
             }
             else if(newPassword === newConfirmPassword){
 
-                  // phone verification done using otp.
-
-                  // In this , you need to encrypt the password and then save it to databse.
-                  // From here , send the phone, and new password in the request body.
-
                   const response = await fetch("http://localhost:3000/api/updatePassword", {
                         method: 'POST',
                         headers:{

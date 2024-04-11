@@ -21,7 +21,7 @@ export default function AppBarAdmin() {
                               </Typography>
                               <Box sx={{ flexGrow: 1 }} />
                               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <IconButton
+                                    {/* <IconButton
                                           size="large"
                                           aria-label="show 7 new notifications"
                                           color="inherit"
@@ -29,7 +29,7 @@ export default function AppBarAdmin() {
                                           <Badge badgeContent={7} color="error">
                                                 <NotificationsIcon />
                                           </Badge>
-                                    </IconButton>
+                                    </IconButton> */}
                               </Box>
                         </Toolbar>
                   </AppBar>
