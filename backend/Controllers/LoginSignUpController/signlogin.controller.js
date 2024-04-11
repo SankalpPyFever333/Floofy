@@ -2,8 +2,6 @@ const Doctor = require("../../Modals/Doctor.modal");
 // const express = require("express");
 const Rescuer = require("../../Modals/RescuerModal/Rescuer.modal");
 
-// Doctor Sign up
-// This will be used when user select himself as a doctor.
 const AddDoctor = async (req, res) => {
   const {
     Name,

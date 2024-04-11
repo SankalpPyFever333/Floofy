@@ -9,7 +9,6 @@ admin.initializeApp({
 
 const auth = getAuth();
 
-// Verify OTP on the server
 async function verifyOtp(phoneNumber, enteredOtp) {
   try {
     const user = await admin.auth().getUserByPhoneNumber(phoneNumber).catch((error)=>{
@@ -39,16 +38,6 @@ async function verifyOtp(phoneNumber, enteredOtp) {
   }
 }
 
-// Example usage
-
-// in this we have to pass the phone number and otp enter by the user on the cleint side.
-// verifyOtp("+123456789", "123456").then((isValid) => {
-//   if (isValid) {
-//     // Proceed with user authentication or other actions
-//   } else {
-//     // Handle invalid OTP
-//   }
-// });
 
 
 module.exports = verifyOtp;
