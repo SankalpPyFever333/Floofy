@@ -5,12 +5,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-
-
-import OpenShoppingCart from './OpenShoppingCart';
-import ShoppingCartButton from './ShoppingCartButton';
-import MainViewYourOrder from './ViewYourOrders/MainViewYourOrder';
-import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -55,19 +49,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
 }));
 
-export default function SearchAndAppbar({setSearchQuery}) {
+export default function SearchDoctor({ setSearchQuery }) {
       const navigate = useNavigate();
 
-      const handleViewOrders = ()=>{
+      const handleViewOrders = () => {
             navigate(`/viewYourOrders/${localStorage.getItem("userId")}`)
       }
 
-      const handleSearchValue = (e)=>{
+      const handleSearchValue = (e) => {
 
       }
 
       return (
-            <Box sx={{ flexGrow: 1 , marginBottom:"12px"}}>
+            <Box sx={{ flexGrow: 1, marginBottom: "12px" }}>
                   <AppBar position="static" >
                         <Toolbar style={
                               {
@@ -81,14 +75,12 @@ export default function SearchAndAppbar({setSearchQuery}) {
                                           <SearchIcon />
                                     </SearchIconWrapper>
                                     <StyledInputBase
-                                          placeholder="Search products"
+                                          placeholder="Search Doctors"
                                           inputProps={{ 'aria-label': 'search' }}
                                     />
                               </Search>
-                              {/* Instead of this , render the cart component build by me. */}
-                              {/* <OpenShoppingCart/> */}
-                              <Button onClick={handleViewOrders} >View Order</Button>
-                              {/* <ShoppingCartButton/> */}
+                              
+
                         </Toolbar>
 
                   </AppBar>

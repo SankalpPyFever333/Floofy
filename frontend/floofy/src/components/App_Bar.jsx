@@ -215,7 +215,7 @@ export default function App_Bar() {
                               </Search> */}     
                               <Box sx={{ flexGrow: 1 }} />
                               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                    {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                           <Badge badgeContent={4} color="error">
                                                 <ImportContactsIcon />
                                           </Badge>
@@ -239,7 +239,7 @@ export default function App_Bar() {
                                           color="inherit"
                                     >
                                           <AccountCircle />
-                                    </IconButton>
+                                    </IconButton> */}
                               </Box>
                               <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                                     <IconButton
