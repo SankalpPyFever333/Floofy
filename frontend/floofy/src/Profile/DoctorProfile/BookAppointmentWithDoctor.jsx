@@ -19,6 +19,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
             Doctor: doctorIdCard,
             Payment: '200',
             DateOfAppointment: '',
+            TimeOfAppointment:'',
             file: null
       });
 
@@ -120,6 +121,14 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                                                 type="date"
                                                 onChange={handleInputChange}
                                                 name="DateOfAppointment"
+                                          />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_Name">
+                                          <Form.Label>Appointment Time</Form.Label>
+                                          <Form.Control
+                                                type="time"
+                                                onChange={handleInputChange}
+                                                name="TimeOfAppointment"
                                           />
                                     </Form.Group>
                                     
