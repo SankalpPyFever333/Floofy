@@ -87,7 +87,6 @@ const countNewUsers = async (req, res) => {
         }
 
       default:
-      // by default show the data for the last year , that's why not using the break above the default.
     }
   } catch (error) {
     console.log("Error in counting users", error);
@@ -98,4 +97,3 @@ const countNewUsers = async (req, res) => {
 
 module.exports = { countNewUsers };
 
-// next target is to count the number of sales last month also count the sale of a particular product.

@@ -8,6 +8,7 @@ const fixAppointment = async (req, res) => {
         ContactNumber,
         Doctor,
         DateOfAppointment,
+        TimeOfAppointment,
         Payment,
         ReasonForAppointment,
       } = req.body;
@@ -17,14 +18,10 @@ const fixAppointment = async (req, res) => {
         ContactNumber,
         Doctor,
         DateOfAppointment,
+        TimeOfAppointment, 
         Payment,
         ReasonForAppointment
       );
-
-      // handle the file handling bcoz not getting the file object.
-      // think how can pass the doctor id and user id from the client to here.
-
-
       const file = req.file;
       console.log("File object: " , file);
       // console.log(`userId: ${User} and doctorId is: ${Doctor}`)
@@ -35,6 +32,7 @@ const fixAppointment = async (req, res) => {
               Doctor: new mongoose.Types.ObjectId(Doctor),
               paymentAmount: Payment,
               AppointmentDate: DateOfAppointment,
+              TimeOfAppointment: TimeOfAppointment,
               PetImage: `http://localhost:3000/uploads/${file.originalname}`,
               ReasonForAppointment: ReasonForAppointment,
             });
