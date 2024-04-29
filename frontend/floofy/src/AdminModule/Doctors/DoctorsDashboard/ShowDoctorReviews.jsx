@@ -248,7 +248,7 @@ export default function ShowDoctorReviews({doctorId}) {
                   }
             }
 
-            // In this rows are not rendering when the component renders due to asynchronous nature. See this later.
+            
             
             fetchReviewData()
       },[doctorId , setReviewRows])
@@ -322,11 +322,6 @@ export default function ShowDoctorReviews({doctorId}) {
             [order, orderBy, page, rowsPerPage],
       );
 
-
-      // if(rows.length === 0){
-      //       return  <div>No reviews available</div>;
-      // }
-
       return (
             <Box sx={{ width: '100%' }}>
                   <Paper sx={{ width: '100%', mb: 2 }}>
@@ -347,7 +342,7 @@ export default function ShowDoctorReviews({doctorId}) {
                                     />
                                     <TableBody>
 
-                                          {visibleRows.map((row, index) => {
+                                          {rows.map((row, index) => {
                                                 const isItemSelected = isSelected(row.id);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
 

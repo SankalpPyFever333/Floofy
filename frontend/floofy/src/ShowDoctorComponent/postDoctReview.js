@@ -1,4 +1,4 @@
-export const postDoctorReview = async(doctorId) => {
+export const postDoctorReview = async(doctorId , rating) => {
       const responsePOstReview = await fetch(
         "http://localhost:3000/api/postReviewToDoctor",
         {
@@ -9,12 +9,13 @@ export const postDoctorReview = async(doctorId) => {
           body: JSON.stringify({
             User: localStorage.getItem("userId"),
             Doctor: doctorId,
-            rating: localStorage.getItem("DoctorRating"),
+            rating: rating,
           }),
         }
       );
 
       if(responsePOstReview.ok){
+            console.log("Review Data is: " , responsePOstReview)
             return responsePOstReview;
       }
       else{

@@ -215,7 +215,7 @@ function EnhancedTableToolbar(props) {
                               id="tableTitle"
                               component="div"
                         >
-                              Reviews
+                              Products Reviews
                         </Typography>
                   )}
 

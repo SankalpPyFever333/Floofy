@@ -110,12 +110,12 @@ function Row(props) {
         <TableCell align="left">{row.DeliveryAddress.HomeAddress},{row.DeliveryAddress.PIN}</TableCell>
         <TableCell align="left">{row.createdAt.toString()}</TableCell>
         <TableCell align="left">
-          <Tooltip title="Edit Order">
+          {/* <Tooltip title="Edit Order">
             <IconButton onClick={HandleOrderEdit}>
               <EditIcon />
             </IconButton>
           </Tooltip>
-          {" / "}
+          {" / "} */}
           <Tooltip title="Cancel Order">
             <IconButton onClick={handleCancelOrder} >
               <DeleteIcon />
@@ -230,7 +230,7 @@ function MainViewYourOrder() {
             <TableCell align="left">Status</TableCell>
             <TableCell align="left">Delivery Address</TableCell>
             <TableCell align="left">Order Date</TableCell>
-            <TableCell align="left">Edit/Delete</TableCell>
+            <TableCell align="left">Cancel Order</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

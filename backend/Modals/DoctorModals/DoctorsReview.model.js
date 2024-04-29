@@ -17,13 +17,8 @@ const DoctorReviewSchema = new mongoose.Schema(
       required: true,
       min: 1,
       max: 5,
-    },
-    // Comment:{
-    //     type: String,
-    //     required: true
-    // }
+    }
 
-    // change in the controller , i had removed comment.
   },
   {
     timestamps: true,

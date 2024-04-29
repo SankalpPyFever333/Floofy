@@ -9,11 +9,11 @@ import { fetchDoctorsReview } from '../AdminModule/Doctors/DoctorsDashboard/fetc
 export default function DoctorRating({doctorIdToRate}) {
       const [value, setValue] = React.useState(0);
 
-      
+      console.log(value)
 
 
       const handleReviewClick = async()=>{
-            const postReview = await postDoctorReview(doctorIdToRate);
+            const postReview = await postDoctorReview(doctorIdToRate , value);
             
             if(postReview.ok){
                   Swal.fire({
@@ -35,10 +35,9 @@ export default function DoctorRating({doctorIdToRate}) {
       React.useEffect(()=>{
             if(value>0){
                   handleReviewClick();
+                  localStorage.setItem("DoctorRating", value)
             }
-            localStorage.setItem("DoctorRating", value)
-
-
+            console.log(value)
       } , [value]);
       return (
             <Box
@@ -47,10 +46,11 @@ export default function DoctorRating({doctorIdToRate}) {
                   }}
             >
                   <Typography component="legend">Rate Doctor</Typography>
+                  
                   <Rating
                         name="simple-controlled"
-                        value={localStorage.getItem("DoctorRating")}
-                        onClick={(event, newValue) => {
+                        value={value}
+                        onChange={(event, newValue) => {
                               setValue(newValue);
                         }}
                   />

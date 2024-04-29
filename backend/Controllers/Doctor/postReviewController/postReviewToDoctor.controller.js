@@ -6,7 +6,7 @@ const postReviewDoctor = async (req, res)=>{
             const postedreview = new DoctorReviewModel({
               User: User,
               Doctor: Doctor,
-              rating: rating,
+              rating: rating.toString(),
               
             });
             await postedreview.save();

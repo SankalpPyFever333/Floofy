@@ -18,7 +18,7 @@ function Razorpayment({disabledState}) {
                   // key: 'rzp_live_HGCsLV5PjSYo8F' , 
                   amount: '5000000',
                   currency: 'INR',
-                  name: 'DigiCoders Technologies',
+                  name: 'Floofy',
                   description: 'Fees Payment',
                   image: '',
                   order_id: paymentConfirmed.OrderResponse.id,
