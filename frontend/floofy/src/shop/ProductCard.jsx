@@ -32,29 +32,78 @@ console.log("image url:" , imgSrc)
 
       return (
       
-            <Card sx={{ maxWidth: "14rem" }} onClick = {handleCardClick} style={{margin:"12px"}}>
+            <Card
+                  sx={{
+                        maxWidth: "14rem",
+                        cursor: "pointer",
+                        boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
+                        border: "10px solid #f0f0f0",
+                        borderRadius: "10px",
+                        // transition: "transform 0.2s",
+                        // "&:hover": {
+                        //       transform: "translateY(-5px)",
+                        //       boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
+                        //       border: "2px solid #ccc",
+                        // }
+                  }}
+                  onClick={handleCardClick}
+            >
                   <CardMedia
                         component="img"
-                        alt= {category}
-                        height="100"
+                        alt={category}
+                        height="150"
                         image={imgSrc}
+                        sx={{
+                              borderTopLeftRadius: "8px",
+                              borderTopRightRadius: "8px",
+                        }}
                   />
-
                   <CardContent>
-                        <Typography gutterBottom variant="h6" style={{
-                              fontFamily:"serif",
-                              fontSize:"15px",
-                              fontWeight:"bolder",
-                              color:"ActiveCaption"
-                        }} component="div">
+                        <Typography
+                              gutterBottom
+                              variant="h6"
+                              component="div"
+                              sx={{
+                                    fontFamily: "Arial, sans-serif",
+                                    fontSize: "16px",
+                                    fontWeight: "bold",
+                                    color: "#333",
+                              }}
+                        >
                               {ProdName}
                         </Typography>
-                        <Typography variant="body2"  color="text.secondary">
+                        <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              sx={{
+                                    fontFamily: "Arial, sans-serif",
+                                    fontSize: "14px",
+                                    color: "#666",
+                              }}
+                        >
                               {ProdDescription}
                         </Typography>
                   </CardContent>
-                  <CardActions style={{display:"flex" , justifyContent:"space-between" , backgroundColor:"lightgoldenrodyellow"}}>
-                        <Typography variant="body2" color="text.primary">
+                  <CardActions
+                        sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              backgroundColor: "#f9f9f9",
+                              borderBottomLeftRadius: "8px",
+                              borderBottomRightRadius: "8px",
+                        }}
+                  >
+                        <Typography
+                              variant="body2"
+                              color="text.primary"
+                              sx={{
+                                    fontFamily: "Arial, sans-serif",
+                                    fontSize: "16px",
+                                    fontWeight: "bold",
+                                    color: "#555",
+                                    marginLeft: "12px",
+                              }}
+                        >
                               Rs.{Price}
                         </Typography>
                   </CardActions>

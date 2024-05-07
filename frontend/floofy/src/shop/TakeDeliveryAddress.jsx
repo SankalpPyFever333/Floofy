@@ -93,10 +93,8 @@ function TakeDeliveryAddress() {
                               <div className="col-6 border-end shadow">
                                     <h3>Order Details</h3>
                               </div>
-                              
-                              <div className="col-4 shadow ">
+                              <div className="col-4 shadow">
                                     <h4>Price Details</h4>
-                                    
                               </div>
                         </div>
                         <div className="row">
@@ -105,12 +103,10 @@ function TakeDeliveryAddress() {
                                           <h5>Delivery Address</h5>
                                     </div>
                               </div>
-                              <div className="col-6 ">
-                                    <div className="container mt-3 d-flex gap-5 border-bottom">
-                                          {/* <h5>Price({prodQuantDialog === 0 ? prodCount : prodQuantDialog} item)</h5> */}
+                              <div className="col-6">
+                                    <div className="container mt-3 d-flex justify-content-between border-bottom">
                                           <h5>Price({prodCount} item)</h5>
-                                          {/* <h5>Rs. {Math.floor(((prodQuantDialog === 0 ? prodCount : prodQuantDialog)  * ProductPrice)) }</h5> */}
-                                          <h5>Rs. {Math.floor(( prodCount  * ProductPrice)) }</h5>
+                                          <h5>Rs. {Math.floor(prodCount * ProductPrice)}</h5>
                                     </div>
                               </div>
                         </div>
@@ -118,14 +114,16 @@ function TakeDeliveryAddress() {
                               <div className="col-6 border-end">
                                     <div className="container mt-3">
                                           <small>Home Address</small>
-                                          <Form.Control size="lg" type="text"  onChange={(e)=>{
-                                                setHomeAdress(e.target.value)
-                                                
-                                                }} placeholder="Home Address" />
+                                          <Form.Control
+                                                size="lg"
+                                                type="text"
+                                                onChange={(e) => setHomeAdress(e.target.value)}
+                                                placeholder="Home Address"
+                                          />
                                     </div>
                               </div>
-                              <div className="col-6 ">
-                                    <div className="container mt-3 d-flex gap-5 border-bottom">
+                              <div className="col-6">
+                                    <div className="container mt-3 d-flex justify-content-between border-bottom">
                                           <h5>Delivery Charges</h5>
                                           <h5>Rs. {DeliveryCharge}</h5>
                                     </div>
@@ -135,53 +133,55 @@ function TakeDeliveryAddress() {
                               <div className="col-6 border-end">
                                     <div className="container mt-3">
                                           <small>District</small>
-                                          <Form.Control size="lg" type="text" placeholder="District" onChange={(e)=>{
-                                                setDistrict(e.target.value)
-                                                
-                                                }} />
+                                          <Form.Control
+                                                size="lg"
+                                                type="text"
+                                                placeholder="District"
+                                                onChange={(e) => setDistrict(e.target.value)}
+                                          />
                                     </div>
                               </div>
-                              <div className="col-6 ">
-                                    
-                                    <div className="container mt-3 d-flex gap-5 border-bottom">
+                              <div className="col-6">
+                                    <div className="container mt-3 d-flex justify-content-between border-bottom">
                                           <h5>Payable Amount</h5>
-                                          {/* <h5>{Math.floor((prodQuantDialog === 0 ? prodCount : prodQuantDialog) * ProductPrice + DeliveryCharge)}</h5> */}
-                                          <h5>{Math.floor(( prodCount) * ProductPrice + DeliveryCharge)}</h5>
+                                          <h5>{Math.floor(prodCount * ProductPrice + DeliveryCharge)}</h5>
+                                    </div>
+                              </div>
+                        </div>
+                        <div className="row">
+                              <div className="col-6 border-end">
+                                    <div className="container mt-3">
+                                          <small>PIN Code</small>
+                                          <Form.Control
+                                                size="lg"
+                                                type="text"
+                                                pattern="[0-9]{6}"
+                                                maxLength={6}
+                                                placeholder="PIN Code"
+                                                onChange={(e) => setPINcode(e.target.value)}
+                                          />
+                                    </div>
+                              </div>
+                              <div className="col-6">
+                                    <div className="container mt-3 d-flex justify-content-between border-bottom">
+                                          <Razorpayment disabledState={isDisabled} />
                                     </div>
                               </div>
                         </div>
                         <div className="row">
                               <div className="col-6 border-end ">
                                     <div className="container mt-3">
-                                          <small>PIN Code</small>
-                                          <Form.Control size="lg" type="text" 
-                                          pattern='[0-9]{6}'
-                                          maxLength={6}
-                                                
-                                          placeholder="PIN Code" onChange={(e)=>{
-                                                setPINcode(e.target.value)
-                                                }} />
-                                    </div>
-                              </div>
-                              <div className="col-6 ">
-                                    <div className="container mt-3 d-flex gap-5 border-bottom">
-                                          
-                                                <Razorpayment disabledState={isDisabled} /> 
-                                    </div>
-                              </div>
-                        </div>
-                        <div className="row">
-                              <div className="col-6 border-end ">
-                                    <div className="col-6 border-end ">
-                                          <div className="container mt-3">
-                                                <small>Email</small>
-                                                <Form.Control size="lg" type="text"
-                                                      value={customerEmail}
-                                                      placeholder="Email" onChange={(e) => {
-                                                            setCustomerEmail(e.target.value)
-                                                            handleEmailChange(e);
-                                                      }} />
-                                          </div>
+                                          <small>Email</small>
+                                          <Form.Control
+                                                size="lg"
+                                                type="text"
+                                                value={customerEmail}
+                                                placeholder="Email"
+                                                onChange={(e) => {
+                                                      setCustomerEmail(e.target.value);
+                                                      handleEmailChange(e);
+                                                }}
+                                          />
                                     </div>
                               </div>
                         </div>
@@ -190,20 +190,31 @@ function TakeDeliveryAddress() {
                                     <div className="container mt-3">
                                           <small>quantity</small>
                                           <br />
-                                          <Button onClick={handleDecrementProduct} variant="warning" size="sm" className='fs-4' active>
+                                          <Button
+                                                onClick={handleDecrementProduct}
+                                                variant="warning"
+                                                size="sm"
+                                                className="fs-4"
+                                                active
+                                          >
                                                 -
-                                          </Button>{' '}
-                                          
+                                          </Button>{" "}
                                           <SlideQuanityDialog prodCount={prodCount} />
-                                          <Button variant="primary" onClick={handleAddProduct} className='fs-4' size="sm" active>
+                                          <Button
+                                                variant="primary"
+                                                onClick={handleAddProduct}
+                                                className="fs-4"
+                                                size="sm"
+                                                active
+                                          >
                                                 +
                                           </Button>
                                     </div>
                               </div>
                         </div>
-                        
                   </div>
             </div>
+
       )
 }
 
