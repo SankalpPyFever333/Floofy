@@ -9,6 +9,8 @@ const totalRevenueCalculation = async (req, res) => {
     switch (getLastStartDate) {
       case "Last Week":
         const { startDateWeek, endDateWeek } = getLastWeekDates();
+        console.log("Statrt Date Week:" , startDateWeek)
+        console.log("End Date Week:" , endDateWeek)
         const calculateRevenueLastWeek = await ProductOrder.aggregate([
           {
             $match: {
@@ -44,8 +46,9 @@ const totalRevenueCalculation = async (req, res) => {
         }
         
       case "Last Month":
-        const { LastMonthStartDate, LastMonthEndDate } =
-          getLastMonthStartDate();
+        const { LastMonthStartDate, LastMonthEndDate } = getLastMonthStartDate();
+          console.log("Statrt Date Month:" , LastMonthStartDate)
+        console.log("End Date Month:" , LastMonthEndDate)
         const calculateRevenueLastMonth = await ProductOrder.aggregate([
           {
             $match: {

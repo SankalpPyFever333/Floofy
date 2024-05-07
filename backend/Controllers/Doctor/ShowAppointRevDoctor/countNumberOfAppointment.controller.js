@@ -30,14 +30,15 @@ const countNumberOFAppointment = async(getLastStartDate , doctorId)=>{
                         return countApppointmentLastWeek;
 
                   case "Last Month":
-                        const { startDateMonth, endDateMonth } = getLastMonthStartDate();
+                        const { LastMonthStartDate, LastMonthEndDate } =
+                          getLastMonthStartDate();
                         const countAppointmentLastMonth =
                           await AppointmentModel.aggregate([
                             {
                               $match: {
                                 createdAt: {
-                                  $gte: new Date(startDateMonth),
-                                  $lt: new Date(endDateMonth),
+                                  $gte: new Date(LastMonthStartDate),
+                                  $lt: new Date(LastMonthEndDate),
                                 },
                                 Doctor: new mongoose.Types.ObjectId(doctorId),
                               },

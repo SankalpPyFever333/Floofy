@@ -31,13 +31,14 @@ const CalTotalRevenue = async (getLastStartDate, doctorId) => {
         return lastWeekRevenue;
 
       case "Last Month":
-        const { startDateMonth, endDateMonth } = getLastMonthStartDate();
+        const { LastMonthStartDate, LastMonthEndDate } =
+          getLastMonthStartDate();
         const lastMonthRevenue = await AppointmentModel.aggregate([
           {
             $match: {
               createdAt: {
-                $gte: new Date(startDateMonth),
-                $lte: new Date(endDateMonth),
+                $gte: new Date(LastMonthStartDate),
+                $lte: new Date(LastMonthEndDate),
               },
               Doctor: new mongoose.Types.ObjectId(doctorId),
             },

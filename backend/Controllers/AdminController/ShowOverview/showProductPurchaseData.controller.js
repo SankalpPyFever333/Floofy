@@ -30,13 +30,14 @@ const countProductTimeframe = async (
         return countProductLastWeek;
         
       case "Last Month":
-            const { startDateMonth, endDateMonth } = getLastMonthStartDate();
+            const { LastMonthStartDate, LastMonthEndDate } =
+              getLastMonthStartDate();
             const countProductLastMonth = await ProductOrder.aggregate([
               {
                 $match: {
                   createdAt: {
-                    $gte:  new Date(startDateMonth),
-                    $lte: new Date(endDateMonth),
+                    $gte:  new Date(LastMonthStartDate),
+                    $lte: new Date(LastMonthEndDate),
                   },
                   // status: "delivered",
                 },
