@@ -141,7 +141,7 @@ function LoginComponent() {
                                                 >
                                                       Forgot password?
                                                 </Link>
-                                                <div className="text-center postion-relative ">
+                                                <div className="text-center postion-relative" style={{marginLeft:"4.3rem"}} >
                                                       <WhatDefineYou  setUserType={setUserType} showAdminRadio = {true} />
 
                                                 </div>

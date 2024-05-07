@@ -76,7 +76,7 @@ function ShowCommentOnPost({postId , likeCount}) {
 
       useEffect(()=>{
             commentResponse();
-            // countNumberOfLikesOnPost();
+            
       },[]);
 
       console.log("comment is " , showComment);

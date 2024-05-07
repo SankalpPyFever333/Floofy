@@ -1,3 +1,90 @@
+// import React, { useEffect, useState } from 'react';
+// import Card from 'react-bootstrap/Card';
+// import Checkbox from '@mui/material/Checkbox';
+// import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+// import Favorite from '@mui/icons-material/Favorite';
+// import { fetchAllPost } from '../../HomeComponent/FeedComponent/getPost';
+// import { handleLikeOnPost } from './postlikehandler';
+// import { CountNumberOfLikes } from '../../HomeComponent/FeedComponent/countLikesONPost';
+// import ShowCommentOnPost from '../../HomeComponent/FeedComponent/ShowCommentOnPost';
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+// function PostCardAllUser() {
+//       const [posts, setPosts] = useState([]);
+//       const [likedPosts, setLikedPosts] = useState({}); // Map post IDs to like states
+
+//       useEffect(() => {
+//             const getDataUseeffect = async () => {
+//                   const AllPostData = await fetchAllPost();
+//                   setPosts(AllPostData.AllPost);
+
+//                   // Initialize liked status for each post
+//                   const likedStatus = AllPostData.AllPost.reduce((acc, post) => {
+//                         acc[post._id] = post.isLiked;
+//                         return acc;
+//                   }, {});
+//                   setLikedPosts(likedStatus);
+//                   AllPostData.AllPost.forEach((post) => CountNumberOfLikes(post._id));
+//             };
+//             getDataUseeffect();
+//       }, []);
+
+//       console.log("LikedStatus Post is: " , likedPosts);
+//       const handleLikeUnlike = async (postId) => {
+//             try {
+//                   const LikeResponse = await handleLikeOnPost(postId);
+//                   if (LikeResponse) {
+//                         const newLikedPosts = { ...likedPosts };
+//                         newLikedPosts[postId] = LikeResponse.isLiked;
+//                         setLikedPosts(newLikedPosts);
+//                   }
+//             } catch (error) {
+//                   console.error("Error on liking the post:", error);
+//             }
+//       };
+
+//       return (
+//             posts.map((post, index) => {
+//                   const postLike = likedPosts[post._id] || 0;
+//                   return ( <Card className='border border-2 shadow-sm bg-body-tertiary rounded container' style={{ width: '70%', margin: '1.4rem' }} key={index}>
+//                         <Card.Body>
+//                               <Card.Title style={{ display: 'inline' }}>
+//                                     {post.userId.username}
+//                               </Card.Title>
+//                               <hr className='shadow border-1' />
+//                         </Card.Body>
+//                         <img src={post.Image} alt="" style={{ width: '100%' }} />
+//                         <hr className='shadow border-3' />
+//                         <Card.Body>
+//                               <Card.Title className='text-opacity-80'>{post.title}</Card.Title>
+//                               <Card.Text className='text-opacity-34'>{post.caption}</Card.Text>
+//                               <Card.Text className='text-light-emphasis'>hashtags</Card.Text>
+//                               <div className='d-flex gap-2'>
+//                                     {post.hashTag.map((ele, index) => (
+//                                           <small key={index}>{ele}</small>
+//                                     ))}
+//                               </div>
+//                               <Card.Text>
+//                                     <Checkbox
+//                                           className='pt-3 text-danger'
+//                                           onClick={() => handleLikeUnlike(post._id)}
+//                                           {...label}
+//                                           icon={<FavoriteBorder />}
+//                                           checkedIcon={<Favorite />}
+//                                           checked={likedPosts[post._id] || false}
+//                                     />
+//                                     {/* Show comment component */}
+//                                     <ShowCommentOnPost postId={post._id} likeCount={postLike} className="pt-3" />
+//                               </Card.Text>
+//                         </Card.Body>
+//                   </Card>
+//             )})
+//       );
+// }
+
+// export default PostCardAllUser;
+
+
 import { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
@@ -20,37 +107,37 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 function PostCardAllUser() {
 
       const [posts, setPosts] = useState([]);
-      const [likedArray , setLikeArray] = useState([]);
-      const [islikedBy , setLikedBy] = useState('')
-      const [isChecked , setIsChecked] = useState('');
+      const [likedArray, setLikeArray] = useState([]);
+      const [islikedBy, setLikedBy] = useState('')
+      const [isChecked, setIsChecked] = useState('');
       const [likedPosts, setLikedPosts] = useState({}); // Map post IDs to like states
       const [isLikedByServer, setIsLikedByServer] = useState('');
       const [countLikes, setCountLikes] = useState(0);
-      
+
       useEffect(() => {
-            const getDataUseeffect = async()=>{
-                  
+            const getDataUseeffect = async () => {
+
                   const AllPostData = await fetchAllPost();
                   console.log('data', AllPostData)
                   setPosts(AllPostData.AllPost);
                   setLikeArray(AllPostData.AllPost.likedBy)
 
                   setLikedPosts(likedArray.reduce((acc, like) => ({ ...acc, [like._id]: true }), {}));
-                  
+
                   const firstPostId = AllPostData.AllPost[0]._id;
-                  console.log("First post ID: " , firstPostId);
+                  console.log("First post ID: ", firstPostId);
                   if (firstPostId) {
                         try {
                               console.log("Inside the if statement")
                               const likeResponse = await handleLikeOnPost(firstPostId);
-                              console.log("LikeResponse in useefect : " , likeResponse);
+                              console.log("LikeResponse in useefect : ", likeResponse);
                               setIsLikedByServer(likeResponse.isLiked);
                         } catch (error) {
                               console.error("Error fetching initial like status:", error);
                         }
                   }
 
-                  
+
             }
             getDataUseeffect();
 
@@ -67,7 +154,7 @@ function PostCardAllUser() {
             //       countNumberOfLikesOnPost(singlePost._id);
             // })
 
-            return ()=>{}
+            return () => { }
 
       }, [])
 
@@ -81,7 +168,7 @@ function PostCardAllUser() {
             console.log("josnLikeReposne", jsonFetchedResponse);
             if (jsonFetchedResponse) {
                   const postLikes = {}
-                  jsonFetchedResponse.AllPost.forEach((singlePost)=>{
+                  jsonFetchedResponse.AllPost.forEach((singlePost) => {
                         const countLikesOnPost = singlePost.likedBy.length;
                         postLikes[singlePost._id] = countLikesOnPost;
                   })
@@ -92,14 +179,14 @@ function PostCardAllUser() {
 
       }
 
-      const handleLikeUnlike = async (postId)=>{
+      const handleLikeUnlike = async (postId) => {
             const LikeResponse = await handleLikeOnPost(postId);
-            console.log("Liked Response: " , LikeResponse)
-            if(LikeResponse){
-                  console.log("post get liked by your" , LikeResponse.isLiked);
+            console.log("Liked Response: ", LikeResponse)
+            if (LikeResponse) {
+                  console.log("post get liked by your", LikeResponse.isLiked);
                   setLikedBy(LikeResponse.isLiked)
             }
-            else{
+            else {
                   console.log("Error on liking the post")
             }
             countNumberOfLikesOnPost(postId);
@@ -107,19 +194,19 @@ function PostCardAllUser() {
 
 
       return (
-            
+
 
             posts.map((post, index) => {
                   const postLike = likedPosts[post._id] || 0;
-                  return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container'   style={{  width: '70%', margin: "1.4rem" }} key={index} >
-                              <Card.Body>
-                                    <Card.Title className='' style={{display:"inline"}} >
-                                          {post.userId.username}
-                                    </Card.Title>
+                  return <Card className='border border-2 shadow-sm  bg-body-tertiary rounded container' style={{ width: '70%', margin: "1.4rem" }} key={index} >
+                        <Card.Body>
+                              <Card.Title className='' style={{ display: "inline" }} >
+                                    {post.userId.username}
+                              </Card.Title>
                               <hr className='shadow border-1' />
-                              </Card.Body>
-                              
-                        <img src={post.Image} alt=""  style={{width:"100%"}}  />
+                        </Card.Body>
+
+                        <img src={post.Image} alt="" style={{ width: "100%" }} />
                         <hr className='shadow border-3' />
                         <Card.Body className='' >
                               <Card.Title className='text-opacity-80 ' >{post.title}</Card.Title>
@@ -135,14 +222,14 @@ function PostCardAllUser() {
                                                 {ele}
                                           </small>
                                     })}
-                                    
+
                               </div>
 
-                              
+
 
                               <Card.Text>
                                     {/* Add this propperty later on: checked={likedPosts[post._id] ?? isLikedByServer} */}
-                                    <Checkbox  key={post._id} className='pt-3 text-danger' onClick={() => { handleLikeUnlike(post._id) }  } {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                                    <Checkbox key={post._id} className='pt-3 text-danger' onClick={() => { handleLikeUnlike(post._id) }} {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
                                     <ShowCommentOnPost postId={post._id} likeCount={postLike} className="pt-3" />
 
                               </Card.Text>
@@ -153,11 +240,8 @@ function PostCardAllUser() {
             }
 
 
-      ));
+            ));
 }
 
 export default PostCardAllUser;
-
-// In this, Now I have a single problem that When I unchecked the like button, then it is counting the like 1 and upon checking the button its count become 0. I want opposite of it. So correct it may be by check state of a like button.
-
 

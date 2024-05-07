@@ -108,21 +108,40 @@ const VerifyOtpComp = () => {
 
       }
 
-      const handleVerifyOtp = ()=>{
-            // verify otp and then redirect the user to forgot password page.
-            // server - side OTP verification can be done using Firebase Admin SDK in a Node.js 
-            // send otp from here to the server for verification.
-            
-            if ( CResult && CResult.confirm(enteredOtp)) {
-                  console.log("verified");
-                  navigate("/GotoForgotPassword")
-            }
-            else {
-                  console.log("not verifies")
-            }
 
-      }
+      const handleVerifyOtp = async () => {
+            try {
+                  if (CResult) {
+                        // Verify the OTP and wait for the result
+                        const userCredential = await CResult.confirm(enteredOtp);
 
+                        // If OTP verification is successful, navigate to the forgot password page
+                        console.log("OTP verified successfully:", userCredential);
+                        navigate("/GotoForgotPassword");
+                  } else {
+                        // If CResult is null or undefined, display an error message
+                        alert("Error: No confirmation result available. Please send OTP again.");
+                  }
+            } catch (error) {
+                  // Handle errors during OTP verification
+                  if (error.code === "auth/invalid-verification-code") {
+                        // Display an alert message for invalid OTP
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "Entered wrong OTP! Please try again.",
+                        });
+                  } else {
+                        // For other errors, log the error and display a generic error message
+                        console.error("Error verifying OTP:", error);
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "Something went wrong! Please try again later.",
+                        });
+                  }
+            }
+      };
 
       return (
             <div>
@@ -132,10 +151,10 @@ const VerifyOtpComp = () => {
                                     <img src= {verifyOtp} alt="VerifyOtp" />
                               </div>
                               <div className="col-sm-6">
-                                    <TextField id="standard-basic" inputProps={{ maxLength: 13 }} label="Phone Number" variant="standard" onChange={(phNumber) => {
+                                    <TextField id="standard-basic" inputProps={{ maxLength: 13 }} className='shadow m-3' label="Phone Number" variant="standard" onChange={(phNumber) => {
                                           setPhNumber(phNumber.target.value)
                                     }} />
-                                    <Button onClick={handleSendotp} variant="contained">Send</Button>
+                                    <Button onClick={handleSendotp} className='shadow m-3' variant="contained">Send</Button>
                                     <div className="otp-container">
                                           {otp.map((digit, index) => (
                                                 <input
@@ -151,7 +170,7 @@ const VerifyOtpComp = () => {
                                                 />
                                           ))}
                                     </div>
-                                    <Button onClick={handleVerifyOtp} variant="contained">Verify</Button>
+                                    <Button onClick={handleVerifyOtp}  variant="contained">Verify</Button>
                                     <div id="recaptchaContainer">
                                           {/* recaptcha will be displayed in this div. */}
                                     </div>
