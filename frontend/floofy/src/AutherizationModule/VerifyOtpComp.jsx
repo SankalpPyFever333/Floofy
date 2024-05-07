@@ -117,10 +117,21 @@ const VerifyOtpComp = () => {
 
                         // If OTP verification is successful, navigate to the forgot password page
                         console.log("OTP verified successfully:", userCredential);
+                        Swal.fire({
+                              position: "center",
+                              icon: "success",
+                              title: 'Verified Successfully',
+                              showConfirmButton: false,
+                              timer: 1500
+                        });
                         navigate("/GotoForgotPassword");
                   } else {
                         // If CResult is null or undefined, display an error message
-                        alert("Error: No confirmation result available. Please send OTP again.");
+                        Swal.fire({
+                              icon: "error",
+                              title: "Oops...",
+                              text: "Error: No confirmation result available. Please send OTP again.",
+                        });
                   }
             } catch (error) {
                   // Handle errors during OTP verification
@@ -148,13 +159,13 @@ const VerifyOtpComp = () => {
                   <div className="container-fluid">
                         <div className="row">
                               <div className="col-sm-6">
-                                    <img src= {verifyOtp} alt="VerifyOtp" />
+                                    <img src={verifyOtp} alt="VerifyOtp" style={{ boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", borderRadius: "10px" }} />
                               </div>
                               <div className="col-sm-6">
                                     <TextField id="standard-basic" inputProps={{ maxLength: 13 }} className='shadow m-3' label="Phone Number" variant="standard" onChange={(phNumber) => {
                                           setPhNumber(phNumber.target.value)
-                                    }} />
-                                    <Button onClick={handleSendotp} className='shadow m-3' variant="contained">Send</Button>
+                                    }} style={{ borderRadius: "10px" }} />
+                                    <Button onClick={handleSendotp} className='shadow m-3' variant="contained" style={{ borderRadius: "10px" }}>Send</Button>
                                     <div className="otp-container">
                                           {otp.map((digit, index) => (
                                                 <input
@@ -163,14 +174,14 @@ const VerifyOtpComp = () => {
                                                       type="text"
                                                       maxLength="1"
                                                       value={digit}
-                                                      style={{margin:"12px"}}
+                                                      // style={{ margin: "12px", width: "40px", height: "40px", textAlign: "center", border: "1px solid #ced4da", borderRadius: "5px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}
                                                       className='otpInputbox'
                                                       onChange={(e) => handleChange(index, e.target.value)}
                                                       onKeyDown={(e) => handleKeyDown(index, e)}
                                                 />
                                           ))}
                                     </div>
-                                    <Button onClick={handleVerifyOtp}  variant="contained">Verify</Button>
+                                    <Button onClick={handleVerifyOtp} variant="contained" style={{ borderRadius: "10px", marginTop: "20px" }}>Verify</Button>
                                     <div id="recaptchaContainer">
                                           {/* recaptcha will be displayed in this div. */}
                                     </div>
@@ -178,6 +189,7 @@ const VerifyOtpComp = () => {
                         </div>
                   </div>
             </div>
+
       );
 };
 

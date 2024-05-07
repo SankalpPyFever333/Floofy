@@ -28,66 +28,83 @@ function SignLogComp() {
       
 
       
-      const addUserSignupDetails =  async (e)=>{
-            e.preventDefault()
+      const addUserSignupDetails = async (e) => {
+            e.preventDefault();
             try {
-                  const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser" , {
-                        method:'POST',      
-                        headers:{
-                                    'Content-Type':'application/json'
-                              },
-                        body: JSON.stringify({ username: username, password: password, contactNumber:phNumber ,  userType: userType })
-                  })
+                  const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser", {
+                        method: 'POST',
+                        headers: {
+                              'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username: username, password: password, contactNumber: phNumber, userType: userType })
+                  });
 
-                  if(response.ok){
-                        Swal.fire({
-                              position: "center",
-                              icon: "success",
-                              title: "Details saved successfully",
-                              showConfirmButton: false,
-                              timer: 1500
-                        });
-                        navigate("/MainApp")
-                  }
-                  else{
-                        Swal.fire({
-                              icon: "error",
-                              title: "Oops...",
-                              text: "Something went wrong!",
-                              // footer: '<a href="#">Why do I have this issue?</a>'
-                        });
-
-                  }
+                  // check duplication in backend
 
                   const data = await response.json();
-                  console.log(data)
+                  console.log("data after duplicate insertion: ", data);
 
+                  // Check if the response contains a MongoDB duplicate key error
+                  if (!response.ok) {
+                        if (data.errorcode === "Username") {
+                              // Check if the error is due to a duplicate username, password, or phone number
+                              Swal.fire({
+                                    icon: "error",
+                                    title: "User already exists",
+                                    text: "Please choose a different username."
+                              });
+                              return; // Stop execution if there's a duplicate key error
+                        }
+                        else if (data.errorcode === "ContactNumber") {
+                              Swal.fire({
+                                    icon: "error",
+                                    title: "Contact Number already exists",
+                                    text: "Please choose a different contact number"
+                              });
+                              return;
+                        }
+                        else{
+                              Swal.fire({
+                                    icon: "error",
+                                    title: "Password already exists",
+                                    text: "Please choose a different password"
+                              });
+                              return;
+                        }
+                  }
+                  // If no error occurred, navigate to the main app
+                  Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Details saved successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                  }).then(() => {
+                        navigate("/LoginPage");
+                  });
             } catch (error) {
-                  console.log(error)
+                  console.log(error);
             }
-            
       }
 
       return (
-                  <div>
-                        <span>Let's setup your login credentials</span>
-                        <div className="inputFields">
-                              <Box sx={{ display: 'flex', flexDirection: "column", alignItems: 'center' }}>
-                                    {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
-                                    <TextField style={{ margin: "20px" }} id="input-with-sx" name='username' label="Username" variant="standard" onChange={(username) => {
-                                          setUsername(username.target.value)
-                                    }} />
-                                    <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' type='password' label="Password" variant="standard" onChange={(password) => {
-                                          setPassword(password.target.value)
-                                    }} />
-                                    <TextField style={{ margin: "20px" }} id="input-with-sx" name='password' label="Phone Number" variant="standard" onChange={(phNumber) => {
-                                          setPhNumber(phNumber.target.value)
-                                    }} />
-                                    <WhatDefineYou setUserType={setUserType} />
-                                    <Button variant="contained" onClick={addUserSignupDetails} style={{ margin: "20px" }} >Signup</Button>
-                              </Box>
-                        </div>
+            <div>
+                  <span style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '20px', display: 'block', textAlign: 'center' }}>Let's set up your login credentials</span>
+                  <div className="inputFields" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <TextField style={{ margin: '10px', width: '300px' }} id="input-with-sx" name='username' label="Username" variant="outlined" onChange={(username) => {
+                              setUsername(username.target.value)
+                        }} />
+                        <TextField style={{ margin: '10px', width: '300px' }} id="input-with-sx" name='password' type='password' label="Password" variant="outlined" onChange={(password) => {
+                              setPassword(password.target.value)
+                        }} />
+                        <TextField style={{ margin: '10px', width: '300px' }} id="input-with-sx" name='password' label="Phone Number" variant="outlined" onChange={(phNumber) => {
+                              setPhNumber(phNumber.target.value)
+                        }} />
+                        <WhatDefineYou setUserType={setUserType} />
+                        <Button variant="contained" onClick={addUserSignupDetails} style={{ margin: '20px', width: '200px', backgroundColor: '#1976D2', color: '#fff' }}>Signup</Button>
                   </div>
+            </div>
+
       )
 }
 

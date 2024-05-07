@@ -103,63 +103,62 @@ function LoginComponent() {
       return (
             <div>
                   {
-                  showSignUpForm ? (
+                        showSignUpForm ? (
 
-                  <div className="container-fluid">
-                        <div className="row">
-                              <div className="col-sm-5">
-                                    {/* <video autoPlay loop muted className="responsive-video">
-                                          <source src={videoSource} type="video/mp4" />
-                                    </video> */}
+                              <div className="container-fluid">
+                                    <div className="row">
+                                          <div className="col-sm-5">
                                                 <img src={floofyLogo} alt="" style={{
                                                       height: "40rem", position: "relative",
-                                                      left: "-157px"}} />
-                              </div>
-                              <div className="col-sm-6 " style={{position:"relative" ,  top:"50px"}} >
-
-                                    <div className="logincinfo text-center shadow-lg" style={{backgroundColor:"#C1FCD3"}} >
-                                          <Box
-                                                component="form"
-                                                sx={{
-                                                      '& > :not(style)': { m: 1, width: '25ch' },
-                                                }}
-                                                noValidate
-                                                autoComplete="off"
-                                          >
-                                                <TextField id="standard-basic" label="Username" variant="standard" onChange={(username)=>{
-                                                      setUserName(username.target.value)
+                                                      left: "-157px"
                                                 }} />
-                                                <TextField id="standard-basic" label="Password" type='password' variant="standard" onChange={(password)=>{
-                                                      setPassword(password.target.value)
-                                                }} />
-                                                
-                                                <Link
-                                                      component="button"
-                                                      variant="body2"
-                                                      onClick={handleForgotPsswrdClick}
-                                                      
-                                                >
-                                                      Forgot password?
-                                                </Link>
-                                                <div className="text-center postion-relative" style={{marginLeft:"4.3rem"}} >
-                                                      <WhatDefineYou  setUserType={setUserType} showAdminRadio = {true} />
+                                          </div>
+                                          <div className="col-sm-6" style={{ position: "relative", top: "50px" }}>
 
+                                                <div className="logincinfo text-center shadow-lg" style={{ backgroundColor: "#C1FCD3", padding: "20px" }}>
+                                                      <Box
+                                                            component="form"
+                                                            sx={{
+                                                                  '& > :not(style)': { m: 1, width: '25ch' },
+                                                            }}
+                                                            noValidate
+                                                            autoComplete="off"
+                                                      >
+                                                            <TextField id="standard-basic" label="Username" variant="standard" onChange={(username) => {
+                                                                  setUserName(username.target.value)
+                                                            }} />
+                                                            <TextField id="standard-basic" label="Password" type='password' variant="standard" onChange={(password) => {
+                                                                  setPassword(password.target.value)
+                                                            }} />
+
+                                                            <Link
+                                                                  component="button"
+                                                                  variant="body2"
+                                                                  onClick={handleForgotPsswrdClick}
+
+                                                            >
+                                                                  Forgot password?
+                                                            </Link>
+                                                            <div className="text-center postion-relative" style={{ marginLeft: "4.3rem" }} >
+                                                                  <WhatDefineYou setUserType={setUserType} showAdminRadio={true} />
+
+                                                            </div>
+                                                            <Button onClick={handleLoginClick} variant="contained" style={{ marginTop: "10px", backgroundColor: "#4CAF50", color: "white", borderRadius: "10px" }}>Login</Button>
+                                                            <br />
+
+                                                            <br />
+                                                            <span onClick={handleSpanClick}><i style={{ color: "purple" }}>Don't have an account? Sign up</i></span>
+                                                      </Box>
                                                 </div>
-                                                <Button onClick={handleLoginClick} variant="contained">Login</Button>
-                                                <br />
-                                                
-                                                <br />
-                                                <span onClick={handleSpanClick} > <i>Don't have an account? sign up </i>  </span>
-                                          </Box>
+                                          </div>
                                     </div>
                               </div>
-                        </div>
-                  </div>
-                  ) : (
-                  <SignupComponent/>
-                  )
+                        ) : (
+                              <SignupComponent />
+                        )
                   }
             </div>
+
       )
 }
 
