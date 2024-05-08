@@ -47,34 +47,47 @@ const VerifyOtpComp = () => {
             );
       }
 
+      const isValidPhoneNumber = (phoneNumber) => {
+            // Remove any non-digit characters from the phone number
+            const strippedPhoneNumber = phoneNumber.replace(/\D/g, '');
+            // Check if the stripped phone number has a length of exactly 10 digits
+            if (strippedPhoneNumber.length !== 10) {
+                  return false;
+            }
+            // Check if the stripped phone number is the same as the original phone number
+            // This ensures that the phone number only contains digits
+            return strippedPhoneNumber === phoneNumber;
+      };
 
       const handleSendotp = async () => {
-            
-            if(phNumber.length<13 || phNumber.length>13){
+            const countryCode = "+91";
+            const fullPhoneNumber = countryCode+phNumber;
+            if (!isValidPhoneNumber(phNumber)) {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Enter a valid number",
+                        text: "Enter a valid 10-digit number without any special characters.",
                   });
             }
+
 
             const response = await fetch("http://localhost:3000/api/fetchLoginCredentials" , {
                   method: "POST",
                   headers: {
                         'Content-Type':"application/json"
                   },
-                  body: JSON.stringify({ contactNumber: phNumber})
+                  body: JSON.stringify({ contactNumber: fullPhoneNumber})
             });
             let data = await response.json();
             if(response.ok){
                   
                   console.log("Contact no: " , data.userLoginData.contactNumber);
-                  if (phNumber.length === 13) {
+                  if (phNumber.length === 10) {
       
                         localStorage.setItem("UserPhoneNumber", data.userLoginData.contactNumber)
                         generateRecaptchaVerifier();
                         let appVeifier = window.recaptchaVerifier;
-                        signInWithPhoneNumber(authentication, phNumber, appVeifier)
+                        signInWithPhoneNumber(authentication, fullPhoneNumber, appVeifier)
                               .then((confirmationResult) => {
                                     window.confirmationResult = confirmationResult;
                                     console.log("recaptcha verified!! and navigating to verifyOTP", confirmationResult);
@@ -162,7 +175,7 @@ const VerifyOtpComp = () => {
                                     <img src={verifyOtp} alt="VerifyOtp" style={{ boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", borderRadius: "10px" }} />
                               </div>
                               <div className="col-sm-6">
-                                    <TextField id="standard-basic" inputProps={{ maxLength: 13 }} className='shadow m-3' label="Phone Number" variant="standard" onChange={(phNumber) => {
+                                    <TextField id="standard-basic" inputProps={{ maxLength: 10 }} className='shadow m-3' label="Phone Number" variant="standard" onChange={(phNumber) => {
                                           setPhNumber(phNumber.target.value)
                                     }} style={{ borderRadius: "10px" }} />
                                     <Button onClick={handleSendotp} className='shadow m-3' variant="contained" style={{ borderRadius: "10px" }}>Send</Button>

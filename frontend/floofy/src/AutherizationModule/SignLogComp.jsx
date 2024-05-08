@@ -25,11 +25,33 @@ function SignLogComp() {
             event.preventDefault();
       };
 
-      
+      const isValidPhoneNumber = (phoneNumber) => {
+            // Check if the input is a string
+            if (typeof phoneNumber !== 'string') {
+                  return false;
+            }
+
+            // Remove any non-digit characters from the phone number
+            const strippedPhoneNumber = phoneNumber.replace(/\D/g, '');
+
+            // Check if the stripped phone number has exactly 10 digits
+            return strippedPhoneNumber.length === 10;
+      };
+
 
       
       const addUserSignupDetails = async (e) => {
             e.preventDefault();
+
+            if (!isValidPhoneNumber(phNumber)) {
+                  Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Enter a valid 10-digit phone number.",
+                  });
+                  return; // Stop execution if phone number is invalid
+            }
+
             try {
                   const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser", {
                         method: 'POST',
@@ -80,7 +102,7 @@ function SignLogComp() {
                         showConfirmButton: false,
                         timer: 1500
                   }).then(() => {
-                        navigate("/LoginPage");
+                        navigate("/");
                   });
             } catch (error) {
                   console.log(error);
