@@ -21,6 +21,7 @@ import MainShopComp from './shop/MainShopComp';
 import MainViewYourOrder from './shop/ViewYourOrders/MainViewYourOrder';
 import MyMainOrderAllComp from './shop/ViewYourOrders/MyMainOrderAllComp';
 import OrderEditingComp from './shop/OrderEditingComp';
+import FloofyHomepage from './FloofyHomePage/FloofyHomepage';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<SignupComponent />} /> */}
 
-          <Route path="/" element={<LoginComponent />} />
+          <Route path="/" element={<FloofyHomepage />} />
+          {/* <Route path="/" element={<LoginComponent />} /> */}
           <Route path="/MainApp" element={<MainApp />} />
           <Route path="/GoToCart" element={<Cart />} />
           <Route path="/MoveToshopByCarousel" element={<MainShopComp />} />
