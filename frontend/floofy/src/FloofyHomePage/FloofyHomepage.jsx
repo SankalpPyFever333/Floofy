@@ -18,6 +18,7 @@ function FloofyHomepage() {
                               scrub:1,
                               markers: true,
                               pin: true,
+                              
                         }
                   });
 
@@ -33,10 +34,10 @@ function FloofyHomepage() {
                   .to("#bottom h1", {
                               top: "-100%",
                   }, "floofy")
-                  .to("#mid", {
+                  .to("#mid h2", {
                               marginTop: "0vh",
                   }, "floofy")
-            } , []
+            }
       )
       return (
             <>
@@ -53,6 +54,9 @@ function FloofyHomepage() {
                         <div id="bottom">
                               <h1>FLOOFY</h1>
                         </div>
+                  </div>
+                  <div className="page1">
+
                   </div>
                   <div className="page1">
 
