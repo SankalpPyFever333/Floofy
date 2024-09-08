@@ -3,7 +3,8 @@ import "./floofyhomepage.css"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-
+import Lottie from "lottie-react"
+import Loadingcat from "./Loadingcat.json"
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 function FloofyHomepage() {
@@ -41,27 +42,21 @@ function FloofyHomepage() {
       )
       return (
             <>
-                  <div className="page1">
-                        
-                  </div>
                   <div id="mainFloofy">
                         <div id="top">
                               <h1>FLOOFY</h1>
                         </div>
-                        <div id="mid">
-                              <h2>Where Every Pet Finds a Place!🐾</h2>
+                        <div id="mid">``
+                              <h2>Where Every Pet Finds a Place!🐾✨</h2>
+                              <div className="lottieFiles">
+                                    <Lottie animationData={Loadingcat} />
+                              </div>
+
                         </div>
                         <div id="bottom">
                               <h1>FLOOFY</h1>
                         </div>
                   </div>
-                  <div className="page1">
-
-                  </div>
-                  <div className="page1">
-
-                  </div>
-
             </>
       )
 }
