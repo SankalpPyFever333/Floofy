@@ -1,0 +1,55 @@
+/* importing the font which we have downloaded */
+
+@font-face {
+  font-family: Machina;
+  src: url("./3856NeueMachina.woff2");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #111;
+}
+
+#page1,
+#page2,
+#page3 {
+  width: 100vw;
+  height: 100vh;
+  padding: 12px 0;
+}
+
+#move {
+  background-color: #d8ff04;
+  display: flex;
+  align-items: center;
+  padding: 3vw 0vw;
+  overflow: hidden;
+}
+
+.marque {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+  padding: 0 1.5vw;
+  flex-shrink: 0;
+  transform: translateX(-100);
+}
+
+.marque h1 {
+  font-family: Machina;
+  font-size: 70px;
+}
+
+.marque img {
+  height: 4vw;
+}
