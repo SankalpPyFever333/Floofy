@@ -1,80 +1,181 @@
 import React from 'react'
 import "./floofymidsection.css"
-import gsap from "gsap"
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
 
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
 
 function FloofyMidsection() {
-
-      useGSAP(() => {
-            window.addEventListener('wheel', (events) => {
-                  // console.log(events)
-                  if (events.deltaY > 0) {
-                        gsap.to(".marque", {
-                              transform: "translateX(-200%)",
-                              ease: "none",
-                              repeat: -1,
-                              duration: 4
-                        });
-
-                        gsap.to(".marque span", {
-                              rotate: 180
-                        });
-                  }
-                  else {
-                        gsap.to(".marque", {
-                              transform: "translateX(0%)",
-                              ease: "none",
-                              repeat: -1,
-                              duration: 4
-                        })
-
-                        gsap.to(".marque span", {
-                              rotate: 0,
-                        });
-                  }
-            })
-      })
 
       return (
             <>
                   <div>
-                        <div id="page2">
-                              <div id="move">
-                                    <div className="marque">
-                                          <h1>Find Your Floofy</h1>
-                                          {/* <img src="../Assets/IMG-20240215-WA0022.jpg" alt="" /> */}
-                                          <span style={{ fontSize: "4rem" }} >🐶</span>
+                        <div
+                              className="absolute scale-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%]"
+                        >
+                              <div
+                                    className="row -translate-x-1/2 w-full flex items-center gap-10 whitespace-nowrap"
+                              >
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500 overflow-hidden"
+                                          >
+                                                <img
+                                                      className="object-cover w-full h-full"
+                                                      src="https://cdn.prod.website-files.com/659dbdfd5a080be8d3483164/659dbdfd5a080be8d3483184_Ellipse%20845.webp"
+                                                      alt="No"
+                                                />
+                                          </div>
                                     </div>
-                                    <div className="marque">
-                                          <h1>Join the Floofy Community</h1>
-                                          <span style={{ fontSize: "4rem" }} >🌟</span>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
                                     </div>
-                                    <div className="marque">
-                                          <h1>Celebrate the Love</h1>
-                                          <span style={{ fontSize: "4rem" }} >🎉</span>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
                                     </div>
-                                    <div className="marque">
-                                          <h1>Find Your Floofy</h1>
-                                          <span style={{ fontSize: "4rem" }} >🐶</span>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
                                     </div>
-                                    <div className="marque">
-                                          <h1>Find Your Floofy</h1>
-                                          <span style={{ fontSize: "4rem" }} >🐶</span>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
+                                    </div>
+                              </div>
+                              <div
+                                    className="row -translate-x-1/3 w-full flex items-center gap-10 whitespace-nowrap"
+                              >
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div className="imgdiv w-[3rem] h-[3rem] rounded-full">
+                                                <img
+                                                      src="https://cdn.prod.website-files.com/659dbdfd5a080be8d3483164/659dbdfd5a080be8d3483184_Ellipse%20845.webp"
+                                                      alt=""
+                                                />
+                                          </div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                              </div>
+                              <div
+                                    className="row -translate-x-2/3 w-full flex items-center gap-10 whitespace-nowrap"
+                              >
+                                    <div className="elem flex items-center gap-10">
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
+                                    </div>
+                              </div>
+                              <div
+                                    className="row -translate-x-3/4 w-full flex items-center gap-10 whitespace-nowrap"
+                              >
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">empathetic</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">useful</h1>
+                                          <div
+                                                className="imgdiv w-[3rem] h-[3rem] rounded-full bg-yellow-500"
+                                          ></div>
+                                    </div>
+                                    <div className="elem flex items-center gap-10">
+
+                                          <h1 className="font-semibold font-[signi] text-7xl">intuitive</h1>
                                     </div>
                               </div>
                         </div>
 
-                        {/* instead if this effect, take the effect from significo website.(empathetic, useful type animation) */}
+                        {/* using tailwind css , it is affecting my other components also. see it later */}
 
                         <div className="lastSection">
                               <h1>let's start the floofy adventure</h1>
                               {/* here put an image of dog mouth and upon scrolling, increase its size and zoom out fully, display the inner app. */}
                         </div>
-
                   </div>
             </>
       )
