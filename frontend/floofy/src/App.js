@@ -30,8 +30,8 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<SignupComponent />} /> */}
 
-          <Route path="/" element={<FloofyHomepage />} />
-          {/* <Route path="/" element={<LoginComponent />} /> */}
+          {/* <Route path="/" element={<FloofyHomepage />} /> */}
+          <Route path="/" element={<LoginComponent />} />
           <Route path="/MainApp" element={<MainApp />} />
           <Route path="/GoToCart" element={<Cart />} />
           <Route path="/MoveToshopByCarousel" element={<MainShopComp />} />

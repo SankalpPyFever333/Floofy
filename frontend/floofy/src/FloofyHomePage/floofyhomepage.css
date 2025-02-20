@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 body,
 html {
   height: 100%;
@@ -8,11 +8,11 @@ html {
   height: 100vh;
   width: 100%;
   background-color: #f0f0f0;
-}
+} */
 
 /* put some images or videos related to pets in the bg. */
 
-#mainFloofy {
+/* #mainFloofy {
   width: 100%;
   height: 100%;
   background-color: #fffdd0;
@@ -85,4 +85,4 @@ html {
   position: absolute;
   top: -25.5%;
   font-family: Quicksand;
-}
+} */
