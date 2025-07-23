@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const loginCredentalsSchema = mongoose.Schema(
   {
@@ -10,8 +10,8 @@ const loginCredentalsSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const userLoginModel = mongoose.model("UserLoginCredentials" , loginCredentalsSchema)
+const userLoginModel = mongoose.model(
+  "UserLoginCredentials",
+  loginCredentalsSchema
+);
 module.exports = userLoginModel;
-
-
-

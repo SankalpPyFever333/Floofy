@@ -1,27 +1,29 @@
-
 const admin = require("firebase-admin");
-const { getAuth, SignInWithPhoneNumber} = require("firebase-admin/auth");
-const serviceAccount  = require("../../floofy_Service_Account.json")
+const { getAuth, SignInWithPhoneNumber } = require("firebase-admin/auth");
+const serviceAccount = require("../../floofy_Service_Account.json");
 // Initialize Firebase Admin SDK (you need to have a service account JSON file)
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const auth = getAuth();
 
 async function verifyOtp(phoneNumber, enteredOtp) {
   try {
-    const user = await admin.auth().getUserByPhoneNumber(phoneNumber).catch((error)=>{
-      if(error.code === 'auth/user-not-found'){
-        return admin.auth().createUser({phoneNumber: phoneNumber})
-      }
-      throw error;
-    });
+    const user = await admin
+      .auth()
+      .getUserByPhoneNumber(phoneNumber)
+      .catch((error) => {
+        if (error.code === "auth/user-not-found") {
+          return admin.auth().createUser({ phoneNumber: phoneNumber });
+        }
+        throw error;
+      });
 
     const verificationResult = await SignInWithPhoneNumber(
       auth,
       phoneNumber,
-      enteredOtp,
+      enteredOtp
     );
 
     // If there's no error, the OTP is valid
@@ -38,7 +40,4 @@ async function verifyOtp(phoneNumber, enteredOtp) {
   }
 }
 
-
-
 module.exports = verifyOtp;
-
