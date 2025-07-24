@@ -1,5 +1,4 @@
 # .gitignore
-/floofy_Service_Account.json
 .env
 
 # dependencies
