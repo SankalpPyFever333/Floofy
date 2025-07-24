@@ -1,9 +1,11 @@
 const admin = require("firebase-admin");
 const { getAuth, SignInWithPhoneNumber } = require("firebase-admin/auth");
-const serviceAccount = require("../../floofy_Service_Account.json");
+// const serviceAccount = require("../../floofy_Service_Account.json");
 // Initialize Firebase Admin SDK (you need to have a service account JSON file)
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(
+    JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+  ),
 });
 
 const auth = getAuth();
