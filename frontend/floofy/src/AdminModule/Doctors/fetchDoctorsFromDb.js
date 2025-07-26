@@ -1,5 +1,6 @@
+import {base_api} from  "../../base_api"
 export const fetchAllDoctorsFromDb = async () => {
-  const fetchedDoctorList = await fetch(`${base_api}/api/fetchDoctorsFromDb`, {
+  const fetchedDoctorList = await fetch(`${ base_api }/api/fetchDoctorsFromDb`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
