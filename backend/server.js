@@ -9,12 +9,22 @@ const uploads = require("./upload");
 dotenv.config();
 
 const port = process.env.PORT || 3000;
+const allowedOrigins = [
+  "https://floofy-frontend.vercel.app",
+  "http://localhost:3000",
+];
 const MONGO_CONN_STRING = process.env.MONGO_CONN_STRING;
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 app.use(
   bodyparser.urlencoded({
     extended: true,
@@ -269,10 +279,9 @@ app.use(
   require("./Routes/PaymentRoutes/DoctorAppointmentPayment/createAppointment.route")
 );
 
-
-app.use("/" , (req, res)=>{
+app.use("/", (req, res) => {
   res.send("backend is running");
-})
+});
 
 mongoose
   .connect(MONGO_CONN_STRING)
