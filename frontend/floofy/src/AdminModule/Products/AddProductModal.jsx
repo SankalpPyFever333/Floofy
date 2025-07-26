@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
+import { base_api } from '../../base_api';
 
 function AddProductModal() {
       const [show, setShow] = useState(false);
@@ -17,8 +18,8 @@ function AddProductModal() {
             Quantity: '',
             DiscountTag: '',
             ExpiryDate: '',
-            SuitableFor:'',
-            KeyIngredients:'',
+            SuitableFor: '',
+            KeyIngredients: '',
             Allergens: [],
             file: null
       });
@@ -53,7 +54,7 @@ function AddProductModal() {
                         formDataToSend.append(key, formData[key]);
                   }
 
-                  const response = await fetch("http://localhost:3000/api/addProductInDbAdmin", {
+                  const response = await fetch(`${base_api}/api/addProductInDbAdmin`, {
                         method: "POST",
                         body: formDataToSend
                   });
@@ -117,7 +118,7 @@ function AddProductModal() {
                                           />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="Product_Category">
-                                          
+
                                           <Form.Select name='Category' onChange={handleInputChange} aria-label="Default select example">
                                                 <option>Category</option>
                                                 <option value="Dog Food">Dog Food</option>
@@ -152,17 +153,17 @@ function AddProductModal() {
                                           />
                                     </Form.Group>
 
-                                    
+
 
                                     <Form.Group className="mb-3" controlId="Product_Category">
 
-                                          <Form.Select name='Category'  onChange={handleAllergensChange} aria-label="Default select example">
+                                          <Form.Select name='Category' onChange={handleAllergensChange} aria-label="Default select example">
                                                 <option>Allergens</option>
                                                 <option value="Gluttem">Gluten</option>
                                                 <option value="Diary">Diary</option>
                                                 <option value="Soy">Soy</option>
                                                 <option value="Nuts">Nuts</option>
-                                                
+
                                           </Form.Select>
                                     </Form.Group>
 

@@ -1,22 +1,19 @@
-export const totalRevenueDoctor = async(timeFrame)=>{
-      const response = await fetch(
-        "http://localhost:3000/api/calTotalRevenueDoc",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            getLastStartDate: timeFrame,
-            doctorIdBody: localStorage.getItem("userId"),
-          }),
-        }
-      );
-      if(response.ok){
-            return response;
-      }
-      else{
-            throw new Error("Error in fetching amount")
-      }
-}
+import { base_api } from "../../../base_api"
 
+export const totalRevenueDoctor = async (timeFrame) => {
+  const response = await fetch(`${base_api}/api/calTotalRevenueDoc`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      getLastStartDate: timeFrame,
+      doctorIdBody: localStorage.getItem("userId"),
+    }),
+  });
+  if (response.ok) {
+    return response;
+  } else {
+    throw new Error("Error in fetching amount");
+  }
+};

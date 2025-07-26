@@ -24,6 +24,7 @@ import { fetchProducts } from '../../shop/fetchProductfromDb';
 import EditProductModal from './EditProductModal';
 import AddProductModal from './AddProductModal';
 import Swal from 'sweetalert2';
+import { base_api } from '../../base_api';
 
 
 async function createData() {
@@ -31,14 +32,14 @@ async function createData() {
       const jsonProd = await response.json();
       const AllProdFromDb = jsonProd.All_prod_response;
 
-      
+
       console.log(AllProdFromDb)
       // I am getting the response, now show the data in the table.
-      return AllProdFromDb.map((product)=>(
+      return AllProdFromDb.map((product) => (
             {
                   id: product._id.toString(),
                   name: product.ProductName,
-                  price:product.Price,
+                  price: product.Price,
                   category: product.Category,
                   description: product.Description,
                   ImagePath: product.ImagePath,
@@ -140,7 +141,7 @@ const headCells = [
             numeric: true,
             disablePadding: false,
             label: 'Last updated',
-      }, 
+      },
       {
             id: 'Expiry_Date',
             numeric: true,
@@ -189,20 +190,20 @@ function EnhancedTableHead(props) {
                                     ) : (
                                           rows[headCell.id] = "false"
                                     )
-                                    
+
                               })
                         }
-                        
+
                         {headCells.map((headCell) => (
-                              
+
                               <TableCell
                                     key={headCell.id}
                                     align={headCell.id === 'Action' ? 'right' : (headCell.numeric ? 'right' : 'left')}
                                     padding={headCell.disablePadding ? 'none' : 'normal'}
                                     sortDirection={orderBy === headCell.id ? order : false}
                               >
-                                    
-                                    
+
+
                                     {/* {console.log("rows after modification: ",rows)} */}
                                     <TableSortLabel
                                           active={orderBy === headCell.id}
@@ -233,46 +234,46 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-      const { numSelected , selected} = props;
-      const [localSelected , setLocalSelected] = useState([]);
+      const { numSelected, selected } = props;
+      const [localSelected, setLocalSelected] = useState([]);
       const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-      const [onProduxtUpdate , setOnProductUpdate] = useState({});
+      const [onProduxtUpdate, setOnProductUpdate] = useState({});
 
-      const handleEditItem = ()=>{
+      const handleEditItem = () => {
             setIsEditModalOpen(!isEditModalOpen)
       }
 
-      const handleUpdatedData = (updatedData)=>{
+      const handleUpdatedData = (updatedData) => {
             console.log('handleUpdatedData -> ', updatedData)
             setOnProductUpdate(updatedData);
       }
 
-      const handleAddItemInDb = ()=>{
+      const handleAddItemInDb = () => {
             // open the modal for adding the product:
 
 
-            
+
       }
 
-      const handleDeleteItemFromDb = async ()=>{
+      const handleDeleteItemFromDb = async () => {
             // code for deleting items from the db.
             try {
-                  const response = await fetch("http://localhost:3000/api/deleteProductByAdmin",{
-                        method:"DELETE",
-                        headers:{
-                              'Content-Type':"application/json"
+                  const response = await fetch(`${base_api}/api/deleteProductByAdmin`, {
+                        method: "DELETE",
+                        headers: {
+                              'Content-Type': "application/json"
                         },
-                        body: JSON.stringify({_id: selected})
+                        body: JSON.stringify({ _id: selected })
                   })
-                  if(!response.ok){
+                  if (!response.ok) {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
                               text: "Error in deleting",
                         });
                   }
-                  
-                  else{
+
+                  else {
                         Swal.fire({
                               position: "center",
                               icon: "success",
@@ -283,7 +284,7 @@ function EnhancedTableToolbar(props) {
                         createData();
                   }
             } catch (error) {
-                  console.log("exception takes place " , error)
+                  console.log("exception takes place ", error)
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -294,7 +295,7 @@ function EnhancedTableToolbar(props) {
             // There is a problem that after successful deletion , that element still selected and I have to handle that error bcoz after deletion it is not in the db , so clicking again on the delete button, i got error.
       }
 
-      React.useEffect(()=>{
+      React.useEffect(() => {
             setLocalSelected(selected);
       }, [selected])
 
@@ -331,26 +332,26 @@ function EnhancedTableToolbar(props) {
 
                   {numSelected > 0 ? (
                         <>
-                        
-                        <Tooltip title="Delete Selected Item">
-                                    <IconButton onClick={handleDeleteItemFromDb}>
-                                    <DeleteIcon />
-                              </IconButton>
-                        </Tooltip>
 
-                        {
-                              numSelected === 1 && (
+                              <Tooltip title="Delete Selected Item">
+                                    <IconButton onClick={handleDeleteItemFromDb}>
+                                          <DeleteIcon />
+                                    </IconButton>
+                              </Tooltip>
+
+                              {
+                                    numSelected === 1 && (
                                           <Tooltip title="Edit">
                                                 <EditProductModal onUpdateProduct={handleUpdatedData} numSelected={numSelected} selectedRowId={selected[0]} />
                                           </Tooltip>
-                              )
-                        }
+                                    )
+                              }
 
                         </>
                   ) : (
                         <>
-                              <AddProductModal/>
-                              <Tooltip title = "filter">
+                              <AddProductModal />
+                              <Tooltip title="filter">
                                     <IconButton>
                                           <FilterListIcon />
                                     </IconButton>
@@ -377,7 +378,7 @@ export default function ShowTabularProducts() {
       const [selected, setSelected] = React.useState([]);
       const [page, setPage] = React.useState(0);
       const [dense, setDense] = React.useState(false);
-      
+
       const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
       const handleRequestSort = (event, property) => {
@@ -465,7 +466,7 @@ export default function ShowTabularProducts() {
                                           rowCount={rows.length}
                                     />
                                     <TableBody>
-                                          {console.log("visible rows",visibleRows)}
+                                          {console.log("visible rows", visibleRows)}
                                           {visibleRows.map((row, index) => {
                                                 const isItemSelected = isSelected(row.id);
                                                 const labelId = `enhanced-table-checkbox-${index}`;
@@ -508,8 +509,8 @@ export default function ShowTabularProducts() {
                                                             <TableCell align="right">{row.ExpiryDate}</TableCell>
                                                             <TableCell align="right">{row.SuitableFor}</TableCell>
                                                             {
-                                                                  row.Allergens.map((ele)=>{
-                                                                        return  <TableCell align="center">{ele}</TableCell>
+                                                                  row.Allergens.map((ele) => {
+                                                                        return <TableCell align="center">{ele}</TableCell>
                                                                   })
                                                             }
                                                       </TableRow>
@@ -537,7 +538,7 @@ export default function ShowTabularProducts() {
                               onRowsPerPageChange={handleChangeRowsPerPage}
                         />
                   </Paper>
-                  
+
             </Box>
       );
 }

@@ -6,21 +6,22 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
+import { base_api } from '../../base_api';
 
-function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
+function EditProductModal({ numSelected, selectedRowId, onUpdateProduct }) {
       const [show, setShow] = useState(false);
-      const [prodFromDb , setProdFromDb] = useState({})
+      const [prodFromDb, setProdFromDb] = useState({})
 
       const [prodName, setProdName] = useState('');
-      const [category , setCategory] = useState('');
-      const [price , setPrice] = useState('');
+      const [category, setCategory] = useState('');
+      const [price, setPrice] = useState('');
       const [description, setDescription] = useState('');
       const [quantity, setQuantity] = useState('');
-      const [imagePath , setImagePath] = useState('');
-      const [discountTag , setDiscountTag] = useState('');
+      const [imagePath, setImagePath] = useState('');
+      const [discountTag, setDiscountTag] = useState('');
 
 
-      const fetchedProduct = async ()=>{
+      const fetchedProduct = async () => {
             // console.log("Id in the fetched: ", selectedRowId)
 
             if (parseInt(quantity) < 1) {
@@ -53,13 +54,13 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
 
 
             try {
-                  const response = await fetch(`http://localhost:3000/api/fetchProductShowModal/${selectedRowId}`, {
-                        method:"GET",
-                        headers:{
-                              'Content-type':"application/json"
+                  const response = await fetch(`${base_api}/api/fetchProductShowModal/${selectedRowId}`, {
+                        method: "GET",
+                        headers: {
+                              'Content-type': "application/json"
                         }
                   })
-                  if(!response.ok){
+                  if (!response.ok) {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
@@ -101,26 +102,26 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
             }
       }
 
-      useEffect(()=>{
-            
-            if(numSelected === 1){
+      useEffect(() => {
+
+            if (numSelected === 1) {
                   fetchProductData();
             }
-      },[numSelected])
+      }, [numSelected])
 
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
 
-      const handleUpdateProductInDb = async()=>{
+      const handleUpdateProductInDb = async () => {
             // code to update product in db goes here.
 
             try {
-                  const response = await fetch(`http://localhost:3000/api/updateProductInDbByAdmin/${selectedRowId}` , {
-                        method:"PUT",
-                        headers:{
-                              'Content-Type':"application/json"
-                        }, 
-                        body: JSON.stringify({ 
+                  const response = await fetch(`${base_api}/api/updateProductInDbByAdmin/${selectedRowId}`, {
+                        method: "PUT",
+                        headers: {
+                              'Content-Type': "application/json"
+                        },
+                        body: JSON.stringify({
                               ProductName: prodName,
                               Price: price,
                               Category: category,
@@ -134,15 +135,15 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                   const updatedProductData = await response.json();
                   console.log("Updated product is", updatedProductData)
                   onUpdateProduct(updatedProductData);
-                  
-                  if(!response.ok){
+
+                  if (!response.ok) {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
                               text: "Error in updating",
                         });
                   }
-                  else{
+                  else {
                         Swal.fire({
                               position: "center",
                               icon: "success",
@@ -158,9 +159,9 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                         title: "Oops...",
                         text: "Internal server error",
                   });
-                  console.log("Error in updation: " , error)
+                  console.log("Error in updation: ", error)
             }
-            
+
             handleClose();
       }
       return (
@@ -182,7 +183,7 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                                 type="text"
                                                 autoFocus
                                                 value={prodFromDb.ProductName || ''}
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                       setProdName(prodFromDb.ProductName = e.target.value)
                                                 }}
                                           />
@@ -192,8 +193,8 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                           <Form.Control
                                                 type="text"
                                                 value={prodFromDb.Price || ''}
-                                                onChange={(e)=>{
-                                                      setPrice(prodFromDb.Price=  e.target.value)
+                                                onChange={(e) => {
+                                                      setPrice(prodFromDb.Price = e.target.value)
                                                 }}
                                           />
                                     </Form.Group>
@@ -201,8 +202,8 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                           <Form.Label>Category</Form.Label>
                                           <Form.Control
                                                 type="text"
-                                                value={prodFromDb.Category|| ''}
-                                                onChange={(e)=>{
+                                                value={prodFromDb.Category || ''}
+                                                onChange={(e) => {
                                                       setCategory(prodFromDb.Category = e.target.value)
                                                 }}
                                           />
@@ -211,8 +212,8 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                           <Form.Label>Description</Form.Label>
                                           <Form.Control
                                                 type="text"
-                                                value={prodFromDb.Description|| ''}
-                                                onChange={(e)=>{
+                                                value={prodFromDb.Description || ''}
+                                                onChange={(e) => {
                                                       setDescription(prodFromDb.Description = e.target.value)
                                                 }}
                                           />
@@ -222,7 +223,7 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                           <Form.Control
                                                 type="text"
                                                 value={prodFromDb.ImagePath || ''}
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                       setImagePath(prodFromDb.ImagePath = e.target.value)
                                                 }}
                                           />
@@ -232,7 +233,7 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                           <Form.Control
                                                 type="text"
                                                 value={prodFromDb.Quantity || ''}
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                       setQuantity(prodFromDb.Quantity = e.target.value)
                                                 }}
                                           />
@@ -242,7 +243,7 @@ function EditProductModal({numSelected , selectedRowId , onUpdateProduct}) {
                                           <Form.Control
                                                 type="text"
                                                 value={prodFromDb.DiscountTag || ''}
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                       setDiscountTag(prodFromDb.DiscountTag = e.target.value)
                                                 }}
                                           />

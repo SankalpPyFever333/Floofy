@@ -21,13 +21,14 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { fetchProductReviews } from './fetchProductReviewFromDb';
 import Swal from 'sweetalert2';
+import { base_api } from '../../base_api';
 
 async function createData() {
       const prodReviewsResponse = await fetchProductReviews();
       const jsonProdReviews = await prodReviewsResponse.json();
       const AllprodReviews = jsonProdReviews.review;
       console.log(AllprodReviews)
-      return AllprodReviews.map((review)=> ({
+      return AllprodReviews.map((review) => ({
             Comment: review.Comment,
             _id: review._id,
             ProductName: review.ProductName,
@@ -100,7 +101,7 @@ const headCells = [
             disablePadding: false,
             label: 'Date',
       },
-      
+
 ];
 
 function EnhancedTableHead(props) {
@@ -160,24 +161,24 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-      const { numSelected , selected} = props;
+      const { numSelected, selected } = props;
       console.log("selected", selected);
-      const handleDeleteReviews = async ()=>{
-            const deleteProdReviews = await fetch("http://localhost:3000/api/deleteProductReview", {
-                  method:"DELETE",
-                  headers:{
-                        'Content-Type':"application/json"
+      const handleDeleteReviews = async () => {
+            const deleteProdReviews = await fetch(`${base_api}/api/deleteProductReview`, {
+                  method: "DELETE",
+                  headers: {
+                        'Content-Type': "application/json"
                   },
-                  body: JSON.stringify({ reviewIds:selected })
+                  body: JSON.stringify({ reviewIds: selected })
             });
-            if(!deleteProdReviews.ok){
+            if (!deleteProdReviews.ok) {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
                         text: "Error in deleting",
                   });
             }
-            else{
+            else {
                   Swal.fire({
                         position: "center",
                         icon: "success",
@@ -258,7 +259,7 @@ export default function ShowProductReviews() {
             if (event.target.checked) {
                   const newSelected = rows.map((n) => n._id);
                   setSelected(newSelected);
-                  console.log("All seleted id" , newSelected)
+                  console.log("All seleted id", newSelected)
                   return;
             }
             setSelected([]);
@@ -266,7 +267,7 @@ export default function ShowProductReviews() {
 
       const handleClick = (event, id) => {
             const selectedIndex = selected.indexOf(id);
-            
+
             let newSelected = [];
 
             if (selectedIndex === -1) {
@@ -311,15 +312,15 @@ export default function ShowProductReviews() {
             [order, orderBy, page, rowsPerPage],
       );
 
-      React.useEffect(()=>{
+      React.useEffect(() => {
 
-      },[visibleRows])
+      }, [visibleRows])
 
 
       return (
             <Box sx={{ width: '100%' }}>
                   <Paper sx={{ width: '100%', mb: 2 }}>
-                        <EnhancedTableToolbar numSelected={selected.length} selected = {selected} />
+                        <EnhancedTableToolbar numSelected={selected.length} selected={selected} />
                         <TableContainer>
                               <Table
                                     sx={{ minWidth: 750 }}

@@ -1,6 +1,8 @@
+import { base_api } from "../../base_api";
+
 export const payAppointmentFees = async (payableAmount) => {
   const receiptNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
-  const payAmountResponse = await fetch("http://localhost:3000/v1/orders", {
+  const payAmountResponse = await fetch(`${base_api}/v1/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

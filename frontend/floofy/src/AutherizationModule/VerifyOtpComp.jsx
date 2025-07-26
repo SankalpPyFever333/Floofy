@@ -7,11 +7,12 @@ import Button from '@mui/material/Button';
 import verifyOtp from "../Assets/OtpVerify1.jpg"
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { base_api } from '../base_api';
 
 const VerifyOtpComp = () => {
       const [otp, setOtp] = useState(['', '', '', '', '', '']);
       const [phNumber, setPhNumber] = useState('');
-      const [CResult , setCResult] = useState('');
+      const [CResult, setCResult] = useState('');
       const inputRefs = useRef(new Array(6).fill(null).map(() => React.createRef()));
       const navigate = useNavigate();
       const enteredOtp = otp.map((num) => num.toString()).join("");
@@ -61,7 +62,7 @@ const VerifyOtpComp = () => {
 
       const handleSendotp = async () => {
             const countryCode = "+91";
-            const fullPhoneNumber = countryCode+phNumber;
+            const fullPhoneNumber = countryCode + phNumber;
             if (!isValidPhoneNumber(phNumber)) {
                   Swal.fire({
                         icon: "error",
@@ -71,19 +72,19 @@ const VerifyOtpComp = () => {
             }
 
 
-            const response = await fetch("http://localhost:3000/api/fetchLoginCredentials" , {
+            const response = await fetch(`${base_api}/api/fetchLoginCredentials`, {
                   method: "POST",
                   headers: {
-                        'Content-Type':"application/json"
+                        'Content-Type': "application/json"
                   },
-                  body: JSON.stringify({ contactNumber: fullPhoneNumber})
+                  body: JSON.stringify({ contactNumber: fullPhoneNumber })
             });
             let data = await response.json();
-            if(response.ok){
-                  
-                  console.log("Contact no: " , data.userLoginData.contactNumber);
+            if (response.ok) {
+
+                  console.log("Contact no: ", data.userLoginData.contactNumber);
                   if (phNumber.length === 10) {
-      
+
                         localStorage.setItem("UserPhoneNumber", data.userLoginData.contactNumber)
                         generateRecaptchaVerifier();
                         let appVeifier = window.recaptchaVerifier;
@@ -109,7 +110,7 @@ const VerifyOtpComp = () => {
                                     });
                               })
                   }
-                  
+
 
             } else {
                   Swal.fire({

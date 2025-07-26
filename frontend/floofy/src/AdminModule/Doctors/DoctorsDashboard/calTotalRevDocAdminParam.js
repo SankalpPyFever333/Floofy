@@ -1,7 +1,12 @@
+import { base_api } from "../../../base_api";
+
 // call this method when the id which you getting from the url is not null in the total revenue card
-export const totalRevenueDoctorAdminParam = async (timeFrame, doctorIdParams) => {
+export const totalRevenueDoctorAdminParam = async (
+  timeFrame,
+  doctorIdParams
+) => {
   const response = await fetch(
-    `http://localhost:3000/api/calTotalRevenueDoc/${doctorIdParams}`,
+    `${base_api}/api/calTotalRevenueDoc/${doctorIdParams}`,
     {
       method: "POST",
       headers: {
@@ -18,5 +23,3 @@ export const totalRevenueDoctorAdminParam = async (timeFrame, doctorIdParams) =>
     throw new Error("Error in fetching amount");
   }
 };
-
-

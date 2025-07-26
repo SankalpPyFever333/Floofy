@@ -9,44 +9,45 @@ import WhatDefineYou from './WhatDefineYou';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import SignupComponent from './SignupComponent';
+import { base_api } from '../base_api';
 function LoginComponent() {
       const [showSignUpForm, setShowSignup] = useState(true);
       const [userType, setUserType] = useState('');
       const [UserName, setUserName] = useState('');
-      const [password , setPassword] =  useState('');
+      const [password, setPassword] = useState('');
       const navigate = useNavigate();
 
-      const handleSpanClick = ()=>{
+      const handleSpanClick = () => {
             setShowSignup(!showSignUpForm)
       }
 
       let userFound = false;
-      const handleLoginClick = async ()=>{
+      const handleLoginClick = async () => {
             // using fetch hit the api and get data from database and match it with values enterd by the user.
-            const loginResponse = await fetch("http://localhost:3000/api/getLoginData" , {
-                  method:"POST",
-                  headers:{
-                        'Content-Type':'application/json',
-                  }, 
-                  body: JSON.stringify({ username: UserName, password: password, userType: localStorage.getItem("userType")})
+            const loginResponse = await fetch(`${base_api}/api/getLoginData`, {
+                  method: "POST",
+                  headers: {
+                        'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ username: UserName, password: password, userType: localStorage.getItem("userType") })
             })
-            
-            if(loginResponse.ok){
+
+            if (loginResponse.ok) {
                   // write code for matching the details enterd by user in the form.
                   const loginDataFromDb = await loginResponse.json();
                   console.log(loginDataFromDb)
 
                   // console.log(`entered username is ${UserName} and password is ${password}`)
 
-                        // console.log(loginDataFromDb.Response.username)
-                        // console.log(loginDataFromDb.Response.password)
-                        
-                  if ((loginDataFromDb.username === UserName)){
-                              userFound = true
+                  // console.log(loginDataFromDb.Response.username)
+                  // console.log(loginDataFromDb.Response.password)
+
+                  if ((loginDataFromDb.username === UserName)) {
+                        userFound = true
                         setUserType(loginDataFromDb.userType)
-                        localStorage.setItem("Username" , loginDataFromDb.username )
+                        localStorage.setItem("Username", loginDataFromDb.username)
                   }
-                  else{
+                  else {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
@@ -55,10 +56,10 @@ function LoginComponent() {
                               timer: 1500
                         });
                   }
-                        
-                  if(userFound){
+
+                  if (userFound) {
                         console.log("user id is ", loginDataFromDb.userId)
-                        localStorage.setItem("userId" , loginDataFromDb.userId)
+                        localStorage.setItem("userId", loginDataFromDb.userId)
                         Swal.fire({
                               position: "center",
                               icon: "success",
@@ -66,11 +67,11 @@ function LoginComponent() {
                               showConfirmButton: false,
                               timer: 1500
                         });
-                        if(userType === "Admin"){
+                        if (userType === "Admin") {
                               navigate("/MainAdminComponent")
                               console.log("Admin id is: ", loginDataFromDb.userId)
                         }
-                        else{
+                        else {
                               navigate("/MainApp")
                         }
 
@@ -83,18 +84,18 @@ function LoginComponent() {
 
                   }
             }
-            else{
+            else {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
                         text: "Something went wrong!",
-                        
+
                   });
             }
       }
 
 
-      const handleForgotPsswrdClick = ()=>{
+      const handleForgotPsswrdClick = () => {
             // navigate to the component of forgot password.
             navigate("/GotoVerifyOtp")
       }
