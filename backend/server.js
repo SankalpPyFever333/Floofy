@@ -269,6 +269,11 @@ app.use(
   require("./Routes/PaymentRoutes/DoctorAppointmentPayment/createAppointment.route")
 );
 
+
+app.use("/" , (req, res)=>{
+  res.send("backend is running");
+})
+
 mongoose
   .connect(MONGO_CONN_STRING)
   .then(() => {
