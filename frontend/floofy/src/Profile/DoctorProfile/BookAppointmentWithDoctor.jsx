@@ -8,9 +8,10 @@ import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
 import Razorpayment from '../../RazorpayPayment/Razorpayment';
 import RazorpaymentDoctorAppointment from './RazorpayDoctorAppointment';
+import { base_api } from '../../base_api';
 
-function BookAppointmentWithDoctor({doctorIdCard}) {
-      console.log("Doctor Id card:v" , doctorIdCard)
+function BookAppointmentWithDoctor({ doctorIdCard }) {
+      console.log("Doctor Id card:v", doctorIdCard)
       const [show, setShow] = useState(false);
       const [formData, setFormData] = useState({
             User: '',
@@ -19,7 +20,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
             Doctor: doctorIdCard,
             Payment: '200',
             DateOfAppointment: '',
-            TimeOfAppointment:'',
+            TimeOfAppointment: '',
             file: null
       });
 
@@ -48,9 +49,9 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                         formDataToSend.append(key, formData[key]);
                   }
 
-                  console.log("form data to send: " , formDataToSend);
+                  console.log("form data to send: ", formDataToSend);
 
-                  const response = await fetch("http://localhost:3000/api/fixAppointmentWithDoctor", {
+                  const response = await fetch(`${base_api}/api/fixAppointmentWithDoctor`, {
                         method: "POST",
                         body: formDataToSend
                   });
@@ -83,13 +84,13 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
 
       return (
             <>
-                  
-                        <IconButton onClick={handleShow}>
-                              <Button type='submit' variant="info" onClick={handleShow}>
-                                    Book Appointment
-                              </Button>
-                        </IconButton>
-                  
+
+                  <IconButton onClick={handleShow}>
+                        <Button type='submit' variant="info" onClick={handleShow}>
+                              Book Appointment
+                        </Button>
+                  </IconButton>
+
 
                   <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
@@ -110,7 +111,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                                           <Form.Label>WhatsApp Number</Form.Label>
                                           <Form.Control
                                                 type="text"
-                                                
+
                                                 onChange={handleInputChange}
                                                 name="ContactNumber"
                                           />
@@ -131,7 +132,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                                                 name="TimeOfAppointment"
                                           />
                                     </Form.Group>
-                                    
+
                                     <Form.Group className="mb-3" controlId="Product_Category">
                                           <Form.Label>Reason for Appointment</Form.Label>
                                           <Form.Control
@@ -140,7 +141,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                                                 name="ReasonForAppointment"
                                           />
                                     </Form.Group>
-                                    
+
 
                                     <Form.Group className="mb-3" controlId="Product_ImagePath">
                                           <Form.Label>Pet Image</Form.Label>
@@ -161,7 +162,7 @@ function BookAppointmentWithDoctor({doctorIdCard}) {
                                                 readOnly
                                           />
                                     </Form.Group>
-                                    
+
 
                               </Form>
                         </Modal.Body>

@@ -11,12 +11,13 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import WhatDefineYou from './WhatDefineYou';
+import { base_api } from '../base_api';
 
 function SignLogComp() {
-      const [username , setUsername] = useState('');
-      const[password , setPassword] = useState('');
+      const [username, setUsername] = useState('');
+      const [password, setPassword] = useState('');
       const [phNumber, setPhNumber] = useState('');
-      const[userType , setUserType] = useState(localStorage.getItem('userType'));
+      const [userType, setUserType] = useState(localStorage.getItem('userType'));
       const [showPassword, setShowPassword] = React.useState(false);
       const navigate = useNavigate();
       const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -39,7 +40,7 @@ function SignLogComp() {
       };
 
 
-      
+
       const addUserSignupDetails = async (e) => {
             e.preventDefault();
 
@@ -53,7 +54,7 @@ function SignLogComp() {
             }
 
             try {
-                  const response = await fetch("http://localhost:3000/api/addLoginCredentialsOfuser", {
+                  const response = await fetch(`${base_api}/api/addLoginCredentialsOfuser`, {
                         method: 'POST',
                         headers: {
                               'Content-Type': 'application/json'
@@ -85,7 +86,7 @@ function SignLogComp() {
                               });
                               return;
                         }
-                        else{
+                        else {
                               Swal.fire({
                                     icon: "error",
                                     title: "Password already exists",

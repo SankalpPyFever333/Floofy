@@ -1,18 +1,17 @@
-export const fetchReviewOfProduct = async (productId)=>{
-      const ReviewReponse = await fetch(
-        "http://localhost:3000/api/getReviewsWithUserName",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ProductId: productId }),
-        }
-      );
+import { base_api } from "../base_api"
 
-      if(ReviewReponse.ok){
-          return ReviewReponse;
-      }else{
-        throw new Error('Could not find product reviews')
-      }
-}
+export const fetchReviewOfProduct = async (productId) => {
+  const ReviewReponse = await fetch(`${base_api}/api/getReviewsWithUserName`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ProductId: productId }),
+  });
+
+  if (ReviewReponse.ok) {
+    return ReviewReponse;
+  } else {
+    throw new Error("Could not find product reviews");
+  }
+};

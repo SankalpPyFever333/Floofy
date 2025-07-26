@@ -7,16 +7,17 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Swal from 'sweetalert2';
+import { base_api } from '../../base_api';
 
 export default function EditBioOfDoctor() {
       const [open, setOpen] = React.useState(false);
-      const [name , setName] = React.useState('')
-      const [Username , setUserName] = React.useState('')
-      const [phone , setPhone] = React.useState('')
-      const [Email , setEmail] = React.useState('')
-      const [Experience , setExperience] = React.useState('')
-      const [Education , setEducation] = React.useState('')
-      const [Specialization , setSpecialization] = React.useState('')
+      const [name, setName] = React.useState('')
+      const [Username, setUserName] = React.useState('')
+      const [phone, setPhone] = React.useState('')
+      const [Email, setEmail] = React.useState('')
+      const [Experience, setExperience] = React.useState('')
+      const [Education, setEducation] = React.useState('')
+      const [Specialization, setSpecialization] = React.useState('')
       const [SocialMediaLink, setSocialMediaLink] = React.useState('')
 
       // const [formData, setFormData] = useState({
@@ -40,31 +41,31 @@ export default function EditBioOfDoctor() {
             setOpen(false);
       };
 
-      const handleUpdateDoctor = async (e)=>{
+      const handleUpdateDoctor = async (e) => {
             e.preventDefault()
             // getting error of circular reference.
 
             // Also check for unique username before updating the database.
             try {
-                  const Doctor_Response = await fetch("http://localhost:3000/api/EditDoctorProfileBio" , {
-                        method:"POST",
-                        headers:{
-                              'Content-Type':"application/json"
-                        } , 
+                  const Doctor_Response = await fetch(`${base_api}/api/EditDoctorProfileBio`, {
+                        method: "POST",
+                        headers: {
+                              'Content-Type': "application/json"
+                        },
                         body: JSON.stringify({
-                              Name:name,
-                              Username:Username,
-                              Phone:phone,
-                              Email:Email,
-                              Experience:Experience,
-                              Education:Education,
-                              Specialization:Specialization,
-                              SocialMediaLink:SocialMediaLink,
-                        })      
+                              Name: name,
+                              Username: Username,
+                              Phone: phone,
+                              Email: Email,
+                              Experience: Experience,
+                              Education: Education,
+                              Specialization: Specialization,
+                              SocialMediaLink: SocialMediaLink,
+                        })
                   });
-      
-                  if(Doctor_Response.ok){
-                         Swal.fire({
+
+                  if (Doctor_Response.ok) {
+                        Swal.fire({
                               position: "center",
                               icon: "success",
                               title: "Profile saved successfully",
@@ -73,8 +74,8 @@ export default function EditBioOfDoctor() {
                         });
                         handleClose()
                   }
-                  else{
-                         Swal.fire({
+                  else {
+                        Swal.fire({
                               icon: "error",
                               title: "Oops...",
                               text: "Something went wrong!",
@@ -87,7 +88,7 @@ export default function EditBioOfDoctor() {
             } catch (error) {
                   console.error("error occured", error)
             }
-            
+
       }
 
       return (
@@ -98,7 +99,7 @@ export default function EditBioOfDoctor() {
                   <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>Edit profile</DialogTitle>
                         <DialogContent>
-                              
+
                               <TextField
                                     autoFocus
                                     margin="dense"
@@ -107,7 +108,7 @@ export default function EditBioOfDoctor() {
                                     type="text"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(name)=>{
+                                    onChange={(name) => {
                                           setName(name.target.value)
                                     }}
                               />
@@ -119,7 +120,7 @@ export default function EditBioOfDoctor() {
                                     type="text"
                                     fullWidth
                                     variant="standard"
-                                    onChange={(username)=>{
+                                    onChange={(username) => {
                                           setUserName(username.target.value)
                                     }}
                               />
@@ -133,7 +134,7 @@ export default function EditBioOfDoctor() {
                                     multiline
                                     maxRows={3}
                                     variant="standard"
-                                    onChange={(phone)=>{
+                                    onChange={(phone) => {
                                           setPhone(phone.target.value)
                                     }}
                               />
@@ -147,7 +148,7 @@ export default function EditBioOfDoctor() {
                                     multiline
                                     maxRows={3}
                                     variant="standard"
-                                    onChange={(Email)=>{
+                                    onChange={(Email) => {
                                           setEmail(Email)
                                     }}
                               />
@@ -161,7 +162,7 @@ export default function EditBioOfDoctor() {
                                     multiline
                                     maxRows={3}
                                     variant="standard"
-                                    onChange={(Experience)=>{
+                                    onChange={(Experience) => {
                                           setExperience(Experience.target.value)
                                     }}
                               />
@@ -175,7 +176,7 @@ export default function EditBioOfDoctor() {
                                     multiline
                                     maxRows={3}
                                     variant="standard"
-                                    onChange={(Specialization)=>{
+                                    onChange={(Specialization) => {
                                           setSpecialization(Specialization.target.value)
                                     }}
                               />
@@ -189,7 +190,7 @@ export default function EditBioOfDoctor() {
                                     multiline
                                     maxRows={3}
                                     variant="standard"
-                                    onChange={(Education)=>{
+                                    onChange={(Education) => {
                                           setEducation(Education.target.value)
                                     }}
                               />
@@ -203,7 +204,7 @@ export default function EditBioOfDoctor() {
                                     multiline
                                     maxRows={3}
                                     variant="standard"
-                                    onChange={(SclLinks)=>{
+                                    onChange={(SclLinks) => {
                                           setSocialMediaLink(SclLinks.target.value)
                                     }}
                               />

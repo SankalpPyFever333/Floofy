@@ -1,5 +1,7 @@
+import { base_api } from "../base_api";
+
 export const fetchProductsUsingId = async (productId) => {
-  const response = await fetch("http://localhost:3000/api/getSingleProduct", {
+  const response = await fetch(`${base_api}/api/getSingleProduct`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

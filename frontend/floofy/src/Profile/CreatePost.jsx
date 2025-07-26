@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
 import LogoImage from "../Assets/FloofyLogo.png"
+import { base_api } from '../base_api';
 
 function CreatePost() {
 
@@ -10,7 +11,7 @@ function CreatePost() {
             title: '',
             caption: '',
             hashTag: '',
-            userId:  localStorage.getItem('userId'),
+            userId: localStorage.getItem('userId'),
             file: null
       });
 
@@ -32,8 +33,8 @@ function CreatePost() {
       };
 
 
-      const handleSavePost = async ()=>{
-            
+      const handleSavePost = async () => {
+
             try {
 
                   const formDataToSend = new FormData();
@@ -41,13 +42,13 @@ function CreatePost() {
                         formDataToSend.append(key, formData[key]);
                   }
 
-                  const createNewPost = await fetch("http://localhost:3000/api/createPost" , {
-                        method:"POST",
-                        
+                  const createNewPost = await fetch(`${base_api}/api/createPost`, {
+                        method: "POST",
+
                         body: formDataToSend
                   });
-      
-                  if(createNewPost.ok){
+
+                  if (createNewPost.ok) {
                         Swal.fire({
                               position: "center",
                               icon: "success",
@@ -56,12 +57,12 @@ function CreatePost() {
                               timer: 1500
                         });
                   }
-                  else{
+                  else {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
                               text: "Something went wrong!",
-                              
+
                         });
                   }
             } catch (error) {
@@ -75,65 +76,65 @@ function CreatePost() {
 
       }
 
-  return (
-    <div>
+      return (
+            <div>
 
-            <div className="row">
-                  <div className="col-sm-7">
-                        <img  src={LogoImage} alt="logo" />
+                  <div className="row">
+                        <div className="col-sm-7">
+                              <img src={LogoImage} alt="logo" />
+                        </div>
+
+                        <div className="col-sm-4">
+
+                              <Form enctype="multipart/form-data">
+                                    <h4>Create your post</h4>
+                                    <Form.Group className="mb-3" controlId="Product_Name">
+                                          <Form.Label>Title</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                autoFocus
+                                                onChange={handleInputChange}
+                                                name="title"
+                                          />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_Name">
+                                          <Form.Label>Caption</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                autoFocus
+                                                onChange={handleInputChange}
+                                                name="caption"
+                                          />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="Product_Name">
+                                          <Form.Label>Hashtags</Form.Label>
+                                          <Form.Control
+                                                type="text"
+                                                autoFocus
+                                                onChange={handleInputChange}
+                                                name="hashTag"
+                                          />
+                                    </Form.Group>
+
+                                    <Form.Group className="mb-3" controlId="Product_ImagePath">
+                                          <Form.Label>Image</Form.Label>
+                                          <Form.Control
+                                                type="file"
+                                                onChange={handleFileSelect}
+                                                name="file"
+                                          />
+                                    </Form.Group>
+
+                              </Form>
+
+
+                              <Button variant="info" onClick={handleSavePost} >Post</Button>{' '}
+                        </div>
                   </div>
 
-                  <div className="col-sm-4">
 
-                          <Form enctype="multipart/form-data">
-                              <h4>Create your post</h4>
-                                <Form.Group className="mb-3" controlId="Product_Name">
-                                      <Form.Label>Title</Form.Label>
-                                      <Form.Control
-                                            type="text"
-                                            autoFocus
-                                            onChange={handleInputChange}
-                                            name="title"
-                                      />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="Product_Name">
-                                      <Form.Label>Caption</Form.Label>
-                                      <Form.Control
-                                            type="text"
-                                            autoFocus
-                                            onChange={handleInputChange}
-                                            name="caption"
-                                      />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="Product_Name">
-                                      <Form.Label>Hashtags</Form.Label>
-                                      <Form.Control
-                                            type="text"
-                                            autoFocus
-                                            onChange={handleInputChange}
-                                            name="hashTag"
-                                      />
-                                </Form.Group>
-
-                                <Form.Group className="mb-3" controlId="Product_ImagePath">
-                                      <Form.Label>Image</Form.Label>
-                                      <Form.Control
-                                            type="file"
-                                            onChange={handleFileSelect}
-                                            name="file"
-                                      />
-                                </Form.Group>
-
-                        </Form>
-
-                          
-                          <Button variant="info" onClick={handleSavePost} >Post</Button>{' '}
-                  </div>
             </div>
-
-              
-    </div>
-  )
+      )
 }
 
 export default CreatePost

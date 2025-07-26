@@ -8,38 +8,39 @@ import { useNavigate } from 'react-router-dom';
 import authentication from './firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import VerifyOtpComp from './VerifyOtpComp';
+import { base_api } from '../base_api';
 
 function ForgotPassword() {
 
-      const [newPassword , setNewPassword] = useState('');
-      const [newConfirmPassword , setNewConfirmPassword] = useState('');
+      const [newPassword, setNewPassword] = useState('');
+      const [newConfirmPassword, setNewConfirmPassword] = useState('');
       const [phNumber, setPhNumber] = useState('');
       const navigate = useNavigate();
 
-      useEffect(()=>{
+      useEffect(() => {
             setPhNumber(localStorage.getItem("UserPhoneNumber"))
             // console.log(phNumber)
       }, []);
 
-      const updateNewPasswordInDb = async ()=>{
+      const updateNewPasswordInDb = async () => {
 
-            if(newPassword.length < 8){
+            if (newPassword.length < 8) {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
                         text: "Password should be at least 8 characters",
                   });
             }
-            else if(newPassword === newConfirmPassword){
+            else if (newPassword === newConfirmPassword) {
 
-                  const response = await fetch("http://localhost:3000/api/updatePassword", {
+                  const response = await fetch(`${base_api}/api/updatePassword`, {
                         method: 'POST',
-                        headers:{
-                              'Content-Type':"application/json"
+                        headers: {
+                              'Content-Type': "application/json"
                         },
-                        body: JSON.stringify({ contactNumber: phNumber, password : newPassword})
+                        body: JSON.stringify({ contactNumber: phNumber, password: newPassword })
                   })
-                  if(response.ok){
+                  if (response.ok) {
                         Swal.fire({
                               position: "center",
                               icon: "success",
@@ -49,7 +50,7 @@ function ForgotPassword() {
                         });
                         navigate("/LoginPage")
                   }
-                  else{
+                  else {
                         Swal.fire({
                               icon: "error",
                               title: "Oops...",
@@ -57,7 +58,7 @@ function ForgotPassword() {
                         });
                   }
             }
-            else{
+            else {
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -66,7 +67,7 @@ function ForgotPassword() {
             }
       }
 
-      
+
 
       return (
             <div>
@@ -74,7 +75,7 @@ function ForgotPassword() {
                         <div className="row">
                               <div className="col-sm-6">
                                     <img className="responsive-video" style={{
-                                          width:"80%"
+                                          width: "80%"
                                     }} src={frgtImage} alt="Forgot Password" />
                               </div>
                               <div className="col-sm-6">
@@ -98,7 +99,7 @@ function ForgotPassword() {
                                                 }} />
                                           </Box>
                                           <Button onClick={updateNewPasswordInDb} variant="contained">Update</Button>
-                                          
+
                                     </div>
 
                               </div>

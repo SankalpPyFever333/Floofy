@@ -1,3 +1,4 @@
+const { base_api } = require("../../../../frontend/floofy/src/base_api");
 const Shop = require("../../../Modals/Shop.model");
 
 const addProductInDbAdmin = async (req, res) => {
@@ -24,7 +25,7 @@ const addProductInDbAdmin = async (req, res) => {
       Price: Price,
       Category: Category,
       Description: Description,
-      ImagePath: `http://localhost:3000/uploads/${file.originalname}`, // Store the path where the file is saved
+      ImagePath: `${base_api}/uploads/${file.originalname}`, // Store the path where the file is saved
       Quantity: Quantity,
       DiscountTag: DiscountTag,
       SuitableFor:SuitableFor,

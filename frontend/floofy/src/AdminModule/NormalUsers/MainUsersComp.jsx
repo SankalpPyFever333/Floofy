@@ -23,13 +23,14 @@ import { visuallyHidden } from '@mui/utils';
 
 import Swal from 'sweetalert2';
 import { allTypeUserResponse } from './fetchAllTypeUsersFromDb';
+import { base_api } from '../../base_api';
 
 
 
 async function createData() {
-  const response = await allTypeUserResponse() ;
+  const response = await allTypeUserResponse();
   const jsonAllUsers = await response.json();
-  console.log("All users json from db",jsonAllUsers)
+  console.log("All users json from db", jsonAllUsers)
   const AllTypeUsersFromDb = jsonAllUsers.users;
 
 
@@ -209,9 +210,9 @@ function EnhancedTableToolbar(props) {
 
   const handleDeleteItemFromDb = async () => {
     // make the api for deleting users
-    console.log("selectedid in delete method:" , selected);
+    console.log("selectedid in delete method:", selected);
     try {
-      const response = await fetch("http://localhost:3000/api/deleteSelectedUser", {
+      const response = await fetch(`${base_api}/api/deleteSelectedUser`, {
         method: "DELETE",
         headers: {
           'Content-Type': "application/json"
@@ -327,7 +328,7 @@ export default function ShowTabularProducts() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [loading , setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 
@@ -454,7 +455,7 @@ export default function ShowTabularProducts() {
                     >
                       {row.username}
                     </TableCell>
-                    
+
                     <TableCell align="left">{row.password}</TableCell>
                     <TableCell align="left">{row.userType}</TableCell>
                     <TableCell align="left">{row.contactNumber}</TableCell>
