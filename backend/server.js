@@ -10,7 +10,7 @@ dotenv.config();
 
 const port = process.env.PORT || 3000;
 const allowedOrigins = [
-  "https://floofy-frontend.vercel.app",
+  "https://floofy-eta.vercel.app",
   "http://localhost:3000",
 ];
 const MONGO_CONN_STRING = process.env.MONGO_CONN_STRING;
