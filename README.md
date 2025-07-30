@@ -3,6 +3,13 @@
 
 Floofy is a community-driven platform designed for pet lovers to connect, share experiences, and find services tailored for their furry friends. Built on the MERN stack, Floofy offers a seamless user experience for both desktop and mobile users.
 
+## 🌈 Explore Floofy — Where Pets Connect!
+
+[![Visit Floofy](https://img.shields.io/badge/Visit%20Floofy-%F0%9F%90%BE%20Live%20App-00c2cb?style=for-the-badge&logo=vercel&logoColor=white&labelColor=00c853)](https://floofy-eta.vercel.app/)
+
+> 🐾 Floofy is a vibrant platform for pet lovers to share moments, explore services, and connect with a like-minded community.
+
+
 
 
 ## Features
