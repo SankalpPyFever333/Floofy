@@ -9,6 +9,9 @@ Floofy is a community-driven platform designed for pet lovers to connect, share 
 
 > 🐾 Floofy is a vibrant platform for pet lovers to share moments, explore services, and connect with a like-minded community.
 
+> ⚠️ **Note:**  
+> This project is hosted on Render's free tier. The **backend server may take 3–4 minutes to wake up** after a period of inactivity.  
+> Please be patient — the app will load shortly once the server is up and running. 🚀
 
 
 
